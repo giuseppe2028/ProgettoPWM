@@ -1,12 +1,14 @@
 package com.example.progettopwm.Login
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataIniziale.SchermataIniziale
 import com.example.progettopwm.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -17,9 +19,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 class Login : AppCompatActivity() {
+    private lateinit var account: String
+
     private lateinit var auth:FirebaseAuth
     private lateinit var googleSignClient:GoogleSignInClient
     private lateinit var binding:ActivityLoginBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -37,6 +43,12 @@ class Login : AppCompatActivity() {
         binding.button.setOnClickListener {
             signInGoogle()
             Log.i("Ciao","Cliccato")
+        }
+        binding.button3.setOnClickListener {
+            Log.i("prova",account)
+           auth.signOut()
+            Log.i("prova","Uscito")
+            startActivity(Intent(this,SchermataIniziale::class.java))
         }
     }
 
@@ -67,6 +79,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun updateUI(account: GoogleSignInAccount) {
+        this.account = account.email.toString()
         val credential = GoogleAuthProvider.getCredential(account.idToken,null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful){
