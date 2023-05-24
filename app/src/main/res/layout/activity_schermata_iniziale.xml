@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SchermataIniziale.SchermataIniziale"
+    android:background="@drawable/viaggio_di_nozze__destinazione_stati_uniti_">
+
+
+    <TextView
+        android:id="@+id/benvenuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/benvenuto"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.159" />
+
+    <Button
+        android:id="@+id/bottoneRegistrzione"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/sfondoBottoni"
+        android:includeFontPadding="true"
+        android:paddingHorizontal="80dp"
+        android:text="@string/Creaaccount"
+        android:textSize="@dimen/sizeText"
+        app:layout_constraintBottom_toTopOf="@id/bottoneLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/benvenuto"
+        app:layout_constraintVertical_bias="0.87"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/bottoneLogin"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/sfondoBottoni1"
+        android:text="@string/login"
+        android:textSize="@dimen/sizeText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bottoneRegistrzione"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bottoneRegistrzione"
+        app:layout_constraintTop_toBottomOf="@+id/bottoneRegistrzione" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
