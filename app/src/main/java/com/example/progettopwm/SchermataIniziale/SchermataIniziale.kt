@@ -12,14 +12,16 @@ class SchermataIniziale : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySchermataInizialeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         clickBottoni()
     }
 
     private fun clickBottoni() {
         binding.bottoneLogin.setOnClickListener {
-            startActivity(Intent(this,Login::class.java))
-        }
+            startActivity(Intent(this, Login::class.java))
         }
     }
+
+}
 
 
