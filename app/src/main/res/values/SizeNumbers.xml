@@ -2,4 +2,7 @@
 <resources>
     <dimen name="sizeText">20dp</dimen>
     <dimen name="title">30dp</dimen>
+    <dimen name="marginButton">30dp</dimen>
+    <dimen name="paddingEditTetxt">5dp</dimen>
+    <dimen name="radius">50dp</dimen>
 </resources>

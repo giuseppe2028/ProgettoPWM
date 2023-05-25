@@ -40,11 +40,11 @@ class Login : AppCompatActivity() {
 
         googleSignClient = GoogleSignIn.getClient(this,gso)
 
-        binding.button.setOnClickListener {
+        binding.accediConGoogle.setOnClickListener {
             signInGoogle()
             Log.i("Ciao","Cliccato")
         }
-        binding.button3.setOnClickListener {
+        binding.accediNormale.setOnClickListener {
             Log.i("prova",account)
            auth.signOut()
             Log.i("prova","Uscito")

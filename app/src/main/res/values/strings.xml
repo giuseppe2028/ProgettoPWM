@@ -3,4 +3,5 @@
     <string name="benvenuto">Benvenut* su NomeAPP</string>
     <string name="Creaaccount">Crea un account</string>
     <string name="login">Accedi</string>
+    <string name="accediConGoogle">Accedi con google</string>
 </resources>
