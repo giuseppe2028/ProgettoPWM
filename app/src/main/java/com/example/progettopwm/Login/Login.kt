@@ -30,8 +30,7 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val manager = supportFragmentManager
-        val trasaction = manager.beginTransaction()
+
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -61,6 +60,9 @@ class Login : AppCompatActivity() {
         //metto in comunicazione il fragment con l'host, per poi cambiare fragment
         supportFragmentManager
             .setFragmentResultListener("requestKey", this) { requestKey, bundle ->
+                //devo inserire i fragment qua dentro per far ricominciare il contatore
+                val manager = supportFragmentManager
+                val trasaction = manager.beginTransaction()
             // We use a String here, but any type that can be put in a Bundle is supported.
                 val result = bundle.getBoolean("bundleKey")
             if(result && sentinellaCounter == 0){
@@ -71,11 +73,20 @@ class Login : AppCompatActivity() {
             }
             else{
                 Log.i("prova","Faccio niente")
-                trasaction.replace(binding.fragmentView.id,FragmentLogin()).addToBackStack(null).commit()
+                trasaction.replace(binding.fragmentView.id,PasswordDimenticataFragment()).addToBackStack(null).commit()
             }
             }
     }
 
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            // Ci sono fragment nello stack dei backstack, esegui il pop del fragment precedente
+            supportFragmentManager.popBackStackImmediate()
+        } else {
+            // Nessun fragment nello stack dei backstack, esegui l'azione di default
+            super.onBackPressed()
+        }
+    }
     private fun signInGoogle() {
         val signIntent = googleSignClient.signInIntent
        launcher.launch(signIntent)
