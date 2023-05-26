@@ -8,6 +8,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataIniziale.FragmentLogin
+import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
 import com.example.progettopwm.SchermataIniziale.SchermataIniziale
 import com.example.progettopwm.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -24,9 +26,12 @@ class Login : AppCompatActivity() {
     private lateinit var auth:FirebaseAuth
     private lateinit var googleSignClient:GoogleSignInClient
     private lateinit var binding:ActivityLoginBinding
-
+    private var sentinellaCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val manager = supportFragmentManager
+        val trasaction = manager.beginTransaction()
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -40,7 +45,7 @@ class Login : AppCompatActivity() {
 
         googleSignClient = GoogleSignIn.getClient(this,gso)
 
-        binding.accediConGoogle.setOnClickListener {
+       /* binding.accediConGoogle.setOnClickListener {
             signInGoogle()
             Log.i("Ciao","Cliccato")
         }
@@ -50,6 +55,25 @@ class Login : AppCompatActivity() {
             Log.i("prova","Uscito")
             startActivity(Intent(this,SchermataIniziale::class.java))
         }
+
+        */
+
+        //metto in comunicazione il fragment con l'host, per poi cambiare fragment
+        supportFragmentManager
+            .setFragmentResultListener("requestKey", this) { requestKey, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported.
+                val result = bundle.getBoolean("bundleKey")
+            if(result && sentinellaCounter == 0){
+                sentinellaCounter ++
+                trasaction.replace(binding.fragmentView.id,PasswordDimenticataFragment()).addToBackStack(null).commit()
+
+                Log.i("prova","${manager.backStackEntryCount}")
+            }
+            else{
+                Log.i("prova","Faccio niente")
+                trasaction.replace(binding.fragmentView.id,FragmentLogin()).addToBackStack(null).commit()
+            }
+            }
     }
 
     private fun signInGoogle() {
@@ -90,4 +114,6 @@ class Login : AppCompatActivity() {
             }
         }
     }
+
+
 }

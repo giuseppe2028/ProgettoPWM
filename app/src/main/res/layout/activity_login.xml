@@ -4,122 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/sfondologin"
     tools:context=".Login.Login">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95">
-
-        <TextView
-            android:id="@+id/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:textSize="@dimen/title"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/subtitleLogin"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentView"
+        android:name="com.example.progettopwm.SchermataIniziale.FragmentLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/marginButton"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77">
-
-        <EditText
-            android:id="@+id/editTextText2"
-            style="@style/textEditStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_text_edit"
-            android:inputType="text"
-            android:paddingVertical="@dimen/paddingEditTetxt"
-            android:text="@string/email" />
-
-        <EditText
-            android:id="@+id/editTextText"
-            style="@style/textEditStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginLinearLayoutElements"
-            android:background="@drawable/custom_text_edit"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:text="@string/password" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.32">
-
-        <Button
-            android:id="@+id/accediNormale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/marginButton"
-            android:backgroundTint="@color/palette1"
-            android:text="@string/login" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/accediConGoogle"
-                app:layout_constraintHorizontal_bias="0.05"
-                app:layout_constraintStart_toStartOf="@+id/accediConGoogle"
-                app:layout_constraintTop_toTopOf="@+id/accediConGoogle"
-                app:srcCompat="@drawable/google__g__logo_svg" />
-
-            <Button
-                android:id="@+id/accediConGoogle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/marginButton"
-                android:backgroundTint="@android:color/transparent"
-                android:text="@string/accediConGoogle"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="@color/black"
-                app:strokeWidth="1dp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout="@layout/fragment_login" />
 </androidx.constraintlayout.widget.ConstraintLayout>
