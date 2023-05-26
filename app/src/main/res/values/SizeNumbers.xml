@@ -5,4 +5,6 @@
     <dimen name="marginButton">30dp</dimen>
     <dimen name="paddingEditTetxt">5dp</dimen>
     <dimen name="radius">50dp</dimen>
+    <dimen name="paddingStartTextEdit">10dp</dimen>
+    <dimen name="marginLinearLayoutElements">10dp</dimen>
 </resources>

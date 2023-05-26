@@ -4,6 +4,10 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+    <style name="textEditStyle">
+        <item name="android:padding">@dimen/paddingStartTextEdit</item>
+        <item name="background">@drawable/text_edit_shape</item>
+    </style>
 
     <style name="Theme.ProgettoPWM" parent="Base.Theme.ProgettoPWM" />
 </resources>
