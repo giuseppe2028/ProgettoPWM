@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.060000002">
+        app:layout_constraintVertical_bias="0.95">
 
         <TextView
             android:id="@+id/Title"
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13">
+        app:layout_constraintVertical_bias="0.77">
 
         <EditText
             android:id="@+id/editTextText2"
@@ -57,28 +57,16 @@
             android:paddingVertical="@dimen/paddingEditTetxt"
             android:text="@string/email" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <EditText
+            android:id="@+id/editTextText"
+            style="@style/textEditStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/editTextText"
-                style="@style/textEditStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/custom_text_edit"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:paddingVertical="@dimen/paddingEditTetxt"
-                android:singleLine="false"
-                android:text="@string/password"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginLinearLayoutElements"
+            android:background="@drawable/custom_text_edit"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:text="@string/password" />
 
     </LinearLayout>
 
@@ -91,13 +79,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.90999997">
+        app:layout_constraintVertical_bias="0.32">
 
         <Button
             android:id="@+id/accediNormale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/marginButton"
+            android:backgroundTint="@color/palette1"
             android:text="@string/login" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
