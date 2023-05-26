@@ -3,8 +3,8 @@ package com.example.progettopwm.SchermataIniziale
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.progettopwm.Login.Login
 import com.example.progettopwm.databinding.ActivitySchermataInizialeBinding
+import com.example.progettopwm.SchermataRegistrazione.SchermataRegistrazione
 
 class SchermataIniziale : AppCompatActivity() {
     private lateinit var binding:ActivitySchermataInizialeBinding
@@ -12,12 +12,20 @@ class SchermataIniziale : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySchermataInizialeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        clickBottoni()
+        //clickBottoneLogin()
+        clickBottoneRegistrazione()
+    }
+
+
+    private fun clickBottoneRegistrazione() {
+        binding.bottoneRegistrzione.setOnClickListener {
+            startActivity(Intent(this, SchermataRegistrazione::class.java))
+        }
     }
 
     private fun clickBottoni() {
         binding.bottoneLogin.setOnClickListener {
-            startActivity(Intent(this,Login::class.java))
+          //  startActivity(Intent(this,Login::class.java))
         }
         }
     }

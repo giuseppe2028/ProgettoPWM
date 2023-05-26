@@ -21,7 +21,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.159" />
+        app:layout_constraintVertical_bias="0.159"
+        tools:ignore="SpUsage" />
 
     <Button
         android:id="@+id/bottoneRegistrzione"
@@ -29,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_edittext"
         android:backgroundTint="@color/sfondoBottoni"
         android:includeFontPadding="true"
         android:paddingHorizontal="80dp"
@@ -39,13 +41,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/benvenuto"
         app:layout_constraintVertical_bias="0.87"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:ignore="SpUsage,TextSizeCheck,VisualLintButtonSize" />
 
     <Button
         android:id="@+id/bottoneLogin"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_edittext"
         android:backgroundTint="@color/sfondoBottoni1"
         android:text="@string/login"
         android:textSize="@dimen/sizeText"
@@ -53,6 +57,9 @@
         app:layout_constraintEnd_toEndOf="@+id/bottoneRegistrzione"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/bottoneRegistrzione"
-        app:layout_constraintTop_toBottomOf="@+id/bottoneRegistrzione" />
+        app:layout_constraintTop_toBottomOf="@+id/bottoneRegistrzione"
+        tools:ignore="SpUsage,TextSizeCheck,VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

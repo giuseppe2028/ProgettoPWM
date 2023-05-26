@@ -3,4 +3,6 @@
     <string name="benvenuto">Benvenut* su NomeAPP</string>
     <string name="Creaaccount">Crea un account</string>
     <string name="login">Accedi</string>
+    <string name="title_activity_schermata_registrazione">activity_schermata_registrazione</string>
+    <string name="registrazione">Registrati</string>
 </resources>
