@@ -40,12 +40,19 @@ class FragmentLogin : Fragment() {
     ): View {
 
         binding = FragmentLoginBinding.inflate(inflater)
+        clickBottoni()
+        // Inflate the layout for this fragment
+        return binding.root
+    }
+
+    private fun clickBottoni() {
         val result = true
         binding.passwordDimenticata.setOnClickListener{
             parentFragmentManager.setFragmentResult("requestKey", bundleOf("bundleKey" to result))
         }
-        // Inflate the layout for this fragment
-        return binding.root
+        binding.accediConGoogle.setOnClickListener {
+            parentFragmentManager.setFragmentResult("requestGoogle", bundleOf("RispostaGoogle" to result))
+        }
     }
 
     companion object {

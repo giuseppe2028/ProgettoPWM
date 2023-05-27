@@ -8,14 +8,15 @@
     tools:context=".Login.Login">
 
     <Button
-        android:id="@+id/conferma"
+        android:id="@+id/CreaAccount"
+        style="@style/bottoneLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/marginButton"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="@dimen/maginBottoneSchermataIniziale"
         android:backgroundTint="@color/palette1"
-        android:text="@string/conferma"
+        android:text="@string/CreaAccount"
         app:layout_constraintBottom_toTopOf="@+id/haiAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -35,7 +36,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/conferma" />
+        app:layout_constraintTop_toBottomOf="@+id/CreaAccount" />
 
     <TextView
         android:id="@+id/signin"

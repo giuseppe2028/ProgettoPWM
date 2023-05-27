@@ -1,16 +1,15 @@
 package com.example.progettopwm.Login
 
 import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
-import com.example.progettopwm.SchermataIniziale.SchermataIniziale
 import com.example.progettopwm.SchermataIniziale.SchermataInizialeFragment
 import com.example.progettopwm.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -30,14 +29,65 @@ class Login : AppCompatActivity() {
     private var sentinellaCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val manager = supportFragmentManager
+        val transaction = manager.beginTransaction()
         super.onCreate(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         if(savedInstanceState == null){
-            val manager = supportFragmentManager
-            val transaction = manager.beginTransaction()
+            Log.i("sonoDentro","Dentro")
             transaction.add(binding.fragmentView.id, SchermataInizialeFragment())
         }
-        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        accediCongoogle()
+        //metto in comunicazione il fragment con l'host, per poi cambiare fragment
+       passDimenticata()
+    }
+
+    private fun accediCongoogle() {
+        supportFragmentManager
+            .setFragmentResultListener("requestGoogle", this) { requestKey, bundle ->
+                //devo inserire i fragment qua dentro per far ricominciare il contatore
+                val manager = supportFragmentManager
+                val trasaction = manager.beginTransaction()
+                // We use a String here, but any type that can be put in a Bundle is supported.
+                val result = bundle.getBoolean("RispostaGoogle")
+
+                if (result){
+                    googleAuth()
+                    signInGoogle()
+
+                }
+            }
+    }
+
+    private fun passDimenticata() {
+        supportFragmentManager
+            .setFragmentResultListener("requestKey", this) { requestKey, bundle ->
+                //devo inserire i fragment qua dentro per far ricominciare il contatore
+                val manager = supportFragmentManager
+                val trasaction = manager.beginTransaction()
+                // We use a String here, but any type that can be put in a Bundle is supported.
+                val result = bundle.getBoolean("bundleKey")
+                if(result && sentinellaCounter == 0){
+                    sentinellaCounter ++
+                    trasaction.setCustomAnimations(R.anim.enter_fragment_up_to_down,R.anim.exit_fragment_right_to_left,R.anim.enter_fragment_down_to_up,R.anim.exit_fragment_left_to_right)
+                        .replace(binding.fragmentView.id,PasswordDimenticataFragment()).addToBackStack(null).commit()
+
+                    Log.i("prova","${manager.backStackEntryCount}")
+                }
+                else{
+                    Log.i("prova","Faccio niente")
+                    trasaction.setCustomAnimations(R.anim.enter_fragment_up_to_down,R.anim.exit_fragment_right_to_left,R.anim.enter_fragment_down_to_up,R.anim.exit_fragment_left_to_right)
+                        .replace(binding.fragmentView.id,PasswordDimenticataFragment()).addToBackStack(null).commit()
+                }
+            }
+        fragmentListenerSignIn()
+    }
+
+    private fun googleAuth() {
         auth = FirebaseAuth.getInstance()
 
         //indico il builder della creazione dell'account
@@ -48,39 +98,18 @@ class Login : AppCompatActivity() {
 
         googleSignClient = GoogleSignIn.getClient(this,gso)
 
-       /* binding.accediConGoogle.setOnClickListener {
-            signInGoogle()
-            Log.i("Ciao","Cliccato")
-        }
-        binding.accediNormale.setOnClickListener {
-            Log.i("prova",account)
-           auth.signOut()
-            Log.i("prova","Uscito")
-            startActivity(Intent(this,SchermataIniziale::class.java))
-        }
+        /* binding.accediConGoogle.setOnClickListener {
+             signInGoogle()
+             Log.i("Ciao","Cliccato")
+         }
+         binding.accediNormale.setOnClickListener {
+             Log.i("prova",account)
+            auth.signOut()
+             Log.i("prova","Uscito")
+             startActivity(Intent(this,SchermataIniziale::class.java))
+         }
 
-        */
-
-        //metto in comunicazione il fragment con l'host, per poi cambiare fragment
-        supportFragmentManager
-            .setFragmentResultListener("requestKey", this) { requestKey, bundle ->
-                //devo inserire i fragment qua dentro per far ricominciare il contatore
-                val manager = supportFragmentManager
-                val trasaction = manager.beginTransaction()
-            // We use a String here, but any type that can be put in a Bundle is supported.
-                val result = bundle.getBoolean("bundleKey")
-            if(result && sentinellaCounter == 0){
-                sentinellaCounter ++
-                trasaction.replace(binding.fragmentView.id,PasswordDimenticataFragment()).addToBackStack(null).commit()
-
-                Log.i("prova","${manager.backStackEntryCount}")
-            }
-            else{
-                Log.i("prova","Faccio niente")
-                trasaction.replace(binding.fragmentView.id,PasswordDimenticataFragment()).addToBackStack(null).commit()
-            }
-            }
-        fragmentListenerSignIn()
+         */
     }
 
     override fun onBackPressed() {
@@ -140,7 +169,8 @@ class Login : AppCompatActivity() {
                 val result = bundle.getBoolean("SignInRisposta")
                 if(result){
 
-                    trasaction.replace(binding.fragmentView.id,FragmentLogin()).addToBackStack(null).commit()
+                    trasaction.setCustomAnimations(R.anim.enter_fragment_up_to_down,R.anim.exit_fragment_right_to_left,R.anim.enter_fragment_down_to_up,R.anim.exit_fragment_left_to_right)
+                        .replace(binding.fragmentView.id,FragmentLogin()).addToBackStack(null).commit()
 
                     Log.i("prova","${manager.backStackEntryCount}")
                 }

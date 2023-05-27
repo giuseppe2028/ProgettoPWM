@@ -47,6 +47,7 @@
 
             <Button
                 android:id="@+id/accediNormale"
+                style="@style/bottoneLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/marginButton"
@@ -70,10 +71,11 @@
 
                 <Button
                     android:id="@+id/accediConGoogle"
+                    style="@style/AccediConGoole"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/marginButton"
-                    android:backgroundTint="@android:color/transparent"
+                    android:layout_marginTop="@dimen/marginTextEdit"
                     android:text="@string/accediConGoogle"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -104,9 +106,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_text_edit"
-                android:inputType="text"
-                android:paddingVertical="@dimen/paddingEditTetxt"
-                android:text="@string/email" />
+                android:hint="@string/email"
+                android:inputType="text|textEmailAddress"
+                android:paddingVertical="@dimen/paddingEditTetxt" />
 
             <EditText
                 android:id="@+id/editTextText"
@@ -116,8 +118,9 @@
                 android:layout_marginTop="@dimen/marginLinearLayoutElements"
                 android:background="@drawable/custom_text_edit"
                 android:ems="10"
+                android:hint="@string/password"
                 android:inputType="textPassword"
-                android:text="@string/password" />
+                android:paddingVertical="5dp" />
 
         </LinearLayout>
 
