@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" /> <!-- Colore di riempimento, puoi personalizzarlo -->
+    <corners android:topLeftRadius="@dimen/radiusLogin" android:topRightRadius="@dimen/radiusLogin" /> <!-- Radius desiderato -->
+</shape>

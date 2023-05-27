@@ -3,114 +3,146 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Nome"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.289"
-        tools:ignore="UnknownId,TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Cognome"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.363"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="Email"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text="Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text="Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.619"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
+    android:layout_height="match_parent"
+    tools:ignore="ExtraText">
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonRegistrati"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="112dp"
-        android:backgroundTint="@color/blu"
-        android:text="Invio"
+        android:layout_margin="@dimen/marginButton"
+        android:backgroundTint="@color/palette1"
+        android:text="@string/conferma"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="UnknownId" />
 
     <TextView
-        android:id="@+id/RegistrazioneText"
+        android:id="@+id/TitleRegistrazione"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registrazione"
-        android:textAlignment="center"
-        android:textColor="@color/blu"
-        android:textSize="45dp"
+        android:textSize="@dimen/title"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintVertical_bias="0.154" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutRegistrazione"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginTextEdit"
+        android:layout_marginHorizontal="@dimen/marginButton"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/inserisciNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inserisciN"/>
+
+        <EditText
+            android:id="@+id/editTextNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_text_edit"
+            android:ems="10"
+            android:inputType="text"
+            android:layout_marginTop="@dimen/marginLinearLayoutElements"
+
+            android:paddingVertical="@dimen/paddingEditTetxt"
+            android:text="@string/nome"
+            tools:ignore="TouchTargetSizeCheck"
+            style="@style/textEditStyle"/>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inserisciC"/>
+        <EditText
+            android:id="@+id/editTextCognome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_text_edit"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="@dimen/marginLinearLayoutElements"
+            android:paddingVertical="@dimen/paddingEditTetxt"
+            android:text="@string/cognome"
+            tools:ignore="MissingConstraints,TouchTargetSizeCheck"
+            style="@style/textEditStyle"/>
 
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inserisciE"            />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_text_edit"
+            android:ems="10"
+            android:inputType="text"
+            android:paddingVertical="@dimen/paddingEditTetxt"
+            android:text="@string/email"
+            tools:ignore="UnknownId,TouchTargetSizeCheck"
+            android:layout_marginTop="@dimen/marginLinearLayoutElements"
+            style="@style/textEditStyle"/>
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inserisciP"            />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_text_edit"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingVertical="@dimen/paddingEditTetxt"
+            android:text="@string/password"
+            tools:ignore="TouchTargetSizeCheck"
+            android:layout_marginTop="@dimen/marginLinearLayoutElements"
+            style="@style/textEditStyle"
+            android:drawableEnd="@drawable/baseline_visibility_off_24"/>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inserisciCP"
+            />
+
+        <EditText
+            android:id="@+id/editTextTextPasswordConferma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_text_edit"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:paddingVertical="@dimen/paddingEditTetxt"
+            android:text="@string/password"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+            android:layout_marginTop="@dimen/marginLinearLayoutElements"
+            style="@style/textEditStyle"
+            android:drawableEnd="@drawable/baseline_visibility_off_24"
+            />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
