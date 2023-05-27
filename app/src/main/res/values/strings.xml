@@ -14,4 +14,6 @@
     <string name="ReimpostaPassword">Reimposta Password</string>
     <string name="subtitleRecuperaPassword">Inserisci l\'indirizzo email associato al tuo account per poterlo recuperare</string>
     <string name="conferma">Conferma</string>
+    <string name="haiAccount">Hai già un account?</string>
+    <string name="Signin">Sign in</string>
 </resources>

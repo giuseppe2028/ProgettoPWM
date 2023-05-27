@@ -9,4 +9,5 @@
     <dimen name="marginLinearLayoutElements">10dp</dimen>
     <dimen name="radiusLogin">30dp</dimen>
     <dimen name="marginTextEdit">15dp</dimen>
+    <dimen name="maginBottoneSchermataIniziale">10dp</dimen>
 </resources>
