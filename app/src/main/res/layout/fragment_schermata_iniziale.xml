@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/marginButton"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="@dimen/maginBottoneSchermataIniziale"
         android:backgroundTint="@color/palette1"
         android:text="@string/conferma"
@@ -20,13 +21,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.110000014"
+        app:layout_constraintVertical_bias="0.26"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/haiAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marginSignIn"
         android:text="@string/haiAccount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/signin"

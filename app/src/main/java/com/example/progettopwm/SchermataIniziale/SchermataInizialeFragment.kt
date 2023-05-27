@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import com.example.progettopwm.R
+import com.example.progettopwm.databinding.FragmentSchermataInizialeBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,7 +19,9 @@ private const val ARG_PARAM2 = "param2"
  * Use the [SchermataInizialeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
 class SchermataInizialeFragment : Fragment() {
+    private lateinit var binding:FragmentSchermataInizialeBinding
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,8 +38,18 @@ class SchermataInizialeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentSchermataInizialeBinding.inflate(inflater)
+        textButton()
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schermata_iniziale, container, false)
+        return binding.root
+
+    }
+
+    private fun textButton() {
+        val result = true
+       binding.signin.setOnClickListener{
+           parentFragmentManager.setFragmentResult("SignIn", bundleOf("SignInRisposta" to result))
+       }
     }
 
     companion object {

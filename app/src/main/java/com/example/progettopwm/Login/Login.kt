@@ -11,6 +11,7 @@ import com.example.progettopwm.R
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
 import com.example.progettopwm.SchermataIniziale.SchermataIniziale
+import com.example.progettopwm.SchermataIniziale.SchermataInizialeFragment
 import com.example.progettopwm.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -29,9 +30,12 @@ class Login : AppCompatActivity() {
     private var sentinellaCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
+        if(savedInstanceState == null){
+            val manager = supportFragmentManager
+            val transaction = manager.beginTransaction()
+            transaction.add(binding.fragmentView.id, SchermataInizialeFragment())
+        }
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
@@ -76,6 +80,7 @@ class Login : AppCompatActivity() {
                 trasaction.replace(binding.fragmentView.id,PasswordDimenticataFragment()).addToBackStack(null).commit()
             }
             }
+        fragmentListenerSignIn()
     }
 
     override fun onBackPressed() {
@@ -124,6 +129,25 @@ class Login : AppCompatActivity() {
                 Toast.makeText(this,it.exception.toString(),Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    private fun fragmentListenerSignIn() {
+        supportFragmentManager
+            .setFragmentResultListener("SignIn", this) { requestKey, bundle ->
+                //devo inserire i fragment qua dentro per far ricominciare il contatore
+                val manager = supportFragmentManager
+                val trasaction = manager.beginTransaction()
+                // We use a String here, but any type that can be put in a Bundle is supported.
+                val result = bundle.getBoolean("SignInRisposta")
+                if(result){
+
+                    trasaction.replace(binding.fragmentView.id,FragmentLogin()).addToBackStack(null).commit()
+
+                    Log.i("prova","${manager.backStackEntryCount}")
+                }
+                else{
+                    Log.i("prova","Faccio niente")
+                }
+            }
     }
 
 

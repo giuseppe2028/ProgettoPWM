@@ -8,7 +8,7 @@
     tools:context=".SchermataIniziale.SchermataIniziale" >
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
+        android:id="@+id/sottoschermata"
         android:name="com.example.progettopwm.SchermataIniziale.SchermataInizialeFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
