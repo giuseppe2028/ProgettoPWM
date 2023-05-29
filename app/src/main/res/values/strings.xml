@@ -6,7 +6,25 @@
     <string name="accediConGoogle">Accedi con google</string>
     <string name="subtitleLogin">Accedi con le tue credenziali</string>
     <string name="indirizzoMail">Indirizzo Email</string>
+    <string name="registrazione">Registrati</string>
+    <string name="nome">Nome</string>
+    <string name="cognome">Cognome</string>
     <string name="password">Password</string>
+    <string name="passwordc">Conferma password</string>
+    <string name="inserisciN">Inserisci il nome</string>
+    <string name="inserisciC">Inserisci il cognome</string>
+    <string name="inserisciE">Inserisci l\'indirizzo email</string>
+    <string name="inserisciP">Inserisci la password</string>
+    <string name="inserisciCP">Inserisci nuovamente la password</string>
+    <string name="OTP">OTP</string>
+    <string name="TitleOTP">Inserisci OTP</string>
+    <string name="subtitleOTP">L\'OTP è stato inviato per email</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="ToastOTP">Compila il campo OTP per continuare</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Email</string>
