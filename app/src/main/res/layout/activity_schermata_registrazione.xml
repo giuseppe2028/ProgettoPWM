@@ -61,7 +61,7 @@
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
 
             android:paddingVertical="@dimen/paddingEditTetxt"
-            android:text="@string/nome"
+            android:hint="@string/nome"
             tools:ignore="TouchTargetSizeCheck"
             style="@style/textEditStyle"/>
 
@@ -79,7 +79,7 @@
             android:inputType="textEmailAddress"
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:paddingVertical="@dimen/paddingEditTetxt"
-            android:text="@string/cognome"
+            android:hint="@string/cognome"
             tools:ignore="MissingConstraints,TouchTargetSizeCheck"
             style="@style/textEditStyle"/>
 
@@ -98,7 +98,7 @@
             android:ems="10"
             android:inputType="text"
             android:paddingVertical="@dimen/paddingEditTetxt"
-            android:text="@string/email"
+            android:hint="@string/email"
             tools:ignore="UnknownId,TouchTargetSizeCheck"
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             style="@style/textEditStyle"/>
@@ -118,7 +118,7 @@
             android:ems="10"
             android:inputType="textPassword"
             android:paddingVertical="@dimen/paddingEditTetxt"
-            android:text="@string/password"
+            android:hint="@string/password"
             tools:ignore="TouchTargetSizeCheck"
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             style="@style/textEditStyle"
@@ -138,7 +138,7 @@
             android:ems="10"
             android:inputType="textPassword"
             android:paddingVertical="@dimen/paddingEditTetxt"
-            android:text="@string/password"
+            android:hint="@string/password"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             style="@style/textEditStyle"
