@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="sfondoBottoni">#AE9B9C</color>
     <color name="sfondoBottoni1">#D7A976</color>
+    <color name="palette1">#3A7AE6</color>
+    <color name="palette2"></color>
+    <color name="startColor">#7FAFF7</color>
+    <color name="endColor">#4B79EF</color>
 </resources>

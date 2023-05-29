@@ -3,4 +3,18 @@
     <string name="benvenuto">Benvenut* su NomeAPP</string>
     <string name="Creaaccount">Crea un account</string>
     <string name="login">Accedi</string>
+    <string name="accediConGoogle">Accedi con google</string>
+    <string name="subtitleLogin">Accedi con le tue credenziali</string>
+    <string name="indirizzoMail">Indirizzo Email</string>
+    <string name="password">Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email</string>
+    <string name="passwordDimenticata">Non te la ricordi?</string>
+    <string name="ReimpostaPassword">Reimposta Password</string>
+    <string name="subtitleRecuperaPassword">Inserisci l\'indirizzo email associato al tuo account per poterlo recuperare</string>
+    <string name="CreaAccount">Crea Account</string>
+    <string name="haiAccount">Hai già un account?</string>
+    <string name="Signin">Sign in</string>
+    <string name="conferma">Conferma</string>
 </resources>
