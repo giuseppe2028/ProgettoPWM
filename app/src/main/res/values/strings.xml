@@ -19,6 +19,7 @@
     <string name="OTP">OTP</string>
     <string name="TitleOTP">Inserisci OTP</string>
     <string name="subtitleOTP">L\'OTP è stato inviato per email</string>
+    <string name="ToastLogin">Non hai inserito password o email</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

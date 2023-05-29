@@ -1,13 +1,16 @@
 package com.example.progettopwm.SchermataIniziale
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.FragmentLoginBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -52,6 +55,15 @@ class FragmentLogin : Fragment() {
         }
         binding.accediConGoogle.setOnClickListener {
             parentFragmentManager.setFragmentResult("requestGoogle", bundleOf("RispostaGoogle" to result))
+        }
+        binding.accediNormale.setOnClickListener {
+            if(binding.email.text.toString().trim().isEmpty()){
+                //comandi database
+                Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
+            }
+            else{
+                startActivity(Intent(this.context,SchermataHome()::class.java))
+            }
         }
     }
 
