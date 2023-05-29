@@ -1,5 +1,6 @@
 package com.example.progettopwm.SchermataIniziale
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataRegistrazione.SchermataRegistrazione
 import com.example.progettopwm.databinding.FragmentSchermataInizialeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,9 +42,16 @@ class SchermataInizialeFragment : Fragment() {
     ): View? {
         binding = FragmentSchermataInizialeBinding.inflate(inflater)
         textButton()
+        clickCreaAccount()
         // Inflate the layout for this fragment
         return binding.root
 
+    }
+
+    private fun clickCreaAccount() {
+        binding.CreaAccount.setOnClickListener {
+            startActivity(Intent(this.context,SchermataRegistrazione()::class.java))
+        }
     }
 
     private fun textButton() {
