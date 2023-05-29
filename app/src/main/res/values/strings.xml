@@ -16,7 +16,9 @@
     <string name="inserisciE">Inserisci l\'indirizzo email</string>
     <string name="inserisciP">Inserisci la password</string>
     <string name="inserisciCP">Inserisci nuovamente la password</string>
-
+    <string name="OTP">OTP</string>
+    <string name="TitleOTP">Inserisci OTP</string>
+    <string name="subtitleOTP">L\'OTP è stato inviato per email</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -28,4 +30,5 @@
     <string name="conferma">Conferma</string>
     <string name="haiAccount">Hai già un account?</string>
     <string name="Signin">Sign in</string>
+    <string name="ToastOTP">Compila il campo OTP per continuare</string>
 </resources>

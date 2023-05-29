@@ -5,144 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="ExtraText">
-    <Button
-        android:id="@+id/buttonRegistrati"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/marginButton"
-        android:backgroundTint="@color/palette1"
-        android:text="@string/conferma"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:ignore="UnknownId" />
 
-    <TextView
-        android:id="@+id/TitleRegistrazione"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/registrazione"
-        android:textSize="@dimen/title"
-        android:textStyle="bold"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.progettopwm.SchermataRegistrazione.FragmentRegistrazione"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154" />
+        tools:ignore="UnknownIdInLayout"
+        tools:layout="@layout/fragment_registrazione" />
 
-    <LinearLayout
-        android:id="@+id/linearLayoutRegistrazione"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/marginTextEdit"
-        android:layout_marginHorizontal="@dimen/marginButton"
-
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/inserisciNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inserisciN"/>
-
-        <EditText
-            android:id="@+id/editTextNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_text_edit"
-            android:ems="10"
-            android:inputType="text"
-            android:layout_marginTop="@dimen/marginLinearLayoutElements"
-
-            android:paddingVertical="@dimen/paddingEditTetxt"
-            android:hint="@string/nome"
-            tools:ignore="TouchTargetSizeCheck"
-            style="@style/textEditStyle"/>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inserisciC"/>
-        <EditText
-            android:id="@+id/editTextCognome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_text_edit"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            android:layout_marginTop="@dimen/marginLinearLayoutElements"
-            android:paddingVertical="@dimen/paddingEditTetxt"
-            android:hint="@string/cognome"
-            tools:ignore="MissingConstraints,TouchTargetSizeCheck"
-            style="@style/textEditStyle"/>
-
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inserisciE"            />
-
-        <EditText
-            android:id="@+id/editTextEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_text_edit"
-            android:ems="10"
-            android:inputType="text"
-            android:paddingVertical="@dimen/paddingEditTetxt"
-            android:hint="@string/email"
-            tools:ignore="UnknownId,TouchTargetSizeCheck"
-            android:layout_marginTop="@dimen/marginLinearLayoutElements"
-            style="@style/textEditStyle"/>
-
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inserisciP"            />
-
-        <EditText
-            android:id="@+id/editTextPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_text_edit"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:paddingVertical="@dimen/paddingEditTetxt"
-            android:hint="@string/password"
-            tools:ignore="TouchTargetSizeCheck"
-            android:layout_marginTop="@dimen/marginLinearLayoutElements"
-            style="@style/textEditStyle"
-            android:drawableEnd="@drawable/baseline_visibility_off_24"/>
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inserisciCP"
-            />
-
-        <EditText
-            android:id="@+id/editTextTextPasswordConferma"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_text_edit"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:paddingVertical="@dimen/paddingEditTetxt"
-            android:hint="@string/password"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
-            android:layout_marginTop="@dimen/marginLinearLayoutElements"
-            style="@style/textEditStyle"
-            android:drawableEnd="@drawable/baseline_visibility_off_24"
-            />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
