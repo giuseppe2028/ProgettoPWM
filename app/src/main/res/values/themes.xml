@@ -17,13 +17,12 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 <style name="bottoneLogin">
-    <item name="android:backgroundTint">@color/palette1</item>
     <item name="android:background">@drawable/shape_button</item>
     <item name="android:textColor">@color/white</item>
 </style>
     <style name="AccediConGoole">
         <item name="android:backgroundTint">@null</item>
-        <item name="android:background">@drawable/shape_button</item>
+        <item name="android:background">@drawable/shape_button_google</item>
         <item name="android:textColor">@color/white</item>
     </style>
 </resources>

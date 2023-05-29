@@ -15,7 +15,6 @@
         android:layout_marginHorizontal="@dimen/marginButton"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="@dimen/maginBottoneSchermataIniziale"
-        android:backgroundTint="@color/palette1"
         android:text="@string/CreaAccount"
         app:layout_constraintBottom_toTopOf="@+id/haiAccount"
         app:layout_constraintEnd_toEndOf="parent"
