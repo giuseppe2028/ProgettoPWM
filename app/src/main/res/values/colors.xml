@@ -9,4 +9,5 @@
     <color name="startColor">#7FAFF7</color>
     <color name="endColor">#4B79EF</color>
     <color name="Red">#F33022</color>
+    <color name="backGround">#F2F2F2</color>
 </resources>

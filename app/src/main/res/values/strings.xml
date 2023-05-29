@@ -20,6 +20,8 @@
     <string name="TitleOTP">Inserisci OTP</string>
     <string name="subtitleOTP">L\'OTP è stato inviato per email</string>
     <string name="ToastLogin">Non hai inserito password o email</string>
+    <string name="benvenutoHome">Ciao, Giuseppe! &#128075;</string>
+    <string name="subtitleHome">Dove vorresti andare?</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -36,4 +38,5 @@
     <string name="haiAccount">Hai già un account?</string>
     <string name="Signin">Sign in</string>
     <string name="conferma">Conferma</string>
+    <string name="CercaDestinazione">Cerca una destinazione</string>
 </resources>
