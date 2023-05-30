@@ -21,7 +21,10 @@
     <string name="subtitleOTP">L\'OTP è stato inviato per email</string>
     <string name="ToastLogin">Non hai inserito password o email</string>
     <string name="TitleProfilo">Profilo</string>
-
+    <string name="GestioneProfilo">Gestisci il tuo account</string>
+    <string name="wallet">Wallet</string>
+    <string name="datipagamento">Modifica i dati di pagamento</string>
+    <string name="lingua">Cambia la lingua</string>
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="ToastOTP">Compila il campo OTP per continuare</string>

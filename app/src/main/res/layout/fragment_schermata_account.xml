@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/marginTitle"
                 android:text="@string/nome"
-                android:textSize="@dimen/title"
+                android:textSize="@dimen/sizeText"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/circleImageView2"
@@ -70,58 +70,6 @@
 
 
 
-
-
-
-
-
-    <!--
-    <LinearLayout
-        android:id="@+id/linearLayoutfotoAcoount"
-        android:layout_width="428dp"
-        android:layout_height="131dp"
-        android:background="@drawable/gradient_layaout"
-        android:gravity="top"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <TextView
-            android:id="@+id/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TitleProfilo"
-            android:textSize="@dimen/title"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/margintopTitle"
-            android:layout_marginBottom="@dimen/margintopTitle"
-            android:layout_marginLeft="@dimen/margintopTitle"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="139dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/stiven_baslar"
-                />
-
-            <TextView
-                android:id="@+id/nome"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/nome"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </LinearLayout>-->
-
     <LinearLayout
         android:id="@+id/linearLayoutlistaAccount"
         android:layout_width="match_parent"
@@ -131,36 +79,67 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginLeft="@dimen/marginButton">
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textViewGestione"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/GestioneProfilo"
+            android:textSize="@dimen/sizeText"
+            android:layout_marginTop="@dimen/paddingStartTextEdit"
+            android:clickable="true"
+            android:drawableStart="@drawable/baseline_account_circle_24"
+            android:drawablePadding="8dp"
+            />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/textViewdatipagamento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/datipagamento"
+            android:textSize="@dimen/sizeText"
+            android:layout_marginTop="@dimen/paddingStartTextEdit"
+            android:clickable="true"
+            android:drawableStart="@drawable/credit_card"
+            android:drawablePadding="8dp"
+
+            />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textViewwallet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/wallet"
+            android:textSize="@dimen/sizeText"
+            android:layout_marginTop="@dimen/paddingStartTextEdit"
+            android:clickable="true"
+            android:drawableStart="@drawable/wallet_bifold_outline"
+            android:drawablePadding="8dp"
+            />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="non mi ricordo cosa scrivere"
+            android:textSize="@dimen/sizeText"
+            android:layout_marginTop="@dimen/paddingStartTextEdit"
+            android:clickable="true"
+            android:drawablePadding="8dp"/>
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/textViewlingua"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/lingua"
+            android:textSize="@dimen/sizeText"
+            android:layout_marginTop="@dimen/paddingStartTextEdit"
+            android:clickable="true"
+            android:drawableStart="@drawable/translate"
+            android:drawablePadding="8dp"
+
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
