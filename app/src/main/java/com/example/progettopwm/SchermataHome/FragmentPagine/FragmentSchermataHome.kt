@@ -5,9 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
+import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
+import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
+import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 
@@ -40,9 +45,31 @@ class FragmentSchermataHome : Fragment() {
         savedInstanceState: Bundle?
     ): View{
         binding = FragmentSchermataHomeBinding.inflate(inflater)
-        binding.listaLocalita.layoutManager = LinearLayoutManager(this.context)
+        recycleViewGestore()
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun recycleViewGestore() {
+        val dati = arrayListOf<ItemsViewModel>(ItemsViewModel(127755,"Esplorazione"), ItemsViewModel(127958,"Mare"),ItemsViewModel(127957,"gita all'aria aperta"),ItemsViewModel(127956,"trekking"),ItemsViewModel(127963,"Cultura"))
+        val listaLuogo = arrayListOf<ItemClassLocalita>(ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"))
+        val adapter = CustomAdapter(dati)
+        val adapterViaggi = CustomAdapterMete(listaLuogo)
+
+        binding.listaLocalita.layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
+        binding.listaLocalita.adapter = adapter
+        binding.listaViaggi.layoutManager= LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
+        binding.listaViaggi.adapter = adapterViaggi
+
+        //per ora hanno lo stesso adapter, poi esso va modificato
+        binding.localitaSuggerite.layoutManager = GridLayoutManager(this.context,2)
+        binding.localitaSuggerite.adapter = adapterViaggi
     }
 
     companion object {

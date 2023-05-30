@@ -28,4 +28,9 @@
     <style name="searchBar">
         <item name="background">@color/backGround</item>
     </style>
+    <style name="roundedImage" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
+        <item name="color">@color/white</item>
+    </style>
 </resources>

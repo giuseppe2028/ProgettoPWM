@@ -39,4 +39,8 @@
     <string name="Signin">Sign in</string>
     <string name="conferma">Conferma</string>
     <string name="CercaDestinazione">Cerca una destinazione</string>
+    <string name="Raccomandati">Raccomandati per te</string>
+    <string name="DestiazioniFamose">Destinazioni popolari</string>
+    <string name="ProssimoViaggio">Prossimo Viaggio</string>
+    <string name="LocalitaSuggerite">Località suggerite</string>
 </resources>

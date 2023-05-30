@@ -12,4 +12,10 @@
     <dimen name="maginBottoneSchermataIniziale">10dp</dimen>
     <dimen name="marginSignIn">60dp</dimen>
     <dimen name="MargineImmagineLayoutSuperiore">10dp</dimen>
+    <dimen name="radiusCard">60dp</dimen>
+    <dimen name="widthCornerCard">0.5dp</dimen>
+    <dimen name="paddingHorizontalCard">15dp</dimen>
+    <dimen name="paddingVerticalCard">5dp</dimen>
+    <dimen name="sizeTextSubTitle">17dp</dimen>
+    <dimen name="marginVerticalCardLocalita">5dp</dimen>
 </resources>
