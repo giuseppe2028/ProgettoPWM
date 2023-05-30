@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView4"
+            android:id="@+id/fragmentContainerHome"
             android:name="com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,6 +25,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/white"
+            app:itemIconTint="@color/black"
+            app:itemTextColor="@color/black"
             app:menu="@menu/menu" />
 
     </LinearLayout>
