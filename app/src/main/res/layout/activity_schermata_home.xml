@@ -13,12 +13,19 @@
         android:orientation="vertical">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView4"
+            android:id="@+id/fragmentContainerHome"
             android:name="com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             tools:layout="@layout/fragment_schermata_home" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerAccount"
+            android:name="com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            tools:layout="@layout/fragment_schermata_account" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"
