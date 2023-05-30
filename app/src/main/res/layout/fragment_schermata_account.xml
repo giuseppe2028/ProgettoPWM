@@ -30,40 +30,42 @@
             android:textSize="@dimen/title"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/margintopTitle"
-            android:layout_marginBottom="@dimen/margintopTitle"
-            android:layout_marginLeft="@dimen/margintopTitle"
+            android:layout_marginLeft="@dimen/marginTitle"
             />
 
 
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/margintopTitle"
+            android:layout_marginBottom="@dimen/marginTitle"
+            >
+
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleImageView2"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/margintopTitle"
+                android:layout_marginLeft="@dimen/marginTitle"
                 android:src="@drawable/stiven_baslar"
-                app:civ_border_color="#FF000000"
-                android:layout_marginTop="@dimen/margintopTitle"
-                android:layout_marginBottom="@dimen/margintopTitle"
-                android:layout_marginLeft="@dimen/margintopTitle"/>
-           />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/nome"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginTitle"
                 android:text="@string/nome"
+                android:textSize="@dimen/title"
                 android:textStyle="bold"
-                android:layout_marginTop="@dimen/margintopTitle"
-                android:layout_marginBottom="@dimen/margintopTitle"
-                android:layout_marginLeft="@dimen/margintopTitle"/>
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/circleImageView2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 
