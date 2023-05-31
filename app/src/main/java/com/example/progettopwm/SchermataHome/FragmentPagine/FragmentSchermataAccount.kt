@@ -1,11 +1,15 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.SchermataModificaDatiAccount
+import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +22,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentSchermataAccount : Fragment() {
+    private  lateinit var binding : FragmentSchermataAccountBinding
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +40,14 @@ class FragmentSchermataAccount : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schermata_account, container, false)
+        binding = FragmentSchermataAccountBinding.inflate(inflater)
+
+        // Inflate the layout for this fragment
+        binding.textViewGestione.setOnClickListener{
+            startActivity(Intent(this.context, SchermataModificaDatiAccount::class.java))
+        }
+
+        return binding.root
     }
 
     companion object {

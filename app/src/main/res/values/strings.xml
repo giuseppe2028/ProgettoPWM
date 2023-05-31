@@ -15,7 +15,10 @@
     <string name="inserisciC">Inserisci il cognome</string>
     <string name="inserisciE">Inserisci l\'indirizzo email</string>
     <string name="inserisciP">Inserisci la password</string>
+    <string name="inserisciPC">Inserisci la password corrente</string>
+
     <string name="inserisciCP">Inserisci nuovamente la password</string>
+    <string name="inserisciNP">Inserisci una nuova password</string>
     <string name="OTP">OTP</string>
     <string name="TitleOTP">Inserisci OTP</string>
     <string name="subtitleOTP">L\'OTP è stato inviato per email</string>
@@ -28,6 +31,7 @@
     <string name="logout">Logout</string>
     <string name="data">Inserisci la data di nascita</string>
     <string name="data1">Data</string>
+    <string name="DatiAccount">Modifica i dati</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
