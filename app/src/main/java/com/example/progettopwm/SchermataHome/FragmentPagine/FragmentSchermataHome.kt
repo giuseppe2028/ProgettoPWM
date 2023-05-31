@@ -1,5 +1,6 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
@@ -70,6 +72,13 @@ class FragmentSchermataHome : Fragment() {
         //per ora hanno lo stesso adapter, poi esso va modificato
         binding.localitaSuggerite.layoutManager = GridLayoutManager(this.context,2)
         binding.localitaSuggerite.adapter = adapterViaggi
+        adapterViaggi.setOnClickListener(object :
+            CustomAdapterMete.OnClickListener{
+            override fun Onclick(position: Int, item: ItemClassLocalita) {
+                startActivity(Intent(context,ActivitySchermataViaggio::class.java))
+            }
+            }
+        )
     }
 
     companion object {

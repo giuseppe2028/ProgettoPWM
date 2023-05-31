@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/foto" >
+    android:background="@drawable/foto"
+    tools:context=".ActivitySchermataViaggio">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -175,7 +176,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
-            android:paddingHorizontal="@dimen/paddingHorizontalCard"
+            android:paddingHorizontal="@dimen/paddingTastoCompra"
             android:text="@string/CompraloOra"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
