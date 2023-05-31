@@ -10,12 +10,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_gestore"
+        android:contentDescription="ciao"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:id="@+id/layoutPersone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/Descrizione"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@id/review">
+
+            <TextView
+                android:id="@+id/iconaNumPersone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/marginPositionElement"
+                android:drawableLeft="@drawable/user" />
+
+            <TextView
+                android:id="@+id/numeroPersone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 persone" />
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
@@ -30,7 +57,10 @@
             android:id="@+id/textView21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_marginBottom="8dp"
+            android:text="Formentera"
+            android:textSize="@dimen/title"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -42,59 +72,116 @@
             android:id="@+id/linearLayout8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/ratingBar3"
+            app:layout_constraintBottom_toTopOf="@+id/review"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/textView21">
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/iconViaggio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/marginPositionElement"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:drawableStart="@drawable/marker" />
 
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:text="Venezia,Italy" />
+
         </LinearLayout>
 
-        <RatingBar
-            android:id="@+id/ratingBar3"
+        <LinearLayout
+            android:id="@+id/review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/Descrizione"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout8" />
+            app:layout_constraintTop_toBottomOf="@id/linearLayout8">
+
+            <RatingBar
+                android:id="@+id/ratingBar3"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:rating="4.5" />
+
+            <TextView
+                android:id="@+id/textReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+
+                android:text="(3450 views)"
+                android:textSize="12sp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/Descrizione"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/shape_login_border"
+            android:text="@string/descrizione"
+            android:textSize="@dimen/sizeTextSubTitle"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/testoDescrizione"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar3" />
+            app:layout_constraintTop_toBottomOf="@id/layoutPersone" />
 
         <TextView
             android:id="@+id/testoDescrizione"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Venezia offre un'esperienza unica e coinvolgente per i visitatori, rendendo ogni viaggio un'esperienza indimenticabile. L'esperienza utente è al centro di tutto ciò che Venezia ha da offrire, dalla navigazione sui canali mozzafiato all'immersione nella cultura e nell'arte veneziana."
+            android:textAlignment="viewStart"
+            app:layout_constraintBottom_toTopOf="@+id/comprami"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@id/Descrizione" />
+
+        <TextView
+            android:id="@+id/prezzoViaggio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="1550$"
+            android:textColor="@color/palette1"
+            android:textSize="@dimen/price"
+            app:layout_constraintBottom_toBottomOf="@+id/comprami"
+            app:layout_constraintEnd_toStartOf="@id/comprami"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/comprami" />
+
+        <Button
+            android:id="@+id/comprami"
+            style="@style/bottoneLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:paddingHorizontal="@dimen/paddingHorizontalCard"
+            android:text="@string/CompraloOra"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/prezzoViaggio"
+            app:layout_constraintTop_toBottomOf="@+id/testoDescrizione" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

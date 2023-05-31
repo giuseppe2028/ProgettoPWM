@@ -21,5 +21,7 @@
     <dimen name="TitleCardHomeSize">16dp</dimen>
     <dimen name="textCardHomeSize">14dp</dimen>
     <dimen name="cardCornerRadius">15dp</dimen>
+    <dimen name="marginPositionElement">5dp</dimen>
+    <dimen name="price">20sp</dimen>
 
 </resources>
