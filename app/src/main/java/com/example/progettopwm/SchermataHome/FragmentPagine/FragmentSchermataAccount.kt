@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.SchermataInserimentoDatiPagamento
 import com.example.progettopwm.SchermataHome.SchermataModificaDatiAccount
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
 
@@ -45,6 +46,9 @@ class FragmentSchermataAccount : Fragment() {
         // Inflate the layout for this fragment
         binding.textViewGestione.setOnClickListener{
             startActivity(Intent(this.context, SchermataModificaDatiAccount::class.java))
+        }
+        binding.textViewdatipagamento.setOnClickListener{
+            startActivity(Intent(this.context, SchermataInserimentoDatiPagamento::class.java))
         }
 
         return binding.root

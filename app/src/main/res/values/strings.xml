@@ -16,6 +16,8 @@
     <string name="inserisciE">Inserisci l\'indirizzo email</string>
     <string name="inserisciP">Inserisci la password</string>
     <string name="inserisciPC">Inserisci la password corrente</string>
+    <string name="inserisciNC">Inserisci nome e cognome dell\'intestatario </string>
+    <string name="inseriscinumero">Inserisci il numero della carta</string>
 
     <string name="inserisciCP">Inserisci nuovamente la password</string>
     <string name="inserisciNP">Inserisci una nuova password</string>
@@ -32,6 +34,9 @@
     <string name="data">Inserisci la data di nascita</string>
     <string name="data1">Data</string>
     <string name="DatiAccount">Modifica i dati</string>
+    <string name="DatiAccountP">Dati di pagamento</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
 
