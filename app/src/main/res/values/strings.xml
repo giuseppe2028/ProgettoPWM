@@ -25,6 +25,7 @@
     <string name="wallet">Wallet</string>
     <string name="datipagamento">Modifica i dati di pagamento</string>
     <string name="lingua">Cambia la lingua</string>
+    <string name="logout">Logout</string>
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="ToastOTP">Compila il campo OTP per continuare</string>

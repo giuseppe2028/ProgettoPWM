@@ -21,6 +21,7 @@
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintVertical_chainStyle="packed"
         android:background="@drawable/gradient_layaout"
+        android:elevation="8dp"
         >
         <TextView
             android:id="@+id/Title"
@@ -38,9 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="@dimen/margintopTitle"
+            android:layout_marginTop="@dimen/marginTitle"
             android:layout_marginBottom="@dimen/marginTitle"
-            >
+            android:elevation="8dp">
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -51,7 +52,8 @@
                 android:src="@drawable/stiven_baslar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:elevation="8dp"/>
 
             <TextView
                 android:id="@+id/nome"
@@ -88,10 +90,11 @@
             android:layout_height="wrap_content"
             android:text="@string/GestioneProfilo"
             android:textSize="@dimen/sizeText"
-            android:layout_marginTop="@dimen/paddingStartTextEdit"
+            android:layout_marginTop="@dimen/paddingTextEdit"
             android:clickable="true"
             android:drawableStart="@drawable/baseline_account_circle_24"
             android:drawablePadding="8dp"
+            android:elevation="8dp"
             />
 
         <TextView
@@ -100,11 +103,11 @@
             android:layout_height="wrap_content"
             android:text="@string/datipagamento"
             android:textSize="@dimen/sizeText"
-            android:layout_marginTop="@dimen/paddingStartTextEdit"
+            android:layout_marginTop="@dimen/paddingTextEdit"
             android:clickable="true"
             android:drawableStart="@drawable/credit_card"
             android:drawablePadding="8dp"
-
+            android:elevation="8dp"
             />
 
         <TextView
@@ -113,21 +116,12 @@
             android:layout_height="wrap_content"
             android:text="@string/wallet"
             android:textSize="@dimen/sizeText"
-            android:layout_marginTop="@dimen/paddingStartTextEdit"
+            android:layout_marginTop="@dimen/paddingTextEdit"
             android:clickable="true"
             android:drawableStart="@drawable/wallet_bifold_outline"
             android:drawablePadding="8dp"
+            android:elevation="8dp"
             />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="non mi ricordo cosa scrivere"
-            android:textSize="@dimen/sizeText"
-            android:layout_marginTop="@dimen/paddingStartTextEdit"
-            android:clickable="true"
-            android:drawablePadding="8dp"/>
 
         <TextView
             android:id="@+id/textViewlingua"
@@ -135,11 +129,24 @@
             android:layout_height="wrap_content"
             android:text="@string/lingua"
             android:textSize="@dimen/sizeText"
-            android:layout_marginTop="@dimen/paddingStartTextEdit"
+            android:layout_marginTop="@dimen/paddingTextEdit"
             android:clickable="true"
             android:drawableStart="@drawable/translate"
             android:drawablePadding="8dp"
+            android:elevation="8dp"
+            />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingTextEdit"
+            android:clickable="true"
+            android:drawablePadding="8dp"
+            android:text="@string/logout"
+            android:textSize="@dimen/sizeText"
+            android:drawableStart="@drawable/logout"
+            android:elevation="8dp"
             />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
