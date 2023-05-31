@@ -18,4 +18,8 @@
     <dimen name="paddingVerticalCard">5dp</dimen>
     <dimen name="sizeTextSubTitle">17dp</dimen>
     <dimen name="marginVerticalCardLocalita">5dp</dimen>
+    <dimen name="TitleCardHomeSize">16dp</dimen>
+    <dimen name="textCardHomeSize">14dp</dimen>
+    <dimen name="cardCornerRadius">15dp</dimen>
+
 </resources>
