@@ -20,7 +20,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:ignore="UnknownId,UnknownIdInLayout" />
+        tools:ignore="UnknownId,UnknownIdInLayout"
+        android:elevation="8dp"/>
 
 
     <TextView
@@ -89,12 +90,43 @@
             android:paddingVertical="@dimen/paddingEditTetxt"
             tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
+        <TextView
+            android:id="@+id/textViewdata"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/data" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/paddingEditTetxt">
+
+            <Button
+                android:id="@+id/buttonData"
+                style="@style/bottoneLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/paddingEditTetxt"
+                android:text="@string/data1"
+                tools:ignore="UnknownId,UnknownIdInLayout"
+                android:elevation="8dp"/>
+            <TextView
+                android:id="@+id/textViewshowdata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/paddingEditTetxt"
+                />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/inserisciE" />
+
+
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -123,12 +155,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
-            android:drawableEnd="@drawable/baseline_visibility_off_24"
             android:ems="10"
-            android:hint="paes"
+            
             android:inputType="textPassword"
             android:paddingVertical="@dimen/paddingEditTetxt"
-            tools:ignore="TouchTargetSizeCheck" />
+            />
 
         <TextView
             android:id="@+id/textView2"
@@ -144,9 +175,9 @@
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
             android:ems="10"
-            android:hint="@string/password"
+
             android:inputType="textPassword"
             android:paddingVertical="@dimen/paddingEditTetxt"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
