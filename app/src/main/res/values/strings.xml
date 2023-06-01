@@ -28,6 +28,7 @@
     <string name="TitleProfilo">Profilo</string>
     <string name="GestioneProfilo">Gestisci il tuo account</string>
     <string name="wallet">Wallet</string>
+    <string name="wallets">Saldo Wallet</string>
     <string name="datipagamento">Modifica i dati di pagamento</string>
     <string name="lingua">Cambia la lingua</string>
     <string name="logout">Logout</string>

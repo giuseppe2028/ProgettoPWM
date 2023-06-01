@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="sizeText">20dp</dimen>
+    <dimen name="sizeText">25dp</dimen>
     <dimen name="title">30dp</dimen>
     <dimen name="marginButton">30dp</dimen>
     <dimen name="paddingEditTetxt">5dp</dimen>
