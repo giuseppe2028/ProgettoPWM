@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Login.OTPFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:id="@+id/linearLayoutRegistrazioneOTP"
