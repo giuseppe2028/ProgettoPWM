@@ -5,20 +5,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/immagineLocalita"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <LinearLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/iconViaggio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/marginPositionElement"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/marker" />
+
+            <TextView
+                android:id="@+id/testoLuogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Venezia,Italy" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutPersone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/Descrizione"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@id/review">
+
+            <TextView
+                android:id="@+id/iconaNumPersone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/marginPositionElement"
+                android:drawableLeft="@drawable/user" />
+
+            <TextView
+                android:id="@+id/numeroPersone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 persone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/costo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/palette1"
+            android:text="500$" />
+    </LinearLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/immagineLocalita"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/marginFoto"
+        android:layout_marginTop="@dimen/marginFoto"
+        android:layout_marginBottom="@dimen/marginFotoBottom"
         android:adjustViewBounds="true"
         android:background="@drawable/corner_image_view_localita"
-        android:maxWidth="100dp"
-        android:maxHeight="100dp"
-        android:minWidth="10dp"
-        android:minHeight="10dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@id/titoloLocalita"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout5"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -26,41 +92,47 @@
         app:shapeAppearanceOverlay="@style/roundedImage"
         app:srcCompat="@drawable/foto" />
 
-    <TextView
-        android:id="@+id/titolo"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Bali"
-        app:layout_constraintBottom_toTopOf="@+id/luogo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
-        app:layout_constraintStart_toEndOf="@+id/immagineLocalita"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout7"
+        app:layout_constraintEnd_toEndOf="@+id/immagineLocalita"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/immagineLocalita"
+        app:layout_constraintTop_toBottomOf="@+id/immagineLocalita"
+        app:layout_constraintVertical_bias="0.120000005"
+        app:layout_constraintVertical_chainStyle="packed">
 
-    <TextView
-        android:id="@+id/luogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Indonesia, India"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/titolo"
-        app:layout_constraintTop_toBottomOf="@id/titolo" />
+        <TextView
+            android:id="@+id/Titolo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Formentera"
+            android:textSize="@dimen/sizeTextSubTitle"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ratingBar2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.43" />
 
-    <RatingBar
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/Titolo"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        android:id="@+id/ratingBar3"
-        style="@style/Widget.AppCompat.RatingBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="133dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="182dp"
-        tools:layout_editor_absoluteY="180dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

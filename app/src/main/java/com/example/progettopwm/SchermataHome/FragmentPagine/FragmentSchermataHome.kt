@@ -48,9 +48,11 @@ class FragmentSchermataHome : Fragment() {
         binding = FragmentSchermataHomeBinding.inflate(inflater)
         recycleViewGestore()
         clickProfile()
+
         // Inflate the layout for this fragment
         return binding.root
     }
+
 
     private fun clickProfile() {
         binding.imageProfile.setOnClickListener {
