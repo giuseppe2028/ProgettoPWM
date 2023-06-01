@@ -24,5 +24,8 @@
     <dimen name="marginPositionElement">5dp</dimen>
     <dimen name="price">20sp</dimen>
     <dimen name="paddingTastoCompra">30dp</dimen>
+    <dimen name="marginFoto">25dp</dimen>
+    <dimen name="marginFotoBottom">15dp</dimen>
+
 
 </resources>
