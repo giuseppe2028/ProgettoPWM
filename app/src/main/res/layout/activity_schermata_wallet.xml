@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutlistaAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:background="@drawable/gradient_layaout"
+        android:elevation="8dp"
+        >
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TitleProfilo"
+            android:textSize="@dimen/title"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margintopTitle"
+            android:layout_marginLeft="@dimen/marginTitle"
+            />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/marginTitle"
+            android:layout_marginBottom="@dimen/marginTitle"
+            android:elevation="8dp">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleImageView2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="@dimen/marginTitle"
+                android:src="@drawable/stiven_baslar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:elevation="8dp"/>
+
+            <TextView
+                android:id="@+id/nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marginTitle"
+                android:text="@string/nome"
+                android:textSize="@dimen/sizeText"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/circleImageView2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutlistaAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginLeft="@dimen/marginButton">
+
+        <TextView
+            android:id="@+id/textViewGestione"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/GestioneProfilo"
+            android:textSize="@dimen/sizeText"
+            android:layout_marginTop="@dimen/paddingTextEdit"
+            android:clickable="true"
+            android:drawableStart="@drawable/baseline_account_circle_24"
+            android:drawablePadding="8dp"
+            android:elevation="8dp"
+            />
+
+        <TextView
+            android:id="@+id/textViewdatipagamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/datipagamento"
+            android:textSize="@dimen/sizeText"
+            android:layout_marginTop="@dimen/paddingTextEdit"
+            android:clickable="true"
+            android:drawableStart="@drawable/credit_card"
+            android:drawablePadding="8dp"
+            android:elevation="8dp"
+            />
+
+        <TextView
+            android:id="@+id/textViewwallet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wallet"
+            android:textSize="@dimen/sizeText"
+            android:layout_marginTop="@dimen/paddingTextEdit"
+            android:clickable="true"
+            android:drawableStart="@drawable/wallet_bifold_outline"
+            android:drawablePadding="8dp"
+            android:elevation="8dp"
+            />
+
+        <TextView
+            android:id="@+id/textViewlingua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lingua"
+            android:textSize="@dimen/sizeText"
+            android:layout_marginTop="@dimen/paddingTextEdit"
+            android:clickable="true"
+            android:drawableStart="@drawable/translate"
+            android:drawablePadding="8dp"
+            android:elevation="8dp"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingTextEdit"
+            android:clickable="true"
+            android:drawablePadding="8dp"
+            android:text="@string/logout"
+            android:textSize="@dimen/sizeText"
+            android:drawableStart="@drawable/logout"
+            android:elevation="8dp"
+            />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
