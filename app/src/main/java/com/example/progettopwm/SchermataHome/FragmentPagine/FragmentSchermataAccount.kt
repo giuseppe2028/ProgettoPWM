@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataInserimentoDatiPagamento
 import com.example.progettopwm.SchermataHome.SchermataModificaDatiAccount
+import com.example.progettopwm.SchermataHome.SchermataWallet
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
 
 
@@ -49,6 +50,9 @@ class FragmentSchermataAccount : Fragment() {
         }
         binding.textViewdatipagamento.setOnClickListener{
             startActivity(Intent(this.context, SchermataInserimentoDatiPagamento::class.java))
+        }
+        binding.textViewwallet.setOnClickListener{
+            startActivity(Intent(this.context, SchermataWallet::class.java))
         }
 
         return binding.root

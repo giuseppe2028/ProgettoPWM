@@ -111,7 +111,7 @@ class SchermataInserimentoDatiPagamento : AppCompatActivity() {
 
 
         binding.buttonConfermaDati.setOnClickListener {
-            if (!validateOtherFields(binding.editTextnumero,binding.editTextNomeCognome,binding.editTextCvv,binding.editTextmese,binding.editTextanno,)) {
+            if (!validateOtherFields(binding.editTextnumero,binding.editTextNomeCognome,binding.editTextCvv,binding.editTextmese,binding.editTextanno)) {
                 Toast.makeText(this, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
             }
             else{

@@ -18,6 +18,7 @@
     <string name="inserisciPC">Inserisci la password corrente</string>
     <string name="inserisciNC">Inserisci nome e cognome dell\'intestatario </string>
     <string name="inseriscinumero">Inserisci il numero della carta</string>
+    <string name="inserisciimporto">Inserisci l\'importo</string>
 
     <string name="inserisciCP">Inserisci nuovamente la password</string>
     <string name="inserisciNP">Inserisci una nuova password</string>
