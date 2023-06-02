@@ -9,7 +9,7 @@
     >
 
     <Button
-        android:id="@+id/buttonRegistrati"
+        android:id="@+id/buttonConfermaDati"
         style="@style/bottoneLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,10 +25,10 @@
 
 
     <TextView
-        android:id="@+id/TitleRegistrazione"
+        android:id="@+id/TitleModificaDatiPagamento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/registrazione"
+        android:text="@string/DatiAccountP"
         android:textSize="@dimen/title"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutRegistrazione"
@@ -52,21 +52,19 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/inserisciNome"
+            android:id="@+id/inserisciNomecognome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inserisciN" />
+            android:text="@string/inserisciNC" />
 
         <EditText
-            android:id="@+id/editTextNome"
+            android:id="@+id/editTextNomeCognome"
             style="@style/textEditStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
             android:ems="10"
-
-            android:hint="@string/nome"
             android:inputType="text"
             android:paddingVertical="@dimen/paddingEditTetxt"
             tools:ignore="TouchTargetSizeCheck" />
@@ -75,109 +73,98 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inserisciC" />
+            android:text="@string/inseriscinumero" />
 
         <EditText
-            android:id="@+id/editTextCognome"
+            android:id="@+id/editTextnumero"
             style="@style/textEditStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
             android:ems="10"
-            android:hint="@string/cognome"
-            android:inputType="text"
+            android:inputType="number"
             android:paddingVertical="@dimen/paddingEditTetxt"
             tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
 
-        <TextView
-            android:id="@+id/textViewdata"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/Layout5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/data" />
+            android:layout_marginTop="@dimen/marginLinearLayoutElements"
+           >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/paddingEditTetxt">
-
-            <Button
-                android:id="@+id/buttonData"
-                style="@style/bottoneLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/paddingEditTetxt"
-                android:text="@string/data1"
-                tools:ignore="UnknownId,UnknownIdInLayout"
-                android:elevation="8dp"/>
             <TextView
-                android:id="@+id/textViewshowdata"
+                android:id="@+id/textViewCVV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/paddingEditTetxt"
-                />
-        </LinearLayout>
+                android:text="CVV"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextCvv"
+                style="@style/textEditStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/custom_text_edit"
+                android:ems="3"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewCVV"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/editTextmese"
+                    style="@style/textEditStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_text_edit"
+                    android:ems="2"
+                    android:inputType="number" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textSize="@dimen/title"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextanno"
+                    style="@style/textEditStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_text_edit"
+                    android:ems="2"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewmeseanno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="MM/AA"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inserisciE" />
-
-
-
-        <EditText
-            android:id="@+id/editTextEmail"
-            style="@style/textEditStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginLinearLayoutElements"
-            android:background="@drawable/custom_text_edit"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:paddingVertical="@dimen/paddingEditTetxt"
-            tools:ignore="UnknownId,TouchTargetSizeCheck" />
-
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inserisciP" />
-
-        <EditText
-            android:id="@+id/editTextPassword"
-            style="@style/textEditStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginLinearLayoutElements"
-            android:background="@drawable/custom_text_edit"
-            android:ems="10"
-
-            android:inputType="textPassword"
-            android:paddingVertical="@dimen/paddingEditTetxt"
-            />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inserisciCP" />
-
-        <EditText
-            android:id="@+id/editTextTextPasswordConferma"
-            style="@style/textEditStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginLinearLayoutElements"
-            android:background="@drawable/custom_text_edit"
-            android:ems="10"
-
-            android:inputType="textPassword"
-            android:paddingVertical="@dimen/paddingEditTetxt"
-            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

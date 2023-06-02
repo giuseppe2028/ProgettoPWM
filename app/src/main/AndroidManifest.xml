@@ -17,6 +17,15 @@
             android:name=".ActivitySchermataViaggio"
             android:exported="false" />
         <activity
+            android:name=".SchermataHome.SchermataWallet"
+            android:exported="false" />
+        <activity
+            android:name=".SchermataHome.SchermataInserimentoDatiPagamento"
+            android:exported="false" />
+        <activity
+            android:name=".SchermataHome.SchermataModificaDatiAccount"
+            android:exported="false" />
+        <activity
             android:name=".SchermataHome.SchermataHome"
             android:exported="false" />
         <activity
