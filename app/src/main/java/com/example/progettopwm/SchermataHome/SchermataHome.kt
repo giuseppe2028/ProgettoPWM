@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataAccount
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataPreferiti.SchermataPreferiti
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
@@ -27,6 +28,7 @@ class SchermataHome : AppCompatActivity() {
             when(item.itemId){
                 R.id.home -> sostituisciFragment(FragmentSchermataHome())
                 R.id.preferiti -> sostituisciFragment(SchermataPreferiti())
+                R.id.account -> sostituisciFragment(FragmentSchermataAccount())
                 else -> {
                      true
                 }
