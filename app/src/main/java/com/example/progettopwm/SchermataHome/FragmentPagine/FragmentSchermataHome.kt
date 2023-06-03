@@ -1,6 +1,9 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
+import ClientNetwork
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -20,6 +23,7 @@ import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,14 +63,18 @@ class FragmentSchermataHome : Fragment() {
         return binding.root
     }
     private fun setHome() {
-        val query = "select nome from profilo where cognome = 'Raffaele'"
+        val query = "select nome, ref_immagine from Persona where cognome = 'Doe'"
         ClientNetwork.retrofit.registrazione(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         if ((response.body()?.get("queryset") as JsonArray).size() == 1) {
-                            val nome = ((response.body()?.get("queryset") as JsonArray).get(0) as JsonObject).get("nome")
+
+                            val nome =  ((response.body()?.get("queryset") as JsonArray).get(0) as JsonObject).get("nome")
+                            val urlImage =  (response.body()?.get("queryset") as JsonArray).get(0) as JsonObject
                             binding.benvenuto.text = nome.toString()
+                            Log.i("ciao","$urlImage")
+                            getImage(urlImage)
                         } else {
                         }
                     }
@@ -78,6 +86,37 @@ class FragmentSchermataHome : Fragment() {
                 }
             }
         )
+
+    }
+    private fun getImage(jsonObject: JsonObject){
+        val string = jsonObject.get("ref_immagine").asString
+        Log.i("ciaoProva","$string")
+        ClientNetwork.retrofit.getImage(string).enqueue(
+            object : Callback<ResponseBody>{
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if(response.isSuccessful){
+                        var avatar: Bitmap? = null
+                        if (response.body()!=null) {
+                            avatar = BitmapFactory.decodeStream(response.body()?.byteStream())
+                        }
+                        binding.imageProfile.setImageBitmap(avatar)
+                        Log.i("ciao","successiful")
+                    }
+                    else{
+                        Log.i("ciao","notsuccessiful")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.i("ciao","fail")
+                }
+
+            }
+        )
+
     }
 
     private fun clickProfile() {

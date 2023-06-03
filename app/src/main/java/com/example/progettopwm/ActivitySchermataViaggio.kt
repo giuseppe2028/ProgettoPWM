@@ -10,5 +10,6 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = SchermataViaggioBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 }
