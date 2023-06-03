@@ -28,7 +28,7 @@ class SchermataHome : AppCompatActivity() {
             when(item.itemId){
                 R.id.home -> sostituisciFragment(FragmentSchermataHome())
                 R.id.preferiti -> sostituisciFragment(SchermataPreferiti())
-                R.id.account -> sostituisciFragment(FragmentSchermataAccount())
+               R.id.account -> sostituisciFragment(FragmentSchermataAccount())
                 else -> {
                      true
                 }
