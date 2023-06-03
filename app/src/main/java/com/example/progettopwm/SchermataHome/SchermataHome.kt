@@ -2,11 +2,17 @@ package com.example.progettopwm.SchermataHome
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataPreferiti.SchermataPreferiti
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SchermataHome : AppCompatActivity() {
     private lateinit var binding:ActivitySchermataHomeBinding
@@ -16,6 +22,9 @@ class SchermataHome : AppCompatActivity() {
         setContentView(binding.root)
         selezioneNavigationBar()
     }
+
+
+
     fun sostituisciFragment(fragment:Fragment):Boolean{
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()

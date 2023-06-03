@@ -1,4 +1,5 @@
 package com.example.progettopwm.SchermataRegistrazione
+import ClientNetwork
 import android.annotation.SuppressLint
 import android.widget.Toast
 import android.graphics.Color
@@ -6,6 +7,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -15,6 +17,11 @@ import android.widget.EditText
 import com.example.progettopwm.Login.OTPFragment
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentRegistrazioneBinding
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -39,12 +46,38 @@ class FragmentRegistrazione : Fragment() {
         }
     }
 
+
+    private fun registrazione(nome:String, cognome:String){
+
+        val query = "insert into profilo (nome, cognome) values ('$nome','$cognome')"
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        if ((response.body()?.get("queryset") as JsonArray).size() == 1) {
+                            Log.i("Ciao", "Ciao")
+                        } else {
+                            Log.i("Ciao", "Cia12313o")
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.i("Ciao", t.message.toString())
+                    print(t.stackTrace)
+                }
+            }
+        )
+
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRegistrazioneBinding.inflate(inflater)
+
 
         val passwordEditText = binding.editTextPassword
         val passwordEditTextC = binding.editTextTextPasswordConferma
@@ -104,20 +137,24 @@ class FragmentRegistrazione : Fragment() {
                 Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
             }
             else{
+                clickBottoni()
+                val nome = binding.editTextNome.text.toString()
+                val cognome = binding.editTextCognome.text.toString()
+                registrazione(nome,cognome)
                 //inserire il comportamento del bottone
             }
         }
-        clickBottoni()
+
 
         return binding.root
     }
 
     private fun clickBottoni() {
-        binding.buttonRegistrati.setOnClickListener{
+
             val manager= parentFragmentManager
             val transaction = manager.beginTransaction()
             transaction.replace(R.id.fragmentContainerView, OTPFragment()).commit()
-        }
+
     }
 
 
@@ -173,23 +210,4 @@ class FragmentRegistrazione : Fragment() {
     // Inflate the layout for this fragment
 
 
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentRegistrazione.
-         */
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentRegistrazione().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
             }
-    }
-}

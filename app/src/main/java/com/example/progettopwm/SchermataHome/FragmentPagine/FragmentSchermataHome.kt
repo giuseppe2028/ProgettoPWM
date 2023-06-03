@@ -2,6 +2,7 @@ package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,11 @@ import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -48,11 +54,31 @@ class FragmentSchermataHome : Fragment() {
         binding = FragmentSchermataHomeBinding.inflate(inflater)
         recycleViewGestore()
         clickProfile()
-
+        setHome()
         // Inflate the layout for this fragment
         return binding.root
     }
+    private fun setHome() {
+        val query = "select nome from profilo where cognome = 'Raffaele'"
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        if ((response.body()?.get("queryset") as JsonArray).size() == 1) {
+                            val nome = ((response.body()?.get("queryset") as JsonArray).get(0) as JsonObject).get("nome")
+                            binding.benvenuto.text = nome.toString()
+                        } else {
+                        }
+                    }
+                }
 
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.i("Ciao", t.message.toString())
+                    print(t.stackTrace)
+                }
+            }
+        )
+    }
 
     private fun clickProfile() {
         binding.imageProfile.setOnClickListener {

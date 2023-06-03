@@ -53,7 +53,6 @@ class OTPFragment : Fragment() {
     }
 
         private fun mostraNotifiche() {
-            Log.i("ciao","suca")
             val channelID:String = "ChannelID"
             //creo la notifica, ovvero creo il canale in cui inviare la notifica
             var channel: NotificationChannel = NotificationChannel(channelID,"MyChannel",
