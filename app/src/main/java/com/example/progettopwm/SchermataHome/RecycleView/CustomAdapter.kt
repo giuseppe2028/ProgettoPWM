@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.progettopwm.R
 import com.example.progettopwm.databinding.CardLocalitaBinding
 
 class CustomAdapter(private val lista:List<ItemsViewModel>):RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
@@ -11,6 +12,7 @@ class CustomAdapter(private val lista:List<ItemsViewModel>):RecyclerView.Adapter
     class ViewHolder(binding:CardLocalitaBinding):RecyclerView.ViewHolder(binding.root){
         val icona = binding.icona
         val descrizione = binding.descrizione
+        val linear = binding.cardLinear
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,6 +33,7 @@ class CustomAdapter(private val lista:List<ItemsViewModel>):RecyclerView.Adapter
         holder.descrizione.text = items.descrizione
         holder.itemView.setOnClickListener{
             onclickListener?.onclick(position,items)
+            holder.linear.setBackgroundColor()
         }
 
     }
