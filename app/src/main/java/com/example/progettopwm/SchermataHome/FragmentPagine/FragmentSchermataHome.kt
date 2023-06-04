@@ -48,8 +48,14 @@ class FragmentSchermataHome : Fragment() {
         binding = FragmentSchermataHomeBinding.inflate(inflater)
         recycleViewGestore()
         clickProfile()
+
+        filtraggioMete()
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun filtraggioMete() {
+
     }
 
     private fun clickProfile() {
@@ -70,7 +76,7 @@ class FragmentSchermataHome : Fragment() {
             ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
             ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
             ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"))
-        val adapter = CustomAdapter(dati)
+         adapter = CustomAdapter(dati)
         val adapterViaggi = CustomAdapterMete(listaLuogo)
 
         binding.listaLocalita.layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)

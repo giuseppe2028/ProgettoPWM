@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.progettopwm.databinding.CardLocalitaBinding
 
 class CustomAdapter(private val lista:List<ItemsViewModel>):RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+    private lateinit var onclickListener: OnclickListener
     class ViewHolder(binding:CardLocalitaBinding):RecyclerView.ViewHolder(binding.root){
         val icona = binding.icona
         val descrizione = binding.descrizione
@@ -27,9 +28,18 @@ class CustomAdapter(private val lista:List<ItemsViewModel>):RecyclerView.Adapter
         val items = lista[position]
         holder.icona.text = getEmojiByUnicode(items.unicodeEmoji)
         holder.descrizione.text = items.descrizione
+        holder.itemView.setOnClickListener{
+            onclickListener.onclick(position,items)
+        }
     }
     fun getEmojiByUnicode(unicode:Int):String{
         return  String(Character.toChars(unicode));
+    }
+    fun setOnClickListener(onClickListener: OnclickListener) {
+        this.onclickListener = onclickListener
+    }
+    interface OnclickListener{
+        fun onclick(position:Int, item:ItemsViewModel)
     }
 
 }
