@@ -1,4 +1,4 @@
-package com.example.progettopwm.SchermataPreferiti.RecyclerView
+package com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ class CustomAdapterPreferiti(val lista:List<ItemViewModel>): RecyclerView.Adapte
         val prezzo = binding.costo
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomAdapterPreferiti.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = FragmentPreferitiBinding.inflate(LayoutInflater.from(parent.context))
         return ViewHolder(view)
     }

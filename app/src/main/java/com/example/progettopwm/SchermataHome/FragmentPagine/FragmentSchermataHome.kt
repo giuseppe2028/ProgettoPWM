@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -32,6 +33,9 @@ class FragmentSchermataHome : Fragment() {
     private lateinit var binding:FragmentSchermataHomeBinding
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var dati:ArrayList<ItemsViewModel>
+    private lateinit var listaLuogo:ArrayList<ItemClassLocalita>
+    private lateinit var  adapterViaggi:CustomAdapterMete
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +52,41 @@ class FragmentSchermataHome : Fragment() {
         binding = FragmentSchermataHomeBinding.inflate(inflater)
         recycleViewGestore()
         clickProfile()
+        gestioneSearchView()
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun gestioneSearchView() {
+        binding.searchView.clearFocus()
+        val searchView = binding.searchView
+        searchView.setOnQueryTextListener(
+            object: SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    listaFiltrata(newText)
+                    return true
+                }
+
+            }
+        )
+    }
+
+    private fun listaFiltrata(newText: String?) {
+        val listaFiltrata = ArrayList<ItemClassLocalita>()
+        if( newText!=null){
+            //cerco il valore
+            for(i in listaLuogo){
+               if( i.title.lowercase().contains(newText)){
+                   listaFiltrata.add(i)
+               }
+            }
+            adapterViaggi.searchMete(listaFiltrata)
+
+        }
     }
 
 
@@ -63,8 +100,8 @@ class FragmentSchermataHome : Fragment() {
     }
 
     private fun recycleViewGestore() {
-        val dati = arrayListOf<ItemsViewModel>(ItemsViewModel(127755,"Esplorazione"), ItemsViewModel(127958,"Mare"),ItemsViewModel(127957,"gita all'aria aperta"),ItemsViewModel(127956,"trekking"),ItemsViewModel(127963,"Cultura"))
-        val listaLuogo = arrayListOf<ItemClassLocalita>(ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
+         dati = arrayListOf<ItemsViewModel>(ItemsViewModel(127755,"Esplorazione"), ItemsViewModel(127958,"Mare"),ItemsViewModel(127957,"gita all'aria aperta"),ItemsViewModel(127956,"trekking"),ItemsViewModel(127963,"Cultura"))
+         listaLuogo = arrayListOf<ItemClassLocalita>(ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
             ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
             ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
             ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
@@ -72,7 +109,7 @@ class FragmentSchermataHome : Fragment() {
             ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
             ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"))
         val adapter = CustomAdapter(dati)
-        val adapterViaggi = CustomAdapterMete(listaLuogo)
+         adapterViaggi = CustomAdapterMete(listaLuogo)
 
         binding.listaLocalita.layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
         binding.listaLocalita.adapter = adapter

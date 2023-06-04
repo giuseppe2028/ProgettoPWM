@@ -1,12 +1,13 @@
 package com.example.progettopwm.SchermataHome.RecycleView
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.progettopwm.databinding.CardLocalitaBinding
 import com.example.progettopwm.databinding.CardViaggiBinding
 
-class CustomAdapterMete(private val lista:List<ItemClassLocalita>):RecyclerView.Adapter<CustomAdapterMete.ViewHolder>() {
+class CustomAdapterMete(private var lista:List<ItemClassLocalita>):RecyclerView.Adapter<CustomAdapterMete.ViewHolder>(){
     private var setOnClickListener:OnClickListener? = null
     class ViewHolder(binding:CardViaggiBinding):RecyclerView.ViewHolder(binding.root){
         val imageView = binding.immagineLocalita
@@ -15,6 +16,11 @@ class CustomAdapterMete(private val lista:List<ItemClassLocalita>):RecyclerView.
         val prezzo = binding.prezzo
         val localita = binding.localita
 
+    }
+    fun searchMete(list:List<ItemClassLocalita>){
+        this.lista = list
+        notifyDataSetChanged()
+        Log.i("ciao","sono qui")
     }
 interface OnClickListener{
     fun Onclick(position: Int,item:ItemClassLocalita)

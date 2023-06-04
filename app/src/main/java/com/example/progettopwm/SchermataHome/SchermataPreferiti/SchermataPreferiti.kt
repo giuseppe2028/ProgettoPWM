@@ -1,4 +1,4 @@
-package com.example.progettopwm.SchermataPreferiti
+package com.example.progettopwm.SchermataHome.SchermataPreferiti
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.R
-import com.example.progettopwm.SchermataPreferiti.RecyclerView.CustomAdapterPreferiti
-import com.example.progettopwm.SchermataPreferiti.RecyclerView.ItemViewModel
+import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.CustomAdapterPreferiti
+import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.ItemViewModel
 import com.example.progettopwm.databinding.FragmentSchermataPreferitiBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -40,7 +40,10 @@ class SchermataPreferiti : Fragment() {
     ): View? {
         binding = FragmentSchermataPreferitiBinding.inflate(inflater)
         binding.listaPreferiti.layoutManager = LinearLayoutManager(this.context)
-        binding.listaPreferiti.adapter = CustomAdapterPreferiti(listOf(ItemViewModel(R.drawable.foto,"Formentera", "italia",4.5,500.0,5),ItemViewModel(R.drawable.foto,"Formentera", "italia",4.5,500.0,5)))
+        binding.listaPreferiti.adapter = CustomAdapterPreferiti(listOf(
+            ItemViewModel(R.drawable.foto,"Formentera", "italia",4.5,500.0,5),
+            ItemViewModel(R.drawable.foto,"Formentera", "italia",4.5,500.0,5)
+        ))
         // Inflate the layout for this fragment
         return binding.root
 

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataAccount
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
-import com.example.progettopwm.SchermataPreferiti.SchermataPreferiti
+import com.example.progettopwm.SchermataHome.SchermataPreferiti.SchermataPreferiti
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
 
 class SchermataHome : AppCompatActivity() {
