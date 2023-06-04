@@ -107,9 +107,9 @@ class FragmentRegistrazione : Fragment() {
         }
         passwordEditTextC.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                passwordEditText.hint = resources.getString(R.string.password)
+                passwordEditTextC.hint = resources.getString(R.string.password)
             } else {
-                passwordEditText.hint = null
+                passwordEditTextC.hint = null
             }
         }
         passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_24, 0)
@@ -138,12 +138,13 @@ class FragmentRegistrazione : Fragment() {
         buttonConferma.setOnClickListener {
             if (!validatePasswords(passwordEditText, passwordEditTextC) || !validateOtherFields(nomeEditText, cognomeEditText, emailEditText)) {
                 Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
+                clickBottoni()
             }
             else{
                 //inserire il comportamento del bottone
             }
         }
-        clickBottoni()
+
 
         return binding.root
     }
@@ -168,10 +169,10 @@ class FragmentRegistrazione : Fragment() {
 
 
         if (passwordsMatch && isPasswordValid && isPasswordValidC) {
-            passwordEditTextC.setTextColor(Color.GREEN)
-            passwordEditText.setTextColor(Color.GREEN)
-            passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
-            passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_green)
+            //passwordEditTextC.setTextColor(Color.GREEN)
+            //passwordEditText.setTextColor(Color.GREEN)
+            //passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
+            //passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_green)
             return true
         }else{passwordEditText.setTextColor(Color.RED)
             passwordEditTextC.setTextColor(Color.RED)
