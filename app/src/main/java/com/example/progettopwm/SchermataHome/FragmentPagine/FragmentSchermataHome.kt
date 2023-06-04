@@ -2,6 +2,7 @@ package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
+import com.example.progettopwm.databinding.CardLocalitaBinding
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +30,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentSchermataHome : Fragment() {
+    private lateinit var adapter:CustomAdapter
+    private lateinit var dati:ArrayList<ItemsViewModel>
+    private lateinit var listaLuogo:ArrayList<ItemClassLocalita>
     private lateinit var binding:FragmentSchermataHomeBinding
+    private lateinit var adapterViaggi:CustomAdapterMete
     private var param1: String? = null
     private var param2: String? = null
 
@@ -48,13 +54,34 @@ class FragmentSchermataHome : Fragment() {
         binding = FragmentSchermataHomeBinding.inflate(inflater)
         recycleViewGestore()
         clickProfile()
-
-        filtraggioMete()
+        filtraLista()
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    private fun filtraggioMete() {
+    private fun filtraLista() {
+
+        adapter.setOnClickListener(
+            object : CustomAdapter.OnclickListener{
+                override fun onclick(position: Int, item: ItemsViewModel) {
+                    filtaListaByMete(item.descrizione)
+                }
+
+            }
+        )
+
+
+    }
+
+    private fun filtaListaByMete(stringa:String) {
+        val lista:ArrayList<ItemClassLocalita> = ArrayList()
+        //filtro la lista
+        for(i in listaLuogo){
+            if(i.tipoViaggio.contains(stringa)){
+                lista.add(i)
+            }
+        }
+        adapterViaggi.filtraLista(lista)
 
     }
 
@@ -68,16 +95,16 @@ class FragmentSchermataHome : Fragment() {
     }
 
     private fun recycleViewGestore() {
-        val dati = arrayListOf<ItemsViewModel>(ItemsViewModel(127755,"Esplorazione"), ItemsViewModel(127958,"Mare"),ItemsViewModel(127957,"gita all'aria aperta"),ItemsViewModel(127956,"trekking"),ItemsViewModel(127963,"Cultura"))
-        val listaLuogo = arrayListOf<ItemClassLocalita>(ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$"))
+         dati = arrayListOf<ItemsViewModel>(ItemsViewModel(127755,"Esplorazione"), ItemsViewModel(127958,"Mare"),ItemsViewModel(127957,"gita all'aria aperta"),ItemsViewModel(127956,"trekking"),ItemsViewModel(127963,"Cultura"))
+         listaLuogo = arrayListOf<ItemClassLocalita>(ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Trekking"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Mare"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Esplorazione"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Trekking"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Cultura"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Mare"),
+            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Cultura"))
          adapter = CustomAdapter(dati)
-        val adapterViaggi = CustomAdapterMete(listaLuogo)
+         adapterViaggi = CustomAdapterMete(listaLuogo)
 
         binding.listaLocalita.layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
         binding.listaLocalita.adapter = adapter

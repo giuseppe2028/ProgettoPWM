@@ -25,10 +25,10 @@
 
 
     <TextView
-        android:id="@+id/TitleRegistrazione"
+        android:id="@+id/TitleModificaDati"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/registrazione"
+        android:text="@string/DatiAccount"
         android:textSize="@dimen/title"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutRegistrazione"
@@ -65,8 +65,7 @@
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
             android:ems="10"
-
-            android:hint="@string/nome"
+            android:text="prelevare da db"
             android:inputType="text"
             android:paddingVertical="@dimen/paddingEditTetxt"
             tools:ignore="TouchTargetSizeCheck" />
@@ -85,7 +84,7 @@
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
             android:ems="10"
-            android:hint="@string/cognome"
+            android:text="prelevare da db"
             android:inputType="text"
             android:paddingVertical="@dimen/paddingEditTetxt"
             tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
@@ -116,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/paddingEditTetxt"
+                android:text="prelevare da db"
                 />
         </LinearLayout>
 
@@ -136,7 +136,7 @@
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
             android:ems="10"
-            android:hint="@string/email"
+            android:text="prelevare da db"
             android:inputType="textEmailAddress"
             android:paddingVertical="@dimen/paddingEditTetxt"
             tools:ignore="UnknownId,TouchTargetSizeCheck" />
@@ -146,7 +146,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inserisciP" />
+            android:text="@string/inserisciPC" />
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -165,7 +165,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inserisciCP" />
+            android:text="@string/inserisciNP" />
 
         <EditText
             android:id="@+id/editTextTextPasswordConferma"

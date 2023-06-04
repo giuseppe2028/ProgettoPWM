@@ -90,7 +90,7 @@
                 android:drawableStart="@drawable/marker" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/testoLuogo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -188,7 +188,6 @@
             android:id="@+id/imageButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_button_favourites"
             android:elevation="20dp"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView21"
@@ -277,8 +276,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
-                        android:backgroundTint="@android:color/transparent"
-                        app:srcCompat="@drawable/envelope" />
+                        android:backgroundTint="@android:color/transparent" />
 
                 </LinearLayout>
 

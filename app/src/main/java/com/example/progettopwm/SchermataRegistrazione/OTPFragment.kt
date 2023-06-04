@@ -1,13 +1,21 @@
 package com.example.progettopwm.Login
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentOTPBinding
+
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -20,6 +28,8 @@ private lateinit var binding:FragmentOTPBinding
  * create an instance of this fragment.
  */
 class OTPFragment : Fragment() {
+
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -35,11 +45,30 @@ class OTPFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
+        mostraNotifiche()
         binding = FragmentOTPBinding.inflate(inflater)
         // Inflate the layout for this fragment
         clickBottoni()
         return binding.root
     }
+
+        private fun mostraNotifiche() {
+            Log.i("ciao","suca")
+            val channelID:String = "ChannelID"
+            //creo la notifica, ovvero creo il canale in cui inviare la notifica
+            var channel: NotificationChannel = NotificationChannel(channelID,"MyChannel",
+                NotificationManager.IMPORTANCE_DEFAULT )
+
+            val notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+            var builder = NotificationCompat.Builder(requireContext(), channelID)
+                .setSmallIcon(R.drawable.form)
+                .setContentTitle("ciao")
+                .setContentText("Prova")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            notificationManager.notify(0,builder.build())
+        }
+
 
     private fun clickBottoni() {
         binding.buttonOTP.setOnClickListener{

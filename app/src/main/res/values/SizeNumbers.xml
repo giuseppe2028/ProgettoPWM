@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="sizeText">20dp</dimen>
+    <dimen name="sizeText">25dp</dimen>
     <dimen name="title">30dp</dimen>
     <dimen name="marginButton">30dp</dimen>
     <dimen name="paddingEditTetxt">5dp</dimen>
     <dimen name="radius">50dp</dimen>
     <dimen name="paddingStartTextEdit">10dp</dimen>
+    <dimen name="paddingTextEdit">16dp</dimen>
+    <dimen name="sizeTextq">20dp</dimen>
     <dimen name="marginLinearLayoutElements">10dp</dimen>
     <dimen name="radiusLogin">30dp</dimen>
     <dimen name="marginTextEdit">15dp</dimen>
@@ -24,5 +26,10 @@
     <dimen name="marginPositionElement">5dp</dimen>
     <dimen name="price">20sp</dimen>
     <dimen name="paddingTastoCompra">30dp</dimen>
+    <dimen name="marginFoto">25dp</dimen>
+    <dimen name="marginFotoBottom">15dp</dimen>
 
+
+    <dimen name="margintopTitle">60dp</dimen>
+    <dimen name="marginTitle">40dp</dimen>
 </resources>
