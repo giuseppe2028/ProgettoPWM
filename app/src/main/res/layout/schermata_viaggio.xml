@@ -185,10 +185,10 @@
             app:layout_constraintTop_toBottomOf="@+id/idContatti" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="20dp"
+            android:background="@color/white"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView21"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,7 @@
 package com.example.progettopwm.SchermataHome.RecycleView
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -28,12 +29,12 @@ class CustomAdapter(private val lista:List<ItemsViewModel>):RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var previousHoleder:ViewHolder? = null
         val items = lista[position]
         holder.icona.text = getEmojiByUnicode(items.unicodeEmoji)
         holder.descrizione.text = items.descrizione
         holder.itemView.setOnClickListener{
             onclickListener?.onclick(position,items)
-            holder.linear.setBackgroundColor()
         }
 
     }
