@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MiSvaGo</string>
+    <string name="app_name">misvago</string>
     <string name="benvenuto">Benvenut* su NomeAPP</string>
     <string name="Creaaccount">Crea un account</string>
     <string name="login">Accedi</string>
