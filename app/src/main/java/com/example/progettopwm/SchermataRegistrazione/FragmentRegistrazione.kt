@@ -92,10 +92,11 @@ class FragmentRegistrazione : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validatePasswordsC(passwordEditText, passwordEditTextC)
             }
 
             override fun afterTextChanged(s: Editable?) {
-                validatePasswords(passwordEditText, passwordEditTextC)
+                validatePasswordsC(passwordEditText, passwordEditTextC)
 
             }
         })
@@ -137,7 +138,7 @@ class FragmentRegistrazione : Fragment() {
         }
 
         buttonConferma.setOnClickListener {
-            if (!validatePasswords(passwordEditText, passwordEditTextC) || !validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata)) {
+            if (!validatePasswords(passwordEditText, passwordEditTextC) || !validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata)||equalPasswords(passwordEditText, passwordEditTextC)) {
                 Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
 
             }
@@ -159,38 +160,63 @@ class FragmentRegistrazione : Fragment() {
         }
     }
 
+    private fun equalPasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
+        val password = passwordEditText.text.toString()
+        val confirmPassword = passwordEditTextC.text.toString()
+        // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
+
+        if (password == confirmPassword) {
+            //passwordEditTextC.setTextColor(Color.GREEN)
+            //passwordEditText.setTextColor(Color.GREEN)
+            passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
+            passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_green)
+
+            return true
+        }
+        else{
+            passwordEditText.setBackgroundResource(R.drawable.edittext_border_red)
+            passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_red)
+            Toast.makeText(this.context, "Le password non coincidono", Toast.LENGTH_SHORT).show()
+
+            return false
+        }
+
+    }
 
     private fun validatePasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
         val password = passwordEditText.text.toString()
-        val confirmPassword = passwordEditTextC.text.toString()
 
         // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
         val isPasswordValid = password.length >= 6
-        val isPasswordValidC = confirmPassword.length >= 6
 
         if (isPasswordValid) {
             //passwordEditTextC.setTextColor(Color.GREEN)
             //passwordEditText.setTextColor(Color.GREEN)
             passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
+            return true
         }
         else{
             passwordEditText.setBackgroundResource(R.drawable.edittext_border_red)
             return false
         }
 
-        if (password == confirmPassword && isPasswordValidC) {
+    }
+    private fun validatePasswordsC(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
+        val confirmPassword = passwordEditTextC.text.toString()
+
+        // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
+         confirmPassword.length >= 6
+
+        if (confirmPassword.length >= 6) {
             //passwordEditTextC.setTextColor(Color.GREEN)
             //passwordEditText.setTextColor(Color.GREEN)
-            passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
             passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_green)
             return true
-        }else{//passwordEditText.setTextColor(Color.RED)
-
-           // passwordEditTextC.setTextColor(Color.RED)
+        }
+        else{
             passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_red)
             return false
         }
-
     }
 
     private fun validateOtherFields(EditText1: EditText, EditText2: EditText, EditText3: EditText, TextView: TextView): Boolean {
