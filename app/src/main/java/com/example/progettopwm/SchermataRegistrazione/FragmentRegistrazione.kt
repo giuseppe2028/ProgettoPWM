@@ -37,6 +37,7 @@ class FragmentRegistrazione : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var isPasswordVisible: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -46,60 +47,23 @@ class FragmentRegistrazione : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRegistrazioneBinding.inflate(inflater)
+        clickBottoni()
 
-        val passwordEditText = binding.editTextPassword
-        val passwordEditTextC = binding.editTextTextPasswordConferma
+
+
         val buttonConferma = binding.buttonRegistrati
         val nomeEditText = binding.editTextNome
         val cognomeEditText = binding.editTextCognome
         val emailEditText = binding.editTextEmail
-        // Aggiungi il TextWatcher all'EditText della password
-        binding.buttonData.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val passwordEditText = binding.editTextPassword
+        val passwordEditTextC = binding.editTextTextPasswordConferma
 
-            val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-                // Aggiorna il TextView con la data selezionata
-                val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
-                binding.textViewshowdata.text = selectedDate
-            }, year, month, day)
-
-            datePickerDialog.show()
-        }
-
-        passwordEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                validatePasswords(passwordEditText)
-
-            }
-        })
-        // Aggiungi il TextWatcher all'EditText della conferma della password
-        passwordEditTextC.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validatePasswordsC(passwordEditText)
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                validatePasswordsC(passwordEditText)
-
-            }
-        })
         passwordEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 passwordEditText.hint = resources.getString(R.string.password)
@@ -136,27 +100,83 @@ class FragmentRegistrazione : Fragment() {
             }
             false
         }
+        passwordEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                validatePasswords(passwordEditText)
+
+            }
+        })
+        // Aggiungi il TextWatcher all'EditText della conferma della password
+        passwordEditTextC.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validatePasswords(passwordEditText)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                validatePasswords(passwordEditText)
+
+            }
+        })
 
         buttonConferma.setOnClickListener {
-            if (!validatePasswords(passwordEditText) || !validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata)||equalPasswords(passwordEditText, passwordEditTextC)) {
+            if(validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata)){
+                Toast.makeText(this.context,"I campi nome, cognome, mail e data nascita non sono riempiti",Toast.LENGTH_SHORT).show()
+            }
+            //controllo il contenuto della password
+            else if(!validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata) && equalPasswords(passwordEditText,passwordEditTextC)){
+                clickBottoni()
+            }
+
+            /*if (!validatePasswords(passwordEditText) || !validateOtherFields()||equalPasswords(passwordEditText, passwordEditTextC)) {
                 Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
 
             }
             else{
                 //inserire il comportamento del bottone
-                clickBottoni()
+
             }
+             */
         }
 
 
         return binding.root
     }
 
+
+
+
+
+
+
     private fun clickBottoni() {
         binding.buttonRegistrati.setOnClickListener{
             val manager= parentFragmentManager
             val transaction = manager.beginTransaction()
             transaction.replace(R.id.fragmentContainerView, OTPFragment()).commit()
+        }
+        // Aggiungi il TextWatcher all'EditText della password
+        binding.buttonData.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                // Aggiorna il TextView con la data selezionata
+                val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
+                binding.textViewshowdata.text = selectedDate
+            }, year, month, day)
+
+            datePickerDialog.show()
         }
     }
 
@@ -167,7 +187,7 @@ class FragmentRegistrazione : Fragment() {
         Log.i("confirm", confirmPassword)
         // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
 
-        if (password == confirmPassword) {
+        if (password.equals(confirmPassword)) {
             //passwordEditTextC.setTextColor(Color.GREEN)
             //passwordEditText.setTextColor(Color.GREEN)
             passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
@@ -204,33 +224,13 @@ class FragmentRegistrazione : Fragment() {
         }
 
     }
-    private fun validatePasswordsC( passwordEditTextC: EditText): Boolean {
-        val confirmPassword = passwordEditTextC.text.toString()
-
-        // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
-         confirmPassword.length >= 6
-
-        if (confirmPassword.length >= 6) {
-
-            //passwordEditTextC.setTextColor(Color.GREEN)
-            //passwordEditText.setTextColor(Color.GREEN)
-            passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_green)
-            return true
-        }
-        else{
-            passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_red)
-            return false
-        }
-    }
-
     private fun validateOtherFields(EditText1: EditText, EditText2: EditText, EditText3: EditText, TextView: TextView): Boolean {
         val field1 = EditText1.text.toString().trim()
         val field2 = EditText2.text.toString().trim()
         val field3 = EditText3.text.toString().trim()
         val field4 = TextView.text.toString().trim()
-        return field1.isNotEmpty() && field2.isNotEmpty() && field3.isNotEmpty() && field4.isNotEmpty()
+        return field1.isEmpty() && field2.isEmpty() && field3.isEmpty() && field4.isEmpty()
     }
-
     private fun togglePasswordVisibility(passwordEdi: EditText) {
         isPasswordVisible = !isPasswordVisible
         if (isPasswordVisible) {
