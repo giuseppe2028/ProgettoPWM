@@ -39,6 +39,7 @@
     <string name="data1">Data</string>
     <string name="DatiAccount">Modifica i dati</string>
     <string name="DatiAccountP">Dati di pagamento</string>
+    <string name="descrizionePagamenti">Aggiungi e gestisci i tuoi dati di pagamento.</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -47,7 +48,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="email">Email</string>
+    <string name="email">esempio.esempio@dominio.esempio</string>
     <string name="passwordDimenticata">Non te la ricordi?</string>
     <string name="ReimpostaPassword">Reimposta Password</string>
     <string name="subtitleRecuperaPassword">Inserisci l\'indirizzo email associato al tuo account per poterlo recuperare</string>

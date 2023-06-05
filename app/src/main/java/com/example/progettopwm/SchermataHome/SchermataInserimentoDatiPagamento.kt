@@ -39,6 +39,10 @@ class SchermataInserimentoDatiPagamento : AppCompatActivity() {
                 if (s?.length != 3) {
                     binding.editTextCvv.setBackgroundResource(R.drawable.edittext_border_red)
                 }
+                else{
+                    binding.editTextCvv.setBackgroundResource(R.drawable.edittext_border_green)
+
+                }
             }
         })
 
@@ -60,7 +64,10 @@ class SchermataInserimentoDatiPagamento : AppCompatActivity() {
                     if(month != null){
                     if ( month < 1 || month > 12) {
                         binding.editTextmese.setBackgroundResource(R.drawable.edittext_border_red)
-                    } }
+                    }
+                    else{
+                        binding.editTextmese.setBackgroundResource(R.drawable.edittext_border_green)
+                    }}
                 }
 
             }
@@ -85,6 +92,10 @@ class SchermataInserimentoDatiPagamento : AppCompatActivity() {
                         if (anno < 23) {
                             binding.editTextanno.setBackgroundResource(R.drawable.edittext_border_red)
                         }
+                        else{
+                            binding.editTextanno.setBackgroundResource(R.drawable.edittext_border_green)
+
+                        }
                     }
                 }
             }
@@ -104,6 +115,9 @@ class SchermataInserimentoDatiPagamento : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 if (s?.length != 16) {
                     binding.editTextnumero.setBackgroundResource(R.drawable.edittext_border_red)
+                }else{
+                    binding.editTextnumero.setBackgroundResource(R.drawable.edittext_border_green)
+
                 }
             }
         })
