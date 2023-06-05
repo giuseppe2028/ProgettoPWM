@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
@@ -55,6 +56,7 @@ class FragmentSchermataHome : Fragment() {
         recycleViewGestore()
         clickProfile()
         filtraLista()
+        gestioneSearchView()
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -122,7 +124,36 @@ class FragmentSchermataHome : Fragment() {
             }
         )
     }
+    private fun gestioneSearchView() {
+        binding.searchView.clearFocus()
+        val searchView = binding.searchView
+        searchView.setOnQueryTextListener(
+            object: SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
 
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    listaFiltrata(newText)
+                    return true
+                }
+
+            }
+        )
+    }
+    private fun listaFiltrata(newText: String?) {
+        val listaFiltrata = ArrayList<ItemClassLocalita>()
+        if( newText!=null){
+            //cerco il valore
+            for(i in listaLuogo){
+                if( i.title.lowercase().contains(newText)){
+                    listaFiltrata.add(i)
+                }
+            }
+            adapterViaggi.searchMete(listaFiltrata)
+
+        }
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
