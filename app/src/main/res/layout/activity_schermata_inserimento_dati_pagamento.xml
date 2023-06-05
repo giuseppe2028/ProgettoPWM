@@ -31,6 +31,7 @@
         android:text="@string/DatiAccountP"
         android:textSize="@dimen/title"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutRegistrazione"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -46,7 +47,7 @@
         android:layout_marginHorizontal="@dimen/marginButton"
 
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRegistrati"
+        app:layout_constraintBottom_toTopOf="@+id/buttonConfermaDati"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -55,6 +56,8 @@
             android:id="@+id/inserisciNomecognome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/coloretestopiccolo"
             android:text="@string/inserisciNC" />
 
         <EditText
@@ -73,6 +76,8 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/coloretestopiccolo"
             android:text="@string/inseriscinumero" />
 
         <EditText
@@ -99,6 +104,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CVV"
+                android:textStyle="bold"
+                android:textColor="@color/coloretestopiccolo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -107,7 +114,7 @@
                 android:id="@+id/editTextCvv"
                 style="@style/textEditStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/custom_text_edit"
                 android:ems="3"
@@ -130,7 +137,7 @@
                     android:id="@+id/editTextmese"
                     style="@style/textEditStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@drawable/custom_text_edit"
                     android:ems="2"
                     android:inputType="number" />
@@ -138,19 +145,21 @@
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="/"
                     android:textSize="@dimen/title"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/coloretestopiccolo"
+                    />
 
                 <EditText
                     android:id="@+id/editTextanno"
                     style="@style/textEditStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="@drawable/custom_text_edit"
                     android:ems="2"
-                    android:inputType="number" />
+                    android:inputType="number"/>
             </LinearLayout>
 
             <TextView
@@ -159,6 +168,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:text="MM/AA"
+                android:textStyle="bold"
+                android:textColor="@color/coloretestopiccolo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -167,4 +178,15 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/descrizionePagamenti"
+        android:textStyle="bold"
+        android:textColor="@color/coloretestopiccolo"
+        app:layout_constraintTop_toBottomOf="@+id/TitleModificaDatiPagamento" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.progettopwm.Login.OTPFragment
 import com.example.progettopwm.R
@@ -91,10 +92,11 @@ class FragmentRegistrazione : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                validatePasswordsC(passwordEditText, passwordEditTextC)
             }
 
             override fun afterTextChanged(s: Editable?) {
-                validatePasswords(passwordEditText, passwordEditTextC)
+                validatePasswordsC(passwordEditText, passwordEditTextC)
 
             }
         })
@@ -107,9 +109,9 @@ class FragmentRegistrazione : Fragment() {
         }
         passwordEditTextC.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                passwordEditText.hint = resources.getString(R.string.password)
+                passwordEditTextC.hint = resources.getString(R.string.password)
             } else {
-                passwordEditText.hint = null
+                passwordEditTextC.hint = null
             }
         }
         passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_24, 0)
@@ -126,8 +128,8 @@ class FragmentRegistrazione : Fragment() {
         }
         passwordEditTextC.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
-                val drawableEnd = passwordEditText.compoundDrawables[2]
-                if (drawableEnd != null && event.rawX >= passwordEditText.right - drawableEnd.bounds.width()) {
+                val drawableEnd = passwordEditTextC.compoundDrawables[2]
+                if (drawableEnd != null && event.rawX >= passwordEditTextC.right - drawableEnd.bounds.width()) {
                     togglePasswordVisibility(passwordEditTextC)
                     return@setOnTouchListener true
                 }
@@ -136,14 +138,16 @@ class FragmentRegistrazione : Fragment() {
         }
 
         buttonConferma.setOnClickListener {
-            if (!validatePasswords(passwordEditText, passwordEditTextC) || !validateOtherFields(nomeEditText, cognomeEditText, emailEditText)) {
+            if (!validatePasswords(passwordEditText, passwordEditTextC) || !validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata)||equalPasswords(passwordEditText, passwordEditTextC)) {
                 Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
+
             }
             else{
                 //inserire il comportamento del bottone
+                clickBottoni()
             }
         }
-        clickBottoni()
+
 
         return binding.root
     }
@@ -156,51 +160,85 @@ class FragmentRegistrazione : Fragment() {
         }
     }
 
-
-    private fun validatePasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
+    private fun equalPasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
         val password = passwordEditText.text.toString()
         val confirmPassword = passwordEditTextC.text.toString()
-
         // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
-        val passwordsMatch = password == confirmPassword
-        val isPasswordValid = password.length >= 6
-        val isPasswordValidC = confirmPassword.length >= 6
 
-
-        if (passwordsMatch && isPasswordValid && isPasswordValidC) {
-            passwordEditTextC.setTextColor(Color.GREEN)
-            passwordEditText.setTextColor(Color.GREEN)
+        if (password == confirmPassword) {
+            //passwordEditTextC.setTextColor(Color.GREEN)
+            //passwordEditText.setTextColor(Color.GREEN)
             passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
             passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_green)
+
             return true
-        }else{passwordEditText.setTextColor(Color.RED)
-            passwordEditTextC.setTextColor(Color.RED)
+        }
+        else{
             passwordEditText.setBackgroundResource(R.drawable.edittext_border_red)
             passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_red)
+            Toast.makeText(this.context, "Le password non coincidono", Toast.LENGTH_SHORT).show()
+
             return false
         }
 
     }
 
-    private fun validateOtherFields(EditText1: EditText, EditText2: EditText, EditText3: EditText): Boolean {
+    private fun validatePasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
+        val password = passwordEditText.text.toString()
+
+        // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
+        val isPasswordValid = password.length >= 6
+
+        if (isPasswordValid) {
+            //passwordEditTextC.setTextColor(Color.GREEN)
+            //passwordEditText.setTextColor(Color.GREEN)
+            passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
+            return true
+        }
+        else{
+            passwordEditText.setBackgroundResource(R.drawable.edittext_border_red)
+            return false
+        }
+
+    }
+    private fun validatePasswordsC(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
+        val confirmPassword = passwordEditTextC.text.toString()
+
+        // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
+         confirmPassword.length >= 6
+
+        if (confirmPassword.length >= 6) {
+            //passwordEditTextC.setTextColor(Color.GREEN)
+            //passwordEditText.setTextColor(Color.GREEN)
+            passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_green)
+            return true
+        }
+        else{
+            passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_red)
+            return false
+        }
+    }
+
+    private fun validateOtherFields(EditText1: EditText, EditText2: EditText, EditText3: EditText, TextView: TextView): Boolean {
         val field1 = EditText1.text.toString().trim()
         val field2 = EditText2.text.toString().trim()
         val field3 = EditText3.text.toString().trim()
-        return field1.isNotEmpty() && field2.isNotEmpty() && field3.isNotEmpty()
+        val field4 = TextView.text.toString().trim()
+        return field1.isNotEmpty() && field2.isNotEmpty() && field3.isNotEmpty() && field4.isNotEmpty()
     }
 
-    private fun togglePasswordVisibility(passwordEditText: EditText) {
+    private fun togglePasswordVisibility(passwordEdi: EditText) {
         isPasswordVisible = !isPasswordVisible
         if (isPasswordVisible) {
-            passwordEditText.inputType =
+            passwordEdi.inputType =
                 InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_off_24, 0)
+            passwordEdi.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_off_24, 0)
         } else {
-            passwordEditText.inputType =
+            passwordEdi.inputType =
                 InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_24, 0)
+            passwordEdi.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_24, 0)
         }
-        passwordEditText.setSelection(passwordEditText.text.length)
+        passwordEdi.setSelection(passwordEdi.text.length)
     }
 
 

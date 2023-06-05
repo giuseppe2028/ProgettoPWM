@@ -31,6 +31,8 @@
         android:text="@string/registrazione"
         android:textSize="@dimen/title"
         android:textStyle="bold"
+        android:textColor="@color/black"
+
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutRegistrazione"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -55,7 +57,9 @@
             android:id="@+id/inserisciNome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inserisciN" />
+            android:text="@string/inserisciN"
+            android:textStyle="bold"
+            android:textColor="@color/coloretestopiccolo"/>
 
         <EditText
             android:id="@+id/editTextNome"
@@ -75,7 +79,9 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inserisciC" />
+            android:text="@string/inserisciC"
+            android:textStyle="bold"
+            android:textColor="@color/coloretestopiccolo"/>
 
         <EditText
             android:id="@+id/editTextCognome"
@@ -94,7 +100,9 @@
             android:id="@+id/textViewdata"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/data" />
+            android:text="@string/data"
+            android:textStyle="bold"
+            android:textColor="@color/coloretestopiccolo"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,6 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/paddingEditTetxt"
+                android:textStyle="bold"
+                android:textColor="@color/coloretestopiccolo"
                 />
         </LinearLayout>
 
@@ -124,7 +134,9 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inserisciE" />
+            android:text="@string/inserisciE"
+            android:textStyle="bold"
+            android:textColor="@color/coloretestopiccolo"/>
 
 
 
@@ -146,7 +158,9 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inserisciP" />
+            android:text="@string/inserisciP"
+            android:textStyle="bold"
+            android:textColor="@color/coloretestopiccolo"/>
 
         <EditText
             android:id="@+id/editTextPassword"
@@ -165,7 +179,9 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inserisciCP" />
+            android:text="@string/inserisciCP"
+            android:textStyle="bold"
+            android:textColor="@color/coloretestopiccolo"/>
 
         <EditText
             android:id="@+id/editTextTextPasswordConferma"
