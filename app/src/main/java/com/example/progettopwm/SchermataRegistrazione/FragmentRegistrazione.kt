@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -45,7 +46,6 @@ class FragmentRegistrazione : Fragment() {
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -82,7 +82,7 @@ class FragmentRegistrazione : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                validatePasswords(passwordEditText, passwordEditTextC)
+                validatePasswords(passwordEditText)
 
             }
         })
@@ -92,11 +92,11 @@ class FragmentRegistrazione : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validatePasswordsC(passwordEditText, passwordEditTextC)
+                validatePasswordsC(passwordEditText)
             }
 
             override fun afterTextChanged(s: Editable?) {
-                validatePasswordsC(passwordEditText, passwordEditTextC)
+                validatePasswordsC(passwordEditText)
 
             }
         })
@@ -138,7 +138,7 @@ class FragmentRegistrazione : Fragment() {
         }
 
         buttonConferma.setOnClickListener {
-            if (!validatePasswords(passwordEditText, passwordEditTextC) || !validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata)||equalPasswords(passwordEditText, passwordEditTextC)) {
+            if (!validatePasswords(passwordEditText) || !validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata)||equalPasswords(passwordEditText, passwordEditTextC)) {
                 Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
 
             }
@@ -163,6 +163,8 @@ class FragmentRegistrazione : Fragment() {
     private fun equalPasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
         val password = passwordEditText.text.toString()
         val confirmPassword = passwordEditTextC.text.toString()
+        Log.i("password", password)
+        Log.i("confirm", confirmPassword)
         // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
 
         if (password == confirmPassword) {
@@ -183,11 +185,12 @@ class FragmentRegistrazione : Fragment() {
 
     }
 
-    private fun validatePasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
+    private fun validatePasswords(passwordEditText: EditText): Boolean {
         val password = passwordEditText.text.toString()
 
         // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
         val isPasswordValid = password.length >= 6
+
 
         if (isPasswordValid) {
             //passwordEditTextC.setTextColor(Color.GREEN)
@@ -201,13 +204,14 @@ class FragmentRegistrazione : Fragment() {
         }
 
     }
-    private fun validatePasswordsC(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
+    private fun validatePasswordsC( passwordEditTextC: EditText): Boolean {
         val confirmPassword = passwordEditTextC.text.toString()
 
         // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
          confirmPassword.length >= 6
 
         if (confirmPassword.length >= 6) {
+
             //passwordEditTextC.setTextColor(Color.GREEN)
             //passwordEditText.setTextColor(Color.GREEN)
             passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_green)
