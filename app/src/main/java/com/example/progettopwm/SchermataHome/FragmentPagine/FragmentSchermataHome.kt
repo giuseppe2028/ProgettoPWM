@@ -2,6 +2,8 @@ package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import ClientNetwork
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -22,6 +24,14 @@ import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
 import com.example.progettopwm.databinding.CardLocalitaBinding
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
+import retrofit2.Callback
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Response
+import java.util.concurrent.atomic.AtomicInteger
+
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -35,7 +45,7 @@ private const val ARG_PARAM2 = "param2"
 class FragmentSchermataHome : Fragment() {
     private lateinit var adapter:CustomAdapter
     private lateinit var dati:ArrayList<ItemsViewModel>
-    private lateinit var listaLuogo:ArrayList<ItemClassLocalita>
+    private var listaLuogo:ArrayList<ItemClassLocalita> = ArrayList()
     private lateinit var binding:FragmentSchermataHomeBinding
     private lateinit var adapterViaggi:CustomAdapterMete
     private var param1: String? = null
@@ -55,6 +65,13 @@ class FragmentSchermataHome : Fragment() {
     ): View{
 
         binding = FragmentSchermataHomeBinding.inflate(inflater)
+        popolaLista{
+            updateList->
+            listaLuogo = updateList
+            adapterViaggi.filtraLista(listaLuogo)
+            Log.i("ciao","${listaLuogo.size}")
+
+        }
         recycleViewGestore()
         clickProfile()
         filtraLista()
@@ -108,13 +125,9 @@ class FragmentSchermataHome : Fragment() {
 
     private fun recycleViewGestore() {
          dati = arrayListOf<ItemsViewModel>(ItemsViewModel(127755,"Esplorazione"), ItemsViewModel(127958,"Mare"),ItemsViewModel(127957,"gita all'aria aperta"),ItemsViewModel(127956,"trekking"),ItemsViewModel(127963,"Cultura"))
-         listaLuogo = arrayListOf<ItemClassLocalita>(ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Trekking"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Mare"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Esplorazione"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Trekking"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Cultura"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Mare"),
-            ItemClassLocalita(R.drawable.foto,"Weekend in spiaggia","cefalu,Italy",4,"500$","Cultura"))
+        //listaLuogo = popolaLista()
+
+
          adapter = CustomAdapter(dati)
          adapterViaggi = CustomAdapterMete(listaLuogo)
 
@@ -182,7 +195,75 @@ class FragmentSchermataHome : Fragment() {
                 }
             }
     }
-    fun popolaLista(){
-        ClientNetwork.retrofit
+    fun popolaLista(callback: (ArrayList<ItemClassLocalita>) -> Unit){
+        val lista:ArrayList<ItemClassLocalita> = arrayListOf()
+        //val query = "select luogo, nome_struttura, recensione,prezzo, tipologia from Viaggio"
+        val query = "select * from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+         object : Callback<JsonObject> {
+             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                 if(response.isSuccessful){
+                     Log.i("ciao","ciao")
+                     val risposta = response.body()?.get("queryset") as JsonArray
+                     var immaginiCount = risposta.size()
+                     if(risposta.size() != 0){
+                         val counter = AtomicInteger(risposta.size())
+                         Log.i("ciao", "${risposta.toString()}")
+                         for(i in risposta){
+                             val jsonObjectElemento = i as JsonObject
+                              var immagineCall:Bitmap?
+                                getImage(jsonObjectElemento){
+                                    immagine ->
+                                    lista.add(ItemClassLocalita(immagine, jsonObjectElemento.get("nome_struttura").toString(), jsonObjectElemento.get("luogo").toString(), jsonObjectElemento.get("recensione").asDouble,jsonObjectElemento.get("prezzo").asInt, jsonObjectElemento.get("tipologia").toString()))
+
+                              immaginiCount--
+                            if(immaginiCount == 0){
+                                callback(lista)
+                            }
+                                }
+                         }
+                         callback(lista)
+                     }
+                 }
+             }
+
+             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+
+             }
+
+         }
+        )
+        }
+    private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
+        val string = jsonObject.get("path_immagine").asString
+        Log.i("ciao90", "$string")
+        Log.i("ciaoProva","$string")
+        ClientNetwork.retrofit.getImage(string).enqueue(
+            object : Callback<ResponseBody>{
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if(response.isSuccessful){
+                        var immagine: Bitmap? = null
+                        if (response.body()!=null) {
+                              immagine = BitmapFactory.decodeStream(response.body()?.byteStream())
+                            callback(immagine)
+                        }
+                        callback(immagine)
+                        Log.i("ciao","successiful")
+                    }
+                    else{
+                        Log.i("ciao","notsuccessiful")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.i("ciao","fail")
+                }
+
+            }
+        )
+
     }
 }

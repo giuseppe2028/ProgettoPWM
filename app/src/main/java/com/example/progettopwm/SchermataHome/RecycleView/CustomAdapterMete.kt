@@ -47,11 +47,11 @@ interface OnClickListener{
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val items = lista[position]
-        holder.imageView.setImageResource(items.image)
+        holder.imageView.setImageBitmap(items.image)
         holder.titolo.text = items.title
         holder.localita.text = items.position
         holder.rating.rating = items.rating.toFloat()
-        holder.prezzo.text = items.prezzo
+        holder.prezzo.text = items.prezzo.toString()
         holder.itemView.setOnClickListener {
             setOnClickListener?.Onclick(position,items)
         }

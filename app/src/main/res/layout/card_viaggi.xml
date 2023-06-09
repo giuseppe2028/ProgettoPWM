@@ -7,15 +7,24 @@
     android:layout_height="wrap_content"
     android:outlineProvider="background">
 
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="linearLayout5,titoloLocalita" />
+
     <TextView
         android:id="@+id/titoloLocalita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/marginVerticalCardLocalita"
+        android:inputType="textMultiLine"
+        android:maxLines="4"
         android:text="cefalu"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/linearLayout5"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintEnd_toStartOf="@+id/barrier"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/immagineLocalita" />
