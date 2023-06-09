@@ -21,6 +21,11 @@ import androidx.core.content.ContextCompat
 import com.example.progettopwm.Login.OTPFragment
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentRegistrazioneBinding
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.Calendar
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -123,7 +128,7 @@ class FragmentRegistrazione : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 validatePasswords(passwordEditText)
-
+                equalPasswords(passwordEditText, passwordEditTextC)
             }
         })
 
@@ -133,18 +138,14 @@ class FragmentRegistrazione : Fragment() {
             }
             //controllo il contenuto della password
             else if(!validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata) && equalPasswords(passwordEditText,passwordEditTextC)){
-                clickBottoni()
-            }
 
-            /*if (!validatePasswords(passwordEditText) || !validateOtherFields()||equalPasswords(passwordEditText, passwordEditTextC)) {
-                Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
-
+                val nome = nomeEditText.text.toString()
+                val cognome = cognomeEditText.text.toString()
+                val email = emailEditText.text.toString()
+                val data = clickBottoni()
+                val password = passwordEditText.text.toString()
+                caricaCredenziali(nome, cognome, email, data, password)
             }
-            else{
-                //inserire il comportamento del bottone
-
-            }
-             */
         }
 
 
@@ -153,11 +154,33 @@ class FragmentRegistrazione : Fragment() {
 
 
 
+    private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
+        val query = "INSERT INTO persona (nome, cognome, data_nascita, mail, password)\n" +
+                "VALUES ('$nome', '$cognome', '$data', '$email', '$password');\n"
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        if ((response.body()?.get("queryset") as JsonArray).size() == 1) {
+
+                            val nome =  ((response.body()?.get("queryset") as JsonArray).get(0) as JsonObject).get("nome")
+                        } else {
+                        }
+                    }
+    }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            }
+        )
+    }
 
 
 
 
-    private fun clickBottoni() {
+    private fun clickBottoni(): String{
+        var selectedDate = ""
         binding.buttonRegistrati.setOnClickListener{
             val manager= parentFragmentManager
             val transaction = manager.beginTransaction()
@@ -172,12 +195,13 @@ class FragmentRegistrazione : Fragment() {
 
             val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                 // Aggiorna il TextView con la data selezionata
-                val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
+                selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
                 binding.textViewshowdata.text = selectedDate
             }, year, month, day)
 
             datePickerDialog.show()
         }
+        return selectedDate
     }
 
     private fun equalPasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
