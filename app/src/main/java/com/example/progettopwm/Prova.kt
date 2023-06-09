@@ -52,7 +52,7 @@ object GestioneDB{
 }
 
 
-fun  Call<ResponseBody>.prova(callback: (Call<ResponseBody>, Response<ResponseBody>) -> Unit){
+/*fun  Call<ResponseBody>.prova(callback: (Call<ResponseBody>, Response<ResponseBody>) -> Unit){
     enqueue(
         object: Callback<ResponseBody>{
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -64,4 +64,5 @@ fun  Call<ResponseBody>.prova(callback: (Call<ResponseBody>, Response<ResponseBo
 
         }
     )
-}
+
+ */

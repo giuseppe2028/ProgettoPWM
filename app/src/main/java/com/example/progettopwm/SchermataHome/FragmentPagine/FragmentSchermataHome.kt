@@ -1,5 +1,6 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
+import ClientNetwork
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -182,6 +183,6 @@ class FragmentSchermataHome : Fragment() {
             }
     }
     fun popolaLista(){
-
+        ClientNetwork.retrofit
     }
 }
