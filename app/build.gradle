@@ -55,5 +55,13 @@ dependencies {
     //gabriele Raffaele
     implementation("androidx.core:core-ktx:1.6.0")
     implementation("androidx.core:core-splashscreen:1.0.0")
+    //retrofit
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+
+    //traduzione di retrofit
+    //GSON Converter
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
 
 }

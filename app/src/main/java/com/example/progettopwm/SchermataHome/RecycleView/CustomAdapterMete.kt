@@ -45,6 +45,7 @@ interface OnClickListener{
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val items = lista[position]
         holder.imageView.setImageResource(items.image)
         holder.titolo.text = items.title

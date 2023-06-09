@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
+import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
@@ -57,8 +58,16 @@ class FragmentSchermataHome : Fragment() {
         clickProfile()
         filtraLista()
         gestioneSearchView()
+        richiediServer()
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun richiediServer() {
+
+        GestioneDB.getImage(null){
+            binding.imageProfile.setImageBitmap(it)
+        }
     }
 
     private fun filtraLista() {
@@ -171,5 +180,8 @@ class FragmentSchermataHome : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    fun popolaLista(){
+
     }
 }
