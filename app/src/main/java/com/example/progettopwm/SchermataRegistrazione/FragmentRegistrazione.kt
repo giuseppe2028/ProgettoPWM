@@ -155,13 +155,19 @@ class FragmentRegistrazione : Fragment() {
 
 
     private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
-        val query = "INSERT INTO persona (nome, cognome, data_nascita, mail, password)\n" +
-                "VALUES ('$nome', '$cognome', '$data', '$email', '$password');\n"
+        val query = "INSERT INTO Persona (nome, cognome, data_nascita, mail, password) VALUES ('$nome', '$cognome', '$data', '$email', '$password');"
+
         ClientNetwork.retrofit.insert(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
                         Log.i("ciao", "ciao")
+                    }
+                    else{
+                        Log.i("errore", "non funziona")
+                        Log.i("errore", response.message())
+                        Log.i("errore",  response.toString())
+
                     }
     }
 
