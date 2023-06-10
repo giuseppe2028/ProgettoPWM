@@ -55,6 +55,8 @@ class FragmentSchermataHome : Fragment() {
     private var param2: String? = null
 
 
+    var count = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -62,6 +64,7 @@ class FragmentSchermataHome : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,7 +77,6 @@ class FragmentSchermataHome : Fragment() {
         clickProfile()
         filtraLista()
         gestioneSearchView()
-        richiediServer()
         popolaLista{
                 updateList->
             listaLuogo = updateList
@@ -82,18 +84,14 @@ class FragmentSchermataHome : Fragment() {
             Log.i("ciao","${listaLuogo.size}")
 
         }
+
         // Inflate the layout for this fragment
         return binding.root
     }
 
 
 
-    private fun richiediServer() {
 
-        GestioneDB.getImage(null){
-            binding.imageProfile.setImageBitmap(it)
-        }
-    }
 
     private fun filtraLista() {
 
@@ -148,13 +146,9 @@ class FragmentSchermataHome : Fragment() {
         adapterViaggi.setOnClickListener(object :
             CustomAdapterMete.OnClickListener{
             override fun Onclick(position: Int, item: ItemClassLocalita) {
-
                 val intent = Intent(activity,ActivitySchermataViaggio()::class.java)
                 intent.putExtra("idViaggio", item.id)
                 startActivity(intent)
-
-
-
             }
             }
         )
@@ -210,7 +204,7 @@ class FragmentSchermataHome : Fragment() {
     fun popolaLista(callback: (ArrayList<ItemClassLocalita>) -> Unit){
         val lista:ArrayList<ItemClassLocalita> = arrayListOf()
         //val query = "select luogo, nome_struttura, recensione,prezzo, tipologia from Viaggio"
-        val query = "select * from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
+        val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
         ClientNetwork.retrofit.registrazione(query).enqueue(
          object : Callback<JsonObject> {
              override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -221,13 +215,14 @@ class FragmentSchermataHome : Fragment() {
                      if(risposta.size() != 0){
                          for(i in risposta){
                              val jsonObjectElemento = i as JsonObject
-                              var immagineCall:Bitmap?
                                 getImage(jsonObjectElemento){
                                     immagine ->
-                                    Log.i("ciao","${jsonObjectElemento.get("nome_struttura").asString}")
-                                    lista.add(ItemClassLocalita(jsonObjectElemento.get("id").asInt,immagine,jsonObjectElemento.get("nome_struttura").asString,
+                                    Log.i("Debug","${jsonObjectElemento.get("id").asInt} localita: ${jsonObjectElemento.get("nome_struttura").asString}" )
+                                    lista.add(ItemClassLocalita(
+                                        jsonObjectElemento.get("id").asInt,immagine,jsonObjectElemento.get("nome_struttura").asString,
                                         jsonObjectElemento.get("luogo").asString, jsonObjectElemento.get("recensione").asDouble,
-                                        jsonObjectElemento.get("prezzo").asInt, jsonObjectElemento.get("tipologia").asString))
+                                        jsonObjectElemento.get("prezzo").asInt, jsonObjectElemento.get("tipologia").asString)
+                                    )
 
                               immaginiCount--
                             if(immaginiCount == 0){
@@ -254,6 +249,8 @@ class FragmentSchermataHome : Fragment() {
         }
     }
     private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
+        count++
+        Log.i("ciao","$count")
         val string = jsonObject.get("path_immagine").asString
         Log.i("ciao90", "$string")
         Log.i("ciaoProva","$string")
@@ -266,14 +263,10 @@ class FragmentSchermataHome : Fragment() {
                     if(response.isSuccessful){
                         var immagine: Bitmap? = null
                         if (response.body()!=null) {
-                              immagine = BitmapFactory.decodeStream(response.body()?.byteStream())
+                            immagine = BitmapFactory.decodeStream(response.body()?.byteStream())
                             callback(immagine)
                         }
                         callback(immagine)
-                        Log.i("ciao","successiful")
-                    }
-                    else{
-                        Log.i("ciao","notsuccessiful")
                     }
                 }
 
