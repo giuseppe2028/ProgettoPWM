@@ -96,13 +96,17 @@ class FragmentSchermataHome : Fragment() {
     }
 
     private fun caricaViaggioProssimo(data: Date) {
+        var id:Int
         val query = "select * from Compra,Viaggio where ref_viaggio = Viaggio.id and Compra.ref_persona = 1 and data>'$data'order by data"
         GestioneDB.richiestaInformazioni(query){
             data ->
             //insersico la card
             val manager = parentFragmentManager
             val transaction = manager.beginTransaction()
-            transaction.add(binding.frgmentProssimoViaggio.id, FragmentProssimoVIaggio()).commit()
+            val fragment  = FragmentProssimoVIaggio()
+            setFragmentResult
+            transaction.add(binding.frgmentProssimoViaggio.id, fragment).commit()
+            id = data.get("id").asInt
         }
     }
 
