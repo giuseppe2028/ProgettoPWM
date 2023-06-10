@@ -53,11 +53,11 @@ class FragmentProssimoVIaggio : Fragment() {
     }
 
     private fun mandaDatiFragment() {
-        Log.i("Viaggio","prova risposta")
+
         parentFragmentManager.setFragmentResultListener("request",this){
             requestKey,bundle->
             val risposta = bundle.getString(requestKey)
-
+            Log.i("Viaggio","Prova")
         }
     }
 

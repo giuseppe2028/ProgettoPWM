@@ -105,10 +105,13 @@ class FragmentSchermataHome : Fragment() {
             val manager = parentFragmentManager
             val transaction = manager.beginTransaction()
             val fragment = FragmentProssimoVIaggio()
-            transaction.add(binding.frgmentProssimoViaggio.id, fragment).commit()
             id = data.get("id").asInt
-            childFragmentManager.setFragmentResult("request", bundleOf("chiaveRisposta" to id))
-            Log.i("value", "$id")
+
+            transaction.add(binding.frgmentProssimoViaggio.id, fragment)
+            childFragmentManager.setFragmentResult("request", Bundle().apply {
+                putString("request", "id")
+            })
+            transaction.commit()
         }
     }
 
