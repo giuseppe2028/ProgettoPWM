@@ -8,7 +8,7 @@ import com.example.progettopwm.databinding.FragmentPreferitiBinding
 
 class CustomAdapterPreferiti(val lista:List<ItemViewModel>): RecyclerView.Adapter<CustomAdapterPreferiti.ViewHolder>(){
     class ViewHolder(val binding:FragmentPreferitiBinding):RecyclerView.ViewHolder(binding.root){
-        val image = binding.immagineLocalita
+        //val image = binding.immaginiLocalita
         val titolo = binding.Titolo
         val testoLuogo = binding.testoLuogo
         val numeroPersone = binding.numeroPersone
@@ -22,7 +22,7 @@ class CustomAdapterPreferiti(val lista:List<ItemViewModel>): RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = lista[position]
-       holder.image.setImageResource(item.image)
+       //holder.image.setImageResource(item.image)
         holder.testoLuogo.text = item.luogo
         holder.titolo.text = item.titolo
         holder.numeroPersone.text = item.numPersone.toString()
