@@ -30,7 +30,7 @@
     <dimen name="marginFoto">25dp</dimen>
     <dimen name="marginFotoBottom">15dp</dimen>
 
-
+    <dimen name="dimensioneImmagineCard">150dp</dimen>
     <dimen name="margintopTitle">60dp</dimen>
     <dimen name="marginTitle">40dp</dimen>
 </resources>

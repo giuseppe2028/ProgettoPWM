@@ -1,6 +1,7 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import ClientNetwork
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -21,6 +22,7 @@ import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
+import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
 import com.example.progettopwm.databinding.CardLocalitaBinding
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
@@ -43,6 +45,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentSchermataHome : Fragment() {
+    private lateinit var datiPassati:SchermataHome.DatiPassati
     private lateinit var adapter:CustomAdapter
     private lateinit var dati:ArrayList<ItemsViewModel>
     private var listaLuogo:ArrayList<ItemClassLocalita> = ArrayList()
@@ -50,6 +53,7 @@ class FragmentSchermataHome : Fragment() {
     private lateinit var adapterViaggi:CustomAdapterMete
     private var param1: String? = null
     private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,21 +69,24 @@ class FragmentSchermataHome : Fragment() {
     ): View{
 
         binding = FragmentSchermataHomeBinding.inflate(inflater)
-        popolaLista{
-            updateList->
-            listaLuogo = updateList
-            adapterViaggi.filtraLista(listaLuogo)
-            Log.i("ciao","${listaLuogo.size}")
 
-        }
         recycleViewGestore()
         clickProfile()
         filtraLista()
         gestioneSearchView()
         richiediServer()
+        popolaLista{
+                updateList->
+            listaLuogo = updateList
+            adapterViaggi.filtraLista(listaLuogo)
+            Log.i("ciao","${listaLuogo.size}")
+
+        }
         // Inflate the layout for this fragment
         return binding.root
     }
+
+
 
     private fun richiediServer() {
 
@@ -125,7 +132,6 @@ class FragmentSchermataHome : Fragment() {
 
     private fun recycleViewGestore() {
          dati = arrayListOf<ItemsViewModel>(ItemsViewModel(127755,"Esplorazione"), ItemsViewModel(127958,"Mare"),ItemsViewModel(127957,"gita all'aria aperta"),ItemsViewModel(127956,"trekking"),ItemsViewModel(127963,"Cultura"))
-        //listaLuogo = popolaLista()
 
 
          adapter = CustomAdapter(dati)
@@ -142,7 +148,13 @@ class FragmentSchermataHome : Fragment() {
         adapterViaggi.setOnClickListener(object :
             CustomAdapterMete.OnClickListener{
             override fun Onclick(position: Int, item: ItemClassLocalita) {
-                startActivity(Intent(context,ActivitySchermataViaggio::class.java))
+
+                val intent = Intent(activity,ActivitySchermataViaggio()::class.java)
+                intent.putExtra("idViaggio", item.id)
+                startActivity(intent)
+
+
+
             }
             }
         )
@@ -207,14 +219,15 @@ class FragmentSchermataHome : Fragment() {
                      val risposta = response.body()?.get("queryset") as JsonArray
                      var immaginiCount = risposta.size()
                      if(risposta.size() != 0){
-                         val counter = AtomicInteger(risposta.size())
-                         Log.i("ciao", "${risposta.toString()}")
                          for(i in risposta){
                              val jsonObjectElemento = i as JsonObject
                               var immagineCall:Bitmap?
                                 getImage(jsonObjectElemento){
                                     immagine ->
-                                    lista.add(ItemClassLocalita(immagine, jsonObjectElemento.get("nome_struttura").toString(), jsonObjectElemento.get("luogo").toString(), jsonObjectElemento.get("recensione").asDouble,jsonObjectElemento.get("prezzo").asInt, jsonObjectElemento.get("tipologia").toString()))
+                                    Log.i("ciao","${jsonObjectElemento.get("nome_struttura").asString}")
+                                    lista.add(ItemClassLocalita(jsonObjectElemento.get("id").asInt,immagine,jsonObjectElemento.get("nome_struttura").asString,
+                                        jsonObjectElemento.get("luogo").asString, jsonObjectElemento.get("recensione").asDouble,
+                                        jsonObjectElemento.get("prezzo").asInt, jsonObjectElemento.get("tipologia").asString))
 
                               immaginiCount--
                             if(immaginiCount == 0){
@@ -222,7 +235,6 @@ class FragmentSchermataHome : Fragment() {
                             }
                                 }
                          }
-                         callback(lista)
                      }
                  }
              }
@@ -234,6 +246,13 @@ class FragmentSchermataHome : Fragment() {
          }
         )
         }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if(context is SchermataHome.DatiPassati){
+            datiPassati = context
+        }
+    }
     private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
         val string = jsonObject.get("path_immagine").asString
         Log.i("ciao90", "$string")

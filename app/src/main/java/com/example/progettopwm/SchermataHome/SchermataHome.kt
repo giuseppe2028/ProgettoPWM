@@ -1,8 +1,10 @@
 package com.example.progettopwm.SchermataHome
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataAccount
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
@@ -36,4 +38,9 @@ class SchermataHome : AppCompatActivity() {
 
         }
     }
+//interfaccia per inviare dati alle activity:
+    interface DatiPassati{
+        fun datiPassati(value:Int)
+    }
+
 }
