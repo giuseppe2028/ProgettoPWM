@@ -58,7 +58,7 @@ class FragmentSchermataHome : Fragment() {
     private lateinit var adapterViaggi:CustomAdapterMete
     private var param1: String? = null
     private var param2: String? = null
-
+    var idPersona:Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,11 +118,12 @@ class FragmentSchermataHome : Fragment() {
 
     private fun setProfilo() {
         //TODO(ll'id sarà passato all'inizio del profilo)
-        val query = "select nome from Persona where id = 1"
+        val query = "select nome,id from Persona where id = 1"
         GestioneDB.richiestaInformazioni(query){
             data ->
             //gestisco il JSON object
             val nome = data.get("nome").asString
+            idPersona = data.get("id").asInt
             //sostituisco la stringa di default:
             val nomePrincipale = binding.nomeProfilo.text
             binding.nomeProfilo.text = nomePrincipale.replace("user".toRegex(), "$nome")
@@ -186,6 +187,7 @@ class FragmentSchermataHome : Fragment() {
             override fun Onclick(position: Int, item: ItemClassLocalita) {
                 val intent = Intent(activity,ActivitySchermataViaggio()::class.java)
                 intent.putExtra("idViaggio", item.id)
+                intent.putExtra("Persona",idPersona)
                 startActivity(intent)
             }
             }

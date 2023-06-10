@@ -17,7 +17,15 @@ interface interfacciaAPI {
     @GET
     fun getImage(@Url url:String): Call <ResponseBody>
 
-
+    @POST("postUpdate/")
+    @FormUrlEncoded
+    fun update(@Field("query") query: String): Call <JsonObject>
+    @POST("postInsert/")
+    @FormUrlEncoded
+    fun insert(@Field("query") query: String): Call <JsonObject>
+    @POST("postRemove/")
+    @FormUrlEncoded
+    fun remove(@Field("query") query: String): Call <JsonObject>
 
 }
 

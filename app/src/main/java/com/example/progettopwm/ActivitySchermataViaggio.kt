@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.SchermataHome
@@ -25,28 +26,59 @@ class ActivitySchermataViaggio : AppCompatActivity(),SchermataHome.DatiPassati {
     private lateinit var binding:SchermataViaggioBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val idViaggio = 0
         super.onCreate(savedInstanceState)
         binding = SchermataViaggioBinding.inflate(layoutInflater)
         setContentView(binding.root)
         var stato:Boolean = false
         val id = intent.getIntExtra("idViaggio",0)
-
+        val idPersona = intent.getIntExtra("Persona",0)
         setSchermata(id)
+        Log.i("id","$id")
+        //setto il cuore a seconda del risultato della query:
+        setLike(id)
         binding.like.setOnClickListener {
             if(stato){
+                //disattivo il bottone:
+                Toast.makeText(this,R.string.Disattivato, Toast.LENGTH_SHORT).show()
                 binding.like.setImageDrawable(getDrawable(R.drawable.heartbutton))
                 stato = false
+                //request http
+                aggiornaDati(idPersona,id,false)
             }else if(!stato){
-                Log.i("ciao","prova3")
+                Toast.makeText(this,R.string.Attivato,Toast.LENGTH_SHORT).show()
                 binding.like.setImageDrawable(getDrawable(R.drawable.heart_3))
                 stato = true
+                aggiornaDati(idPersona,id,true)
             }
         }
 
     }
-
+    private fun setLike(id:Int){
+        val query = "select * from Preferiti where ref_viaggio = $id"
+        GestioneDB.queryGenerica(query){
+            data->
+            if(data.size()!=0){
+                //vuol dire che l'elemento è nei preferiti
+                binding.like.setImageDrawable(getDrawable(R.drawable.heart_3))
+            }
+            else if(data.size() ==0){
+                binding.like.setImageDrawable(getDrawable(R.drawable.heartbutton))
+            }
+        }
+    }
+    fun aggiornaDati(idPersona:Int,id:Int,attivazione:Boolean) {
+    //aggiungo o rimuovo
+        if(attivazione){
+            Log.i("debug","debug: Persona: $idPersona, Viaggio:$id")
+            val query = "insert into Preferiti(ref_persona,ref_viaggio) values($idPersona,$id)"
+            GestioneDB.inserisciElemento(query)
+        }else if(!attivazione){
+            val query = "delete from Preferiti where ref_viaggio = $id"
+            GestioneDB.eliminaElemento(query)
+        }
+    }
     fun setSchermata(id:Int){
+        //TODO(Selezionare il cuore su rosso o nero a secondo della query)
         Log.i("Ciao","$id")
         val query = "select * from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Viaggio.id = $id and immagine_default = 1"
         ClientNetwork.retrofit.registrazione(query).enqueue(

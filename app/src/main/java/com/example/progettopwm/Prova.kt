@@ -1,5 +1,6 @@
 package com.example.progettopwm
 
+import ClientNetwork
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
@@ -37,4 +38,81 @@ object GestioneDB {
                 }
         )
             }
+    fun aggiornaServer(query: String){
+        ClientNetwork.retrofit.update(query).enqueue(
+            object: Callback<JsonObject>{
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if(response.isSuccessful){
+                        Log.i("Debug", "Query caricata con successo")
+                    }
+                    else{
+                        Log.i("Debug", "Errore nella query")
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.i("Debug", "Errore nel server")
+                }
+
+            }
+        )
+    }
+    fun inserisciElemento(query: String){
+        ClientNetwork.retrofit.insert(query).enqueue(
+            object: Callback<JsonObject>{
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if(response.isSuccessful){
+                        Log.i("Debug", "Query caricata con successo")
+                    }
+                    else{
+                        Log.i("Debug", "Errore nella query")
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.i("Debug", "Errore nel server")
+                }
+
+            }
+        )
+    }
+    fun eliminaElemento(query: String){
+        ClientNetwork.retrofit.remove(query).enqueue(
+            object: Callback<JsonObject>{
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if(response.isSuccessful){
+                        Log.i("Debug", "Query caricata con successo")
+                    }
+                    else{
+                        Log.i("Debug", "Errore nella query")
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.i("Debug", "Errore nel server")
+                }
+
+            }
+        )
+    }
+    fun queryGenerica(query:String, callback: (JsonArray) -> Unit){
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object: Callback<JsonObject>{
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if(response.isSuccessful){
+                    val risposta = response.body()?.get("queryset") as JsonArray
+                   callback(risposta)
+                }
+                else{
+                    Log.i("Debug", "Errore nella query")
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                Log.i("Debug", "Errore nel server")
+            }
+
+        }
+        )
+    }
 }
