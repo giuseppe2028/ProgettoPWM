@@ -19,15 +19,15 @@ object GestioneDB {
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
-                        Log.i("ciao", "ciao")
                         val risposta = response.body()?.get("queryset") as JsonArray
-                        var immaginiCount = risposta.size()
-                        if (risposta.size() == 1) {
-                                    //ho un solo oggetto JSON
-                                    callback(risposta.get(0) as JsonObject)
-                                }
-                            }
+                        if (risposta.size() != 0) {
+                            Log.i("alpha", "ento")
+                            //ho un solo oggetto JSON
+                            callback(risposta.get(0) as JsonObject)
                         }
+                    }
+                        }
+
 
 
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {

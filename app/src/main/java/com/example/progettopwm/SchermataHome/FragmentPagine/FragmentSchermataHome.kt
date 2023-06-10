@@ -17,18 +17,26 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.GestioneDB
+import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
+import com.example.progettopwm.interfacciaAPI
 import retrofit2.Callback
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
+import java.sql.Date
+import java.time.LocalDate
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,8 +89,21 @@ class FragmentSchermataHome : Fragment() {
 
         }
 
+        caricaViaggioProssimo(Date.valueOf(LocalDate.now().toString()))
+
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun caricaViaggioProssimo(data: Date) {
+        val query = "select * from Compra,Viaggio where ref_viaggio = Viaggio.id and Compra.ref_persona = 1 and data>'$data'order by data"
+        GestioneDB.richiestaInformazioni(query){
+            data ->
+            //insersico la card
+            val manager = parentFragmentManager
+            val transaction = manager.beginTransaction()
+            transaction.add(binding.frgmentProssimoViaggio.id, FragmentProssimoVIaggio()).commit()
+        }
     }
 
     private fun setProfilo() {
