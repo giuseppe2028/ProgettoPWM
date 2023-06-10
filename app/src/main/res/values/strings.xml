@@ -26,7 +26,7 @@
     <string name="TitleOTP">Inserisci OTP</string>
     <string name="subtitleOTP">L\'OTP è stato inviato per email</string>
     <string name="ToastLogin">Non hai inserito password o email</string>
-    <string name="benvenutoHome">Ciao, Giuseppe! &#128075;</string>
+    <string name="benvenutoHome">Ciao, user! &#128075;</string>
     <string name="subtitleHome">Dove vorresti andare?</string>
     <string name="TitleProfilo">Profilo</string>
     <string name="GestioneProfilo">Gestisci il tuo account</string>

@@ -2,67 +2,40 @@ package com.example.progettopwm
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
+import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-object GestioneDB{
-     fun setHome() {
-        val query = "select nome, ref_immagine from Persona where cognome = 'Doe'"
-        ClientNetwork.retrofit.registrazione(query)
-    }
+object GestioneDB {
 
-     fun getImage(jsonObject: JsonObject?, onResponse:(Bitmap) -> Unit){
-        val string = jsonObject?.get("ref_immagine")?.asString
-         if (string != null) {
-             ClientNetwork.retrofit.getImage(string).enqueue(
-                 object : Callback<ResponseBody>{
-                     override fun onResponse(
-                         call: Call<ResponseBody>,
-                         response: Response<ResponseBody>
-                     ) {
-                         if(response.isSuccessful){
-                             var avatar: Bitmap? = null
-                             if (response.body()!=null) {
-                                 avatar = BitmapFactory.decodeStream(response.body()?.byteStream())
-                                 onResponse(avatar)
-                             }
+    fun richiestaInformazioni(query:String,callback: (JsonObject)-> Unit){
+        val lista:ArrayList<ItemClassLocalita> = arrayListOf()
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        Log.i("ciao", "ciao")
+                        val risposta = response.body()?.get("queryset") as JsonArray
+                        var immaginiCount = risposta.size()
+                        if (risposta.size() == 1) {
+                                    //ho un solo oggetto JSON
 
-                         }
-                         else{
-
-                         }
+                                    callback(risposta.get(0) as JsonObject)
+                                }
+                            }
+                        }
 
 
+                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
 
-                     }
-
-                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                         TODO("Not yet implemented")
-                     }
-
-                 }
-             )
-         }
-
-
-    }
+                }
+        )
+            }
 }
-
-
-/*fun  Call<ResponseBody>.prova(callback: (Call<ResponseBody>, Response<ResponseBody>) -> Unit){
-    enqueue(
-        object: Callback<ResponseBody>{
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                callback(call,response)
-            }
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-
-        }
-    )
-
- */

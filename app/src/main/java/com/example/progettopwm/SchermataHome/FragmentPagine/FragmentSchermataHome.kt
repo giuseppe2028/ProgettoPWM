@@ -1,6 +1,7 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import ClientNetwork
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -14,17 +15,13 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.GestioneDB
-import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.SchermataHome.SchermataHome
-import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
-import com.example.progettopwm.databinding.CardLocalitaBinding
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 import retrofit2.Callback
 import com.google.gson.JsonArray
@@ -32,7 +29,6 @@ import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
-import java.util.concurrent.atomic.AtomicInteger
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,7 +51,6 @@ class FragmentSchermataHome : Fragment() {
     private var param2: String? = null
 
 
-    var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +72,7 @@ class FragmentSchermataHome : Fragment() {
         clickProfile()
         filtraLista()
         gestioneSearchView()
+        setProfilo()
         popolaLista{
                 updateList->
             listaLuogo = updateList
@@ -89,8 +85,20 @@ class FragmentSchermataHome : Fragment() {
         return binding.root
     }
 
+    private fun setProfilo() {
+        //TODO(ll'id sarà passato all'inizio del profilo)
+        val query = "select nome from Persona where id = 1"
+        GestioneDB.richiestaInformazioni(query){
+            data ->
+            //gestisco il JSON object
+            val nome = data.get("nome").asString
+            //sostituisco la stringa di default:
+            val nomePrincipale = binding.nomeProfilo.text
+            binding.nomeProfilo.text = nomePrincipale.replace("user".toRegex(), "$nome")
 
 
+        }
+    }
 
 
     private fun filtraLista() {
@@ -207,6 +215,7 @@ class FragmentSchermataHome : Fragment() {
         val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
         ClientNetwork.retrofit.registrazione(query).enqueue(
          object : Callback<JsonObject> {
+             @SuppressLint("SuspiciousIndentation")
              override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                  if(response.isSuccessful){
                      Log.i("ciao","ciao")
@@ -221,7 +230,7 @@ class FragmentSchermataHome : Fragment() {
                                     lista.add(ItemClassLocalita(
                                         jsonObjectElemento.get("id").asInt,immagine,jsonObjectElemento.get("nome_struttura").asString,
                                         jsonObjectElemento.get("luogo").asString, jsonObjectElemento.get("recensione").asDouble,
-                                        jsonObjectElemento.get("prezzo").asInt, jsonObjectElemento.get("tipologia").asString)
+                                        jsonObjectElemento.get("prezzo").asString.plus("$"), jsonObjectElemento.get("tipologia").asString)
                                     )
 
                               immaginiCount--
@@ -249,8 +258,6 @@ class FragmentSchermataHome : Fragment() {
         }
     }
     private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
-        count++
-        Log.i("ciao","$count")
         val string = jsonObject.get("path_immagine").asString
         Log.i("ciao90", "$string")
         Log.i("ciaoProva","$string")
@@ -278,4 +285,5 @@ class FragmentSchermataHome : Fragment() {
         )
 
     }
+
 }
