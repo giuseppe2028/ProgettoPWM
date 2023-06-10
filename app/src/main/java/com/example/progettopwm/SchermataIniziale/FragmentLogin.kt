@@ -12,6 +12,11 @@ import androidx.core.os.bundleOf
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.FragmentLoginBinding
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -46,6 +51,32 @@ class FragmentLogin : Fragment() {
         return binding.root
     }
 
+    private fun verificaCredenziali(email: String, password: String, callback: (Boolean)->Unit){
+        val query = "SELECT id FROM webmobile.Persona WHERE mail = '$email' AND password ='$password' ;"
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        if ((response.body()?.get("queryset") as JsonArray).size() == 1) {
+                            callback(true)
+                        }else{
+                        callback(false)
+                        }
+                    }
+                    else{
+                        Log.i("errore", "non funziona")
+                        Log.i("errore", response.message())
+                        Log.i("errore",  response.toString())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    TODO("Not yet implemented")
+                }
+            }
+        )
+    }
     private fun clickBottoni() {
         val result = true
         binding.passwordDimenticata.setOnClickListener{
@@ -55,12 +86,19 @@ class FragmentLogin : Fragment() {
             parentFragmentManager.setFragmentResult("requestGoogle", bundleOf("RispostaGoogle" to result))
         }
         binding.accediNormale.setOnClickListener {
-            if(binding.email.text.toString().trim().isEmpty()){
-                //comandi database
+            if(binding.email.text.toString().trim().isEmpty() && binding.password.text.toString().trim().isEmpty()){
                 Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
             }
             else{
-                startActivity(Intent(this.context,SchermataHome()::class.java))
+                verificaCredenziali(binding.email.text.toString(), binding.password.text.toString()){ result->
+                if(result){
+                    startActivity(Intent(this.context,SchermataHome()::class.java))
+                }
+                else{
+                    Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
+
+                }
+                }
             }
         }
     }

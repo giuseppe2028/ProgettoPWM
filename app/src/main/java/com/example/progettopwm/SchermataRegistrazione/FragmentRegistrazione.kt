@@ -123,12 +123,10 @@ class FragmentRegistrazione : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validatePasswords(passwordEditText)
             }
 
             override fun afterTextChanged(s: Editable?) {
-                validatePasswords(passwordEditText)
-                equalPasswords(passwordEditText, passwordEditTextC)
+                validatePasswords(passwordEditTextC)
             }
         })
 
@@ -144,18 +142,23 @@ class FragmentRegistrazione : Fragment() {
                 val email = emailEditText.text.toString()
                 val data = clickBottoni()
                 val password = passwordEditText.text.toString()
-                caricaCredenziali(nome, cognome, email, data, password)
+                mostraOTP()
+                //caricaCredenziali(nome, cognome, email, data, password)
             }
         }
 
 
         return binding.root
     }
-
+private fun mostraOTP(){
+    val manager= parentFragmentManager
+    val transaction = manager.beginTransaction()
+    transaction.replace(R.id.fragmentContainerView, OTPFragment()).commit()
+}
 
 
     private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
-        val query = "INSERT INTO Persona (nome, cognome, data_nascita, mail, password) VALUES ('$nome', '$cognome', '$data', '$email', '$password');"
+        val query = "INSERT INTO webmobile.Persona (nome, cognome, data_nascita, mail, password) VALUES ('$nome', '$cognome', '$data', '$email', '$password');"
 
         ClientNetwork.retrofit.insert(query).enqueue(
             object : Callback<JsonObject> {
@@ -183,11 +186,6 @@ class FragmentRegistrazione : Fragment() {
 
     private fun clickBottoni(): String{
         var selectedDate = ""
-        binding.buttonRegistrati.setOnClickListener{
-            val manager= parentFragmentManager
-            val transaction = manager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView, OTPFragment()).commit()
-        }
         // Aggiungi il TextWatcher all'EditText della password
         binding.buttonData.setOnClickListener {
             val calendar = Calendar.getInstance()
