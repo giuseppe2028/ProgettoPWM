@@ -131,8 +131,7 @@ class FragmentSchermataHome : Fragment() {
         binding.imageProfile.setOnClickListener {
             val manager = parentFragmentManager
             val transaction = manager.beginTransaction()
-            TODO("Qui andrà il codice di raffa")
-            //transaction.replace(R.id.fragmentContainerHome,)
+            //transaction.replace(,FragmentSchermataAccount())
         }
     }
 
@@ -210,6 +209,7 @@ class FragmentSchermataHome : Fragment() {
             }
     }
     fun popolaLista(callback: (ArrayList<ItemClassLocalita>) -> Unit){
+        Log.i("popola","sono in popola lista")
         val lista:ArrayList<ItemClassLocalita> = arrayListOf()
         //val query = "select luogo, nome_struttura, recensione,prezzo, tipologia from Viaggio"
         val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
@@ -218,10 +218,11 @@ class FragmentSchermataHome : Fragment() {
              @SuppressLint("SuspiciousIndentation")
              override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                  if(response.isSuccessful){
-                     Log.i("ciao","ciao")
+                     Log.i("ciao","DentroSono")
                      val risposta = response.body()?.get("queryset") as JsonArray
                      var immaginiCount = risposta.size()
                      if(risposta.size() != 0){
+                         Log.i("ciao","DentroSonoQua")
                          for(i in risposta){
                              val jsonObjectElemento = i as JsonObject
                                 getImage(jsonObjectElemento){
@@ -239,7 +240,12 @@ class FragmentSchermataHome : Fragment() {
                             }
                                 }
                          }
-                     }
+                     }else{
+                         Log.i("Errore","${response.errorBody()}")
+                         Log.i("Errore","Errore")}
+                 }else{
+                     Log.i("Errore","${response.errorBody()}")
+                     Log.i("Errore","Errore")
                  }
              }
 
