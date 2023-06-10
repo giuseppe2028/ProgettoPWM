@@ -3,6 +3,7 @@ package com.example.progettopwm
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -56,6 +57,15 @@ class ActivitySchermataViaggio : AppCompatActivity(),SchermataHome.DatiPassati {
                         if(risposta.size() != 0){
                             Log.i("ciao123wdq","${(risposta.get(0) as JsonObject).get("nome_struttura").asString}")
                             binding.titleViaggio.text = (risposta.get(0) as JsonObject).get("nome_struttura").asString
+                            binding.numeroPersone.text = (risposta.get(0) as JsonObject).get("num_persone").asString
+                            binding.testoLuogo.text = (risposta.get(0) as JsonObject).get("luogo").asString
+                            binding.ratingBar3.rating = (risposta.get(0) as JsonObject).get("recensione").asFloat
+                            binding.testoDescrizione.text = (risposta.get(0) as JsonObject).get("descrizione").asString
+                            binding.prezzoViaggio.text = (risposta.get(0) as JsonObject).get("prezzo").asString.plus("$")
+                            val image = risposta.get(0) as JsonObject
+                            //mi prendo l'immagine:
+                            getImage(image)
+                            binding.sfondo.background
 
                         }
                         else{
@@ -84,7 +94,7 @@ class ActivitySchermataViaggio : AppCompatActivity(),SchermataHome.DatiPassati {
                         var immagine: Bitmap? = null
                         if (response.body()!=null) {
                             immagine = BitmapFactory.decodeStream(response.body()?.byteStream())
-
+                            binding.sfondo.setImageBitmap(immagine)
                         }
                     }
                     else{

@@ -24,7 +24,6 @@ object GestioneDB {
                         var immaginiCount = risposta.size()
                         if (risposta.size() == 1) {
                                     //ho un solo oggetto JSON
-
                                     callback(risposta.get(0) as JsonObject)
                                 }
                             }
@@ -32,7 +31,7 @@ object GestioneDB {
 
 
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                        TODO("Not yet implemented")
+                        Log.i("Problema","${t.message}")
                     }
 
                 }
