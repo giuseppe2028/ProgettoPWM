@@ -13,7 +13,9 @@ interface interfacciaAPI {
     @POST("postSelect/")
     @FormUrlEncoded
     fun registrazione(@Field("query") query: String): Call<JsonObject>
-
+    @POST("postInsert/")
+    @FormUrlEncoded
+    fun insert(@Field("query") query: String): Call<JsonObject>
     @GET
     fun getImage(@Url url:String): Call <ResponseBody>
 

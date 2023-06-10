@@ -157,15 +157,11 @@ class FragmentRegistrazione : Fragment() {
     private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
         val query = "INSERT INTO persona (nome, cognome, data_nascita, mail, password)\n" +
                 "VALUES ('$nome', '$cognome', '$data', '$email', '$password');\n"
-        ClientNetwork.retrofit.registrazione(query).enqueue(
+        ClientNetwork.retrofit.insert(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
-                        if ((response.body()?.get("queryset") as JsonArray).size() == 1) {
-
-                            val nome =  ((response.body()?.get("queryset") as JsonArray).get(0) as JsonObject).get("nome")
-                        } else {
-                        }
+                        Log.i("ciao", "ciao")
                     }
     }
 
