@@ -101,7 +101,12 @@ object GestioneDB {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 if(response.isSuccessful){
                     val risposta = response.body()?.get("queryset") as JsonArray
-                   callback(risposta)
+                    if(risposta.size() != 0){
+                        callback(risposta)}
+                    else{
+
+                    }
+
                 }
                 else{
                     Log.i("Debug", "Errore nella query")
@@ -114,5 +119,35 @@ object GestioneDB {
 
         }
         )
+    }
+    fun getImage(jsonObject: JsonObject,callback:(Bitmap)->Unit){
+        val string = jsonObject.get("path_immagine").asString
+        Log.i("ciao90", "$string")
+        Log.i("ciaoProva","$string")
+        ClientNetwork.retrofit.getImage(string).enqueue(
+            object : Callback<ResponseBody>{
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if(response.isSuccessful){
+                        var immagine: Bitmap? = null
+                        if (response.body()!=null) {
+                            immagine = BitmapFactory.decodeStream(response.body()?.byteStream())
+                            callback(immagine)
+                        }
+                        if (immagine != null) {
+                            callback(immagine)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.i("ciao","fail")
+                }
+
+            }
+        )
+
     }
 }

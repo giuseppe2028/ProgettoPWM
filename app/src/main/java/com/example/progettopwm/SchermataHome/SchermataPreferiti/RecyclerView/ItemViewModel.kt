@@ -1,4 +1,8 @@
 package com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView
 
-class ItemViewModel(val image:Int, val titolo:String,val luogo:String, val rating:Double, val costo:Double, val numPersone:Int) {
+import android.graphics.Bitmap
+
+class ItemViewModel(
+    val image: Bitmap?, val titolo:String,
+    val luogo:String, val rating:Double, val costo:Double, val numPersone:Int) {
 }

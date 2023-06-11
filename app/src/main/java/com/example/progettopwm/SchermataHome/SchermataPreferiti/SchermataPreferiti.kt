@@ -1,15 +1,20 @@
 package com.example.progettopwm.SchermataHome.SchermataPreferiti
 
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.progettopwm.R
+import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.CustomAdapterPreferiti
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.ItemViewModel
 import com.example.progettopwm.databinding.FragmentSchermataPreferitiBinding
+import com.google.gson.JsonObject
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +31,7 @@ class SchermataPreferiti : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding:FragmentSchermataPreferitiBinding
+    var lista = ArrayList<ItemViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -37,15 +43,56 @@ class SchermataPreferiti : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSchermataPreferitiBinding.inflate(inflater)
         binding.listaPreferiti.layoutManager = LinearLayoutManager(this.context)
-        binding.listaPreferiti.adapter = CustomAdapterPreferiti(listOf(
-            ItemViewModel(R.drawable.foto,"Formentera", "italia",4.5,500.0,5),
-            ItemViewModel(R.drawable.foto,"Formentera", "italia",4.5,500.0,5)
-        ))
+        //faccio la query
+        setSchermata()
+
         // Inflate the layout for this fragment
         return binding.root
+
+    }
+
+    private fun setSchermata() {
+        //TODO(passare l'id della persona via intent)
+        val query = "select distinct luogo,nome_struttura,recensione,prezzo,path_immagine,num_persone from Viaggio V,Preferiti P,Immagini I where P.ref_viaggio = V.id and I.ref_viaggio = V.id "
+        var iesimoDato: JsonObject  // Dichiarazione della variabile fuori dal callback
+
+//faccio la query
+        GestioneDB.queryGenerica(query) { dati ->
+            for (i in dati) {
+                iesimoDato = i as JsonObject
+                Log.i("entro", "entro")
+
+                // Carico l'immagine in modo asincrono
+                GestioneDB.getImage(i) { immagineRitorno ->
+                    val immagine = immagineRitorno
+
+                    // Aggiungo l'elemento alla lista
+                    lista.add(
+                        ItemViewModel(
+                            immagine,
+                            iesimoDato.get("nome_struttura").asString,
+                            iesimoDato.get("luogo").asString,
+                            iesimoDato.get("recensione").asDouble,
+                            iesimoDato.get("prezzo").asDouble,
+                            iesimoDato.get("num_persone").asInt
+                        )
+                    )
+
+                    // Aggiorno l'adapter dopo l'aggiunta di un nuovo elemento
+                    binding.listaPreferiti.adapter?.notifyDataSetChanged()
+                }
+            }
+        }
+
+// Imposto l'adapter fuori dal callback
+        binding.listaPreferiti.adapter = CustomAdapterPreferiti(lista)
+
+        binding.listaPreferiti.adapter = CustomAdapterPreferiti(lista)
+
+
 
     }
 

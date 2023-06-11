@@ -78,7 +78,6 @@ class ActivitySchermataViaggio : AppCompatActivity(),SchermataHome.DatiPassati {
         }
     }
     fun setSchermata(id:Int){
-        //TODO(Selezionare il cuore su rosso o nero a secondo della query)
         Log.i("Ciao","$id")
         val query = "select * from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Viaggio.id = $id and immagine_default = 1"
         ClientNetwork.retrofit.registrazione(query).enqueue(

@@ -11,8 +11,10 @@ class CustomAdapterPreferiti(val lista:List<ItemViewModel>): RecyclerView.Adapte
         //val image = binding.immaginiLocalita
         val titolo = binding.Titolo
         val testoLuogo = binding.testoLuogo
+        val recensione = binding.ratingBar2
         val numeroPersone = binding.numeroPersone
         val prezzo = binding.costo
+        val immagine = binding.immagineLocalita
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,10 +25,13 @@ class CustomAdapterPreferiti(val lista:List<ItemViewModel>): RecyclerView.Adapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = lista[position]
        //holder.image.setImageResource(item.image)
+
+        holder.immagine.setImageBitmap(item.image)
         holder.testoLuogo.text = item.luogo
         holder.titolo.text = item.titolo
+        holder.recensione.rating = item.rating.toFloat()
         holder.numeroPersone.text = item.numPersone.toString()
-        holder.prezzo.text = item.costo.toString()
+        holder.prezzo.text = item.costo.toString().plus("$")
 
     }
 
