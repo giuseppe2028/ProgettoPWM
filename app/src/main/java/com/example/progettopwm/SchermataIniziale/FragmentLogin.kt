@@ -99,7 +99,8 @@ class FragmentLogin : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     callback(false, null)
-                    TODO("Not yet implemented")
+                    Log.e("Errore", "Errore durante la chiamata di rete", t)
+                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
                 }
             }
         )
