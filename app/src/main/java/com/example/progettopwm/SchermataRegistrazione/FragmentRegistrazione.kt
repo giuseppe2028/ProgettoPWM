@@ -143,7 +143,7 @@ class FragmentRegistrazione : Fragment() {
                 val data = clickBottoni()
                 val password = passwordEditText.text.toString()
                 mostraOTP()
-                //caricaCredenziali(nome, cognome, email, data, password)
+                caricaCredenziali(nome, cognome, email, data, password)
             }
         }
 

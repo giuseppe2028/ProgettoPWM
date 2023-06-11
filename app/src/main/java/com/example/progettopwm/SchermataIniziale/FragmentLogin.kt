@@ -1,5 +1,8 @@
 package com.example.progettopwm.SchermataIniziale
-
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import retrofit2.http.Url
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataHome
@@ -17,7 +21,7 @@ import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+import okhttp3.ResponseBody
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -51,6 +55,56 @@ class FragmentLogin : Fragment() {
         return binding.root
     }
 
+
+    private fun notificaPassword(password:String) {
+        val channelID:String = "ChannelID"
+        //creo la notifica, ovvero creo il canale in cui inviare la notifica
+        var channel: NotificationChannel = NotificationChannel(channelID,"MyChannel",
+            NotificationManager.IMPORTANCE_DEFAULT )
+
+        val notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+        var builder = NotificationCompat.Builder(requireContext(), channelID)
+            .setSmallIcon(R.drawable.gmail_icon__2020__svg)
+            .setContentTitle("Password")
+            .setContentText(password)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        notificationManager.notify(0,builder.build())
+    }
+
+
+
+    private fun recuperaPassword(email: String, callback: (Boolean, String?) -> Unit){
+        val query = "SELECT password FROM webmobile.Persona WHERE mail = '$email';"
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        val resultSet = response.body()?.get("queryset") as JsonArray
+                        if (resultSet.size() == 1) {
+                            val password = resultSet[0].asJsonObject.get("password").asString
+                            callback(true, password)
+                        }else{
+                            callback(false, null)
+                        }
+                    }
+                    else{
+                        callback(false, null)
+                        Log.i("errore", "non funziona")
+                        Log.i("errore", response.message())
+                        Log.i("errore",  response.toString())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    callback(false, null)
+                    TODO("Not yet implemented")
+                }
+            }
+        )
+    }
+
     private fun verificaCredenziali(email: String, password: String, callback: (Boolean)->Unit){
         val query = "SELECT id FROM webmobile.Persona WHERE mail = '$email' AND password ='$password' ;"
         ClientNetwork.retrofit.registrazione(query).enqueue(
@@ -80,8 +134,21 @@ class FragmentLogin : Fragment() {
     private fun clickBottoni() {
         val result = true
         binding.passwordDimenticata.setOnClickListener{
-            parentFragmentManager.setFragmentResult("requestKey", bundleOf("bundleKey" to result))
-        }
+            if (binding.email.text.toString().trim().isEmpty()){
+                Toast.makeText(this.context,"Inserisci una mail",Toast.LENGTH_SHORT).show()
+            }else{
+                val email = binding.email.text.toString().trim()
+                recuperaPassword(email) { success, password ->
+                    if (success) {
+                        password?.let { notificaPassword(password) }
+                    } else {
+                        Toast.makeText(context, "Nessuna password associata all'email", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+          //  parentFragmentManager.setFragmentResult("requestKey", bundleOf("bundleKey" to result))
+            }
+
         binding.accediConGoogle.setOnClickListener {
             parentFragmentManager.setFragmentResult("requestGoogle", bundleOf("RispostaGoogle" to result))
         }
