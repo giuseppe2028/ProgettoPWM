@@ -6,11 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.progettopwm.Login.OTPFragment
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataInserimentoDatiPagamento
 import com.example.progettopwm.SchermataHome.SchermataModificaDatiAccount
-import com.example.progettopwm.SchermataHome.SchermataWallet
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
 
 

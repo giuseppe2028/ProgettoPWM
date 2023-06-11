@@ -106,16 +106,18 @@ class FragmentLogin : Fragment() {
         )
     }
 
-    private fun verificaCredenziali(email: String, password: String, callback: (Boolean)->Unit){
+    private fun verificaCredenziali(email: String, password: String, callback: (Boolean, Int?)->Unit){
         val query = "SELECT id FROM webmobile.Persona WHERE mail = '$email' AND password ='$password' ;"
         ClientNetwork.retrofit.registrazione(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
-                        if ((response.body()?.get("queryset") as JsonArray).size() == 1) {
-                            callback(true)
+                        val resultSet = response.body()?.get("queryset") as JsonArray
+                        if (resultSet.size() == 1) {
+                            val id = resultSet[0].asJsonObject.get("id").asInt
+                            callback(true, id)
                         }else{
-                        callback(false)
+                        callback(false, null)
                         }
                     }
                     else{
@@ -128,6 +130,7 @@ class FragmentLogin : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     TODO("Not yet implemented")
+                    callback(false, null)
                 }
             }
         )
@@ -158,9 +161,12 @@ class FragmentLogin : Fragment() {
                 Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
             }
             else{
-                verificaCredenziali(binding.email.text.toString(), binding.password.text.toString()){ result->
+                verificaCredenziali(binding.email.text.toString(), binding.password.text.toString()){ result, id->
                 if(result){
+                    val bundle = bundleOf("id" to id)
+                    parentFragmentManager.setFragmentResult("requestKey", bundle)
                     startActivity(Intent(this.context,SchermataHome()::class.java))
+
                 }
                 else{
                     Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
