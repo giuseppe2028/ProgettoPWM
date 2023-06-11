@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
-import com.example.progettopwm.GestioneDB
+//import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
@@ -65,9 +65,9 @@ class FragmentSchermataHome : Fragment() {
 
     private fun richiediServer() {
 
-        GestioneDB.getImage(null){
+       /* GestioneDB.getImage(null){
             binding.imageProfile.setImageBitmap(it)
-        }
+        }*/
     }
 
     private fun filtraLista() {

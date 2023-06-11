@@ -161,9 +161,9 @@ class FragmentLogin : Fragment() {
                 Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
             }
             else{
-                verificaCredenziali(binding.email.text.toString(), binding.password.text.toString()){ result, id->
+                verificaCredenziali(binding.email.text.toString(), binding.password.text.toString()){ result, id_p->
                 if(result){
-                    val bundle = bundleOf("id" to id)
+                    val bundle = bundleOf("id_p" to id_p)
                     parentFragmentManager.setFragmentResult("requestKey", bundle)
                     startActivity(Intent(this.context,SchermataHome()::class.java))
 

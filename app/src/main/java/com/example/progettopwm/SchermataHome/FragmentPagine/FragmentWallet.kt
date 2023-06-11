@@ -59,9 +59,10 @@ class FragmentWallet : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var id_p = 0
 
         parentFragmentManager.setFragmentResultListener("requestKey", this) { requestKey, bundle ->
-            val id = bundle.getInt("id")
+             id_p = bundle.getInt("id_p")
             // Utilizza l'id recuperato come desideri
             // Esegui le operazioni necessarie con l'id
         }
@@ -71,7 +72,7 @@ class FragmentWallet : Fragment() {
             }
             else{
                 var wallet = binding.editText.text.toString()
-                aggiornaWallet(id, wallet.toInt())
+                aggiornaWallet(id_p, wallet.toInt())
                 binding.editText.setText("")
                 }
         }
@@ -92,7 +93,7 @@ class FragmentWallet : Fragment() {
     }
     private fun aggiornaWallet(id: Int, wallet: Int){
         val query = "UPDATE webmbile.Persona SET wallet = wallet + $wallet WHERE id = $id;"
-        ClientNetwork.retrofit.registrazione(query).enqueue(
+        ClientNetwork.retrofit.update(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
