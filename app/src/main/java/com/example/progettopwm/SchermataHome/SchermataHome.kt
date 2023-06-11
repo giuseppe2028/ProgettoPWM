@@ -38,10 +38,6 @@ class SchermataHome : AppCompatActivity() {
 
         }
     }
-//interfaccia per inviare dati alle activity:
-    interface DatiPassati{
-        fun datiPassati(value:Int)
 
-}
 
 }

@@ -7,8 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentProssimoVIaggioBinding
+import com.google.gson.JsonObject
+import java.sql.Date
+import java.time.LocalDate
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,23 +47,40 @@ class FragmentProssimoVIaggio : Fragment() {
 
         binding = FragmentProssimoVIaggioBinding.inflate(layoutInflater)
         mandaDatiFragment()
-        setSchermata()
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    private fun setSchermata() {
-        val query = ""
+    private fun setSchermata(id:Int) {
+        Log.i("Viaggio","ciao1")
+        val data = Date.valueOf(
+            LocalDate.now().toString())
+        val query = "select * from Compra,Viaggio where ref_viaggio = Viaggio.id and Compra.ref_persona = 1 and data>'$data'order by data"
+        GestioneDB.richiestaInformazioni(query){
+
+            dato ->
+
+            binding.titoloProssimoViaggio.text= dato.get("nome_struttura").asString
+            binding.dataProssimoViaggio.text = dato.get("data").asString
+            binding.luogoProssimoViaggio.text = dato.get("luogo").asString
+
+        }
     }
 
     private fun mandaDatiFragment() {
 
         parentFragmentManager.setFragmentResultListener("request",this){
             requestKey,bundle->
-            val risposta = bundle.getString(requestKey)
-            Log.i("Viaggio","Prova")
+            val risposta = bundle.getInt("id")
+
+            //faccio la query
+            setSchermata(id)
+            //setto la schermata:
+
         }
     }
+
+
 
     companion object {
         /**

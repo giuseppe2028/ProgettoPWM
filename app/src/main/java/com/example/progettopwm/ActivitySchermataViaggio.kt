@@ -1,13 +1,17 @@
 package com.example.progettopwm
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.SchermataHome
@@ -20,22 +24,81 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class ActivitySchermataViaggio : AppCompatActivity(),SchermataHome.DatiPassati {
 
+class ActivitySchermataViaggio : AppCompatActivity() {
+    var numeroTelefono:String = ""
+    //setto il permesso:
+    val requestPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()){
+
+        isGaranted:Boolean->
+        if(isGaranted){
+            Log.i("TAG", "Permission enabled")
+        }else{
+            Log.i("TAG", "Permission enabled")
+        }
+
+        }
 
     private lateinit var binding:SchermataViaggioBinding
-
+    var stato:Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SchermataViaggioBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var stato:Boolean = false
+
         val id = intent.getIntExtra("idViaggio",0)
         val idPersona = intent.getIntExtra("Persona",0)
         setSchermata(id)
         Log.i("id","$id")
         //setto il cuore a seconda del risultato della query:
         setLike(id)
+        setAzienda(id)
+        clickLike(idPersona,id)
+        clickAzienda()
+
+    }
+
+    private fun setAzienda(id:Int) {
+        val query = "select distinct nome_azienda, num_telefono, email from Azienda A, Viaggio V where A.ref_viaggio = V.id and V.id = $id"
+        GestioneDB.richiestaInformazioni(query){
+            dati ->
+                binding.nomePersona.text = dati.get("nome_azienda").asString
+                numeroTelefono = dati.get("num_telefono").asString
+            //TODO(Aggiungere l'immagine del profilo)
+        }
+    }
+
+    private fun clickAzienda() {
+        binding.imagePhoneButton.setOnClickListener {
+         //chiedo il permesso
+            val permesso = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CALL_PHONE)
+            Log.i("permesso", "sono dentro")
+            if(permesso != PackageManager.PERMISSION_GRANTED){
+                Log.i("permesso","PermessoAbilitato")
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.setData(Uri.parse("tel:$numeroTelefono"));
+                startActivity(intent)
+            }
+            else{
+                requestPermission.launch(android.Manifest.permission.CALL_PHONE)
+            }
+        }
+        binding.imageEmailButton.setOnClickListener {
+            //chiedo il permesso
+            val permesso = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CALL_PHONE)
+            Log.i("permesso", "sono dentro")
+            if(permesso != PackageManager.PERMISSION_GRANTED){
+                Log.i("permesso","PermessoAbilitato")
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.putExtra(Intent.EXTRA_EMAIL, "emailaddress@emailaddress.com");
+                //startActivity(intent)
+                startActivity(Intent.createChooser(intent, "Send Email"));
+            }
+        }
+    }
+
+    private fun clickLike(idPersona:Int,id:Int) {
         binding.like.setOnClickListener {
             if(stato){
                 //disattivo il bottone:
@@ -43,16 +106,17 @@ class ActivitySchermataViaggio : AppCompatActivity(),SchermataHome.DatiPassati {
                 binding.like.setImageDrawable(getDrawable(R.drawable.heartbutton))
                 stato = false
                 //request http
+
                 aggiornaDati(idPersona,id,false)
-            }else if(!stato){
+            }else if(!stato) {
                 Toast.makeText(this,R.string.Attivato,Toast.LENGTH_SHORT).show()
                 binding.like.setImageDrawable(getDrawable(R.drawable.heart_3))
                 stato = true
                 aggiornaDati(idPersona,id,true)
             }
         }
-
     }
+
     private fun setLike(id:Int){
         val query = "select * from Preferiti where ref_viaggio = $id"
         GestioneDB.queryGenerica(query){
@@ -60,9 +124,11 @@ class ActivitySchermataViaggio : AppCompatActivity(),SchermataHome.DatiPassati {
             if(data.size()!=0){
                 //vuol dire che l'elemento è nei preferiti
                 binding.like.setImageDrawable(getDrawable(R.drawable.heart_3))
+                stato = true
             }
             else if(data.size() ==0){
                 binding.like.setImageDrawable(getDrawable(R.drawable.heartbutton))
+                stato = false
             }
         }
     }
@@ -142,10 +208,5 @@ class ActivitySchermataViaggio : AppCompatActivity(),SchermataHome.DatiPassati {
 
 
     }
-
-    override fun datiPassati(value: Int) {
-        Log.i("ciao","$value")
-    }
-
 
 }

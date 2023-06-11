@@ -285,18 +285,19 @@
                     app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
 
                     <ImageButton
-                        android:id="@+id/imageButton3"
+                        android:id="@+id/imagePhoneButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@android:color/transparent"
                         app:srcCompat="@drawable/phone_call" />
 
                     <ImageButton
-                        android:id="@+id/imageButton"
+                        android:id="@+id/imageEmailButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
-                        android:backgroundTint="@android:color/transparent" />
+                        android:backgroundTint="@android:color/transparent"
+                        android:src="@drawable/envelope" />
 
                 </LinearLayout>
 

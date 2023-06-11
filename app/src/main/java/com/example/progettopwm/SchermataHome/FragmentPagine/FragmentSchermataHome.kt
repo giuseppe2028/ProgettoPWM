@@ -50,7 +50,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentSchermataHome : Fragment() {
-    private lateinit var datiPassati:SchermataHome.DatiPassati
     private lateinit var adapter:CustomAdapter
     private lateinit var dati:ArrayList<ItemsViewModel>
     private var listaLuogo:ArrayList<ItemClassLocalita> = ArrayList()
@@ -102,15 +101,17 @@ class FragmentSchermataHome : Fragment() {
             "select * from Compra,Viaggio where ref_viaggio = Viaggio.id and Compra.ref_persona = 1 and data>'$data'order by data"
         GestioneDB.richiestaInformazioni(query) { data ->
             //insersico la card
-            val manager = parentFragmentManager
+            val manager = childFragmentManager
+            id = data.get("id").asInt
+            childFragmentManager.setFragmentResult("request", Bundle().apply {
+                putInt("id", id)
+            })
             val transaction = manager.beginTransaction()
             val fragment = FragmentProssimoVIaggio()
-            id = data.get("id").asInt
+
 
             transaction.add(binding.frgmentProssimoViaggio.id, fragment)
-            childFragmentManager.setFragmentResult("request", Bundle().apply {
-                putString("request", "id")
-            })
+
             transaction.commit()
         }
     }
@@ -290,12 +291,7 @@ class FragmentSchermataHome : Fragment() {
         )
         }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if(context is SchermataHome.DatiPassati){
-            datiPassati = context
-        }
-    }
+
     private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
         val string = jsonObject.get("path_immagine").asString
         Log.i("ciao90", "$string")

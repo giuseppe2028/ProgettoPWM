@@ -15,7 +15,6 @@ import retrofit2.Response
 object GestioneDB {
 
     fun richiestaInformazioni(query:String,callback: (JsonObject)-> Unit){
-        val lista:ArrayList<ItemClassLocalita> = arrayListOf()
         ClientNetwork.retrofit.registrazione(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
