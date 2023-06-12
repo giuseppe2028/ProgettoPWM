@@ -24,6 +24,7 @@ import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.SchermataHome.SchermataHome
+import com.example.progettopwm.ViewDialog
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 import com.example.progettopwm.interfacciaAPI
 import retrofit2.Callback
@@ -88,11 +89,19 @@ class FragmentSchermataHome : Fragment() {
             Log.i("ciao","${listaLuogo.size}")
 
         }
+        filterButton()
 
         caricaViaggioProssimo(Date.valueOf(LocalDate.now().toString()))
 
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    private fun filterButton() {
+        binding.filterButton.setOnClickListener {
+            val alert = ViewDialog()
+            alert.showResetPasswordDialog(activity)
+        }
     }
 
     private fun caricaViaggioProssimo(data: Date) {
