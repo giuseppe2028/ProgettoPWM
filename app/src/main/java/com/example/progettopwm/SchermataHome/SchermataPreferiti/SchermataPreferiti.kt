@@ -1,5 +1,6 @@
 package com.example.progettopwm.SchermataHome.SchermataPreferiti
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.GestioneDB
+import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
+import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.CustomAdapterPreferiti
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.ItemViewModel
 import com.example.progettopwm.databinding.FragmentSchermataPreferitiBinding
@@ -31,7 +36,7 @@ class SchermataPreferiti : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding:FragmentSchermataPreferitiBinding
-    var lista = ArrayList<ItemViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -54,13 +59,16 @@ class SchermataPreferiti : Fragment() {
 
     }
 
+
+
     private fun setSchermata() {
         //TODO(passare l'id della persona via intent)
-        val query = "select distinct luogo,nome_struttura,recensione,prezzo,path_immagine,num_persone from Viaggio V,Preferiti P,Immagini I where P.ref_viaggio = V.id and I.ref_viaggio = V.id "
+        val query = "select distinct V.id,luogo,nome_struttura,recensione,prezzo,path_immagine,num_persone from Viaggio V,Preferiti P,Immagini I where P.ref_viaggio = V.id and I.ref_viaggio = V.id"
         var iesimoDato: JsonObject  // Dichiarazione della variabile fuori dal callback
-
+        var lista = ArrayList<ItemViewModel>()
 //faccio la query
         GestioneDB.queryGenerica(query) { dati ->
+
             for (i in dati) {
                 iesimoDato = i as JsonObject
                 Log.i("entro", "entro")
@@ -70,8 +78,9 @@ class SchermataPreferiti : Fragment() {
                     val immagine = immagineRitorno
 
                     // Aggiungo l'elemento alla lista
-                    lista.add(
+                     lista.add(
                         ItemViewModel(
+                            iesimoDato.get("id").asInt,
                             immagine,
                             iesimoDato.get("nome_struttura").asString,
                             iesimoDato.get("luogo").asString,
@@ -88,9 +97,23 @@ class SchermataPreferiti : Fragment() {
         }
 
 // Imposto l'adapter fuori dal callback
-        binding.listaPreferiti.adapter = CustomAdapterPreferiti(lista)
+       val adapter = CustomAdapterPreferiti(lista)
+        binding.listaPreferiti.adapter = adapter
+        adapter.setOnClickListener(object:
+            CustomAdapterPreferiti.OnClickListener {
+            override fun Onclick(position: Int, item: ItemViewModel) {
+                val query = "delete from Preferiti where ref_viaggio = ${item.id}"
+                GestioneDB.eliminaElemento(query)
+                //lo aggiorno pure localemnte per evitare una query di troppo:
+                lista.removeAt(position)
+                adapter.notifyDataSetChanged()
+            }
+        }
+        )
 
-        binding.listaPreferiti.adapter = CustomAdapterPreferiti(lista)
+        //binding.listaPreferiti.adapter = CustomAdapterPreferiti(lista)
+
+
 
 
 

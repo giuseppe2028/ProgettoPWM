@@ -4,9 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
+import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
+import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.databinding.FragmentPreferitiBinding
 
 class CustomAdapterPreferiti(val lista:List<ItemViewModel>): RecyclerView.Adapter<CustomAdapterPreferiti.ViewHolder>(){
+    private var setOnClickListener:OnClickListener? = null
     class ViewHolder(val binding:FragmentPreferitiBinding):RecyclerView.ViewHolder(binding.root){
         //val image = binding.immaginiLocalita
         val titolo = binding.Titolo
@@ -15,6 +18,7 @@ class CustomAdapterPreferiti(val lista:List<ItemViewModel>): RecyclerView.Adapte
         val numeroPersone = binding.numeroPersone
         val prezzo = binding.costo
         val immagine = binding.immagineLocalita
+        val elimina = binding.elimina
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,13 +36,21 @@ class CustomAdapterPreferiti(val lista:List<ItemViewModel>): RecyclerView.Adapte
         holder.recensione.rating = item.rating.toFloat()
         holder.numeroPersone.text = item.numPersone.toString()
         holder.prezzo.text = item.costo.toString().plus("$")
-
+        holder.elimina.setOnClickListener {
+            setOnClickListener?.Onclick(position,item)
+        }
     }
+
 
     override fun getItemCount(): Int {
         return lista.size
     }
-
+    interface OnClickListener{
+        fun Onclick(position: Int,item: ItemViewModel)
+    }
+    fun setOnClickListener(onClickListener:OnClickListener){
+        this.setOnClickListener = onClickListener
+    }
 
 
 }
