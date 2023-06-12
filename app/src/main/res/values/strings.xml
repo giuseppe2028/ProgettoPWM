@@ -86,7 +86,7 @@
         <item>Decrescente</item>
     </string-array>
     <string name="titleTextDialog">Filtra Per:</string>
-    <string name="Regione">Regione</string>
+    <string name="Regione">Destinazione</string>
     <string name="NumeroPersoneDialog">Numero Persone</string>
     <string name="Prezzo">Prezzo</string>
 

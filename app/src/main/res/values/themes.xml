@@ -8,7 +8,10 @@
         <item name="android:padding">@dimen/paddingStartTextEdit</item>
         <item name="background">@drawable/text_edit_shape</item>
     </style>
-
+    <style name="Theme_Dialog" parent="android:Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
     <style name="Theme.ProgettoPWM" parent="Base.Theme.ProgettoPWM" />
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>

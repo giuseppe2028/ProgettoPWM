@@ -2,6 +2,8 @@ package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import ClientNetwork
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -13,11 +15,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.GestioneDB
+import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
@@ -39,6 +43,7 @@ import retrofit2.Call
 import retrofit2.Response
 import java.sql.Date
 import java.time.LocalDate
+import java.util.logging.Filter
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -99,8 +104,9 @@ class FragmentSchermataHome : Fragment() {
 
     private fun filterButton() {
         binding.filterButton.setOnClickListener {
-            val alert = ViewDialog()
-            alert.showResetPasswordDialog(activity)
+            //val alert = ViewDialog()
+            //alert.showResetPasswordDialog(activity)
+            val builder = AlertDialog.Builder(context)
         }
     }
 
