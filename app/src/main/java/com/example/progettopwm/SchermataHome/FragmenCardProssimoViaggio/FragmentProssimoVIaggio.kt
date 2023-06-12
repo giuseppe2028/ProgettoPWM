@@ -1,5 +1,6 @@
 package com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.renderscript.ScriptGroup.Binding
 import android.util.Log
@@ -52,10 +53,12 @@ class FragmentProssimoVIaggio : Fragment() {
     }
 
     private fun setSchermata(id:Int) {
+        //TODO inserire l'id del viaggio
+        var immagine:Bitmap
         Log.i("Viaggio","ciao1")
         val data = Date.valueOf(
             LocalDate.now().toString())
-        val query = "select * from Compra,Viaggio where ref_viaggio = Viaggio.id and Compra.ref_persona = 1 and data>'$data'order by data"
+        val query = "select * from Compra,Viaggio,Immagini where Compra.ref_viaggio = Viaggio.id and Compra.ref_persona = 1 and data>'2023-06-12' and Viaggio.id = Immagini.ref_viaggio order by data "
         GestioneDB.richiestaInformazioni(query){
 
             dato ->
@@ -63,7 +66,10 @@ class FragmentProssimoVIaggio : Fragment() {
             binding.titoloProssimoViaggio.text= dato.get("nome_struttura").asString
             binding.dataProssimoViaggio.text = dato.get("data").asString
             binding.luogoProssimoViaggio.text = dato.get("luogo").asString
-
+            GestioneDB.getImage(dato){
+               dato ->
+                binding.immagineViaggio.setImageBitmap(dato)
+            }
         }
     }
 
