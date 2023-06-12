@@ -1,310 +1,312 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relative"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ActivitySchermataViaggio">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/relative"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ActivitySchermataViaggio">
 
-        <ImageView
-            android:id="@+id/sfondo"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:layout_marginBottom="350dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/foto" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shape_gestore"
-        android:contentDescription="ciao">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="306dp" />
-
-        <LinearLayout
-            android:id="@+id/layoutPersone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/Descrizione"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@id/review">
-
-            <TextView
-                android:id="@+id/iconaNumPersone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/marginPositionElement"
-                android:drawableLeft="@drawable/user" />
-
-            <TextView
-                android:id="@+id/numeroPersone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4 persone" />
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_begin="35dp"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/titleViaggio"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Formentera"
-            android:textSize="@dimen/title"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
-            app:layout_constraintEnd_toStartOf="@+id/guideline5"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/review"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@+id/titleViaggio">
-
-            <TextView
-                android:id="@+id/iconViaggio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/marginPositionElement"
-                android:layout_weight="1"
-                android:drawableStart="@drawable/marker" />
-
-            <TextView
-                android:id="@+id/testoLuogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Venezia,Italy" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/review"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/Descrizione"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout8">
-
-            <RatingBar
-                android:id="@+id/ratingBar3"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:rating="4.5" />
-
-            <TextView
-                android:id="@+id/textReview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-
-                android:text="(3450 views)"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/Descrizione"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/shape_login_border"
-            android:text="@string/descrizione"
-            android:textSize="@dimen/sizeTextSubTitle"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/testoDescrizione"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@id/layoutPersone" />
-
-        <TextView
-            android:id="@+id/testoDescrizione"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Venezia offre un'esperienza unica e coinvolgente per i visitatori, rendendo ogni viaggio un'esperienza indimenticabile. L'esperienza utente è al centro di tutto ciò che Venezia ha da offrire, dalla navigazione sui canali mozzafiato all'immersione nella cultura e nell'arte veneziana."
-            android:textAlignment="viewStart"
-            app:layout_constraintBottom_toTopOf="@+id/idContatti"
-            app:layout_constraintEnd_toEndOf="@+id/comprami"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@id/Descrizione" />
-
-        <TextView
-            android:id="@+id/prezzoViaggio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="1550$"
-            android:textColor="@color/palette1"
-            android:textSize="@dimen/price"
-            app:layout_constraintBottom_toBottomOf="@+id/comprami"
-            app:layout_constraintEnd_toStartOf="@id/comprami"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toTopOf="@+id/comprami" />
-
-        <Button
-            android:id="@+id/comprami"
-            style="@style/bottoneLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:paddingHorizontal="@dimen/paddingTastoCompra"
-            android:text="@string/CompraloOra"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/prezzoViaggio"
-            app:layout_constraintTop_toBottomOf="@+id/idContatti" />
-
-        <ImageButton
-            android:id="@+id/like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/titleViaggio"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/heartbutton" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/idContatti"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@id/comprami"
-            app:layout_constraintEnd_toEndOf="@+id/comprami"
-            app:layout_constraintStart_toStartOf="@+id/guideline4"
-            app:layout_constraintTop_toBottomOf="@id/testoDescrizione">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/sfondo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_marginBottom="350dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/foto" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shape_gestore"
+            android:contentDescription="ciao">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="306dp" />
+
+            <LinearLayout
+                android:id="@+id/layoutPersone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/Descrizione"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@id/review">
+
+                <TextView
+                    android:id="@+id/iconaNumPersone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/marginPositionElement"
+                    android:drawableLeft="@drawable/user" />
+
+                <TextView
+                    android:id="@+id/numeroPersone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4 persone" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_begin="35dp"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/titleViaggio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Formentera"
+                android:textSize="@dimen/title"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/review"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@+id/titleViaggio">
+
+                <TextView
+                    android:id="@+id/iconViaggio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/marginPositionElement"
+                    android:layout_weight="1"
+                    android:drawableStart="@drawable/marker" />
+
+                <TextView
+                    android:id="@+id/testoLuogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Venezia,Italy" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/Descrizione"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout8">
+
+                <RatingBar
+                    android:id="@+id/ratingBar3"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:rating="4.5" />
+
+                <TextView
+                    android:id="@+id/textReview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+
+                    android:text="(3450 views)"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Descrizione"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/shape_login_border"
+                android:text="@string/descrizione"
+                android:textSize="@dimen/sizeTextSubTitle"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/testoDescrizione"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@id/layoutPersone" />
+
+            <TextView
+                android:id="@+id/testoDescrizione"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Venezia offre un'esperienza unica e coinvolgente per i visitatori, rendendo ogni viaggio un'esperienza indimenticabile. L'esperienza utente è al centro di tutto ciò che Venezia ha da offrire, dalla navigazione sui canali mozzafiato all'immersione nella cultura e nell'arte veneziana."
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toTopOf="@+id/idContatti"
+                app:layout_constraintEnd_toEndOf="@+id/comprami"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@id/Descrizione" />
+
+            <TextView
+                android:id="@+id/prezzoViaggio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="1550$"
+                android:textColor="@color/palette1"
+                android:textSize="@dimen/price"
+                app:layout_constraintBottom_toBottomOf="@+id/comprami"
+                app:layout_constraintEnd_toStartOf="@id/comprami"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toTopOf="@+id/comprami" />
+
+            <Button
+                android:id="@+id/comprami"
+                style="@style/bottoneLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:paddingHorizontal="@dimen/paddingTastoCompra"
+                android:text="@string/CompraloOra"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/prezzoViaggio"
+                app:layout_constraintTop_toBottomOf="@+id/idContatti" />
+
+            <ImageButton
+                android:id="@+id/like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/titleViaggio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/heartbutton" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/idContatti"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@id/comprami"
+                app:layout_constraintEnd_toEndOf="@+id/comprami"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@id/testoDescrizione">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/linearLayout9"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/nomePersona"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="Maria Rossi"
-                        app:layout_constraintBottom_toBottomOf="@+id/imageProfile2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageProfile2"
-                        app:layout_constraintTop_toTopOf="@+id/imageProfile2" />
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-
-                        android:id="@+id/imageProfile2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/sfondologin"
-                        app:civ_border_color="#FF000000"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/nomePersona"
+                        app:layout_constraintEnd_toStartOf="@+id/linearLayout9"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/nomePersona"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:text="Maria Rossi"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageProfile2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageProfile2"
+                            app:layout_constraintTop_toTopOf="@+id/imageProfile2" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+
+                            android:id="@+id/imageProfile2"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/sfondologin"
+                            app:civ_border_color="#FF000000"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintRight_toLeftOf="@id/nomePersona"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
+                        app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
+
+                        <ImageButton
+                            android:id="@+id/imagePhoneButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@android:color/transparent"
+                            app:srcCompat="@drawable/phone_call" />
+
+                        <ImageButton
+                            android:id="@+id/imageEmailButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:backgroundTint="@android:color/transparent"
+                            android:src="@drawable/envelope" />
+
+                    </LinearLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:id="@+id/linearLayout9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/constraintLayout2"
-                    app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
+            </androidx.cardview.widget.CardView>
 
-                    <ImageButton
-                        android:id="@+id/imagePhoneButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@android:color/transparent"
-                        app:srcCompat="@drawable/phone_call" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <ImageButton
-                        android:id="@+id/imageEmailButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
-                        android:backgroundTint="@android:color/transparent"
-                        android:src="@drawable/envelope" />
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+    </FrameLayout>
