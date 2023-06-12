@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,9 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
-import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
-import com.example.progettopwm.SchermataHome.SchermataHome
+import com.example.progettopwm.Recensioni.RecyclerView.recensioneFragment
 import com.example.progettopwm.databinding.SchermataViaggioBinding
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -56,7 +53,21 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         setAzienda(id)
         clickLike(idPersona,id)
         clickAzienda()
+        clickShowMore()
 
+    }
+
+    private fun clickShowMore() {
+        /*binding.clicca.setOnClickListener {
+            val fragmentManager = supportFragmentManager
+                val transaction = fragmentManager.beginTransaction()
+                transaction.add(R.id.fragmentContainerView3, recensioneFragment(), "Fragment 1")
+                transaction.addToBackStack("Fragment 1")
+                transaction.commit()
+
+        }
+
+         */
     }
 
     private fun setAzienda(id:Int) {
