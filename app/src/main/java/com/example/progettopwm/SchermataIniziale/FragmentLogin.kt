@@ -12,12 +12,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.MutableLiveData
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentModificaDati
+import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentWallet
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.FragmentLoginBinding
+import com.example.progettopwm.databinding.FragmentModificaDatiBinding
+import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -35,6 +40,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class FragmentLogin : Fragment() {
     private lateinit var binding:FragmentLoginBinding
+   // private val idPLiveData: MutableLiveData<Int> = MutableLiveData()
     private var param1: String? = null
     private var param2: String? = null
 
@@ -51,8 +57,10 @@ class FragmentLogin : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+
         binding = FragmentLoginBinding.inflate(inflater)
         clickBottoni()
+
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -61,9 +69,8 @@ class FragmentLogin : Fragment() {
 
 
 
-
     private fun verificaCredenziali(email: String, password: String, callback: (Boolean, Int?)->Unit){
-        val query = "SELECT id FROM webmobile.Persona WHERE mail = '$email' AND password ='$password' ;"
+        val query = "SELECT id FROM Persona WHERE mail = '$email' AND password ='$password'"
         ClientNetwork.retrofit.registrazione(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -108,14 +115,12 @@ class FragmentLogin : Fragment() {
             else{
                 verificaCredenziali(binding.editTextText2.text.toString(), binding.password.text.toString()){ result, id_p->
                 if(result){
-                 /*   val intent = Intent("my_custom_action")
-                    intent.putExtra("id_p", id_p)
-                    LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
+                    if (id_p != null) {
+                        idPersona.setId(id_p)
+                    }
+                    val intent = Intent(this.context,SchermataHome()::class.java)
 
-*/
-
-
-                    startActivity(Intent(this.context,SchermataHome()::class.java))
+                    startActivity(intent)
 
                 }
                 else{

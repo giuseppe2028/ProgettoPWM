@@ -20,11 +20,15 @@ class SchermataHome : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySchermataHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         selezioneNavigationBar()
+
         wallet()
+
     }
 
     private fun wallet() {
+
         supportFragmentManager
             .setFragmentResultListener("requestK", this) { requestK, bundle ->
                 //devo inserire i fragment qua dentro per far ricominciare il contatore

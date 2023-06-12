@@ -12,10 +12,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.progettopwm.ClientNetwork
 
 import com.example.progettopwm.databinding.FragmentWalletBinding
+import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -37,13 +41,9 @@ class FragmentWallet : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentWalletBinding
-    private var idP: Int = 1
+   // private val idPLiveData: MutableLiveData<Int> = MutableLiveData()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
 
@@ -62,51 +62,43 @@ class FragmentWallet : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-binding = FragmentWalletBinding.inflate(inflater)
-    /*    class MyBroadcastReceiver : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val id_p = intent?.getIntExtra("objectId", -1)
-                if (id_p != null) {
-                    r(id_p)
-                }
-            }
-        }
-        val broadcastReceiver = MyBroadcastReceiver()
-        val intentFilter = IntentFilter("my_custom_action")
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(broadcastReceiver, intentFilter)
 
-*/
+
+binding = FragmentWalletBinding.inflate(inflater)
+
+
 
         binding.buttonPaga.setOnClickListener{
             if (!validateOtherFields(binding.editText)) {
                 Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
             }
-            else{
-                val saldo = binding.editText.text.toString()
-                aggiornaWallet(idP, saldo.toDouble())
+            else{val saldo = binding.editText.text.toString()
+                val id_p=idPersona.getId()
+                    aggiornaWallet(id_p, saldo.toDouble())
                 binding.editText.setText("")
+
                 }
         }
 
         binding.buttonSaldo.setOnClickListener{
-            recuperaWallet(idP){ result, saldo->
-                if(result){
-                    binding.textView9.text = saldo.toString()
-                }
-                else{
-                    binding.textView9.text = "null"
+            val id_p=idPersona.getId()
+                recuperaWallet(id_p){ result, saldo->
+                    if(result){
+                        binding.textView9.text = saldo.toString()
+                    } else{
+                        binding.textView9.text = "null"
+                    }
                 }
             }
-        }
+
 
         // Inflate the layout for this fragment
         return binding.root
     }
-    private fun r(i: Int){
-        idP = i
-    }
+
+
     private fun aggiornaWallet(id: Int, saldo: Double){
-        val query = "UPDATE Persona SET saldo = saldo + $saldo WHERE id = 1;"
+        val query = "UPDATE Persona SET saldo = saldo + $saldo WHERE id = $id;"
         ClientNetwork.retrofit.update(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -127,7 +119,7 @@ binding = FragmentWalletBinding.inflate(inflater)
     }
 
     private fun recuperaWallet(id: Int, callback: (Boolean, Double?) -> Unit){
-        val query = "SELECT saldo FROM Persona WHERE id = 1"
+        val query = "SELECT saldo FROM Persona WHERE id = $id"
         ClientNetwork.retrofit.registrazione(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -182,5 +174,7 @@ binding = FragmentWalletBinding.inflate(inflater)
                     putString(ARG_PARAM2, param2)
                 }
             }
+
+
     }
 }
