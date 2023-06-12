@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentDatiPagamentoBinding
 import com.google.gson.JsonArray

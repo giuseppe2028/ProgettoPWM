@@ -1,10 +1,7 @@
 package com.example.progettopwm.SchermataRegistrazione
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.widget.Toast
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -17,11 +14,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.Login.OTPFragment
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentRegistrazioneBinding
-import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,6 +53,12 @@ class FragmentRegistrazione : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+       /* val intercector = HttpLoggingInterceptor()
+        intercector.level= HttpLoggingInterceptor.Level.BODY
+        val client = OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS).connectTimeout(60, TimeUnit.SECONDS).addInterceptor(intercector).build()
+        val arg = Retrofit.Builder().baseUrl("http://10.0.2.2:8000/webmobile/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client).build().create(InterfacciaAPI::class.java)*/
         binding = FragmentRegistrazioneBinding.inflate(inflater)
         clickBottoni()
 
@@ -158,13 +160,13 @@ private fun mostraOTP(){
 
 
     private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
-        val query = "INSERT INTO webmobile.Persona (nome, cognome, data_nascita, mail, password) VALUES ('$nome', '$cognome', '$data', '$email', '$password');"
+        val query = "INSERT INTO Persona (nome,  cognome, mail, data_nascita, password) VALUES ('$nome', '$cognome', '$email', '$data', '$password')"
 
         ClientNetwork.retrofit.insert(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
-                        Log.i("ciao", "ciao")
+                        Log.i("ciao", response.body().toString())
                     }
                     else{
                         Log.i("errore", "non funziona")

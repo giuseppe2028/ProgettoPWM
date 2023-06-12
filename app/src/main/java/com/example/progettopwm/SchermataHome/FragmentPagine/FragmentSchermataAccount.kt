@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
 
@@ -40,26 +41,27 @@ class FragmentSchermataAccount : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentSchermataAccountBinding.inflate(inflater)
-
+        val result = true
         // Inflate the layout for this fragment
         binding.textViewGestione.setOnClickListener{
-            val manager= parentFragmentManager
-            val transaction = manager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView, FragmentModificaDati()).commit()
+
         }
         binding.textViewdatipagamento.setOnClickListener{
-            val manager= parentFragmentManager
-            val transaction = manager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView, FragmentDatiPagamento()).commit()
+
         }
         binding.textViewwallet.setOnClickListener{
-            val manager= parentFragmentManager
-            val transaction = manager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView, FragmentWallet()).commit()
+            parentFragmentManager.setFragmentResult("requestK", bundleOf("bundleK" to result))
         }
+          /*  val manager= parentFragmentManager
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.fragmentContainerHome, FragmentWallet()).commit()
+        }*/
 
         return binding.root
     }
+
+
+
 
     companion object {
         /**

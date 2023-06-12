@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.progettopwm.R
+import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.databinding.FragmentModificaDatiBinding
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
