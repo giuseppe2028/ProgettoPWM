@@ -7,6 +7,45 @@
     android:layout_height="match_parent"
     tools:context=".SchermataHome.FragmentPagine.FragmentSchermataHome">
 
+    <RelativeLayout
+        android:id="@+id/searchBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout4">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            style="@style/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="32dp"
+            android:background="@drawable/search_bar_border"
+            android:backgroundTint="@color/backGround"
+            android:iconifiedByDefault="false"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/CercaDestinazione" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/searchView"
+            android:layout_alignRight="@id/searchView"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="false"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/marginTopIconSearchView"
+            android:layout_marginEnd="@dimen/marginLeftIconSearchView"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/settings_sliders" />
+
+    </RelativeLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="match_parent"
@@ -20,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/searchView"
+        app:layout_constraintBottom_toTopOf="@+id/searchBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -58,23 +97,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        style="@style/searchBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/search_bar_border"
-        android:backgroundTint="@color/backGround"
-        android:iconifiedByDefault="false"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout4"
-        app:iconifiedByDefault="false"
-        app:queryHint="@string/CercaDestinazione"/>
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -83,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
         tools:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
