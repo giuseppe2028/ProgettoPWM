@@ -72,24 +72,24 @@ binding = FragmentWalletBinding.inflate(inflater)
             if (!validateOtherFields(binding.editText)) {
                 Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
             }
-            else{val saldo = binding.editText.text.toString()
+            else{
+                val saldo = binding.editText.text.toString()
                 val id_p=idPersona.getId()
-                    aggiornaWallet(id_p, saldo.toDouble())
+                aggiornaWallet(id_p, saldo.toDouble())
                 binding.editText.setText("")
-
-                }
+            }
         }
 
         binding.buttonSaldo.setOnClickListener{
             val id_p=idPersona.getId()
-                recuperaWallet(id_p){ result, saldo->
-                    if(result){
-                        binding.textView9.text = saldo.toString()
-                    } else{
-                        binding.textView9.text = "null"
-                    }
+            recuperaWallet(id_p){ result, saldo->
+                if(result){
+                    binding.textView9.text = saldo.toString()
+                } else{
+                    binding.textView9.text = "null"
                 }
             }
+        }
 
 
         // Inflate the layout for this fragment

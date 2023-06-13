@@ -1,15 +1,24 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputType
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import com.example.progettopwm.ClientNetwork
+import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentModificaDatiBinding
+import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -29,6 +38,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class FragmentModificaDati : Fragment() {
     private lateinit var binding: FragmentModificaDatiBinding
+    private var isPasswordVisible: Boolean = false
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -41,47 +51,218 @@ class FragmentModificaDati : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding.buttonData.setOnClickListener {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
-            // Aggiorna il TextView con la data selezionata
-            val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
-            binding.textViewshowdata.text = selectedDate
-        }, year, month, day)
 
-        datePickerDialog.show()
-    }
-        // Inflate the layout for this fragment
+
+
+        binding = FragmentModificaDatiBinding.inflate(inflater)
+        val buttonConferma = binding.buttonRegistrati
+        val nomeEditText = binding.editTextNome
+        val cognomeEditText = binding.editTextCognome
+        val emailEditText = binding.editTextEmail
+        val passwordEditText = binding.editTextPassword
+        val passwordEditTextC = binding.editTextTextPasswordConferma
+
+
+        val id_p=idPersona.getId()
+
+       mostraDati(id_p)
+        clickBottoni()
+
+
+
+
+        //verifica la validità della nuova password
+        passwordEditTextC.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+            override fun afterTextChanged(s: Editable?) {
+                validatePasswords(passwordEditTextC)
+
+            }
+        })
+
+
+
+        //questo blocco serve per l'occhiolino
+        passwordEditText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_24, 0)
+        passwordEditTextC.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_24, 0)
+        passwordEditText.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val drawableEnd = passwordEditText.compoundDrawables[2]
+                if (drawableEnd != null && event.rawX >= passwordEditText.right - drawableEnd.bounds.width()) {
+                    togglePasswordVisibility(passwordEditText)
+                    return@setOnTouchListener true
+                }
+            }
+            false
+        }
+        passwordEditTextC.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val drawableEnd = passwordEditTextC.compoundDrawables[2]
+                if (drawableEnd != null && event.rawX >= passwordEditTextC.right - drawableEnd.bounds.width()) {
+                    togglePasswordVisibility(passwordEditTextC)
+                    return@setOnTouchListener true
+                }
+            }
+            false
+        }
+        //fino a qui
+
+        buttonConferma.setOnClickListener {
+            if(validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata)){
+                Toast.makeText(this.context,"I campi nome, cognome, mail e data nascita non sono riempiti",Toast.LENGTH_SHORT).show()
+            }
+            //controllo il contenuto della password
+            else if(!validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata) && notEqualPasswords(passwordEditText,passwordEditTextC)){
+                EqualPasswords(passwordEditText, id_p) { equal ->
+                    // Qui puoi gestire il risultato del confronto tra le password
+                    if (equal) {
+                        val nome = nomeEditText.text.toString()
+                        val cognome = cognomeEditText.text.toString()
+                        val email = emailEditText.text.toString()
+                        val data = clickBottoni()
+                        val password = passwordEditTextC.text.toString()
+                        val id_p = idPersona.getId()
+                        inserisciDati(id_p, nome,cognome,email, data, password)
+                    } else {
+                        Toast.makeText(
+                            this.context,
+                            "ricontrollare i campi delle password",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                    }
+
+                }}
+            }
+
+
+
+
         return binding.root
     }
-    private fun recuperaDati(id: Int, callback: (Boolean, String?, String?, String?, String?, String?) -> Unit){
-        val query = "SELECT nome, cognome, mail, data_nascita, password FROM webmobile.Persona WHERE id = $id;"
-        ClientNetwork.retrofit.registrazione(query).enqueue(
+
+
+
+
+
+    private fun clickBottoni(): String{
+        var selectedDate = ""
+        // Aggiungi il TextWatcher all'EditText della password
+        binding.buttonData.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
+                // Aggiorna il TextView con la data selezionata
+                selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
+                binding.textViewshowdata.text = selectedDate
+            }, year, month, day)
+
+            datePickerDialog.show()
+        }
+        return selectedDate
+    }
+    private fun togglePasswordVisibility(passwordEdi: EditText) {
+        isPasswordVisible = !isPasswordVisible
+        if (isPasswordVisible) {
+            passwordEdi.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            passwordEdi.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_off_24, 0)
+        } else {
+            passwordEdi.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            passwordEdi.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_visibility_24, 0)
+        }
+        passwordEdi.setSelection(passwordEdi.text.length)
+    }
+
+
+    private fun validateOtherFields(EditText1: EditText, EditText2: EditText, EditText3: EditText, TextView: TextView): Boolean {
+        val field1 = EditText1.text.toString().trim()
+        val field2 = EditText2.text.toString().trim()
+        val field3 = EditText3.text.toString().trim()
+        val field4 = TextView.text.toString().trim()
+        return field1.isEmpty() && field2.isEmpty() && field3.isEmpty() && field4.isEmpty()
+    }
+    private fun EqualPasswords(passwordEditText: EditText, id_p: Int, callback: (Boolean) -> Unit) {
+        recuperaPassword(id_p) { password ->
+            val pass = password.toString()
+            val equal = pass.equals(passwordEditText.text.toString())
+            callback(equal)
+        }
+    }
+
+
+    private fun notEqualPasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
+        val password = passwordEditText.text.toString()
+        val confirmPassword = passwordEditTextC.text.toString()
+        // Verifica se le password non coincidono
+
+        if (!password.equals(confirmPassword)) {
+            passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
+            passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_green)
+            return true
+        }
+        else{
+            passwordEditText.setBackgroundResource(R.drawable.edittext_border_red)
+            passwordEditTextC.setBackgroundResource(R.drawable.edittext_border_red)
+            Toast.makeText(this.context, "Le password coincidono", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+    }
+
+    private fun validatePasswords(passwordEditText: EditText): Boolean {
+        val password = passwordEditText.text.toString()
+        val isPasswordValid = password.length >= 6
+        if (isPasswordValid) {
+            passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
+            return true
+        }
+        else{
+            passwordEditText.setBackgroundResource(R.drawable.edittext_border_red)
+            return false
+        }
+    }
+
+    private fun mostraDati(id_p: Int){
+        recuperaDati(id_p){result, nome,cognome,mail, data_nascita->
+            if(result){
+                binding.editTextNome.hint= nome.toString()
+                binding.editTextCognome.hint = cognome.toString()
+                binding.editTextEmail.hint = mail.toString()
+                binding.textViewshowdata.text = data_nascita.toString()
+            }
+            else{
+                binding.editTextNome.hint= "xxxxxxxxx"
+                binding.editTextCognome.hint = "xxxxxxxxx"
+                binding.editTextEmail.hint = "xxxxxx@xxxx.xxx"
+                binding.textViewshowdata.text = "xxxx-xx-xx"
+            }
+        }
+    }
+
+
+    private fun inserisciDati(id: Int, nome: String, cognome: String,mail: String, data_nascita: String, password: String){
+        val query = "UPDATE  Persona SET nome = '$nome', cognome= '$cognome',mail='$mail', data_nascita = '$data_nascita', password = '$password' WHERE id = $id;"
+        ClientNetwork.retrofit.update(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
-                        val resultSet = response.body()?.get("queryset") as JsonArray
-                        if (resultSet.size() == 1) {
-                            val nome = resultSet[0].asJsonObject.get("nome").asString
-                            val cognome = resultSet[1].asJsonObject.get("cognome").asString
-                            val mail = resultSet[2].asJsonObject.get("mail").asString
-                            val data_nascita = resultSet[3].asJsonObject.get("data_nascita").asString
-                            val password = resultSet[4].asJsonObject.get("password").asString
-                            callback(true, nome, cognome, mail, data_nascita, password)
-                        }else{
-                            callback(false, null, null, null, null, null)
-                        }
-                    }
-                    else{
-                        callback(false, null, null, null, null, null)
+
+                    }else{
+                        Log.i("Errore", "Errore durante la chiamata di rete")
                         Log.i("errore", "non funziona")
                         Log.i("errore", response.message())
                         Log.i("errore",  response.toString())
@@ -89,7 +270,71 @@ class FragmentModificaDati : Fragment() {
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    callback(false, null, null, null, null, null)
+
+                    Log.e("Errore", "Errore durante la chiamata di rete", t)
+                }
+            }
+        )
+    }
+    private fun recuperaPassword(id: Int, callback: (String?) -> Unit){
+        val query = "SELECT password FROM Persona WHERE id = $id"
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        val resultSet = response.body()?.get("queryset") as JsonArray
+                        if (resultSet.size() == 1) {
+                            val password = resultSet[0].asJsonObject.get("password").asString
+                            callback(password)
+                        }else{
+                            callback( null)
+                        }
+                    }
+                    else{
+                        callback(null)
+                        Log.i("errore", "non funziona")
+                        Log.i("errore", response.message())
+                        Log.i("errore",  response.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    callback(null)
+                    Log.e("Errore", "Errore durante la chiamata di rete", t)
+                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
+
+    private fun recuperaDati(id: Int, callback: (Boolean, String?, String?, String?, String?) -> Unit){
+        val query = "SELECT nome, cognome, mail, data_nascita FROM Persona WHERE id = $id"
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        val resultSet = response.body()?.get("queryset") as JsonArray
+                        if (resultSet.size() == 1) {
+                            val nome = resultSet[0].asJsonObject.get("nome").asString
+                            val cognome = resultSet[0].asJsonObject.get("cognome").asString
+                            val mail = resultSet[0].asJsonObject.get("mail").asString
+                            val data_nascita = resultSet[0].asJsonObject.get("data_nascita").asString
+                            callback(true, nome, cognome, mail, data_nascita)
+                        }else{
+                            callback(false, null, null, null, null)
+                        }
+                    }
+                    else{
+                        callback(false, null, null, null, null)
+                        Log.i("errore", "non funziona")
+                        Log.i("errore", response.message())
+                        Log.i("errore",  response.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    callback(false, null, null, null, null)
                     Log.e("Errore", "Errore durante la chiamata di rete", t)
                     Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
                 }

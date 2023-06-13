@@ -14,18 +14,7 @@ object ClientNetwork {
     ).build()
     val retrofit by lazy{  Retrofit.Builder().baseUrl("http://10.0.2.2:8000/webmobile/")
         .addConverterFactory(GsonConverterFactory.create())
-        .build().create(InterfacciaAPI::class.java)}
+        .client(client).build().create(InterfacciaAPI::class.java)}
 
-  /*  val retrofit by lazy{
-
-
-        Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8000/webmobile/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(InterfacciaAPI::class.java)
-    }
-
-   */
 
 }

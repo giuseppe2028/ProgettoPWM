@@ -54,6 +54,7 @@ class FragmentSchermataHome : Fragment() {
     ): View{
 
         binding = FragmentSchermataHomeBinding.inflate(inflater)
+
         recycleViewGestore()
         clickProfile()
         filtraLista()

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentDatiPagamento
+import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentModificaDati
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataAccount
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentWallet
@@ -16,6 +18,7 @@ import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
 class SchermataHome : AppCompatActivity() {
     private lateinit var binding:ActivitySchermataHomeBinding
     private var sentinellaCounter = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySchermataHomeBinding.inflate(layoutInflater)
@@ -24,8 +27,50 @@ class SchermataHome : AppCompatActivity() {
         selezioneNavigationBar()
 
         wallet()
+        DatiPagamento()
+        ModificaDati()
 
     }
+    private fun ModificaDati() {
+
+        supportFragmentManager
+            .setFragmentResultListener("requestMD", this) { requestMD, bundle ->
+                //devo inserire i fragment qua dentro per far ricominciare il contatore
+                val manager = supportFragmentManager
+                val trasaction = manager.beginTransaction()
+                // We use a String here, but any type that can be put in a Bundle is supported.
+                val result = bundle.getBoolean("bundleMD")
+                if(result && sentinellaCounter == 0){
+                    sentinellaCounter ++
+                    trasaction.replace(binding.fragmentContainerHome.id, FragmentModificaDati()).addToBackStack(null).commit()
+                }
+                else{
+                    trasaction.replace(binding.fragmentContainerHome.id, FragmentModificaDati()).addToBackStack(null).commit()
+                }
+            }
+        fragmentListenerSignIn()
+    }
+    private fun DatiPagamento() {
+
+        supportFragmentManager
+            .setFragmentResultListener("requestDP", this) { requestDP, bundle ->
+                //devo inserire i fragment qua dentro per far ricominciare il contatore
+                val manager = supportFragmentManager
+                val trasaction = manager.beginTransaction()
+                // We use a String here, but any type that can be put in a Bundle is supported.
+                val result = bundle.getBoolean("bundleDP")
+                if(result && sentinellaCounter == 0){
+                    sentinellaCounter ++
+                    trasaction.replace(binding.fragmentContainerHome.id, FragmentDatiPagamento()).addToBackStack(null).commit()
+                }
+                else{
+                    trasaction.replace(binding.fragmentContainerHome.id, FragmentDatiPagamento()).addToBackStack(null).commit()
+                }
+            }
+        fragmentListenerSignIn()
+    }
+
+
 
     private fun wallet() {
 

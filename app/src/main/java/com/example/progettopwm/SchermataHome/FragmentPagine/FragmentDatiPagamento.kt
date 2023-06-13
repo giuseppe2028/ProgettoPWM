@@ -14,6 +14,8 @@ import android.widget.Toast
 import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentDatiPagamentoBinding
+import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
+import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -49,16 +51,15 @@ class FragmentDatiPagamento : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var id_p=0
+        binding = FragmentDatiPagamentoBinding.inflate(inflater)
+
         binding.editTextCvv.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(3))
         binding.editTextmese.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(2))
         binding.editTextanno.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(2))
         binding.editTextnumero.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(16))
-        //recupero l'id
-        parentFragmentManager.setFragmentResultListener("requestKey", this) { requestKey, bundle ->
-            id_p = bundle.getInt("id_p")
-        }
+
         //chiamo la query
+        val id_p = idPersona.getId()
         recuperaDati(id_p){result, numero_carta, cvv, nome_titolare, mese_scadenza, anno_scadenza->
             if(result){
                 binding.editTextnumero.hint= numero_carta.toString()
@@ -164,11 +165,11 @@ class FragmentDatiPagamento : Fragment() {
                 Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
             }
             else{
-                var n_c = binding.editTextnumero.text.toString().toLong()
-                var nome =binding.editTextNomeCognome.text.toString()
-                var cvv = binding.editTextCvv.text.toString().toInt()
-                var mese = binding.editTextmese.text.toString().toInt()
-                var anno = binding.editTextanno.text.toString().toInt()
+                val n_c = binding.editTextnumero.text.toString().toLong()
+                val nome =binding.editTextNomeCognome.text.toString()
+                val cvv = binding.editTextCvv.text.toString().toInt()
+                val mese = binding.editTextmese.text.toString().toInt()
+                val anno = binding.editTextanno.text.toString().toInt()
                 inserisciDati(id_p, n_c, cvv, nome, mese, anno){value->
                     if(value){
                         Toast.makeText(context, "caricati", Toast.LENGTH_SHORT).show()
@@ -182,18 +183,13 @@ class FragmentDatiPagamento : Fragment() {
 
             }
         }
-
-
-
-
-
         return binding.root
     }
 
 
 
     private fun inserisciDati(id: Int,numero_carta: Long, cvv: Int, nome_titolare: String, mese_scadenza:Int, anno_scadenza:Int, callback: (Boolean) -> Unit){
-        val query = "UPDATE webmobile.DatiPagamento JOIN webmobile.Persona ON webmobile.DatiPagamento.numero_carta = webmobile.Persona.ref_datiPagamento SET webmobile.DatiPagamento.numero_carta = $numero_carta, webmobile.Persona.ref_datiPagamento=$numero_carta, webmobile.DatiPagamento.cvv = $cvv, webmobile.DatiPagamento.nome_titolare = $nome_titolare, webmobile.DatiPagamento.mese_scadenza = $mese_scadenza , webmobile.DatiPagamento.anno_scadenza = $anno_scadenza WHERE webmobile.Persona.id = $id;"
+        val query = "UPDATE DatiPagamento JOIN Persona ON DatiPagamento.numero_carta = Persona.ref_datiPagamento SET DatiPagamento.numero_carta = $numero_carta, Persona.ref_datiPagamento=$numero_carta, DatiPagamento.cvv = $cvv, DatiPagamento.nome_titolare = '$nome_titolare', DatiPagamento.mese_scadenza = $mese_scadenza , DatiPagamento.anno_scadenza = $anno_scadenza WHERE Persona.id = $id"
         ClientNetwork.retrofit.update(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -218,7 +214,7 @@ class FragmentDatiPagamento : Fragment() {
 
 
     private fun recuperaDati(id: Int, callback: (Boolean, Long?, Int?, String?, Int?, Int?) -> Unit){
-        val query = "select D.numero_carta, D.cvv, D.nome_titolare, D.mese_scadenza, D.anno_scadenza from webmobile.DatiPagamento D join webmobile.Persona P on D.numero_carta = P.ref_datiPagamento where P.id =$id;"
+        val query = "select D.numero_carta, D.cvv, D.nome_titolare, D.mese_scadenza, D.anno_scadenza from DatiPagamento D join Persona P on D.numero_carta = P.ref_datiPagamento where P.id =$id"
         ClientNetwork.retrofit.registrazione(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -226,10 +222,10 @@ class FragmentDatiPagamento : Fragment() {
                         val resultSet = response.body()?.get("queryset") as JsonArray
                         if (resultSet.size() == 1) {
                             val numero_carta = resultSet[0].asJsonObject.get("numero_carta").asLong
-                            val cvv = resultSet[1].asJsonObject.get("cvv").asInt
-                            val nome_titolare = resultSet[2].asJsonObject.get("nome_titolare").asString
-                            val mese_scadenza = resultSet[3].asJsonObject.get("mese_scadenza").asInt
-                            val anno_scadenza = resultSet[4].asJsonObject.get("anno_scadenza").asInt
+                            val cvv = resultSet[0].asJsonObject.get("cvv").asInt
+                            val nome_titolare = resultSet[0].asJsonObject.get("nome_titolare").asString
+                            val mese_scadenza = resultSet[0].asJsonObject.get("mese_scadenza").asInt
+                            val anno_scadenza = resultSet[0].asJsonObject.get("anno_scadenza").asInt
                             callback(true, numero_carta, cvv, nome_titolare, mese_scadenza, anno_scadenza)
                         }else{
                             callback(false, null, null, null, null, null)
