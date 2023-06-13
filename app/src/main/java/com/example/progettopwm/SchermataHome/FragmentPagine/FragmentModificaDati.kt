@@ -25,6 +25,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.Calendar
+import java.text.SimpleDateFormat
+import java.util.Date
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,7 +75,7 @@ class FragmentModificaDati : Fragment() {
         val id_p=idPersona.getId()
 
        mostraDati(id_p)
-        clickBottoni()
+       clickBottoni()
 
 
 
@@ -128,10 +131,10 @@ class FragmentModificaDati : Fragment() {
                         val nome = nomeEditText.text.toString()
                         val cognome = cognomeEditText.text.toString()
                         val email = emailEditText.text.toString()
-                        val data = clickBottoni()
                         val password = passwordEditTextC.text.toString()
+                        val data= binding.textViewshowdata.text.toString()
                         val id_p = idPersona.getId()
-                        inserisciDati(id_p, nome,cognome,email, data, password)
+                        inserisciDati(id_p, nome,cognome, data ,email, password)
                     } else {
                         Toast.makeText(
                             this.context,
@@ -150,12 +153,17 @@ class FragmentModificaDati : Fragment() {
         return binding.root
     }
 
+    fun convertStringToDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-M-dd")
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+
+        val date: Date = inputFormat.parse(inputDate)
+        return outputFormat.format(date)
+    }
 
 
 
-
-    private fun clickBottoni(): String{
-        var selectedDate = ""
+    private fun clickBottoni(){
         // Aggiungi il TextWatcher all'EditText della password
         binding.buttonData.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -165,13 +173,12 @@ class FragmentModificaDati : Fragment() {
 
             val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                 // Aggiorna il TextView con la data selezionata
-                selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
-                binding.textViewshowdata.text = selectedDate
+                val selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
+                binding.textViewshowdata.text = convertStringToDate(selectedDate)
             }, year, month, day)
 
             datePickerDialog.show()
         }
-        return selectedDate
     }
     private fun togglePasswordVisibility(passwordEdi: EditText) {
         isPasswordVisible = !isPasswordVisible
@@ -248,30 +255,28 @@ class FragmentModificaDati : Fragment() {
                 binding.editTextNome.hint= "xxxxxxxxx"
                 binding.editTextCognome.hint = "xxxxxxxxx"
                 binding.editTextEmail.hint = "xxxxxx@xxxx.xxx"
-                binding.textViewshowdata.text = "xxxx-xx-xx"
+
             }
         }
     }
 
 
-    private fun inserisciDati(id: Int, nome: String, cognome: String,mail: String, data_nascita: String, password: String){
-        val query = "UPDATE  Persona SET nome = '$nome', cognome= '$cognome',mail='$mail', data_nascita = '$data_nascita', password = '$password' WHERE id = $id;"
+    private fun inserisciDati(id: Int, nome: String, cognome: String, data_nascita: String,mail: String,password: String){
+        val query = "UPDATE  Persona SET nome = '$nome', cognome= '$cognome', data_nascita = '$data_nascita',mail='$mail', password = '$password' WHERE id = $id;"
         ClientNetwork.retrofit.update(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
-
-                    }else{
-                        Log.i("Errore", "Errore durante la chiamata di rete")
+                    }
+                    else{
                         Log.i("errore", "non funziona")
                         Log.i("errore", response.message())
                         Log.i("errore",  response.toString())
                     }
                 }
-
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
                     Log.e("Errore", "Errore durante la chiamata di rete", t)
+                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
                 }
             }
         )

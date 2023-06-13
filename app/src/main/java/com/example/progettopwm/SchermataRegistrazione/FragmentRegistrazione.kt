@@ -22,7 +22,9 @@ import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -142,7 +144,7 @@ class FragmentRegistrazione : Fragment() {
                 val nome = nomeEditText.text.toString()
                 val cognome = cognomeEditText.text.toString()
                 val email = emailEditText.text.toString()
-                val data = clickBottoni()
+                val data = binding.textViewshowdata.text.toString()
                 val password = passwordEditText.text.toString()
                 mostraOTP()
                 caricaCredenziali(nome, cognome, email, data, password)
@@ -187,8 +189,7 @@ private fun mostraOTP(){
 
 
 
-    private fun clickBottoni(): String{
-        var selectedDate = ""
+    private fun clickBottoni(){
         // Aggiungi il TextWatcher all'EditText della password
         binding.buttonData.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -198,13 +199,13 @@ private fun mostraOTP(){
 
             val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                 // Aggiorna il TextView con la data selezionata
-                selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
-                binding.textViewshowdata.text = selectedDate
+               val  selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
+                binding.textViewshowdata.text = convertStringToDate(selectedDate)
             }, year, month, day)
 
             datePickerDialog.show()
         }
-        return selectedDate
+
     }
 
     private fun equalPasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
@@ -258,6 +259,14 @@ private fun mostraOTP(){
         val field4 = TextView.text.toString().trim()
         return field1.isEmpty() && field2.isEmpty() && field3.isEmpty() && field4.isEmpty()
     }
+    fun convertStringToDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-M-dd")
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+
+        val date: Date = inputFormat.parse(inputDate)
+        return outputFormat.format(date)
+    }
+
     private fun togglePasswordVisibility(passwordEdi: EditText) {
         isPasswordVisible = !isPasswordVisible
         if (isPasswordVisible) {
