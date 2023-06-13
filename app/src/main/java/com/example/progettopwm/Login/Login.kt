@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.progettopwm.InterfacciaAPI
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
@@ -19,6 +20,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class Login : AppCompatActivity() {
     private lateinit var account: String
@@ -29,10 +35,10 @@ class Login : AppCompatActivity() {
     private var sentinellaCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
         super.onCreate(savedInstanceState)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         if(savedInstanceState == null){
             Log.i("sonoDentro","Dentro")

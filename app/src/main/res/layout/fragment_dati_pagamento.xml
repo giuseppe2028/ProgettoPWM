@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="ExtraText"
-
+    tools:context=".SchermataHome.FragmentPagine.FragmentDatiPagamento"
     >
 
     <Button
@@ -97,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
-           >
+            >
 
             <TextView
                 android:id="@+id/textViewCVV"
