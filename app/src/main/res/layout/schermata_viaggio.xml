@@ -9,64 +9,65 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_gestore">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/sfondo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp">
+            android:layout_gravity="top"
+            android:layout_marginBottom="310dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/foto" />
 
-            <ImageView
-                android:id="@+id/sfondo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="top"
-                android:layout_marginBottom="350dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/foto" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView2"
+            android:name="com.example.progettopwm.Recensioni.GestioneSchermataViaggio.ContenitoreSchermataViaggio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/comprami"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sfondo"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            tools:layout="@layout/fragment_contenitore_schermata_viaggio" />
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView2"
-                android:name="com.example.progettopwm.Recensioni.GestioneSchermataViaggio.ContenitoreSchermataViaggio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sfondo" />
+        <TextView
+            android:id="@+id/prezzoViaggio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:text="1550$"
+            android:textColor="@color/palette1"
+            android:textSize="@dimen/price"
+            app:layout_constraintEnd_toStartOf="@+id/comprami"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="672dp" />
 
-            <TextView
-                android:id="@+id/prezzoViaggio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1550$"
-                android:textColor="@color/palette1"
-                android:textSize="@dimen/price"
-                app:layout_constraintEnd_toStartOf="@+id/comprami"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="672dp" />
+        <Button
+            android:id="@+id/comprami"
+            style="@style/bottoneLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:paddingHorizontal="@dimen/paddingTastoCompra"
+            android:text="@string/CompraloOra"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/prezzoViaggio"
+            app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView2" />
 
-            <Button
-                android:id="@+id/comprami"
-                style="@style/bottoneLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:paddingHorizontal="@dimen/paddingTastoCompra"
-                android:text="@string/CompraloOra"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/prezzoViaggio" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
