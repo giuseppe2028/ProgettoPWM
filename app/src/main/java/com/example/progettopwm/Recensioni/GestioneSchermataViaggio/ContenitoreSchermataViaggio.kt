@@ -1,21 +1,24 @@
-package com.example.progettopwm
+package com.example.progettopwm.Recensioni.GestioneSchermataViaggio
 
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
-import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
-import com.example.progettopwm.SchermataHome.SchermataHome
-import com.example.progettopwm.databinding.SchermataViaggioBinding
+import com.example.progettopwm.GestioneDB
+import com.example.progettopwm.GestioneDB.getImage
+import com.example.progettopwm.R
+import com.example.progettopwm.Recensioni.RecyclerView.recensioneFragment
+import com.example.progettopwm.databinding.FragmentContenitoreSchermataViaggioBinding
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
@@ -23,10 +26,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 
-class ActivitySchermataViaggio : AppCompatActivity() {
-    var numeroTelefono:String = ""
+
+class ContenitoreSchermataViaggio : Fragment() {
+    var stato:Boolean = false
     //setto il permesso:
     val requestPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()){
@@ -40,39 +48,51 @@ class ActivitySchermataViaggio : AppCompatActivity() {
 
     }
 
-    private lateinit var binding:SchermataViaggioBinding
-    var stato:Boolean = false
+    private lateinit var binding:FragmentContenitoreSchermataViaggioBinding
+    var numeroTelefono:String = ""
+    // TODO: Rename and change types of parameters
+    private var idPersona:Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = SchermataViaggioBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val id = intent.getIntExtra("idViaggio",0)
-        val idPersona = intent.getIntExtra("Persona",0)
-        setSchermata(id)
-        Log.i("id","$id")
-        //setto il cuore a seconda del risultato della query:
-        setLike(id)
-        setAzienda(id)
-        clickLike(idPersona,id)
-        clickAzienda()
-
-    }
-
-    private fun setAzienda(id:Int) {
-        val query = "select distinct nome_azienda, num_telefono, email from Azienda A, Viaggio V where A.ref_viaggio = V.id and V.id = $id"
-        GestioneDB.richiestaInformazioni(query){
-                dati ->
-            binding.nomePersona.text = dati.get("nome_azienda").asString
-            numeroTelefono = dati.get("num_telefono").asString
-            //TODO(Aggiungere l'immagine del profilo)
+        if( arguments?.getInt("valore")!=null){
+            idPersona = arguments?.getInt("valore")!!
         }
+
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        var stato:Boolean = false
+        binding = FragmentContenitoreSchermataViaggioBinding.inflate(layoutInflater)
+        //Aggiungere id viaggio
+        setAzienda(1)
+        clickAzienda()
+        Log.i("id","$idPersona 123")
+
+        setLike(id)
+        setSchermata(idPersona)
+        // Inflate the layout for this fragment
+        return binding.root
+
+    }
+
+
+        private fun setAzienda(id:Int) {
+            val query = "select distinct nome_azienda, num_telefono, email from Azienda A, Viaggio V where A.ref_viaggio = V.id and V.id = $id"
+            GestioneDB.richiestaInformazioni(query){
+                    dati ->
+                binding.nomePersona.text = dati.get("nome_azienda").asString
+                numeroTelefono = dati.get("num_telefono").asString
+                //TODO(Aggiungere l'immagine del profilo)
+            }
+        }
     private fun clickAzienda() {
         binding.imagePhoneButton.setOnClickListener {
             //chiedo il permesso
-            val permesso = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CALL_PHONE)
+            val permesso = ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission.CALL_PHONE)
             Log.i("permesso", "sono dentro")
             if(permesso != PackageManager.PERMISSION_GRANTED){
                 Log.i("permesso","PermessoAbilitato")
@@ -86,7 +106,7 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         }
         binding.imageEmailButton.setOnClickListener {
             //chiedo il permesso
-            val permesso = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CALL_PHONE)
+            val permesso = ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission.CALL_PHONE)
             Log.i("permesso", "sono dentro")
             if(permesso != PackageManager.PERMISSION_GRANTED){
                 Log.i("permesso","PermessoAbilitato")
@@ -98,51 +118,8 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         }
     }
 
-    private fun clickLike(idPersona:Int,id:Int) {
-        binding.like.setOnClickListener {
-            if(stato){
-                //disattivo il bottone:
-                Toast.makeText(this,R.string.Disattivato, Toast.LENGTH_SHORT).show()
-                binding.like.setImageDrawable(getDrawable(R.drawable.heartbutton))
-                stato = false
-                //request http
 
-                aggiornaDati(idPersona,id,false)
-            }else if(!stato) {
-                Toast.makeText(this,R.string.Attivato,Toast.LENGTH_SHORT).show()
-                binding.like.setImageDrawable(getDrawable(R.drawable.heart_3))
-                stato = true
-                aggiornaDati(idPersona,id,true)
-            }
-        }
-    }
 
-    private fun setLike(id:Int){
-        val query = "select * from Preferiti where ref_viaggio = $id"
-        GestioneDB.queryGenerica(query){
-                data->
-            if(data.size()!=0){
-                //vuol dire che l'elemento è nei preferiti
-                binding.like.setImageDrawable(getDrawable(R.drawable.heart_3))
-                stato = true
-            }
-            else if(data.size() ==0){
-                binding.like.setImageDrawable(getDrawable(R.drawable.heartbutton))
-                stato = false
-            }
-        }
-    }
-    fun aggiornaDati(idPersona:Int,id:Int,attivazione:Boolean) {
-        //aggiungo o rimuovo
-        if(attivazione){
-            Log.i("debug","debug: Persona: $idPersona, Viaggio:$id")
-            val query = "insert into Preferiti(ref_persona,ref_viaggio) values($idPersona,$id)"
-            GestioneDB.inserisciElemento(query)
-        }else if(!attivazione){
-            val query = "delete from Preferiti where ref_viaggio = $id"
-            GestioneDB.eliminaElemento(query)
-        }
-    }
     fun setSchermata(id:Int){
         Log.i("Ciao","$id")
         val query = "select * from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Viaggio.id = $id and immagine_default = 1"
@@ -158,11 +135,11 @@ class ActivitySchermataViaggio : AppCompatActivity() {
                             binding.testoLuogo.text = (risposta.get(0) as JsonObject).get("luogo").asString
                             binding.ratingBar3.rating = (risposta.get(0) as JsonObject).get("recensione").asFloat
                             binding.testoDescrizione.text = (risposta.get(0) as JsonObject).get("descrizione").asString
-                            binding.prezzoViaggio.text = (risposta.get(0) as JsonObject).get("prezzo").asString.plus("$")
+                            //binding.prezzoViaggio.text = (risposta.get(0) as JsonObject).get("prezzo").asString.plus("$")
                             val image = risposta.get(0) as JsonObject
                             //mi prendo l'immagine:
                             getImage(image)
-                            binding.sfondo.background
+                            //binding.sfondo.background
 
                         }
                         else{
@@ -191,7 +168,7 @@ class ActivitySchermataViaggio : AppCompatActivity() {
                         var immagine: Bitmap? = null
                         if (response.body()!=null) {
                             immagine = BitmapFactory.decodeStream(response.body()?.byteStream())
-                            binding.sfondo.setImageBitmap(immagine)
+                            //binding.sfondo.setImageBitmap(immagine)
                         }
                     }
                     else{
@@ -207,6 +184,60 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         )
 
 
+    }
+    private fun clickLike(idPersona:Int,id:Int) {
+        binding.like.setOnClickListener {
+            if(stato){
+                //disattivo il bottone:
+                Toast.makeText(context,R.string.Disattivato, Toast.LENGTH_SHORT).show()
+               // binding.like.setImageDrawable(getDrawable(R.drawable.heartbutton))
+                stato = false
+                //request http
+
+                aggiornaDati(idPersona,id,false)
+            }else if(!stato) {
+                Toast.makeText(context,R.string.Attivato, Toast.LENGTH_SHORT).show()
+                //binding.like.setImageDrawable(getDrawable(R.drawable.heart_3))
+                stato = true
+                aggiornaDati(idPersona,id,true)
+            }
+        }
+    }
+
+    private fun setLike(id:Int){
+        val query = "select * from Preferiti where ref_viaggio = $id"
+        GestioneDB.queryGenerica(query){
+                data->
+            if(data.size()!=0){
+                //vuol dire che l'elemento è nei preferiti
+                //binding.like.setImageDrawable(getDrawable(R.drawable.heart_3))
+                stato = true
+            }
+            else if(data.size() ==0){
+                //binding.like.setImageDrawable(getDrawable(R.drawable.heartbutton))
+                stato = false
+            }
+        }
+    }
+    fun aggiornaDati(idPersona:Int,id:Int,attivazione:Boolean) {
+        //aggiungo o rimuovo
+        if(attivazione){
+            Log.i("debug","debug: Persona: $idPersona, Viaggio:$id")
+            val query = "insert into Preferiti(ref_persona,ref_viaggio) values($idPersona,$id)"
+            GestioneDB.inserisciElemento(query)
+        }else if(!attivazione){
+            val query = "delete from Preferiti where ref_viaggio = $id"
+            GestioneDB.eliminaElemento(query)
+        }
+    }
+    companion object {
+        fun newInstance(dato:Int): ContenitoreSchermataViaggio {
+            val fragment = ContenitoreSchermataViaggio()
+            val argomenti = Bundle()
+            argomenti.putInt("valore", dato)
+            fragment.arguments = argomenti
+            return fragment
+        }
     }
 
 }
