@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,9 +11,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
-import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
-import com.example.progettopwm.SchermataHome.SchermataHome
+import com.example.progettopwm.Gestione.ClientNetwork
+import com.example.progettopwm.Gestione.GestioneDB
 import com.example.progettopwm.databinding.SchermataViaggioBinding
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -56,7 +54,18 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         setAzienda(id)
         clickLike(idPersona,id)
         clickAzienda()
+        clickCompra(id)
 
+    }
+
+    private fun clickCompra(id: Int) {
+        //passo i dati e l'id del viaggio:
+
+        binding.comprami.setOnClickListener {
+            val intent = Intent(this,SchermataPagamentoViaggio()::class.java)
+            intent.putExtra("idViaggio",id)
+            startActivity(intent)
+        }
     }
 
     private fun setAzienda(id:Int) {

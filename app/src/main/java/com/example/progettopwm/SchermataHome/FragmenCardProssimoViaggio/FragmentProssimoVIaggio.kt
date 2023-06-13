@@ -2,16 +2,13 @@ package com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Binding
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.progettopwm.GestioneDB
-import com.example.progettopwm.R
+import com.example.progettopwm.Gestione.GestioneDB
 import com.example.progettopwm.databinding.FragmentProssimoVIaggioBinding
-import com.google.gson.JsonObject
 import java.sql.Date
 import java.time.LocalDate
 

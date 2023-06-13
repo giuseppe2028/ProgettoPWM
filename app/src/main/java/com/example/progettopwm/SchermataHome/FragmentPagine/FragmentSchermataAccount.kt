@@ -1,6 +1,5 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -11,10 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import com.example.progettopwm.ClientNetwork
-import com.example.progettopwm.R
+import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
-import com.example.progettopwm.idPersona
+import com.example.progettopwm.Gestione.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody

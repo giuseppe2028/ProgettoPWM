@@ -2,8 +2,6 @@ package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -17,13 +15,12 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.example.progettopwm.ClientNetwork
+import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentModificaDatiBinding
-import com.example.progettopwm.idPersona
+import com.example.progettopwm.Gestione.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -75,7 +72,7 @@ class FragmentModificaDati : Fragment() {
         val passwordEditTextC = binding.editTextTextPasswordConferma
 
 
-        val id_p=idPersona.getId()
+        val id_p= idPersona.getId()
 
        mostraDati(id_p)
        clickBottoni()
