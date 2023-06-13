@@ -99,7 +99,7 @@ class FragmentLogin : Fragment() {
             parentFragmentManager.setFragmentResult("requestGoogle", bundleOf("RispostaGoogle" to result))
         }
         binding.accediNormale.setOnClickListener {
-            if(binding.editTextText2.text.toString().trim().isEmpty() && binding.password.text.toString().trim().isEmpty()){
+            /*if(binding.editTextText2.text.toString().trim().isEmpty() && binding.password.text.toString().trim().isEmpty()){
                 Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
             }
             else{
@@ -118,7 +118,13 @@ class FragmentLogin : Fragment() {
 
                 }
                 }
-            }
+                }
+
+             *///TODO da eliminare il commento e questa parte di codice
+            val intent = Intent(this.context,SchermataHome()::class.java)
+
+            startActivity(intent)
+
         }
     }
 

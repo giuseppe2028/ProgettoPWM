@@ -159,6 +159,8 @@ class Login : AppCompatActivity() {
             }
         }
     }
+
+    //TODO(DA TOGLIERE)
     private fun fragmentListenerSignIn() {
         supportFragmentManager
             .setFragmentResultListener("SignIn", this) { requestKey, bundle ->
