@@ -277,55 +277,6 @@ class FragmentSchermataHome : Fragment() {
     fun popolaLista(callback: (ArrayList<ItemClassLocalita>) -> Unit){
         Log.i("popola","sono in popola lista")
         val lista:ArrayList<ItemClassLocalita> = arrayListOf()
-        //val query = "select luogo, nome_struttura, recensione,prezzo, tipologia from Viaggio"
-        /*val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
-        ClientNetwork.retrofit.registrazione(query).enqueue(
-         object : Callback<JsonObject> {
-             @SuppressLint("SuspiciousIndentation")
-             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                 if(response.isSuccessful){
-                     Log.i("ciao","DentroSono")
-                     val risposta = response.body()?.get("queryset") as JsonArray
-                     var immaginiCount = risposta.size()
-                     if(risposta.size() != 0){
-                         Log.i("ciao","DentroSonoQua")
-                         for(i in risposta){
-                             val jsonObjectElemento = i as JsonObject
-                                getImage(jsonObjectElemento){
-                                    immagine ->
-                                    Log.i("Debug","${jsonObjectElemento.get("id").asInt} localita: ${jsonObjectElemento.get("nome_struttura").asString}" )
-                                    lista.add(ItemClassLocalita(
-                                        jsonObjectElemento.get("id").asInt,immagine,jsonObjectElemento.get("nome_struttura").asString,
-                                        jsonObjectElemento.get("luogo").asString, jsonObjectElemento.get("recensione").asDouble,
-                                        jsonObjectElemento.get("prezzo").asString.plus("$"),
-                                        jsonObjectElemento.get("tipologia").asString,
-                                        jsonObjectElemento.get("num_persone").asString
-
-                                    )
-                                    )
-
-                              immaginiCount--
-                            if(immaginiCount == 0){
-                                callback(lista)
-                            }
-                                }
-                         }
-                     }else{
-                         Log.i("Errore","${response.errorBody()}")
-                         Log.i("Errore","Errore")}
-                 }else{
-                     Log.i("Errore","${response.errorBody()}")
-                     Log.i("Errore","Errore")
-                 }
-             }
-
-             override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-
-             }
-
-         }
-        )
-         */
         //seleziono la dimensione di queste count
         val query = "select count(Viaggio.id) as contatore from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
         var datoRichiesto:Int
@@ -335,23 +286,6 @@ class FragmentSchermataHome : Fragment() {
             //setto ogni card:
             for(i in 0..datoRichiesto){
                 val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
-               /* GestioneDB.richiestaInformazioni(query){
-                    dato ->
-                    lista.add(ItemClassLocalita(
-                        dato.get("id").asInt,
-                        null,
-                        dato.get("nome_struttura").asString,
-                        dato.get("luogo").asString,
-                        dato.get("recensione").asDouble,
-                        dato.get("prezzo").asString.plus("$"),
-                        dato.get("tipologia").asString,
-                        dato.get("num_persone").asString
-
-                    )
-                    )
-                    callback(lista)
-                }
-                */
                 GestioneDB.queryImmagini(query){
                     elemento,immagine ->
                     lista.add(ItemClassLocalita(
