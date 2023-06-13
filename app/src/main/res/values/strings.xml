@@ -66,6 +66,7 @@
     <string name="Attivato">Viaggio aggiunto nei preferiti</string>
     <string name="Disattivato">Viaggio eliminato dai preferiti</string>
     <string-array name="Regione">
+        <item>Tutte le destinazioni</item>
         <item>Europa</item>
         <item>Africa</item>
         <item>Asia</item>
@@ -74,6 +75,7 @@
         <item>Tutte le mete</item>
     </string-array>
     <string-array name="NumPersone">
+        <item>Nessuno</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -89,5 +91,4 @@
     <string name="Regione">Destinazione</string>
     <string name="NumeroPersoneDialog">Numero Persone</string>
     <string name="Prezzo">Prezzo</string>
-
 </resources>

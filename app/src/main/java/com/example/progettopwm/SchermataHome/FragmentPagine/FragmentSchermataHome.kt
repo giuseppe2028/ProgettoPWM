@@ -63,14 +63,12 @@ class FragmentSchermataHome : Fragment() {
         }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
         binding = FragmentSchermataHomeBinding.inflate(inflater)
-
         recycleViewGestore()
         clickProfile()
         filtraLista()
@@ -116,12 +114,17 @@ class FragmentSchermataHome : Fragment() {
 
     private fun filtraListaDialog(destinazione: String, numeroPersone: String) {
         //filtro la lista:
-        val lista:ArrayList<ItemClassLocalita> = ArrayList()
+        var lista:ArrayList<ItemClassLocalita> = ArrayList()
         //filtro la lista
         for(i in listaLuogo){
             //aggiungo il tipo di destinazione
-            if(i.numPersone.contains(numeroPersone)){
-                lista.add(i)
+            if(numeroPersone.equals("Tutte le destinazioni")){
+                //levo il filtro di tutte le destinazioni
+                lista = listaLuogo
+            }else {
+                if (i.numPersone.contains(numeroPersone)) {
+                    lista.add(i)
+                }
             }
         }
         adapterViaggi.filtraLista(lista)
@@ -308,7 +311,7 @@ class FragmentSchermataHome : Fragment() {
         }
 
 
-
+//TODO da elminare
     private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
         val string = jsonObject.get("path_immagine").asString
         Log.i("ciao90", "$string")
@@ -340,6 +343,4 @@ class FragmentSchermataHome : Fragment() {
 
 }
 
-    private fun richiediDataBase() {
 
-    }
