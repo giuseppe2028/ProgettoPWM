@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,7 +15,10 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.SchermataHome
+import com.example.progettopwm.SchermataRegistrazione.SchermataRegistrazione
 import com.example.progettopwm.databinding.FragmentOTPBinding
+import kotlin.random.Random
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,14 +49,15 @@ class OTPFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
-        mostraNotifiche()
+        val randomNumber = Random.nextInt(101, 901).toString()
+        mostraNotifiche(randomNumber)
         binding = FragmentOTPBinding.inflate(inflater)
         // Inflate the layout for this fragment
-        clickBottoni()
+        clickBottoni(randomNumber)
         return binding.root
     }
 
-        private fun mostraNotifiche() {
+        private fun mostraNotifiche(rand:String) {
             val channelID:String = "ChannelID"
             //creo la notifica, ovvero creo il canale in cui inviare la notifica
             var channel: NotificationChannel = NotificationChannel(channelID,"MyChannel",
@@ -61,21 +66,23 @@ class OTPFragment : Fragment() {
             val notificationManager = activity?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
             var builder = NotificationCompat.Builder(requireContext(), channelID)
-                .setSmallIcon(R.drawable.form)
-                .setContentTitle("ciao")
-                .setContentText("Prova")
+                .setSmallIcon(R.drawable.gmail_icon__2020__svg)
+                .setContentTitle("OTP")
+                .setContentText(rand)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             notificationManager.notify(0,builder.build())
         }
 
 
-    private fun clickBottoni() {
+    private fun clickBottoni(randomNumber: String) {
         binding.buttonOTP.setOnClickListener{
-            if(binding.editTextOTP.text.toString().trim().isNotEmpty()){
-                //comandi database
+            if(binding.editTextOTP.text.toString().trim().isNotEmpty() && binding.editTextOTP.text.toString().equals(randomNumber)){
+                startActivity(Intent(this.context, SchermataHome()::class.java))
+
             }
             else{
                 Toast.makeText(this.context, R.string.ToastOTP, Toast.LENGTH_SHORT).show()
+                mostraNotifiche(randomNumber)
             }
         }
     }

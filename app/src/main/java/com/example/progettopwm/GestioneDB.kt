@@ -1,6 +1,6 @@
 package com.example.progettopwm
 
-import ClientNetwork
+
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
@@ -26,17 +26,17 @@ object GestioneDB {
                             callback(risposta.get(0) as JsonObject)
                         }
                     }
-                        }
-
-
-
-                    override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                        Log.i("Problema","${t.message}")
-                    }
-
                 }
-        )
+
+
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.i("Problema","${t.message}")
+                }
+
             }
+        )
+    }
     fun aggiornaServer(query: String){
         ClientNetwork.retrofit.update(query).enqueue(
             object: Callback<JsonObject>{
@@ -97,26 +97,26 @@ object GestioneDB {
     fun queryGenerica(query:String, callback: (JsonArray) -> Unit){
         ClientNetwork.retrofit.registrazione(query).enqueue(
             object: Callback<JsonObject>{
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                if(response.isSuccessful){
-                    val risposta = response.body()?.get("queryset") as JsonArray
-                    if(risposta.size() != 0){
-                        callback(risposta)}
-                    else{
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if(response.isSuccessful){
+                        val risposta = response.body()?.get("queryset") as JsonArray
+                        if(risposta.size() != 0){
+                            callback(risposta)}
+                        else{
+
+                        }
 
                     }
-
+                    else{
+                        Log.i("Debug", "Errore nella query")
+                    }
                 }
-                else{
-                    Log.i("Debug", "Errore nella query")
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.i("Debug", "Errore nel server")
                 }
-            }
 
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Log.i("Debug", "Errore nel server")
             }
-
-        }
         )
     }
     fun getImage(jsonObject: JsonObject,callback:(Bitmap)->Unit){

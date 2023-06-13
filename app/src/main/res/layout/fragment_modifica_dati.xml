@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="ExtraText"
-
+    tools:context=".SchermataHome.FragmentPagine.FragmentModificaDati"
     >
 
     <Button
@@ -65,7 +65,6 @@
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
             android:ems="10"
-            android:text="prelevare da db"
             android:inputType="text"
             android:paddingVertical="@dimen/paddingEditTetxt"
             tools:ignore="TouchTargetSizeCheck" />
@@ -84,7 +83,6 @@
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
             android:ems="10"
-            android:text="prelevare da db"
             android:inputType="text"
             android:paddingVertical="@dimen/paddingEditTetxt"
             tools:ignore="MissingConstraints,TouchTargetSizeCheck" />
@@ -115,7 +113,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/paddingEditTetxt"
-                android:text="prelevare da db"
                 />
         </LinearLayout>
 
@@ -136,7 +133,6 @@
             android:layout_marginTop="@dimen/marginLinearLayoutElements"
             android:background="@drawable/custom_text_edit"
             android:ems="10"
-            android:text="prelevare da db"
             android:inputType="textEmailAddress"
             android:paddingVertical="@dimen/paddingEditTetxt"
             tools:ignore="UnknownId,TouchTargetSizeCheck" />

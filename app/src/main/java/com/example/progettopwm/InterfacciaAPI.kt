@@ -8,25 +8,23 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Url
 
-interface interfacciaAPI {
+interface InterfacciaAPI {
 
     @POST("postSelect/")
     @FormUrlEncoded
     fun registrazione(@Field("query") query: String): Call<JsonObject>
-
+    @POST("postInsert/")
+    @FormUrlEncoded
+    fun insert(@Field("query") query: String): Call <JsonObject>
     @GET
     fun getImage(@Url url:String): Call <ResponseBody>
+    @POST("postRemove/")
+    @FormUrlEncoded
+    fun remove(@Field("query") query: String) : Call <JsonObject>
 
     @POST("postUpdate/")
     @FormUrlEncoded
     fun update(@Field("query") query: String): Call <JsonObject>
-    @POST("postInsert/")
-    @FormUrlEncoded
-    fun insert(@Field("query") query: String): Call <JsonObject>
-    @POST("postRemove/")
-    @FormUrlEncoded
-    fun remove(@Field("query") query: String): Call <JsonObject>
-
 }
 
 

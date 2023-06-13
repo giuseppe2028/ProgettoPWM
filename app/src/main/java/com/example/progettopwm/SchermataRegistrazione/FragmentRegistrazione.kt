@@ -1,10 +1,7 @@
 package com.example.progettopwm.SchermataRegistrazione
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.widget.Toast
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -17,11 +14,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.Login.OTPFragment
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentRegistrazioneBinding
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -52,6 +55,12 @@ class FragmentRegistrazione : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+       /* val intercector = HttpLoggingInterceptor()
+        intercector.level= HttpLoggingInterceptor.Level.BODY
+        val client = OkHttpClient.Builder().readTimeout(60, TimeUnit.SECONDS).connectTimeout(60, TimeUnit.SECONDS).addInterceptor(intercector).build()
+        val arg = Retrofit.Builder().baseUrl("http://10.0.2.2:8000/webmobile/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client).build().create(InterfacciaAPI::class.java)*/
         binding = FragmentRegistrazioneBinding.inflate(inflater)
         clickBottoni()
 
@@ -118,12 +127,10 @@ class FragmentRegistrazione : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                validatePasswords(passwordEditText)
             }
 
             override fun afterTextChanged(s: Editable?) {
-                validatePasswords(passwordEditText)
-
+                validatePasswords(passwordEditTextC)
             }
         })
 
@@ -133,36 +140,56 @@ class FragmentRegistrazione : Fragment() {
             }
             //controllo il contenuto della password
             else if(!validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata) && equalPasswords(passwordEditText,passwordEditTextC)){
-                clickBottoni()
-            }
 
-            /*if (!validatePasswords(passwordEditText) || !validateOtherFields()||equalPasswords(passwordEditText, passwordEditTextC)) {
-                Toast.makeText(this.context, "Controllare il contenuto dei campi", Toast.LENGTH_SHORT).show()
-
+                val nome = nomeEditText.text.toString()
+                val cognome = cognomeEditText.text.toString()
+                val email = emailEditText.text.toString()
+                val data = binding.textViewshowdata.text.toString()
+                val password = passwordEditText.text.toString()
+                mostraOTP()
+                caricaCredenziali(nome, cognome, email, data, password)
             }
-            else{
-                //inserire il comportamento del bottone
-
-            }
-             */
         }
 
 
         return binding.root
     }
+private fun mostraOTP(){
+    val manager= parentFragmentManager
+    val transaction = manager.beginTransaction()
+    transaction.replace(R.id.fragmentContainerView, OTPFragment()).commit()
+}
+
+
+    private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
+        val query = "INSERT INTO Persona (nome,  cognome, mail, data_nascita, password) VALUES ('$nome', '$cognome', '$email', '$data', '$password')"
+
+        ClientNetwork.retrofit.insert(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        Log.i("ciao", response.body().toString())
+                    }
+                    else{
+                        Log.i("errore", "non funziona")
+                        Log.i("errore", response.message())
+                        Log.i("errore",  response.toString())
+
+                    }
+    }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.e("Errore", "Errore durante la chiamata di rete", t)
+                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
 
 
 
 
-
-
-
-    private fun clickBottoni() {
-        binding.buttonRegistrati.setOnClickListener{
-            val manager= parentFragmentManager
-            val transaction = manager.beginTransaction()
-            transaction.replace(R.id.fragmentContainerView, OTPFragment()).commit()
-        }
+    private fun clickBottoni(){
         // Aggiungi il TextWatcher all'EditText della password
         binding.buttonData.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -172,12 +199,13 @@ class FragmentRegistrazione : Fragment() {
 
             val datePickerDialog = DatePickerDialog(requireContext(), { _, selectedYear, selectedMonth, selectedDay ->
                 // Aggiorna il TextView con la data selezionata
-                val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
-                binding.textViewshowdata.text = selectedDate
+               val  selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
+                binding.textViewshowdata.text = convertStringToDate(selectedDate)
             }, year, month, day)
 
             datePickerDialog.show()
         }
+
     }
 
     private fun equalPasswords(passwordEditText: EditText, passwordEditTextC: EditText): Boolean {
@@ -231,6 +259,14 @@ class FragmentRegistrazione : Fragment() {
         val field4 = TextView.text.toString().trim()
         return field1.isEmpty() && field2.isEmpty() && field3.isEmpty() && field4.isEmpty()
     }
+    fun convertStringToDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-M-dd")
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+
+        val date: Date = inputFormat.parse(inputDate)
+        return outputFormat.format(date)
+    }
+
     private fun togglePasswordVisibility(passwordEdi: EditText) {
         isPasswordVisible = !isPasswordVisible
         if (isPasswordVisible) {
