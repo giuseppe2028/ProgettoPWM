@@ -135,9 +135,6 @@ object GestioneDB {
                             immagine = BitmapFactory.decodeStream(response.body()?.byteStream())
                             callback(immagine)
                         }
-                        if (immagine != null) {
-                            callback(immagine)
-                        }
                     }
                 }
 
@@ -148,5 +145,37 @@ object GestioneDB {
             }
         )
 
+    }
+    fun queryImmagini(query:String,callback:(JsonObject,Bitmap)->Unit){
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object: Callback<JsonObject>{
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if(response.isSuccessful){
+                        val risposta = response.body()?.get("queryset") as JsonArray
+                        if(risposta.size() != 0) {
+                            //chiedo le immagini:
+                            val elemento = risposta.get(0) as JsonObject
+                            getImage(elemento){
+                                immagine->
+                                callback(elemento,immagine)
+                            }
+
+                        }
+                        else{
+
+                        }
+
+                    }
+                    else{
+                        Log.i("Debug", "Errore nella query")
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.i("Debug", "Errore nel server")
+                }
+
+            }
+        )
     }
 }

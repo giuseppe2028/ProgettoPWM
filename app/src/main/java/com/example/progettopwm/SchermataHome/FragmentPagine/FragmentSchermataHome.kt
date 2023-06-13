@@ -278,7 +278,7 @@ class FragmentSchermataHome : Fragment() {
         Log.i("popola","sono in popola lista")
         val lista:ArrayList<ItemClassLocalita> = arrayListOf()
         //val query = "select luogo, nome_struttura, recensione,prezzo, tipologia from Viaggio"
-        val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
+        /*val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
         ClientNetwork.retrofit.registrazione(query).enqueue(
          object : Callback<JsonObject> {
              @SuppressLint("SuspiciousIndentation")
@@ -325,7 +325,54 @@ class FragmentSchermataHome : Fragment() {
 
          }
         )
+         */
+        //seleziono la dimensione di queste count
+        val query = "select count(Viaggio.id) as contatore from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
+        var datoRichiesto:Int
+        GestioneDB.richiestaInformazioni(query){
+            dato ->
+            datoRichiesto = dato.get("contatore").asInt
+            //setto ogni card:
+            for(i in 0..datoRichiesto){
+                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
+               /* GestioneDB.richiestaInformazioni(query){
+                    dato ->
+                    lista.add(ItemClassLocalita(
+                        dato.get("id").asInt,
+                        null,
+                        dato.get("nome_struttura").asString,
+                        dato.get("luogo").asString,
+                        dato.get("recensione").asDouble,
+                        dato.get("prezzo").asString.plus("$"),
+                        dato.get("tipologia").asString,
+                        dato.get("num_persone").asString
+
+                    )
+                    )
+                    callback(lista)
+                }
+                */
+                GestioneDB.queryImmagini(query){
+                    elemento,immagine ->
+                    lista.add(ItemClassLocalita(
+                        elemento.get("id").asInt,
+                        immagine,
+                        elemento.get("nome_struttura").asString,
+                        elemento.get("luogo").asString,
+                        elemento.get("recensione").asDouble,
+                        elemento.get("prezzo").asString.plus("$"),
+                        elemento.get("tipologia").asString,
+                        elemento.get("num_persone").asString
+
+                    )
+                    )
+                    callback(lista)
+                }
+            }
+
         }
+        }
+
 
 
     private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
@@ -358,3 +405,7 @@ class FragmentSchermataHome : Fragment() {
     }
 
 }
+
+    private fun richiediDataBase() {
+
+    }
