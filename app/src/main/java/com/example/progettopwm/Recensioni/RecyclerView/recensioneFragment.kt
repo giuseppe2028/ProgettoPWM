@@ -24,7 +24,7 @@ class recensioneFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var binding:FragmentRecensioneBinding
+    private lateinit var binding: FragmentRecensioneBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -39,40 +39,25 @@ class recensioneFragment : Fragment() {
     ): View {
         binding = FragmentRecensioneBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
-       val lista:List<ItemViewModelRecensioni>  = listOf(
-           ItemViewModelRecensioni("ciao",3.5,"Ciao","waods"),
-           ItemViewModelRecensioni("ciao",3.5,"Ciao","waods"),
-           ItemViewModelRecensioni("ciao",3.5,"Ciao","waods"),
-           ItemViewModelRecensioni("ciao",3.5,"Ciao","waods"),
-           ItemViewModelRecensioni("ciao",3.5,"Ciao","waods"),
-           ItemViewModelRecensioni("ciao",3.5,"Ciao","waods"),
-           ItemViewModelRecensioni("ciao",3.5,"Ciao","waods"),
-           ItemViewModelRecensioni("ciao",3.5,"Ciao","waods"),
+        val lista: List<ItemViewModelRecensioni> = listOf(
+            ItemViewModelRecensioni("ciao", 3.5, "Ciao", "waods"),
+            ItemViewModelRecensioni("ciao", 3.5, "Ciao", "waods"),
+            ItemViewModelRecensioni("ciao", 3.5, "Ciao", "waods"),
+            ItemViewModelRecensioni("ciao", 3.5, "Ciao", "waods"),
+            ItemViewModelRecensioni("ciao", 3.5, "Ciao", "waods"),
+            ItemViewModelRecensioni("ciao", 3.5, "Ciao", "waods"),
+            ItemViewModelRecensioni("ciao", 3.5, "Ciao", "waods"),
+            ItemViewModelRecensioni("ciao", 3.5, "Ciao", "waods"),
 
-       )
+            )
         //setto tutta le recyclerView
-        binding.lista.layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
+        binding.lista.layoutManager =
+            LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
         binding.lista.adapter = CustomAdapterRecensioni(lista)
         return binding.root
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment recensioneFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            recensioneFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
     }
 }

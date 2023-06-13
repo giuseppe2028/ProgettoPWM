@@ -35,8 +35,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sfondo"
-            app:layout_constraintVertical_chainStyle="spread_inside"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:layout="@layout/fragment_contenitore_schermata_viaggio" />
 
         <TextView
@@ -47,11 +48,13 @@
             android:text="1550$"
             android:textColor="@color/palette1"
             android:textSize="@dimen/price"
+            app:layout_constraintBottom_toBottomOf="@+id/comprami"
             app:layout_constraintEnd_toStartOf="@+id/comprami"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="672dp" />
+            app:layout_constraintTop_toTopOf="@+id/comprami"
+            app:layout_constraintVertical_bias="0.49" />
 
         <Button
             android:id="@+id/comprami"
