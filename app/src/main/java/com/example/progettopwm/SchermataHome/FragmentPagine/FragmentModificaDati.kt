@@ -2,6 +2,8 @@ package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -21,6 +23,7 @@ import com.example.progettopwm.databinding.FragmentModificaDatiBinding
 import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -146,9 +149,6 @@ class FragmentModificaDati : Fragment() {
 
                 }}
             }
-
-
-
 
         return binding.root
     }
@@ -346,6 +346,9 @@ class FragmentModificaDati : Fragment() {
             }
         )
     }
+
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of

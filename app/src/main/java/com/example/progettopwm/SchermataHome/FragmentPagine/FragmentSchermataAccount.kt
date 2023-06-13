@@ -1,6 +1,8 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +17,7 @@ import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
 import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,11 +53,15 @@ class FragmentSchermataAccount : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentSchermataAccountBinding.inflate(inflater)
+
         val result = true
         val id_p = idPersona.getId()
-        richiediNome(id_p){value, nome->
+        richiediNome(id_p){value, nome, ref_immagine->
             if(value){
                 binding.nome.text = nome
+                if (ref_immagine != null) {
+                    setUpImage(ref_immagine)
+                }
             }
             else{
                 Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
@@ -75,9 +82,34 @@ class FragmentSchermataAccount : Fragment() {
         return binding.root
     }
 
+    private fun setUpImage(ref_immagine:String){
+            ClientNetwork.retrofit.getImage(ref_immagine).enqueue(
+                object : Callback<ResponseBody>{
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        if(response.isSuccessful){
+                            var immagine: Bitmap? = null
+                            if (response.body()!=null) {
+                                immagine = BitmapFactory.decodeStream(response.body()?.byteStream())
+                                binding.circleImageView2.setImageBitmap(immagine)
+                            }
+                        }
+                    }
 
-    private fun richiediNome(id: Int, callback: (Boolean, String?) -> Unit){
-        val query = "select nome from Persona where id =$id"
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        Log.i("ciao","fail")
+                    }
+
+                }
+            )
+
+
+    }
+
+    private fun richiediNome(id: Int, callback: (Boolean, String?, String?) -> Unit){
+        val query = "select nome, ref_immagine from Persona where id =$id"
         ClientNetwork.retrofit.registrazione(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -85,13 +117,14 @@ class FragmentSchermataAccount : Fragment() {
                         val resultSet = response.body()?.get("queryset") as JsonArray
                         if (resultSet.size() == 1) {
                             val nome= resultSet[0].asJsonObject.get("nome").asString
-                            callback(true, nome)
+                            val ref_immagine= resultSet[0].asJsonObject.get("ref_immagine").asString
+                            callback(true, nome, ref_immagine)
                         }else{
-                            callback(false, null)
+                            callback(false, null, null)
                         }
                     }
                     else{
-                        callback(false, null)
+                        callback(false, null, null)
                         Log.i("errore", "non funziona")
                         Log.i("errore", response.message())
                         Log.i("errore",  response.toString())
@@ -99,7 +132,7 @@ class FragmentSchermataAccount : Fragment() {
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    callback(false, null)
+                    callback(false, null, null)
                     Log.e("Errore", "Errore durante la chiamata di rete", t)
                     Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
                 }
