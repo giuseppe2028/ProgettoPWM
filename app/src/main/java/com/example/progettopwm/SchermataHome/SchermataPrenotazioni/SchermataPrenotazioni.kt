@@ -121,7 +121,7 @@ class SchermataPrenotazioni : Fragment() {
         adapter.setOnClickListener(object:
             CustomAdapterPrenotazioni.OnClickListener {
             override fun onScaricaClick(position: Int, item: ItemViewModelP) {
-                val query = "select P.nome, P.cognome, V.luogo, V.nome_struttura, V.data, V.giorni_pernotto, V.prezzo  from Persona P, Compra C, Viaggio V where P.id =$idP and V.id=${item.id} and C.ref_persona = P.id and C.ref_viaggio = V.id"
+              /*  val query = "select P.nome, P.cognome, V.luogo, V.nome_struttura, V.data, V.giorni_pernotto, V.prezzo  from Persona P, Compra C, Viaggio V where P.id =$idP and V.id=${item.id} and C.ref_persona = P.id and C.ref_viaggio = V.id"
                 ClientNetwork.retrofit.registrazione(query).enqueue(
                     object : Callback<JsonObject> {
                         override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -156,6 +156,8 @@ class SchermataPrenotazioni : Fragment() {
                         }
                     }
                 )
+
+               */
             }
             override fun Onclick(position: Int, item: ItemViewModelP) {
                 val query = "delete from Compra where ref_viaggio = ${item.id}"

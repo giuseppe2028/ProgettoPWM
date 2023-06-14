@@ -7,5 +7,5 @@
     <item android:id="@+id/prenotazioni" android:icon="@drawable/suitcase_alt"
     android:title="prenotazioni" />
     <item android:id="@+id/account" android:icon="@drawable/user"
-        android:title="accont" />
+        android:title="account" />
 </menu>
