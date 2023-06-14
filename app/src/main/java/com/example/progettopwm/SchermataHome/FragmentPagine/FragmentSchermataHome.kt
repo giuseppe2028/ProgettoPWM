@@ -314,6 +314,10 @@ class FragmentSchermataHome : Fragment() {
 
                     )
                     )
+                    //ordino la lista:
+                   lista.sortByDescending {
+                        it.rating
+                    }
                     callback(lista)
                 }
             }
