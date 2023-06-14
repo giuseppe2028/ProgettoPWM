@@ -16,10 +16,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import com.example.progettopwm.ClientNetwork
+import com.example.progettopwm.Gestione.ClientNetwork
+import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.Login.Login
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
-import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody

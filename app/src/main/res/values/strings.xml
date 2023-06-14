@@ -42,9 +42,11 @@
     <string name="descrizionePagamenti">Aggiungi e gestisci i tuoi dati di pagamento.</string>
 
 
+    <!-- TODO: Remove or change this placeholder text -->
 
     <string name="ToastOTP">Compila il campo OTP per continuare</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">esempio.esempio@dominio.esempio</string>
     <string name="passwordDimenticata">Non te la ricordi?</string>
@@ -93,5 +95,10 @@
     <string name="Regione">Destinazione</string>
     <string name="NumeroPersoneDialog">Numero Persone</string>
     <string name="Prezzo">Prezzo</string>
+
+    <string name="RiepilogoPrenotazione">Riepilogo Prenotazione</string>
+    <string name="titoloDialogAcquisto">Complimenti, il tuo acquisto è andato a buon fine</string>
+    <string name="testoAlertDialogAcquisto">Tutti i dettagli della fatturazioni saranno inviati alla sua casella di posta. Per maggiori dettagli può trovare la ricevuta nella sezione prenotazioni. Le auguriamo un buon viaggio.
+    </string>
     <string name="ToastLogin1">Mail di google non registrata, registrati prima di entrare</string>
 </resources>

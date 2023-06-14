@@ -29,6 +29,9 @@ object GestioneDB {
                         }
                     }
                 }
+
+
+
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     Log.i("Problema","${t.message}")
                 }
@@ -75,7 +78,6 @@ object GestioneDB {
         )
     }
     fun eliminaElemento(query: String){
-
         ClientNetwork.retrofit.remove(query).enqueue(
             object: Callback<JsonObject>{
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

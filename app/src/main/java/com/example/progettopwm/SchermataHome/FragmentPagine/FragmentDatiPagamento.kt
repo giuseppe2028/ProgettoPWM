@@ -11,11 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
-import com.example.progettopwm.ClientNetwork
+import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentDatiPagamentoBinding
-import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
-import com.example.progettopwm.idPersona
+import com.example.progettopwm.Gestione.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call

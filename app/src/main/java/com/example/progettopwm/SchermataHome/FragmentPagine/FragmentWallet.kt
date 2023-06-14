@@ -15,10 +15,10 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.example.progettopwm.ClientNetwork
+import com.example.progettopwm.Gestione.ClientNetwork
+import com.example.progettopwm.Gestione.idPersona
 
 import com.example.progettopwm.databinding.FragmentWalletBinding
-import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -71,7 +71,7 @@ binding = FragmentWalletBinding.inflate(inflater)
             }
             else{
                 val saldo = binding.editText.text.toString()
-                val id_p=idPersona.getId()
+                val id_p= idPersona.getId()
                 aggiornaWallet(id_p, saldo.toDouble())
                 binding.editText.setText("")
             }

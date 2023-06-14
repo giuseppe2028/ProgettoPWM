@@ -1,6 +1,6 @@
-package com.example.progettopwm
+package com.example.progettopwm.Gestione
 
-object idPersona {
+object idPersona{
     private var id: Int = 0
 
     fun setId(value: Int) {
