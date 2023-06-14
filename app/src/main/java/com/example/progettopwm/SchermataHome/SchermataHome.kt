@@ -41,10 +41,22 @@ class SchermataHome : AppCompatActivity() {
         //attendo i dati del primo fragment
         supportFragmentManager.setFragmentResultListener("itemSelected",this){
                 requestKey, bundle ->
+
                 val result = bundle.getString("itemSelectRisposta")
-                setLocal(this,"it")
-            finish()
-            startActivity(intent)
+            Log.i("seleziona","$result")
+            if(result!=null){
+                if(result.equals("inglese")){
+                    setLocal(this,"en")
+                    finish()
+                    startActivity(intent)
+                }
+                else if(result.equals("italiano")){
+                    setLocal(this,"it")
+                    finish()
+                    startActivity(intent)
+                }
+            }
+
         }
     }
 

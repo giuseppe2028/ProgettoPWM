@@ -79,30 +79,42 @@ class FragmentSchermataAccount : Fragment() {
     }
 
     private fun selectLingua() {
-
+        var sentinellaSpinner = false
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                val selectedOption: String = parent.getItemAtPosition(position).toString()
-                if (selectedOption.equals("Inglese")){
-                    Log.i("Selected","$selectedOption")
-                    setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to selectedOption))
-
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (sentinellaSpinner) {
+                    val selectedOption: String = parent.getItemAtPosition(position).toString()
+                    setFragmentResult(
+                        "itemSelected",
+                        bundleOf("itemSelectRisposta" to selectedOption)
+                    )
+                }
+                else{
+                    sentinellaSpinner = true
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Azioni da intraprendere quando non viene selezionata alcuna opzione
-                Log.i("ciao","ciao")
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // Azioni da intraprendere quando non viene selezionata alcuna opzione
+                    Log.i("ciao", "ciao")
+                }
             }
+
+            val item = binding.spinner.selectedItemPosition
+
+            setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to item))
+            //passo il valore indietro all'activity:
+
+
         }
 
-        val item = binding.spinner.selectedItemPosition
 
-        setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to item))
-        //passo il valore indietro all'activity:
-
-
-    }
 
     private fun clickBottoni() {
         val result = true

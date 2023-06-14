@@ -67,7 +67,7 @@
     <string name="Attivato">Viaggio aggiunto nei preferiti</string>
     <string name="Disattivato">Viaggio eliminato dai preferiti</string>
     <string-array name="lingua">
-        <item>Inglese</item>
+        <item>inglese</item>
         <item>italiano</item>
     </string-array>
 </resources>
