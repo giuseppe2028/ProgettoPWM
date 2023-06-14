@@ -1,6 +1,8 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
+import ClientNetwork
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -15,18 +17,15 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
-import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
-//import com.example.progettopwm.GestioneDB
-import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
-import com.example.progettopwm.InterfacciaAPI
+import com.example.progettopwm.interfacciaAPI
 import retrofit2.Callback
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -95,6 +94,45 @@ class FragmentSchermataHome : Fragment() {
         // Inflate the layout for this fragment
         return binding.root
     }
+
+    private fun filterButton() {
+
+        binding.filterButton.setOnClickListener {
+            val alert = ViewDialog()
+            val ciao = alert.showDialog(activity){
+                destinazione,numeroPersone->
+                //devo filtrare la lista
+                filtraListaDialog(destinazione,numeroPersone)
+            }
+            val builder = AlertDialog.Builder(context)
+            Log.i("ciao","$ciao 123")
+            }
+
+        /*val builder = AlertDialog.Builder(context)
+        val inflater = LayoutInflater.from(context)
+        val dialogView = inflater.inflate(R.layout.filtri, null)
+        val alert = builder.create()
+        alert.show()
+
+         */
+
+
+    }
+
+    private fun filtraListaDialog(destinazione: String, numeroPersone: String) {
+        //filtro la lista:
+        val lista:ArrayList<ItemClassLocalita> = ArrayList()
+        //filtro la lista
+        for(i in listaLuogo){
+            //aggiungo il tipo di destinazione
+            if(i.numPersone.contains(numeroPersone)){
+                lista.add(i)
+            }
+        }
+        adapterViaggi.filtraLista(lista)
+
+    }
+
 
     private fun caricaViaggioProssimo(data: Date) {
         var id: Int
@@ -246,43 +284,35 @@ class FragmentSchermataHome : Fragment() {
     fun popolaLista(callback: (ArrayList<ItemClassLocalita>) -> Unit){
         Log.i("popola","sono in popola lista")
         val lista:ArrayList<ItemClassLocalita> = arrayListOf()
-        //val query = "select luogo, nome_struttura, recensione,prezzo, tipologia from Viaggio"
-        val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
-        ClientNetwork.retrofit.registrazione(query).enqueue(
-         object : Callback<JsonObject> {
-             @SuppressLint("SuspiciousIndentation")
-             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                 if(response.isSuccessful){
-                     Log.i("ciao","DentroSono")
-                     val risposta = response.body()?.get("queryset") as JsonArray
-                     var immaginiCount = risposta.size()
-                     if(risposta.size() != 0){
-                         Log.i("ciao","DentroSonoQua")
-                         for(i in risposta){
-                             val jsonObjectElemento = i as JsonObject
-                                getImage(jsonObjectElemento){
-                                    immagine ->
-                                    Log.i("Debug","${jsonObjectElemento.get("id").asInt} localita: ${jsonObjectElemento.get("nome_struttura").asString}" )
-                                    lista.add(ItemClassLocalita(
-                                        jsonObjectElemento.get("id").asInt,immagine,jsonObjectElemento.get("nome_struttura").asString,
-                                        jsonObjectElemento.get("luogo").asString, jsonObjectElemento.get("recensione").asDouble,
-                                        jsonObjectElemento.get("prezzo").asString.plus("$"), jsonObjectElemento.get("tipologia").asString)
-                                    )
+        //seleziono la dimensione di queste count
+        val query = "select count(Viaggio.id) as contatore from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1"
+        var datoRichiesto:Int
+        GestioneDB.richiestaInformazioni(query){
+            dato ->
+            datoRichiesto = dato.get("contatore").asInt
+            //setto ogni card:
+            for(i in 0..datoRichiesto){
+                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, ref_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
+                GestioneDB.queryImmagini(query){
+                    elemento,immagine ->
+                    lista.add(ItemClassLocalita(
+                        elemento.get("id").asInt,
+                        immagine,
+                        elemento.get("nome_struttura").asString,
+                        elemento.get("luogo").asString,
+                        elemento.get("recensione").asDouble,
+                        elemento.get("prezzo").asString.plus("$"),
+                        elemento.get("tipologia").asString,
+                        elemento.get("num_persone").asString
 
-                              immaginiCount--
-                            if(immaginiCount == 0){
-                                callback(lista)
-                            }
-                                }
-                         }
-                     }else{
-                         Log.i("Errore","${response.errorBody()}")
-                         Log.i("Errore","Errore")}
-                 }else{
-                     Log.i("Errore","${response.errorBody()}")
-                     Log.i("Errore","Errore")
-                 }
-             }
+                    )
+                    )
+                    callback(lista)
+                }
+            }
+
+        }
+        }
 
              override fun onFailure(call: Call<JsonObject>, t: Throwable) {
 

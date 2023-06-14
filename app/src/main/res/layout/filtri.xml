@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/corner_dialog"
+    tools:ignore="MissingDefaultResource"
+    style="@style/Theme_Dialog">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardFiltri"
+        android:layout_width="340dp"
+        android:layout_height="290dp"
+        android:paddingStart="10dp"
+        app:cardCornerRadius="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/titleTextDialog"
+                android:textSize="@dimen/dimenTitleDialog"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.23000002"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/Regione"
+                app:layout_constraintBottom_toTopOf="@+id/regione"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <Spinner
+                android:id="@+id/regione"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:clipToPadding="false"
+                android:contextClickable="false"
+                android:entries="@array/Regione"
+                android:spinnerMode="dropdown"
+                android:textAlignment="textStart"
+                app:layout_constraintBottom_toTopOf="@+id/NumPersoneTesto"
+                app:layout_constraintTop_toBottomOf="@+id/textView12"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <TextView
+                android:id="@+id/NumPersoneTesto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/NumeroPersoneDialog"
+                app:layout_constraintBottom_toTopOf="@+id/numPersone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/regione" />
+
+            <Spinner
+                android:id="@+id/numPersone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:entries="@array/NumPersone"
+                app:layout_constraintBottom_toTopOf="@id/PrezzoTesto"
+                app:layout_constraintTop_toBottomOf="@+id/NumPersoneTesto"
+                tools:layout_editor_absoluteX="10dp" />
+
+            <TextView
+                android:id="@+id/PrezzoTesto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Prezzo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/numPersone"
+                app:layout_constraintBottom_toTopOf="@id/sselezionaPrezzo"
+                />
+
+            <Button
+                android:id="@+id/bottoneConferma"
+                style="@style/bottoneLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="5dp"
+                android:text="@string/conferma"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.928"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sselezionaPrezzo" />
+
+            <SeekBar
+                android:id="@+id/sselezionaPrezzo"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:max="9"
+                android:progress="3"
+                app:layout_constraintBottom_toTopOf="@+id/bottoneConferma"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/PrezzoTesto" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

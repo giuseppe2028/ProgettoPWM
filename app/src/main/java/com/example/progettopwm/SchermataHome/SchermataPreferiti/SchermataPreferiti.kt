@@ -63,7 +63,7 @@ class SchermataPreferiti : Fragment() {
 
     private fun setSchermata() {
         //TODO(passare l'id della persona via intent)
-        val query = "select distinct V.id,luogo,nome_struttura,recensione,prezzo,path_immagine,num_persone from Viaggio V,Preferiti P,Immagini I where P.ref_viaggio = V.id and I.ref_viaggio = V.id"
+        val query = "select distinct V.id,luogo,nome_struttura,recensione,prezzo,ref_immagine,num_persone from Viaggio V,Preferiti P,Immagini I where P.ref_viaggio = V.id and I.ref_viaggio = V.id"
         var iesimoDato: JsonObject  // Dichiarazione della variabile fuori dal callback
         var lista = ArrayList<ItemViewModel>()
 //faccio la query

@@ -12,6 +12,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.progettopwm.Recensioni.ViewRecensioni
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.SchermataHome
@@ -56,7 +57,16 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         setAzienda(id)
         clickLike(idPersona,id)
         clickAzienda()
+        clickMostraRecensioni(id)
 
+    }
+
+    private fun clickMostraRecensioni(idViaggio:Int) {
+        binding.mostraRecensioni.setOnClickListener {
+            val i = Intent(this,ViewRecensioni::class.java)
+            i.putExtra("idViaggio",idViaggio)
+            startActivity(i)
+        }
     }
 
     private fun setAzienda(id:Int) {
@@ -178,7 +188,7 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         )
     }
     private fun getImage(jsonObject: JsonObject){
-        val string = jsonObject.get("path_immagine").asString
+        val string = jsonObject.get("ref_immagine").asString
         Log.i("ciao90", "$string")
         Log.i("ciaoProva","$string")
         ClientNetwork.retrofit.getImage(string).enqueue(

@@ -34,4 +34,5 @@
     <dimen name="dimensioneImmagineCard">150dp</dimen>
     <dimen name="margintopTitle">60dp</dimen>
     <dimen name="marginTitle">40dp</dimen>
+    <dimen name="dimenTitleDialog">20dp</dimen>
 </resources>
