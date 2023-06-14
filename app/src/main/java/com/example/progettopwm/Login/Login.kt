@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.progettopwm.InterfacciaAPI
+import com.example.progettopwm.LanguageApp
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
@@ -52,8 +53,20 @@ class Login : AppCompatActivity() {
         accediCongoogle()
         //metto in comunicazione il fragment con l'host, per poi cambiare fragment
        passDimenticata()
+        setLingua()
     }
 
+    private fun setLingua() {
+        //prendo il valore della lingua:
+        val lingua = getSharedPreferences("misvago",Context.MODE_PRIVATE).getString("Lingua","")
+        Log.i("lingua","$lingua")
+        if(lingua.equals("en")){
+            LanguageApp.setLocal(this,"en")
+        }
+        else if(lingua.equals("it")){
+            LanguageApp.setLocal(this,"it")
+        }
+    }
 
 
     private fun accediCongoogle() {

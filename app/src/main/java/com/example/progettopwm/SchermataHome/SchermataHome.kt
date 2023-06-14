@@ -1,12 +1,15 @@
 package com.example.progettopwm.SchermataHome
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.progettopwm.ActivitySchermataViaggio
+import com.example.progettopwm.LanguageApp
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentDatiPagamento
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentModificaDati
@@ -22,8 +25,10 @@ import java.util.Locale
 class SchermataHome : AppCompatActivity() {
     private lateinit var binding:ActivitySchermataHomeBinding
     private var sentinellaCounter = 0
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        sharedPreferences = getSharedPreferences("misvago",Context.MODE_PRIVATE)
         super.onCreate(savedInstanceState)
         binding = ActivitySchermataHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -31,27 +36,30 @@ class SchermataHome : AppCompatActivity() {
         selezioneNavigationBar()
 
         wallet()
-        DatiPagamento()
-        ModificaDati()
-        attendiDatiFragment()
+        datiPagamento()
+        modificaDati()
+        selectLingua()
 
     }
 
-    private fun attendiDatiFragment() {
+    private fun selectLingua() {
         //attendo i dati del primo fragment
         supportFragmentManager.setFragmentResultListener("itemSelected",this){
-                requestKey, bundle ->
+                _, bundle ->
 
                 val result = bundle.getString("itemSelectRisposta")
             Log.i("seleziona","$result")
             if(result!=null){
                 if(result.equals("inglese")){
-                    setLocal(this,"en")
+                    LanguageApp.setLocal(this,"en")
+                    //inserisco la lingua nelle sharedPreferences
+                    sharedPreferences.edit().putString("Lingua","en").apply()
                     finish()
                     startActivity(intent)
                 }
                 else if(result.equals("italiano")){
-                    setLocal(this,"it")
+                    LanguageApp.setLocal(this,"it")
+                    sharedPreferences.edit().putString("Lingua","it").apply()
                     finish()
                     startActivity(intent)
                 }
@@ -60,7 +68,7 @@ class SchermataHome : AppCompatActivity() {
         }
     }
 
-    private fun ModificaDati() {
+    private fun modificaDati() {
 
         supportFragmentManager
             .setFragmentResultListener("requestMD", this) { requestMD, bundle ->
@@ -79,7 +87,7 @@ class SchermataHome : AppCompatActivity() {
             }
         fragmentListenerSignIn()
     }
-    private fun DatiPagamento() {
+    private fun datiPagamento() {
 
         supportFragmentManager
             .setFragmentResultListener("requestDP", this) { requestDP, bundle ->
@@ -98,9 +106,6 @@ class SchermataHome : AppCompatActivity() {
             }
         fragmentListenerSignIn()
     }
-
-
-
     private fun wallet() {
 
         supportFragmentManager
@@ -142,9 +147,7 @@ class SchermataHome : AppCompatActivity() {
                 }
             }
     }
-
-
-    fun sostituisciFragment(fragment:Fragment):Boolean{
+    private fun sostituisciFragment(fragment:Fragment):Boolean{
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
         transaction.replace(binding.fragmentContainerHome.id,fragment).commit()
@@ -164,16 +167,6 @@ class SchermataHome : AppCompatActivity() {
         }
     }
 
-    fun setLocal(activity: Activity, langCode:String){
-        val locale: Locale = Locale(langCode)
-        Locale.setDefault(locale)
-        val resources = activity.resources
-        val config = resources.configuration
-        config.setLocale(locale)
-        resources.updateConfiguration(config,resources.displayMetrics)
-
-
-    }
 
 
 }
