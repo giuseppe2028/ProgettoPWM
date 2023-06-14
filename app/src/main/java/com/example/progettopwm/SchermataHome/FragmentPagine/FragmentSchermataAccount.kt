@@ -1,8 +1,7 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
-import android.app.Activity
-import android.content.Intent
-import android.content.res.Resources
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -16,7 +15,6 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.example.progettopwm.ClientNetwork
-import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
 import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
@@ -25,7 +23,6 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.Locale
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -39,6 +36,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentSchermataAccount : Fragment() {
+    private lateinit var sharedPreferences: SharedPreferences
     private  lateinit var binding : FragmentSchermataAccountBinding
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -56,6 +54,7 @@ class FragmentSchermataAccount : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        sharedPreferences = requireActivity().getSharedPreferences("misvago", Context.MODE_PRIVATE)
         // Inflate the layout for this fragment
         binding = FragmentSchermataAccountBinding.inflate(inflater)
 
@@ -75,12 +74,20 @@ class FragmentSchermataAccount : Fragment() {
         // Inflate the layout for this fragment
         clickBottoni()
         selectLingua()
+
         return binding.root
+    }
+
+    private fun setSpinner(selectedOption: String) {
+        //lo salvo nelle sharedPreferences:
+
     }
 
     private fun selectLingua() {
         var sentinellaSpinner = false
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        val spinner = binding.spinner
+        linguaDefault()
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View?,
@@ -92,7 +99,12 @@ class FragmentSchermataAccount : Fragment() {
                     setFragmentResult(
                         "itemSelected",
                         bundleOf("itemSelectRisposta" to selectedOption)
+
                     )
+                    //quando lo spinner viene cliccato memorizzo la sua posizione
+                    sharedPreferences.edit().putInt("valoreSpinnerLingua",position).commit()
+                    setSpinner(selectedOption)
+                    spinner.setSelection(position)
                 }
                 else{
                     sentinellaSpinner = true
@@ -114,6 +126,11 @@ class FragmentSchermataAccount : Fragment() {
 
         }
 
+    private fun linguaDefault() {
+
+        val position = sharedPreferences.getInt("valoreSpinnerLingua",0)
+        binding.spinner.setSelection(position)
+    }
 
 
     private fun clickBottoni() {
