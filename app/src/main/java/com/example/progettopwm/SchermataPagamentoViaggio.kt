@@ -30,19 +30,19 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
     private fun querySchermata(id:Int) {
 
         val query =
-                "select nome_struttura,luogo,data,num_persone,prezzo,path_immagine from Viaggio, Immagini where Viaggio.id = $id and Immagini.ref_viaggio = Viaggio.id"
+            "select nome_struttura,luogo,data,num_persone,prezzo,path_immagine from Viaggio, Immagini where Viaggio.id = $id and Immagini.ref_viaggio = Viaggio.id"
         GestioneDB.richiestaInformazioni(query){
-            elemento ->
-                binding.titoloViaggio.text = elemento.get("nome_struttura").asString
-                binding.dataViaggio.text = elemento.get("data").asString
-                binding.numeroPersone.text = elemento.get("num_persone").asString
-                binding.testoLuogo.text = elemento.get("luogo").asString
-                binding.prezzoViaggio2.text = elemento.get("prezzo").asString.plus("$")
-                prezzo = elemento.get("prezzo").asInt
-                GestioneDB.getImage(elemento){
+                elemento ->
+            binding.titoloViaggio.text = elemento.get("nome_struttura").asString
+            binding.dataViaggio.text = elemento.get("data").asString
+            binding.numeroPersone.text = elemento.get("num_persone").asString
+            binding.testoLuogo.text = elemento.get("luogo").asString
+            binding.prezzoViaggio2.text = elemento.get("prezzo").asString.plus("$")
+            prezzo = elemento.get("prezzo").asInt
+            GestioneDB.getImage(elemento){
                     immagine->
-                    binding.immagineLocalita.setImageBitmap(immagine)
-                }
+                binding.immagineLocalita.setImageBitmap(immagine)
+            }
             mostraDialog()
         }
 
@@ -64,7 +64,7 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
         //faccio la query
         val query = "select saldo from Persona where id=${idPersona.getId()}"
         GestioneDB.richiestaInformazioni(query){
-            saldoRichiesto ->
+                saldoRichiesto ->
             val saldo = saldoRichiesto.get("saldo").asInt
             Log.i("saldo","$saldo")
 
@@ -81,8 +81,8 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
 
     private fun aggiornaDati() {
         Log.i("ciao","$prezzo prezzooo")
-            val query = "update Persona set saldo = saldo - $prezzo where id = ${idPersona.getId()}"
-            GestioneDB.aggiornaServer(query)
+        val query = "update Persona set saldo = saldo - $prezzo where id = ${idPersona.getId()}"
+        GestioneDB.aggiornaServer(query)
 
     }
 }
