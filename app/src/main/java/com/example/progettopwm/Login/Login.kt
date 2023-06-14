@@ -2,6 +2,8 @@ package com.example.progettopwm.Login
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,10 +13,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.progettopwm.InterfacciaAPI
 import com.example.progettopwm.LanguageApp
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
 import com.example.progettopwm.SchermataIniziale.SchermataInizialeFragment
 import com.example.progettopwm.databinding.ActivityLoginBinding
+import com.example.progettopwm.idPersona
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -32,28 +36,54 @@ import java.util.concurrent.TimeUnit
 class Login : AppCompatActivity() {
     private lateinit var account: String
 
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var auth:FirebaseAuth
     private lateinit var googleSignClient:GoogleSignInClient
     private lateinit var binding:ActivityLoginBinding
     private var sentinellaCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        sharedPreferences = this.getSharedPreferences("misvago",Context.MODE_PRIVATE)
+
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
+
+        //prendo la preferences: ovvero mail password id persona:
+        // val username = sharedPreferences.getString("username","")
+        //val password = sharedPreferences.getString("password","")
+
         super.onCreate(savedInstanceState)
+
+
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         if(savedInstanceState == null){
             Log.i("sonoDentro","Dentro")
             transaction.add(binding.fragmentView.id, SchermataInizialeFragment())
         }
+
         setContentView(binding.root)
-
-
+        verificaPermanenza()
         accediCongoogle()
         //metto in comunicazione il fragment con l'host, per poi cambiare fragment
        passDimenticata()
         setLingua()
+    }
+
+    private fun verificaPermanenza() {
+        val id = sharedPreferences.getInt("id",0)
+        if(id!=0){
+            //loggo l'utente
+            val i = Intent(this,SchermataHome::class.java)
+            //i.putExtra("username", username)
+            //i.putExtra("password",password)
+            i.putExtra("id",id)
+            idPersona.setId(id!!.toInt())
+            startActivity(i)
+
+        }
+
+
     }
 
     private fun setLingua() {

@@ -1,6 +1,7 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -15,6 +16,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import com.example.progettopwm.ClientNetwork
+import com.example.progettopwm.Login.Login
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
 import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
@@ -77,12 +79,6 @@ class FragmentSchermataAccount : Fragment() {
 
         return binding.root
     }
-
-    private fun setSpinner(selectedOption: String) {
-        //lo salvo nelle sharedPreferences:
-
-    }
-
     private fun selectLingua() {
         var sentinellaSpinner = false
         val spinner = binding.spinner
@@ -103,7 +99,6 @@ class FragmentSchermataAccount : Fragment() {
                     )
                     //quando lo spinner viene cliccato memorizzo la sua posizione
                     sharedPreferences.edit().putInt("valoreSpinnerLingua",position).commit()
-                    setSpinner(selectedOption)
                     spinner.setSelection(position)
                 }
                 else{
@@ -145,6 +140,12 @@ class FragmentSchermataAccount : Fragment() {
         }
         binding.textViewwallet.setOnClickListener{
             parentFragmentManager.setFragmentResult("requestK", bundleOf("bundleK" to result))
+        }
+        binding.logout.setOnClickListener {
+            sharedPreferences.edit().putInt("id",0).apply()
+            //lo porto alla schermata di log in:
+            val i = Intent(context,Login::class.java)
+            startActivity(i)
         }
     }
 
