@@ -19,7 +19,6 @@
     <string name="inserisciNC">Inserisci nome e cognome dell\'intestatario </string>
     <string name="inseriscinumero">Inserisci il numero della carta</string>
     <string name="inserisciimporto">Inserisci l\'importo</string>
-
     <string name="inserisciCP">Inserisci nuovamente la password</string>
     <string name="inserisciNP">Inserisci una nuova password</string>
     <string name="OTP">OTP</string>
@@ -67,4 +66,29 @@
     <string name="Attivato">Viaggio aggiunto nei preferiti</string>
     <string name="Disattivato">Viaggio eliminato dai preferiti</string>
     <string name="mostraRecensioni">Mostra Recensioni</string>
+    <string-array name="Regione">
+        <item>Europa</item>
+        <item>Africa</item>
+        <item>Asia</item>
+        <item>America</item>
+        <item>Oceania</item>
+        <item>Tutte le mete</item>
+    </string-array>
+    <string-array name="NumPersone">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="Prezzo">
+        <item>Crescente</item>
+        <item>Decrescente</item>
+    </string-array>
+    <string name="titleTextDialog">Filtra Per:</string>
+    <string name="Regione">Destinazione</string>
+    <string name="NumeroPersoneDialog">Numero Persone</string>
+    <string name="Prezzo">Prezzo</string>
+
 </resources>

@@ -11,5 +11,7 @@ class ItemClassLocalita(
     val image:Bitmap?,
     val title:String, val position:String, val rating:Double,
     val prezzo: String,
-    val tipoViaggio:String):Parcelable{
+    val tipoViaggio:String,
+    val numPersone:String
+    ):Parcelable{
 }
