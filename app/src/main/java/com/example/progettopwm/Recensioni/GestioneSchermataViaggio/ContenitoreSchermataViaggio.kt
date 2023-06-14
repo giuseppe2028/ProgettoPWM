@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.GestioneDB.getImage
 import com.example.progettopwm.R

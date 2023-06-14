@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <string name="app_name">misvago</string>
+        <string name="benvenuto">Welcome to NameAPP</string>
+        <string name="Creaaccount">Create an account</string>
+        <string name="login">Login</string>
+        <string name="accediConGoogle">Login with Google</string>
+        <string name="subtitleLogin">Login with your credentials</string>
+        <string name="indirizzoMail">Email Address</string>
+        <string name="registrazione">Register</string>
+        <string name="nome">Name</string>
+        <string name="cognome">Surname</string>
+        <string name="password">Password</string>
+        <string name="passwordc">Confirm Password</string>
+        <string name="inserisciN">Enter your name</string>
+        <string name="inserisciC">Enter your surname</string>
+        <string name="inserisciE">Enter your email address</string>
+        <string name="inserisciP">Enter your password</string>
+        <string name="inserisciPC">Enter your current password</string>
+        <string name="inserisciNC">Enter the name and surname of the account holder</string>
+        <string name="inseriscinumero">Enter the card number</string>
+        <string name="inserisciimporto">Enter the amount</string>
+        <string name="inserisciCP">Enter the password again</string>
+        <string name="inserisciNP">Enter a new password</string>
+        <string name="OTP">OTP</string>
+        <string name="TitleOTP">Enter OTP</string>
+        <string name="subtitleOTP">The OTP has been sent to your email</string>
+        <string name="ToastLogin">You have not entered a password or email</string>
+        <string name="benvenutoHome">Hello, user! &#128075;</string>
+        <string name="subtitleHome">Where would you like to go?</string>
+        <string name="TitleProfilo">Profile</string>
+        <string name="GestioneProfilo">Manage your account</string>
+        <string name="wallet">Wallet</string>
+        <string name="wallets">Wallet Balance</string>
+        <string name="datipagamento">Edit payment information</string>
+        <string name="lingua">Change language</string>
+        <string name="logout">Logout</string>
+        <string name="data">Enter your date of birth</string>
+        <string name="data1">Date</string>
+        <string name="DatiAccount">Edit profile</string>
+        <string name="DatiAccountP">Payment information</string>
+        <string name="descrizionePagamenti">Add and manage your payment information.</string>
+        <string name="ToastOTP">Fill in the OTP field to continue</string>
+        <string name="hello_blank_fragment">Hello blank fragment</string>
+        <string name="email">example.example@domain.example</string>
+        <string name="passwordDimenticata">Forgot password?</string>
+        <string name="ReimpostaPassword">Reset Password</string>
+        <string name="subtitleRecuperaPassword">Enter the email address associated with your account to recover it</string>
+        <string name="CreaAccount">Create Account</string>
+        <string name="haiAccount">Already have an account?</string>
+        <string name="Signin">Sign in</string>
+        <string name="conferma">Confirm</string>
+        <string name="CercaDestinazione">Search for a destination</string>
+        <string name="Raccomandati">Recommended for you</string>
+        <string name="DestiazioniFamose">Popular destinations</string>
+        <string name="ProssimoViaggio">Upcoming Trip</string>
+        <string name="LocalitaSuggerite">Suggested Locations</string>
+        <string name="confermato">Confirmed</string>
+        <string name="descrizione">Description</string>
+        <string name="CompraloOra">Buy Now</string>
+        <string name="Attivato">Trip added to favorites</string>
+        <string name="Disattivato">Trip removed from favorites</string>
+
+</resources>

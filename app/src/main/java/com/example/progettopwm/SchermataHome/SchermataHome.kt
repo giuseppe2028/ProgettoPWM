@@ -1,5 +1,6 @@
 package com.example.progettopwm.SchermataHome
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,7 @@ import com.example.progettopwm.SchermataHome.SchermataPreferiti.SchermataPreferi
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
+import java.util.Locale
 
 class SchermataHome : AppCompatActivity() {
     private lateinit var binding:ActivitySchermataHomeBinding
@@ -31,8 +33,19 @@ class SchermataHome : AppCompatActivity() {
         wallet()
         DatiPagamento()
         ModificaDati()
+        attendiDatiFragment()
 
     }
+
+    private fun attendiDatiFragment() {
+        //attendo i dati del primo fragment
+        supportFragmentManager.setFragmentResultListener("itemSelected",this){
+                requestKey, bundle ->
+                val result = bundle.getInt("bundleKey")
+            Log.i("risultato ", "$result")
+        }
+    }
+
     private fun ModificaDati() {
 
         supportFragmentManager
@@ -137,5 +150,16 @@ class SchermataHome : AppCompatActivity() {
         }
     }
 
+    fun setLocal(activity: Activity, langCode:String){
+        val locale: Locale = Locale(langCode)
+        Locale.setDefault(locale)
+        val resources = activity.resources
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config,resources.displayMetrics)
 
+
+    }
+
+    //setLocal(requireActivity(),"en")
 }

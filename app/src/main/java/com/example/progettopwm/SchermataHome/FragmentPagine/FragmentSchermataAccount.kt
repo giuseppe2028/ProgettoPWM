@@ -1,6 +1,8 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
+import android.app.Activity
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -9,8 +11,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
@@ -21,6 +25,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,7 +59,7 @@ class FragmentSchermataAccount : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSchermataAccountBinding.inflate(inflater)
 
-        val result = true
+
         val id_p = idPersona.getId()
         richiediNome(id_p){value, nome, ref_immagine->
             if(value){
@@ -68,6 +73,34 @@ class FragmentSchermataAccount : Fragment() {
             }
         }
         // Inflate the layout for this fragment
+        clickBottoni()
+        selectLingua()
+        return binding.root
+    }
+
+    private fun selectLingua() {
+
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedOption: String = parent.getItemAtPosition(position).toString()
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Azioni da intraprendere quando non viene selezionata alcuna opzione
+            }
+        }
+
+        val item = binding.spinner.selectedItemPosition
+        Log.i("sono qui","$item")
+        setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to item))
+        //passo il valore indietro all'activity:
+
+
+    }
+
+    private fun clickBottoni() {
+        val result = true
         binding.textViewGestione.setOnClickListener{
             parentFragmentManager.setFragmentResult("requestMD", bundleOf("bundleMD" to result))
 
@@ -79,7 +112,6 @@ class FragmentSchermataAccount : Fragment() {
         binding.textViewwallet.setOnClickListener{
             parentFragmentManager.setFragmentResult("requestK", bundleOf("bundleK" to result))
         }
-        return binding.root
     }
 
     private fun setUpImage(ref_immagine:String){

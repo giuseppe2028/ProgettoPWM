@@ -129,20 +129,27 @@
             android:elevation="8dp"
             />
 
-        <TextView
-            android:id="@+id/textViewlingua"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lingua"
-            android:textSize="@dimen/sizeTextAccount"
-            android:layout_marginTop="@dimen/paddingTextEdit"
-            android:clickable="true"
-            android:textStyle="bold"
-            android:textColor="@color/coloretestopiccolo"
-            android:drawableStart="@drawable/translate"
-            android:drawablePadding="8dp"
-            android:elevation="8dp"
-            />
+            android:layout_height="match_parent"
+            android:layout_marginVertical="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="0"
+                android:src="@drawable/translate" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/lingua" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView"
