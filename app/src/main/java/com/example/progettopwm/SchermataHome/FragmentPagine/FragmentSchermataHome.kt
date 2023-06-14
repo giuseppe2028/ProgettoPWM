@@ -285,7 +285,7 @@ class FragmentSchermataHome : Fragment() {
             datoRichiesto = dato.get("contatore").asInt
             //setto ogni card:
             for(i in 0..datoRichiesto){
-                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
+                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, ref_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
                 GestioneDB.queryImmagini(query){
                     elemento,immagine ->
                     lista.add(ItemClassLocalita(
@@ -310,7 +310,7 @@ class FragmentSchermataHome : Fragment() {
 
 
     private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
-        val string = jsonObject.get("path_immagine").asString
+        val string = jsonObject.get("ref_immagine").asString
         Log.i("ciao90", "$string")
         Log.i("ciaoProva","$string")
         ClientNetwork.retrofit.getImage(string).enqueue(
@@ -340,6 +340,4 @@ class FragmentSchermataHome : Fragment() {
 
 }
 
-    private fun richiediDataBase() {
 
-    }
