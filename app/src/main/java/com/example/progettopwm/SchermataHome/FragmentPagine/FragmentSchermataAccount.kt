@@ -175,7 +175,7 @@ class FragmentSchermataAccount : Fragment() {
     }
 
     private fun richiediNome(id: Int, callback: (Boolean, String?, String?) -> Unit){
-        val query = "select nome, ref_immagine from Persona where id =$id"
+        val query = "select nome, path_immagine from Persona where id =$id"
         ClientNetwork.retrofit.registrazione(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

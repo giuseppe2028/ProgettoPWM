@@ -139,8 +139,8 @@ class SchermataPrenotazioni : Fragment() {
                                     val pdfData = generateReceiptText(item.id, nome, cognome, luogo, nome_struttura, data, giorni, prezzo)
                                     val pdfFileName = "ricevuta_${item.id}.pdf"
 
-                                    val file = generatePDF(pdfData, pdfFileName)
-                                    downloadPDF(file)
+                                   // val file = generatePDF(pdfData, pdfFileName)
+                                  //  downloadPDF(file)
                                 }else{
                                 }
                             }
@@ -224,81 +224,6 @@ class SchermataPrenotazioni : Fragment() {
             }
     }
 
-    // Dimensioni della pagina del documento PDF
-    private val pageWidth: Int = 595 // Valore in pixel
-    private val pageHeight: Int = 842 // Valore in pixel
-    private val pageNumber: Int = 1
 
-    // Dimensione del testo
-    private val textSize: Float = 12f // Valore in sp (scale-independent pixels)
-
-    // Spaziatura tra le righe del testo
-    private val lineSpacing: Float = 8f // Valore in pixel
-
-    // Contesto dell'applicazione
-    private lateinit var context: Context
-
-    // Authority per il provider di file
-    private val authority: String = "com.example.progettopwm.fileprovider"
-
-
-    // Metodo per generare il file PDF con il contenuto desiderato
-    private fun generatePDF(content: String, fileName: String): File? {
-        // Crea un nuovo documento PDF
-        val pdfDocument = PrintedPdfDocument(context, PrintAttributes.Builder().build())
-
-        // Inizia una nuova pagina
-        val pageInfo = PdfDocument.PageInfo.Builder(pageWidth, pageHeight, pageNumber).create()
-        val page = pdfDocument.startPage(pageInfo)
-
-        // Crea il canvas per disegnare il contenuto sulle pagine
-        val canvas = page.canvas
-
-        // Configura il paint per il testo
-        val paint = Paint()
-        paint.color = Color.BLACK
-        paint.textSize = textSize
-
-        // Disegna il contenuto sulla pagina
-        val contentRect = Rect()
-        page.getCanvas().getClipBounds(contentRect)
-        val textPaint = TextPaint()
-        textPaint.setTextSize(textSize.toFloat())
-        StaticLayout.Builder.obtain(content, 0, content.length, textPaint, contentRect.width())
-            .setAlignment(Layout.Alignment.ALIGN_NORMAL)
-            .setLineSpacing(lineSpacing, 1f)
-            .setIncludePad(true)
-            .build()
-            .draw(canvas)
-
-        // Fine del documento
-        pdfDocument.finishPage(page)
-
-        // Salva il documento PDF su file
-        val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), fileName)
-        try {
-            val fileOutputStream = FileOutputStream(file)
-            pdfDocument.writeTo(fileOutputStream)
-            fileOutputStream.close()
-            pdfDocument.close()
-            return file
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        return null
-    }
-
-    // Metodo per avviare il download del file PDF
-    private fun downloadPDF(file: File?) {
-        file?.let {
-            val uri = context?.let { it1 -> FileProvider.getUriForFile(it1, authority, file) }
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                setDataAndType(uri, "application/pdf")
-                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            }
-            context?.startActivity(intent)
-        }
-    }
 
 }
