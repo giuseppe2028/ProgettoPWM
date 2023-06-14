@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.InterfacciaAPI
 import com.example.progettopwm.LanguageApp
 import com.example.progettopwm.R
@@ -150,10 +151,12 @@ class Login : AppCompatActivity() {
 
         googleSignClient = GoogleSignIn.getClient(this,gso)
 
-        /* binding.accediConGoogle.setOnClickListener {
+
              signInGoogle()
              Log.i("Ciao","Cliccato")
-         }
+
+
+         /*
          binding.accediNormale.setOnClickListener {
              Log.i("prova",account)
             auth.signOut()
@@ -205,12 +208,27 @@ class Login : AppCompatActivity() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful){
                 Log.i("prova","Sei nella nuova pagina")
+                //verifico la mail:
+                verificaMail(account.email)
+
             }
             else{
                 Toast.makeText(this,it.exception.toString(),Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+    private fun verificaMail(email: String?) {
+        Log.i("email","$email")
+        val query = "select * from Persona where mail = '$email'"
+        GestioneDB.login(query,this) { dato ->
+                   val i = Intent(this,SchermataHome::class.java)
+                    startActivity(i)
+                    Log.i("dato","${dato.size()}")
+                    //stampo il Toast
+        }
+    }
+
     private fun fragmentListenerSignIn() {
         supportFragmentManager
             .setFragmentResultListener("SignIn", this) { requestKey, bundle ->
