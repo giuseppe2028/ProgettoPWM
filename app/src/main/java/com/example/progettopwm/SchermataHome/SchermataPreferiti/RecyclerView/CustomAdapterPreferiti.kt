@@ -3,9 +3,6 @@ package com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
-import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
-import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.databinding.FragmentPreferitiBinding
 
 class CustomAdapterPreferiti(val lista:List<ItemViewModel>): RecyclerView.Adapter<CustomAdapterPreferiti.ViewHolder>(){
