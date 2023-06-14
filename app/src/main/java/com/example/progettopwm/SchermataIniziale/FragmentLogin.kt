@@ -70,6 +70,7 @@ class FragmentLogin : Fragment() {
                         val resultSet = response.body()?.get("queryset") as JsonArray
                         if (resultSet.size() == 1) {
                             val id = resultSet[0].asJsonObject.get("id").asInt
+                            Log.i("idPersona","IDPERSONA")
                             callback(true, id)
                         }else{
                         callback(false, null)
@@ -100,17 +101,19 @@ class FragmentLogin : Fragment() {
             parentFragmentManager.setFragmentResult("requestGoogle", bundleOf("RispostaGoogle" to result))
         }
         binding.accediNormale.setOnClickListener {
-            /*if(binding.editTextText2.text.toString().trim().isEmpty() && binding.password.text.toString().trim().isEmpty()){
-                Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
+            if(binding.editTextText2.text.toString().trim().isEmpty() && binding.password.text.toString().trim().isEmpty()){
+              Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
             }
             else{
                 verificaCredenziali(binding.editTextText2.text.toString(), binding.password.text.toString()){ result, id_p->
                 if(result){
                     if (id_p != null) {
+                        Log.i("persona","idPersona:$id_p")
                         //sistemo le preferences:
-                        sharedPreferences.edit().putInt("id",id).apply()
+                        sharedPreferences.edit().putInt("id",id_p).apply()
                         idPersona.setId(id_p)
                     }
+                    Log.i("questo","log")
                     val intent = Intent(this.context,SchermataHome()::class.java)
 
                     startActivity(intent)
@@ -123,10 +126,7 @@ class FragmentLogin : Fragment() {
                 }
                 }
 
-             *///TODO da eliminare il commento e questa parte di codice
-            val intent = Intent(this.context,SchermataHome()::class.java)
 
-            startActivity(intent)
 
         }
     }

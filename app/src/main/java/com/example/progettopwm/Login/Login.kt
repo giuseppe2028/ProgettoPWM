@@ -43,7 +43,7 @@ class Login : AppCompatActivity() {
     private var sentinellaCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        sharedPreferences = this.getSharedPreferences("misvago",Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("misvago",Context.MODE_PRIVATE)
 
         val manager = supportFragmentManager
         val transaction = manager.beginTransaction()
@@ -78,7 +78,8 @@ class Login : AppCompatActivity() {
             //i.putExtra("username", username)
             //i.putExtra("password",password)
             i.putExtra("id",id)
-            idPersona.setId(id!!.toInt())
+
+            idPersona.setId(id)
             startActivity(i)
 
         }
@@ -88,7 +89,7 @@ class Login : AppCompatActivity() {
 
     private fun setLingua() {
         //prendo il valore della lingua:
-        val lingua = getSharedPreferences("misvago",Context.MODE_PRIVATE).getString("Lingua","")
+        val lingua = sharedPreferences.getString("Lingua","")
         Log.i("lingua","$lingua")
         if(lingua.equals("en")){
             LanguageApp.setLocal(this,"en")
@@ -155,7 +156,7 @@ class Login : AppCompatActivity() {
              Log.i("Ciao","Cliccato")
 
 
-         /*
+         /*+
          binding.accediNormale.setOnClickListener {
              Log.i("prova",account)
             auth.signOut()
