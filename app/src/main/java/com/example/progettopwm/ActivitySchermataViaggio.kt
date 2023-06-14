@@ -186,6 +186,12 @@ class ActivitySchermataViaggio : AppCompatActivity() {
 
             }
         )
+        val queryRecensione = "select count(id) as num_id from Recensioni where ref_viaggio = $id"
+        GestioneDB.richiestaInformazioni(queryRecensione){
+            valore->
+            binding.textReview.text = "(${valore.get("num_id").asString}) views"
+        }
+
     }
     private fun getImage(jsonObject: JsonObject){
         val string = jsonObject.get("ref_immagine").asString

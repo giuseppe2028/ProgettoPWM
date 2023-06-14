@@ -1,5 +1,7 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
+import androidx.fragment.app.setFragmentResult
+import androidx.core.os.bundleOf
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,7 +16,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.Login.Login
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
