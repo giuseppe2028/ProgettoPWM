@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.progettopwm.Gestione.GestioneDB
+import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.databinding.FragmentProssimoVIaggioBinding
 import java.sql.Date
 import java.time.LocalDate

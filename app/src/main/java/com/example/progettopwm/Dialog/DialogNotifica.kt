@@ -7,7 +7,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import com.example.progettopwm.Gestione.GestioneDB
 import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataHome

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.progettopwm.Dialog.DialogNotifica
-import com.example.progettopwm.Gestione.GestioneDB
 import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.databinding.ActivitySchermataPagamentoViaggioBinding
 import java.time.Duration

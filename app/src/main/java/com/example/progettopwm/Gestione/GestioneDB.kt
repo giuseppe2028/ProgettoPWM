@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
 import android.widget.Toast
+import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject

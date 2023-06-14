@@ -15,7 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.progettopwm.Gestione.ClientNetwork
-import com.example.progettopwm.Gestione.GestioneDB
+import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.R
 import com.example.progettopwm.Recensioni.RecyclerView.recensioneFragment
 import com.example.progettopwm.databinding.FragmentContenitoreSchermataViaggioBinding

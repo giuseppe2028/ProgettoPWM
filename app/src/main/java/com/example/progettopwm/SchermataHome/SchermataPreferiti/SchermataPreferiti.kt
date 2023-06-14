@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.progettopwm.Gestione.GestioneDB
+import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.CustomAdapterPreferiti
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.ItemViewModel
 import com.example.progettopwm.databinding.FragmentSchermataPreferitiBinding

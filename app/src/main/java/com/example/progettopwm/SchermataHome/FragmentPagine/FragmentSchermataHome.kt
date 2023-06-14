@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.Gestione.ClientNetwork
-import com.example.progettopwm.Gestione.GestioneDB
+import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
 //import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.R
