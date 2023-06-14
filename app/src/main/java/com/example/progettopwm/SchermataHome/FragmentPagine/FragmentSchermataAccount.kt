@@ -83,16 +83,21 @@ class FragmentSchermataAccount : Fragment() {
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedOption: String = parent.getItemAtPosition(position).toString()
+                if (selectedOption.equals("Inglese")){
+                    Log.i("Selected","$selectedOption")
+                    setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to selectedOption))
 
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // Azioni da intraprendere quando non viene selezionata alcuna opzione
+                Log.i("ciao","ciao")
             }
         }
 
         val item = binding.spinner.selectedItemPosition
-        Log.i("sono qui","$item")
+
         setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to item))
         //passo il valore indietro all'activity:
 

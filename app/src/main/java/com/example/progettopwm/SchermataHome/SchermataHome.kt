@@ -41,8 +41,10 @@ class SchermataHome : AppCompatActivity() {
         //attendo i dati del primo fragment
         supportFragmentManager.setFragmentResultListener("itemSelected",this){
                 requestKey, bundle ->
-                val result = bundle.getInt("bundleKey")
-            Log.i("risultato ", "$result")
+                val result = bundle.getString("itemSelectRisposta")
+                setLocal(this,"it")
+            finish()
+            startActivity(intent)
         }
     }
 
@@ -161,5 +163,5 @@ class SchermataHome : AppCompatActivity() {
 
     }
 
-    //setLocal(requireActivity(),"en")
+
 }
