@@ -66,4 +66,5 @@
     <string name="CompraloOra">Compralo Ora</string>
     <string name="Attivato">Viaggio aggiunto nei preferiti</string>
     <string name="Disattivato">Viaggio eliminato dai preferiti</string>
+    <string name="mostraRecensioni">Mostra Recensioni</string>
 </resources>
