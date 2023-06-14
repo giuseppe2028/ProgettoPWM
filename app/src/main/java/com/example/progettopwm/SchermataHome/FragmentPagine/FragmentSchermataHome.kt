@@ -210,7 +210,12 @@ class FragmentSchermataHome : Fragment() {
     }
 
     private fun recycleViewGestore() {
-         dati = arrayListOf<ItemsViewModel>(ItemsViewModel(127755,"Esplorazione"), ItemsViewModel(127958,"Mare"),ItemsViewModel(127957,"gita all'aria aperta"),ItemsViewModel(127956,"trekking"),ItemsViewModel(127963,"Cultura"))
+         dati = arrayListOf<ItemsViewModel>(
+             ItemsViewModel(127755,getString(R.string.Esplorazione)),
+             ItemsViewModel(127958,getString(R.string.Mare)),
+             ItemsViewModel(127957,getString(R.string.Relax)),
+             ItemsViewModel(127956,getString(R.string.Trekking)),
+             ItemsViewModel(127963,getString(R.string.Cultura)))
 
 
          adapter = CustomAdapter(dati)

@@ -166,6 +166,10 @@ class SchermataHome : AppCompatActivity() {
 
         }
     }
+    //blocco l'onpressed
+    override fun onBackPressed() {
+
+    }
 
 
 

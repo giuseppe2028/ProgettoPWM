@@ -101,4 +101,9 @@
     <string name="testoAlertDialogAcquisto">Tutti i dettagli della fatturazioni saranno inviati alla sua casella di posta. Per maggiori dettagli può trovare la ricevuta nella sezione prenotazioni. Le auguriamo un buon viaggio.
     </string>
     <string name="ToastLogin1">Mail di google non registrata, registrati prima di entrare</string>
+    <string name="Esplorazione">Esplorazione</string>
+    <string name="Mare">Mare</string>
+    <string name="Relax">Relax</string>
+    <string name="Trekking">Trekking</string>
+    <string name="Cultura">Cultura</string>
 </resources>
