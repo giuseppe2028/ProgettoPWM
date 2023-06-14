@@ -59,10 +59,18 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         clickLike(idPersona,id)
         clickAzienda()
         clickMostraRecensioni(id)
-
+        clickCompra(id)
 
     }
+    private fun clickCompra(id: Int) {
+        //passo i dati e l'id del viaggio:
 
+        binding.comprami.setOnClickListener {
+            val intent = Intent(this,SchermataPagamentoViaggio()::class.java)
+            intent.putExtra("idViaggio",id)
+            startActivity(intent)
+        }
+    }
     private fun clickMostraRecensioni(idViaggio:Int) {
         binding.mostraRecensioni.setOnClickListener {
             val i = Intent(this,ViewRecensioni::class.java)
