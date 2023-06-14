@@ -10,8 +10,8 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.GestioneDB
-import com.example.progettopwm.InterfacciaAPI
 import com.example.progettopwm.LanguageApp
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataHome
@@ -19,7 +19,6 @@ import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
 import com.example.progettopwm.SchermataIniziale.SchermataInizialeFragment
 import com.example.progettopwm.databinding.ActivityLoginBinding
-import com.example.progettopwm.idPersona
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
