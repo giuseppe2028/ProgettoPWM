@@ -6,7 +6,7 @@ import android.os.ProxyFileDescriptorCallback
 import android.util.Log
 import android.widget.Adapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.progettopwm.GestioneDB
+import com.example.progettopwm.Gestione.GestioneDB
 import com.example.progettopwm.R
 import com.example.progettopwm.Recensioni.RecyclerView.CustomAdapterRecensioni
 import com.example.progettopwm.Recensioni.RecyclerView.ItemViewModelRecensioni

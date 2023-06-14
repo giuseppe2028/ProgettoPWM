@@ -1,14 +1,19 @@
 package com.example.progettopwm.Login
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.progettopwm.InterfacciaAPI
+import com.example.progettopwm.Gestione.idPersona
+import com.example.progettopwm.LanguageApp
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
 import com.example.progettopwm.SchermataIniziale.SchermataInizialeFragment
@@ -28,7 +33,7 @@ import java.util.concurrent.TimeUnit
 
 class Login : AppCompatActivity() {
     private lateinit var account: String
-
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var auth:FirebaseAuth
     private lateinit var googleSignClient:GoogleSignInClient
     private lateinit var binding:ActivityLoginBinding
@@ -66,7 +71,7 @@ class Login : AppCompatActivity() {
         val id = sharedPreferences.getInt("id",0)
         if(id!=0){
             //loggo l'utente
-            val i = Intent(this,SchermataHome::class.java)
+            val i = Intent(this, SchermataHome::class.java)
             //i.putExtra("username", username)
             //i.putExtra("password",password)
             i.putExtra("id",id)
@@ -80,7 +85,7 @@ class Login : AppCompatActivity() {
 
     private fun setLingua() {
         //prendo il valore della lingua:
-        val lingua = getSharedPreferences("misvago",Context.MODE_PRIVATE).getString("Lingua","")
+        val lingua = getSharedPreferences("misvago", Context.MODE_PRIVATE).getString("Lingua","")
         Log.i("lingua","$lingua")
         if(lingua.equals("en")){
             LanguageApp.setLocal(this,"en")

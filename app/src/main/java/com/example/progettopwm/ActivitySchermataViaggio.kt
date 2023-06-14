@@ -12,6 +12,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.progettopwm.Gestione.ClientNetwork
+import com.example.progettopwm.Gestione.GestioneDB
 import com.example.progettopwm.Recensioni.ViewRecensioni
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita

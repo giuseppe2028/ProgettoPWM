@@ -49,7 +49,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:background="@drawable/gradient_wallet"
             android:paddingLeft="10dp">
 
             <androidx.constraintlayout.widget.Guideline
@@ -90,7 +89,6 @@
                     android:layout_height="wrap_content"
                     android:singleLine="false"
                     android:text="Formentera"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/TitleCardHomeSize"
                     android:textStyle="bold" />
 
@@ -101,7 +99,6 @@
                     android:layout_marginVertical="5dp"
 
                     android:text="Venezia,Italia "
-                    android:textColor="@color/white"
                     android:textSize="@dimen/textCardHomeSize" />
 
                 <LinearLayout
@@ -115,7 +112,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="10dp"
                         android:text="15/08/21"
-                        android:textColor="@color/white"
                         android:textSize="@dimen/textCardHomeSize" />
 
                     <TextView
