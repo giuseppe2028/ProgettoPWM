@@ -96,4 +96,8 @@
     <string name="NumeroPersoneDialog">Numero Persone</string>
     <string name="Prezzo">Prezzo</string>
 
+    <string name="RiepilogoPrenotazione">Riepilogo Prenotazione</string>
+    <string name="titoloDialogAcquisto">Complimenti, il tuo acquisto è andato a buon fine</string>
+    <string name="testoAlertDialogAcquisto">Tutti i dettagli della fatturazioni saranno inviati alla sua casella di posta. Per maggiori dettagli può trovare la ricevuta nella sezione prenotazioni. Le auguriamo un buon viaggio.
+    </string>
 </resources>

@@ -1,7 +1,4 @@
 package com.example.progettopwm.SchermataIniziale
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -11,19 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
-import androidx.lifecycle.MutableLiveData
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.example.progettopwm.ClientNetwork
+import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
-import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentModificaDati
-import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentWallet
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.FragmentLoginBinding
-import com.example.progettopwm.databinding.FragmentModificaDatiBinding
-import com.example.progettopwm.idPersona
+import com.example.progettopwm.Gestione.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -109,7 +99,7 @@ class FragmentLogin : Fragment() {
             parentFragmentManager.setFragmentResult("requestGoogle", bundleOf("RispostaGoogle" to result))
         }
         binding.accediNormale.setOnClickListener {
-            if(binding.editTextText2.text.toString().trim().isEmpty() && binding.password.text.toString().trim().isEmpty()){
+            /*if(binding.editTextText2.text.toString().trim().isEmpty() && binding.password.text.toString().trim().isEmpty()){
                 Toast.makeText(this.context, R.string.ToastLogin, Toast.LENGTH_SHORT).show()
             }
             else{
@@ -130,7 +120,13 @@ class FragmentLogin : Fragment() {
 
                 }
                 }
-            }
+                }
+
+             *///TODO da eliminare il commento e questa parte di codice
+            val intent = Intent(this.context,SchermataHome()::class.java)
+
+            startActivity(intent)
+
         }
     }
 

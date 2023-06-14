@@ -1,9 +1,6 @@
 package com.example.progettopwm.Login
 
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,14 +8,11 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.progettopwm.InterfacciaAPI
-import com.example.progettopwm.LanguageApp
 import com.example.progettopwm.R
-import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
 import com.example.progettopwm.SchermataIniziale.SchermataInizialeFragment
 import com.example.progettopwm.databinding.ActivityLoginBinding
-import com.example.progettopwm.idPersona
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,13 +24,11 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class Login : AppCompatActivity() {
     private lateinit var account: String
 
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var auth:FirebaseAuth
     private lateinit var googleSignClient:GoogleSignInClient
     private lateinit var binding:ActivityLoginBinding
@@ -211,6 +203,8 @@ class Login : AppCompatActivity() {
             }
         }
     }
+
+    //TODO(DA TOGLIERE)
     private fun fragmentListenerSignIn() {
         supportFragmentManager
             .setFragmentResultListener("SignIn", this) { requestKey, bundle ->

@@ -1,5 +1,6 @@
-package com.example.progettopwm
+package com.example.progettopwm.Gestione
 
+import com.example.progettopwm.Interfacce.InterfacciaAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

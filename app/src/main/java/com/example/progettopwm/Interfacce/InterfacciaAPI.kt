@@ -1,4 +1,4 @@
-package com.example.progettopwm
+package com.example.progettopwm.Interfacce
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Call

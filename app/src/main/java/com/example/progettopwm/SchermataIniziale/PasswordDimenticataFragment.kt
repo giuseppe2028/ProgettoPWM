@@ -11,10 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
-import androidx.core.os.bundleOf
-import com.example.progettopwm.ClientNetwork
+import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
-import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentModificaDati
 import com.example.progettopwm.databinding.FragmentPasswordDimenticataBinding
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject

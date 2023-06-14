@@ -28,6 +28,10 @@
         <activity
             android:name=".Recensioni.ViewRecensioni"
             android:exported="false" />
+
+        <activity
+            android:name=".SchermataPagamentoViaggio"
+            android:exported="false" />
         <activity
             android:name=".ActivitySchermataViaggio"
             android:exported="false" />

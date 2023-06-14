@@ -1,10 +1,9 @@
-package com.example.progettopwm
+package com.example.progettopwm.Gestione
 
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
-import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
