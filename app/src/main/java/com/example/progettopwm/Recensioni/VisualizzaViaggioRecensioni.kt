@@ -61,7 +61,8 @@ class VisualizzaViaggioRecensioni : AppCompatActivity() {
                 }
             }
         }
-        adapter.setOnClickListener(
+        /*adapter.setOnClick
+        Listener(
             object : CustomAdapter.OnclickListener{
                 override fun onclick(position: Int, item: ItemsViewModel) {
                     filtaListaByMete(item.descrizione)
@@ -69,6 +70,8 @@ class VisualizzaViaggioRecensioni : AppCompatActivity() {
 
             }
         )
+
+         */
 
 
     }

@@ -32,6 +32,7 @@ class CustomAdapterScriviRecensione(val lista:List<ItemViewModelRecensioniScritt
         holder.recensione.rating = item.rating.toFloat()
         holder.numeroPersone.text = item.numPersone.toString()
         holder.data.text = item.data
+       holder
     }
 
 
