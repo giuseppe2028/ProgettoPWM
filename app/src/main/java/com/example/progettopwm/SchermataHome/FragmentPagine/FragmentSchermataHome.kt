@@ -28,16 +28,6 @@ import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 import com.example.progettopwm.ViewDialog
-import retrofit2.Callback
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Response
 import java.sql.Date
 import java.time.LocalDate
 
@@ -46,11 +36,7 @@ import java.time.LocalDate
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentSchermataHome.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class FragmentSchermataHome : Fragment() {
     private lateinit var adapter:CustomAdapter
     private lateinit var dati:ArrayList<ItemsViewModel>
@@ -326,7 +312,7 @@ class FragmentSchermataHome : Fragment() {
         }
 
 
-    private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
+    /*private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
         val string = jsonObject.get("ref_immagine").asString
         Log.i("ciao90", "$string")
         Log.i("ciaoProva","$string")
@@ -354,5 +340,7 @@ class FragmentSchermataHome : Fragment() {
         )
 
     }
+
+     */
 
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultRegistry
 import androidx.core.os.bundleOf
 import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
@@ -31,6 +32,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentLogin : Fragment() {
+    val CODICE_HOME = 1
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding:FragmentLoginBinding
     private var param1: String? = null
@@ -114,9 +116,11 @@ class FragmentLogin : Fragment() {
                         idPersona.setId(id_p)
                     }
                     Log.i("questo","log")
-                    val intent = Intent(this.context,SchermataHome()::class.java)
 
-                    startActivity(intent)
+                    //startActivity(intent)
+
+                    val intent = Intent(this.context,SchermataHome::class.java)
+
 
                 }
                 else{

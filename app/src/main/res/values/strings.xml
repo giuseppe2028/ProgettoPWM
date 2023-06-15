@@ -106,4 +106,12 @@
     <string name="Relax">Relax</string>
     <string name="Trekking">Trekking</string>
     <string name="Cultura">Cultura</string>
+    <string name="Recensione">Scrivi una recensione</string>
+    <string name="titoloRecensione">Inserisci un titolo</string>
+    <string name="descrizioneRecensione">Inserisci una descrizione</string>
+    <string name="InserisciRecensione">Scrivi una recensione</string>
+    <string name="InserisciTitolo">Perfavore, inserisci un titolo alla tua recensione</string>
+    <string name="InserisciTesto">Perfavore, descrivi la tua esperienza</string>
+    <string name="InserisciValuta">Perfavore, inserisci una valutazione</string>
+    <string name="PopupRecensione">Grazie per la tua collaborazione</string>
 </resources>

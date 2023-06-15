@@ -19,6 +19,7 @@ import androidx.core.os.bundleOf
 import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.Login.Login
+import com.example.progettopwm.Recensioni.VisualizzaViaggioRecensioni
 import com.example.progettopwm.databinding.FragmentSchermataAccountBinding
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -144,6 +145,10 @@ class FragmentSchermataAccount : Fragment() {
             sharedPreferences.edit().putInt("id",0).apply()
             //lo porto alla schermata di log in:
             val i = Intent(context,Login::class.java)
+            startActivity(i)
+        }
+        binding.recensioneButton.setOnClickListener{
+            val i = Intent(context,VisualizzaViaggioRecensioni::class.java)
             startActivity(i)
         }
     }
