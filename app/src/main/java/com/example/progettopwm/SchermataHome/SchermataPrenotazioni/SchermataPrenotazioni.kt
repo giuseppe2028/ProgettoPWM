@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.drawable.Drawable
 import android.graphics.pdf.PdfDocument
 import android.os.Build
 import android.os.Bundle
@@ -25,9 +26,11 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.content.PermissionChecker
 import androidx.core.content.PermissionChecker.checkSelfPermission
+import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.GestioneDB
+import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataPrenotazioni.RecyclerView.CustomAdapterPrenotazioni
 import com.example.progettopwm.SchermataHome.SchermataPrenotazioni.RecyclerView.ItemViewModelP
 import com.example.progettopwm.databinding.FragmentPrenotazioniBinding
@@ -35,7 +38,9 @@ import com.example.progettopwm.databinding.FragmentSchermataPrenotazioniBinding
 import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.itextpdf.io.image.ImageDataFactory
 import com.itextpdf.text.Document
+import com.itextpdf.text.Image
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
 import retrofit2.Call
@@ -207,8 +212,12 @@ class SchermataPrenotazioni : Fragment() {
             PdfWriter.getInstance(mDoc, FileOutputStream(mFilePath))
             mDoc.open()
             val data = file
+            /*val drawableId = R.drawable.photo_2023_05_31_21_01_17_removebg_preview
+            val drawable: Drawable? = context?.getDrawable(drawableId)
+            val img = ImageDataFactory.create(R.drawable.photo_2023_05_31_21_01_17_removebg_preview, null)*/
             mDoc.addAuthor("Gabriele")
             mDoc.add(Paragraph(data))
+           // mDoc.add()
             mDoc.close()
             Toast.makeText(this.context, "$mFileName.pdf\n is created in \n $mFilePath", Toast.LENGTH_SHORT).show()
 
