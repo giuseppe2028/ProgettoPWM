@@ -87,13 +87,15 @@
                 android:id="@+id/nomeProfilo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/benvenutoHome" />
+                android:text="@string/benvenutoHome"
+                android:textColor="@color/coloretestopiccolo"/>
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/subtitleHome" />
+                android:text="@string/subtitleHome"
+                android:textColor="@color/coloretestopiccolo"/>
         </LinearLayout>
     </LinearLayout>
 

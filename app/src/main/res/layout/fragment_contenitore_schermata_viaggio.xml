@@ -64,6 +64,7 @@
             android:layout_marginBottom="8dp"
             android:text="Formentera"
             android:textSize="@dimen/title"
+            android:textColor="@color/coloretestopiccolo"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
