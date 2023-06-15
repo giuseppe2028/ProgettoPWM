@@ -107,4 +107,7 @@
     <string name="Trekking">Trekking</string>
     <string name="Cultura">Cultura</string>
     <string name="Recensione">Scrivi una recensione</string>
+    <string name="titoloRecensione">Inserisci un titolo</string>
+    <string name="descrizioneRecensione">Inserisci una descrizione</string>
+    <string name="InserisciRecensione">Scrivi una recensione</string>
 </resources>

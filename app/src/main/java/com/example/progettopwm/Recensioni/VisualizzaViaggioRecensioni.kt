@@ -3,6 +3,7 @@ package com.example.progettopwm.Recensioni
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.Recensioni.RecyclerView.ItemViewModelRecensioni
@@ -21,9 +22,10 @@ class VisualizzaViaggioRecensioni : AppCompatActivity() {
     }
 
     private fun setupSchermata() {
+        binding.recyclerViewRecensioni.layoutManager = LinearLayoutManager(this)
         val lista:ArrayList<ItemViewModelRecensioniScrittura> = ArrayList()
         val data = LocalDate.now().toString()
-        Log.i("data","$data")
+        Log.i("data","${idPersona.getId()}")
         //faccio la query:
         //mi faccio dare la dimensione:
         //aggiungere immagine
@@ -33,8 +35,9 @@ class VisualizzaViaggioRecensioni : AppCompatActivity() {
             //count:
             val count = dato.get("countId").asInt
 
-            for(i in 0..count){
-                val query = "select V.id as id, luogo,nome_struttura,data,prezzo, recensione, num_persone, ref_immagine from Immagini I, Viaggio V, Compra C where C.ref_persona = ${idPersona.getId()} and V.data < $data and I.ref_viaggio = V.id and C.ref_viaggio = $i"
+            for(i in 1..count){
+                //val query = "select V.id as id, luogo,nome_struttura,data,prezzo, recensione, num_persone, ref_immagine from Immagini I, Viaggio V, Compra C where C.ref_persona = ${idPersona.getId()} and V.data < $data and I.ref_viaggio = V.id and C.ref_viaggio = $i"
+                val query = "select V.id as id, luogo,nome_struttura,data,prezzo, recensione, num_persone, ref_immagine from Immagini I, Viaggio V, Compra C where C.ref_persona = ${idPersona.getId()} and V.data < '$data' and I.ref_viaggio = V.id and C.ref_viaggio = V.id"
                 //richiedo la card
                 GestioneDB.queryImmagini(query){
                     dato,immagine->
@@ -50,7 +53,7 @@ class VisualizzaViaggioRecensioni : AppCompatActivity() {
                         )
                     )
                     Log.i("listasize", "${lista.size}")
-                    CustomAdapterScriviRecensione(lista)
+                    binding.recyclerViewRecensioni.adapter = CustomAdapterScriviRecensione(lista)
                 }
             }
         }
