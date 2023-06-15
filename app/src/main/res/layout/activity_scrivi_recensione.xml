@@ -14,11 +14,12 @@
         android:text="@string/InserisciRecensione"
         android:textSize="@dimen/dimenTitleDialog"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/cardView3"
+        app:layout_constraintBottom_toTopOf="@+id/confermaButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/cardView3"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <androidx.cardview.widget.CardView
@@ -32,22 +33,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10">
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.050000012">
 
         <LinearLayout
+            android:id="@+id/linearLayout12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/inserisciTesto"
+                android:id="@+id/inserisciTitolo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:hint="@string/titoloRecensione"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:paddingVertical="7dp"
                 android:paddingLeft="10dp" />
 
@@ -62,14 +65,14 @@
                 android:isIndicator="false" />
 
             <EditText
-                android:id="@+id/insersciTitolo"
+                android:id="@+id/insersciTesto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="15dp"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:hint="@string/descrizioneRecensione"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:lines="5"
                 android:maxLines="5"
                 android:paddingVertical="7dp"
@@ -77,7 +80,6 @@
                 android:singleLine="false" />
 
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
     <Button
@@ -91,6 +93,6 @@
         android:text="@string/conferma"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
