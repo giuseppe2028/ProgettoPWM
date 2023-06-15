@@ -9,10 +9,13 @@ import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.Recensioni.RecyclerView.ItemViewModelRecensioni
 import com.example.progettopwm.Recensioni.ScriviRecensione.RecyclerView.CustomAdapterScriviRecensione
 import com.example.progettopwm.Recensioni.ScriviRecensione.RecyclerView.ItemViewModelRecensioniScrittura
+import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
+import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.databinding.ActivityVisualizzaViaggioRecensioniBinding
 import java.time.LocalDate
 
 class VisualizzaViaggioRecensioni : AppCompatActivity() {
+    private lateinit var adapter:CustomAdapterScriviRecensione
     private lateinit var binding:ActivityVisualizzaViaggioRecensioniBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,10 +56,19 @@ class VisualizzaViaggioRecensioni : AppCompatActivity() {
                         )
                     )
                     Log.i("listasize", "${lista.size}")
-                    binding.recyclerViewRecensioni.adapter = CustomAdapterScriviRecensione(lista)
+                    adapter = CustomAdapterScriviRecensione(lista)
+                    binding.recyclerViewRecensioni.adapter = adapter
                 }
             }
         }
+        adapter.setOnClickListener(
+            object : CustomAdapter.OnclickListener{
+                override fun onclick(position: Int, item: ItemsViewModel) {
+                    filtaListaByMete(item.descrizione)
+                }
+
+            }
+        )
 
 
     }

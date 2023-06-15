@@ -46,4 +46,6 @@ class CustomAdapterScriviRecensione(val lista:List<ItemViewModelRecensioniScritt
     }
 
 
+
+
 }
