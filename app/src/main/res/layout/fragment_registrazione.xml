@@ -122,6 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/paddingEditTetxt"
                 android:textStyle="bold"
+                android:textSize="20dp"
                 android:textColor="@color/coloretestopiccolo"
                 />
         </LinearLayout>

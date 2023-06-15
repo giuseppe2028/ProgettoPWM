@@ -15,7 +15,6 @@
         android:text="@string/ProssimoViaggio"
         android:textSize="@dimen/sizeTextSubTitle"
         android:textStyle="bold"
-        android:textColor="@color/coloretestopiccolo"
         app:layout_constraintBottom_toTopOf="@id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

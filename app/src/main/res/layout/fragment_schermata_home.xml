@@ -74,7 +74,6 @@
             android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:layout_marginRight="@dimen/MargineImmagineLayoutSuperiore"
-            android:src="@drawable/sfondologin"
             app:civ_border_color="#FF000000" />
 
         <LinearLayout

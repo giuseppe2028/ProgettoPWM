@@ -50,7 +50,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="@dimen/marginTitle"
-                android:src="@drawable/stiven_baslar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -61,6 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/marginTitle"
+                android:textColor="@color/coloretestopiccolo"
+
                 android:textSize="@dimen/sizeText"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
