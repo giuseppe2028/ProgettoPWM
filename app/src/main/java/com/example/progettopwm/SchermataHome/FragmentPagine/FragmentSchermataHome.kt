@@ -222,7 +222,6 @@ class FragmentSchermataHome : Fragment() {
                     if (response.isSuccessful) {
                         val resultSet = response.body()?.get("queryset") as JsonArray
                         if (resultSet.size() == 1) {
-                            val nome= resultSet[0].asJsonObject.get("nome").asString
                             val ref_immagine= resultSet[0].asJsonObject.get("ref_immagine").asString
                             callback(true, ref_immagine)
                         }else{
