@@ -11,12 +11,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.Gestione.ClientNetwork
+import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
 //import com.example.progettopwm.GestioneDB
@@ -59,7 +61,7 @@ class FragmentSchermataHome : Fragment() {
     private lateinit var adapterViaggi:CustomAdapterMete
     private var param1: String? = null
     private var param2: String? = null
-    var idPersona:Int = 0
+    var idPerson:Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +85,17 @@ class FragmentSchermataHome : Fragment() {
         filtraLista()
         gestioneSearchView()
         setProfilo()
+        val id_p= idPersona.getId()
+        richiediImg(id_p){value, ref_immagine->
+            if(value){
+                if (ref_immagine != null) {
+                    setUpImage(ref_immagine)
+                }
+            }
+            else{
+                Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
+            }
+        }
         popolaLista{
                 updateList->
             listaLuogo = updateList
@@ -159,13 +172,14 @@ class FragmentSchermataHome : Fragment() {
 
 
     private fun setProfilo() {
+        val id = idPersona.getId()
         //TODO(ll'id sarà passato all'inizio del profilo)
-        val query = "select nome,id from Persona where id = 1"
+        val query = "select nome,id from Persona where id = $id"
         GestioneDB.richiestaInformazioni(query){
             data ->
             //gestisco il JSON object
             val nome = data.get("nome").asString
-            idPersona = data.get("id").asInt
+            idPerson = data.get("id").asInt
             //sostituisco la stringa di default:
             val nomePrincipale = binding.nomeProfilo.text
             binding.nomeProfilo.text = nomePrincipale.replace("user".toRegex(), "$nome")
@@ -174,6 +188,63 @@ class FragmentSchermataHome : Fragment() {
         }
     }
 
+    private fun setUpImage(ref_immagine:String){
+        ClientNetwork.retrofit.getImage(ref_immagine).enqueue(
+            object : Callback<ResponseBody>{
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
+                    if(response.isSuccessful){
+                        var immagine: Bitmap? = null
+                        if (response.body()!=null) {
+                            immagine = BitmapFactory.decodeStream(response.body()?.byteStream())
+                            binding.imageProfile.setImageBitmap(immagine)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.i("ciao","fail")
+                }
+
+            }
+        )
+
+
+    }
+
+    private fun richiediImg(id: Int, callback: (Boolean, String?) -> Unit){
+        val query = "select ref_immagine from Persona where id =$id"
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        val resultSet = response.body()?.get("queryset") as JsonArray
+                        if (resultSet.size() == 1) {
+                            val nome= resultSet[0].asJsonObject.get("nome").asString
+                            val ref_immagine= resultSet[0].asJsonObject.get("ref_immagine").asString
+                            callback(true, ref_immagine)
+                        }else{
+                            callback(false, null)
+                        }
+                    }
+                    else{
+                        callback(false, null)
+                        Log.i("errore", "non funziona")
+                        Log.i("errore", response.message())
+                        Log.i("errore",  response.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    callback(false, null)
+                    Log.e("Errore", "Errore durante la chiamata di rete", t)
+                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
 
     private fun filtraLista() {
 
@@ -234,7 +305,7 @@ class FragmentSchermataHome : Fragment() {
             override fun Onclick(position: Int, item: ItemClassLocalita) {
                 val intent = Intent(activity,ActivitySchermataViaggio()::class.java)
                 intent.putExtra("idViaggio", item.id)
-                intent.putExtra("Persona",idPersona)
+                intent.putExtra("Persona",idPerson)
                 startActivity(intent)
             }
             }

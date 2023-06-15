@@ -140,18 +140,9 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center">
+
+
             <Button
-                android:id="@+id/buttonSaldo"
-                style="@style/bottoneLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/paddingEditTetxt"
-                android:elevation="8dp"
-                android:text="Saldo"
-                android:layout_marginRight="10dp"/>
-
-
-           <Button
             android:id="@+id/buttonPaga"
             style="@style/bottoneLogin"
             android:layout_width="wrap_content"
