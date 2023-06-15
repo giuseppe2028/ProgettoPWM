@@ -17,6 +17,7 @@ import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataAcc
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentWallet
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.SchermataPreferiti
+import com.example.progettopwm.SchermataHome.SchermataPrenotazioni.SchermataPrenotazioni
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
 import com.example.progettopwm.databinding.ActivitySchermataHomeBinding
@@ -159,6 +160,7 @@ class SchermataHome : AppCompatActivity() {
                 R.id.home -> sostituisciFragment(FragmentSchermataHome())
                 R.id.preferiti -> sostituisciFragment(SchermataPreferiti())
                R.id.account -> sostituisciFragment(FragmentSchermataAccount())
+                R.id.prenotazioni->sostituisciFragment(SchermataPrenotazioni())
                 else -> {
                      true
                 }
