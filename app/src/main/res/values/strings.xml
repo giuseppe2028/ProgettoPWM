@@ -110,4 +110,7 @@
     <string name="titoloRecensione">Inserisci un titolo</string>
     <string name="descrizioneRecensione">Inserisci una descrizione</string>
     <string name="InserisciRecensione">Scrivi una recensione</string>
+    <string name="InserisciTitolo">Perfavore, inserisci un titolo alla tua recensione</string>
+    <string name="InserisciTesto">Perfavore, descrivi la tua esperienza</string>
+    <string name="InserisciValuta">Perfavore, inserisci una valutazione</string>
 </resources>
