@@ -1,11 +1,14 @@
 package com.example.progettopwm.SchermataHome.SchermataPrenotazioni
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.pdf.PdfDocument
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.print.PrintAttributes
@@ -20,6 +23,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.core.content.PermissionChecker
+import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ClientNetwork
 import com.example.progettopwm.GestioneDB
@@ -30,12 +35,17 @@ import com.example.progettopwm.databinding.FragmentSchermataPrenotazioniBinding
 import com.example.progettopwm.idPersona
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.itextpdf.text.Document
+import com.itextpdf.text.Paragraph
+import com.itextpdf.text.pdf.PdfWriter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.Locale
 import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
@@ -53,7 +63,9 @@ class SchermataPrenotazioni : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentSchermataPrenotazioniBinding
-
+    private val STORAGE_CODE =1001
+    private var pdfData = ""
+    private var pdfFileName = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -136,11 +148,9 @@ class SchermataPrenotazioni : Fragment() {
                                     val data= resultSet[0].asJsonObject.get("data").asString
                                     val giorni= resultSet[0].asJsonObject.get("giorni_pernotto").asInt
                                     val prezzo= resultSet[0].asJsonObject.get("prezzo").asDouble
-                                    val pdfData = generateReceiptText(item.id, nome, cognome, luogo, nome_struttura, data, giorni, prezzo)
-                                    val pdfFileName = "ricevuta_${item.id}.pdf"
-
-                                   // val file = generatePDF(pdfData, pdfFileName)
-                                  //  downloadPDF(file)
+                                    pdfData = generateReceiptText(item.id, nome, cognome, luogo, nome_struttura, data, giorni, prezzo)
+                                    pdfFileName = "ricevuta_${item.id}.pdf"
+                                    pdf(pdfData, pdfFileName)
                                 }else{
                                 }
                             }
@@ -172,8 +182,39 @@ class SchermataPrenotazioni : Fragment() {
         }
         )
 
+    }
 
 
+
+    private fun pdf(file: String, fileName: String){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            if(this.context?.let { checkSelfPermission(it, Manifest.permission.WRITE_EXTERNAL_STORAGE) } == PermissionChecker.PERMISSION_DENIED){
+                val permission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                requestPermissions(permission, STORAGE_CODE)
+            }else{
+                savePDF(file, fileName)
+            }
+        }else{
+            savePDF(file, fileName)
+        }
+    }
+    private fun savePDF(file: String, fileName: String){
+        val mDoc = Document()
+        val mFileName = fileName
+            //SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
+        val mFilePath = Environment.getExternalStorageDirectory().toString() + "/" + mFileName + ".pdf"
+        try{
+            PdfWriter.getInstance(mDoc, FileOutputStream(mFilePath))
+            mDoc.open()
+            val data = file
+            mDoc.addAuthor("Gabriele")
+            mDoc.add(Paragraph(data))
+            mDoc.close()
+            Toast.makeText(this.context, "$mFileName.pdf\n is created in \n $mFilePath", Toast.LENGTH_SHORT).show()
+
+        }catch(e:Exception){
+            Toast.makeText(this.context, "" + e.toString(), Toast.LENGTH_SHORT).show()
+        }
 
     }
     private fun generateReceiptText(id: Int, nomeCliente: String,cognomeCliente: String, luogo: String,nomeStruttura: String,data: String,giorni: Int, importo: Double): String {
@@ -198,6 +239,18 @@ class SchermataPrenotazioni : Fragment() {
         """.trimIndent()
 
         return receiptText
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            STORAGE_CODE -> {
+                if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    savePDF(pdfData, pdfFileName)
+                }else{
+                    Toast.makeText(this.context, "permissione denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 
