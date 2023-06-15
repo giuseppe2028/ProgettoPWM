@@ -3,6 +3,7 @@ package com.example.progettopwm.Recensioni.ScriviRecensione.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.databinding.CardScriviRecensioneBinding
 
 class CustomAdapterScriviRecensione(val lista:List<ItemViewModelRecensioniScrittura>): RecyclerView.Adapter<CustomAdapterScriviRecensione.ViewHolder>(){
@@ -32,7 +33,9 @@ class CustomAdapterScriviRecensione(val lista:List<ItemViewModelRecensioniScritt
         holder.recensione.rating = item.rating.toFloat()
         holder.numeroPersone.text = item.numPersone.toString()
         holder.data.text = item.data
-       holder
+       holder.itemView.setOnClickListener {
+           setOnClickListener?.Onclick(position,item)
+       }
     }
 
 

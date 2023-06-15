@@ -1,16 +1,14 @@
 package com.example.progettopwm.Recensioni
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.GestioneDB
-import com.example.progettopwm.Recensioni.RecyclerView.ItemViewModelRecensioni
 import com.example.progettopwm.Recensioni.ScriviRecensione.RecyclerView.CustomAdapterScriviRecensione
 import com.example.progettopwm.Recensioni.ScriviRecensione.RecyclerView.ItemViewModelRecensioniScrittura
-import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
-import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.databinding.ActivityVisualizzaViaggioRecensioniBinding
 import java.time.LocalDate
 
@@ -25,6 +23,7 @@ class VisualizzaViaggioRecensioni : AppCompatActivity() {
     }
 
     private fun setupSchermata() {
+        var valore:Boolean = false
         binding.recyclerViewRecensioni.layoutManager = LinearLayoutManager(this)
         val lista:ArrayList<ItemViewModelRecensioniScrittura> = ArrayList()
         val data = LocalDate.now().toString()
@@ -58,23 +57,31 @@ class VisualizzaViaggioRecensioni : AppCompatActivity() {
                     Log.i("listasize", "${lista.size}")
                     adapter = CustomAdapterScriviRecensione(lista)
                     binding.recyclerViewRecensioni.adapter = adapter
+                    adapter.setOnClickListener(
+                        object: CustomAdapterScriviRecensione.OnClickListener{
+                            override fun Onclick(position: Int, item: ItemViewModelRecensioniScrittura) {
+                                Log.i("cambiato","cambiato")
+                                val intentRec = Intent(this@VisualizzaViaggioRecensioni,RecensioneScritta::class.java)
+                                intentRec.putExtra("idViaggio",item.id)
+                                startActivity(intentRec)
+                            }
+                        }
+                    )
+
                 }
+
             }
+
+
         }
-        /*adapter.setOnClick
-        Listener(
-            object : CustomAdapter.OnclickListener{
-                override fun onclick(position: Int, item: ItemsViewModel) {
-                    filtaListaByMete(item.descrizione)
-                }
 
-            }
-        )
 
-         */
+
 
 
     }
+
+
 
 
 }

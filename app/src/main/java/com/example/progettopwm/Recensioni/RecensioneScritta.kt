@@ -11,7 +11,7 @@ class RecensioneScritta : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityScriviRecensioneBinding.inflate(layoutInflater)
         setContentView(binding.root)
-       val idViaggio = intent.getIntExtra("iViaggio",0)
+       val idViaggio = intent.getIntExtra("idViaggio",0)
 
     }
 }
