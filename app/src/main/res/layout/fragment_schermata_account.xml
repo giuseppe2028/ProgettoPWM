@@ -129,6 +129,20 @@
             android:elevation="8dp"
             />
 
+        <TextView
+            android:id="@+id/recensioneButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingTextEdit"
+            android:clickable="true"
+            android:drawableStart="@drawable/write"
+            android:drawablePadding="8dp"
+            android:elevation="8dp"
+            android:text="@string/Recensione"
+            android:textColor="@color/coloretestopiccolo"
+            android:textSize="@dimen/sizeTextAccount"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

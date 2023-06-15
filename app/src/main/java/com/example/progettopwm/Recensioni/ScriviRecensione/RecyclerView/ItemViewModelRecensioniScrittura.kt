@@ -2,7 +2,7 @@ package com.example.progettopwm.Recensioni.ScriviRecensione.RecyclerView
 
 import android.graphics.Bitmap
 
-class ItemViewModelPreferiti
+class ItemViewModelRecensioniScrittura
     (
     val id:Int,
     val image: Bitmap?, val titolo:String,

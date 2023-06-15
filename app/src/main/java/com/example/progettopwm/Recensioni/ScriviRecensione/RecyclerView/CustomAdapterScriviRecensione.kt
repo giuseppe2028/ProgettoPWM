@@ -3,11 +3,9 @@ package com.example.progettopwm.Recensioni.ScriviRecensione.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.progettopwm.databinding.CardRecensioneBinding
 import com.example.progettopwm.databinding.CardScriviRecensioneBinding
-import com.example.progettopwm.databinding.FragmentPreferitiBinding
 
-class CustomAdapterScriviRecensione(val lista:List<ItemViewModelPreferiti>): RecyclerView.Adapter<CustomAdapterScriviRecensione.ViewHolder>(){
+class CustomAdapterScriviRecensione(val lista:List<ItemViewModelRecensioniScrittura>): RecyclerView.Adapter<CustomAdapterScriviRecensione.ViewHolder>(){
     private var setOnClickListener:OnClickListener? = null
     class ViewHolder(val binding:CardScriviRecensioneBinding):RecyclerView.ViewHolder(binding.root){
         //val image = binding.immaginiLocalita
@@ -41,7 +39,7 @@ class CustomAdapterScriviRecensione(val lista:List<ItemViewModelPreferiti>): Rec
         return lista.size
     }
     interface OnClickListener{
-        fun Onclick(position: Int,item: ItemViewModelPreferiti)
+        fun Onclick(position: Int,item: ItemViewModelRecensioniScrittura)
     }
     fun setOnClickListener(onClickListener:OnClickListener){
         this.setOnClickListener = onClickListener
