@@ -72,7 +72,6 @@ class FragmentSchermataHome : Fragment() {
         Log.i("passoUnaVolta","ciao")
         waitReload()
         binding = FragmentSchermataHomeBinding.inflate(inflater)
-       // binding.progressBar.visibility = View.VISIBLE
 
 
         recycleViewGestore()
@@ -92,7 +91,6 @@ class FragmentSchermataHome : Fragment() {
 
         caricaViaggioProssimo(Date.valueOf(LocalDate.now().toString()))
 
-       // binding.progressBar.visibility = View.GONE
         // Inflate the layout for this fragment
         return binding.root
     }

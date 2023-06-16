@@ -8,10 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.GestioneDB
+import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.CustomAdapterPreferiti
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.ItemViewModel
 import com.example.progettopwm.databinding.FragmentSchermataPreferitiBinding
 import com.google.gson.JsonObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"

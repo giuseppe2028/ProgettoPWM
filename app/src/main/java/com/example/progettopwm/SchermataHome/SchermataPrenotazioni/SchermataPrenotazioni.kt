@@ -42,6 +42,10 @@ import com.itextpdf.text.Document
 import com.itextpdf.text.Image
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.pdf.PdfWriter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,6 +71,7 @@ class SchermataPrenotazioni : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentSchermataPrenotazioniBinding
+    private var statoCaricamento:Boolean = false
     private val STORAGE_CODE =1001
     private var pdfData = ""
     private var pdfFileName = ""
