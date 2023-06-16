@@ -12,29 +12,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.GestioneDB
-import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
-//import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
 import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
-import com.example.progettopwm.SchermataHome.SchermataHome
-import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 import com.example.progettopwm.ViewDialog
+import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 import retrofit2.Callback
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
@@ -59,7 +52,7 @@ class FragmentSchermataHome : Fragment() {
     private lateinit var adapterViaggi:CustomAdapterMete
     private var param1: String? = null
     private var param2: String? = null
-    var idPersona:Int = 0
+    var idPersona: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,25 +67,26 @@ class FragmentSchermataHome : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
+    ): View {
 
         binding = FragmentSchermataHomeBinding.inflate(inflater)
+       // binding.progressBar.visibility = View.VISIBLE
+        binding.frameLayout2.visibility = View.GONE
 
         recycleViewGestore()
         clickProfile()
         filtraLista()
         gestioneSearchView()
         setProfilo()
-        popolaLista{
-                updateList->
+        popolaLista { updateList ->
             listaLuogo = updateList
             adapterViaggi.filtraLista(listaLuogo)
             Log.i("ciao","${listaLuogo.size}")
-
         }
+        filterButton()
 
         caricaViaggioProssimo(Date.valueOf(LocalDate.now().toString()))
-
+       // binding.progressBar.visibility = View.GONE
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -101,14 +95,15 @@ class FragmentSchermataHome : Fragment() {
 
         binding.filterButton.setOnClickListener {
             val alert = ViewDialog()
-            val ciao = alert.showDialog(activity){
-                destinazione,numeroPersone->
+            val ciao = alert.showDialog(activity) {
+                    destinazione, numeroPersone,stato ->
                 //devo filtrare la lista
-                filtraListaDialog(destinazione,numeroPersone)
+                filtraListaDialog(destinazione, numeroPersone,stato)
             }
             val builder = AlertDialog.Builder(context)
-            Log.i("ciao","$ciao 123")
-            }
+            Log.i("ciao", "$ciao 123")
+        }
+    }
 
         /*val builder = AlertDialog.Builder(context)
         val inflater = LayoutInflater.from(context)
@@ -118,20 +113,43 @@ class FragmentSchermataHome : Fragment() {
 
          */
 
+    private fun filtraListaDialog(destinazione: String, numeroPersone: String,ordineCrescente:Boolean) {
 
-    }
+        val lista = if (numeroPersone == "Nessuno" && destinazione == "Tutte le destinazioni") {
+            listaLuogo
+        } else {
+           listaLuogo.filter {
+               it.continente == destinazione && it.numPersone == numeroPersone
+           }
+        }
+        val listaOrdinata = if (ordineCrescente) {
+            lista.sortedBy { it.prezzo }
+        } else {
+            lista.sortedByDescending { it.prezzo }
+        }
 
-    private fun filtraListaDialog(destinazione: String, numeroPersone: String) {
-        //filtro la lista:
-        val lista:ArrayList<ItemClassLocalita> = ArrayList()
-        //filtro la lista
-        for(i in listaLuogo){
-            //aggiungo il tipo di destinazione
-            if(i.numPersone.contains(numeroPersone)){
-                lista.add(i)
+        adapterViaggi.filtraLista(listaOrdinata)
+        Log.i("debug1", "${lista.size}")
+        /*if(ordine){
+            Log.i("proa12","sonoqui")
+            lista.sortBy {
+                it.prezzo
             }
         }
-        adapterViaggi.filtraLista(lista)
+
+         listaLuogo.filter {
+                it.continente == destinazione && it.numPersone == numeroPersone
+            } as ArrayList<ItemClassLocalita>
+
+
+        else{
+            lista.sortByDescending {
+                it.prezzo
+            }
+
+
+        }
+*/
 
     }
 
@@ -185,8 +203,6 @@ class FragmentSchermataHome : Fragment() {
 
             }
         )
-
-
     }
 
     private fun filtaListaByMete(stringa:String) {
@@ -299,7 +315,7 @@ class FragmentSchermataHome : Fragment() {
             datoRichiesto = dato.get("contatore").asInt
             //setto ogni card:
             for(i in 0..datoRichiesto){
-                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, ref_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
+                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, ref_immagine,continente,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
                 GestioneDB.queryImmagini(query){
                     elemento,immagine ->
                     lista.add(ItemClassLocalita(
@@ -310,7 +326,8 @@ class FragmentSchermataHome : Fragment() {
                         elemento.get("recensione").asDouble,
                         elemento.get("prezzo").asString.plus("$"),
                         elemento.get("tipologia").asString,
-                        elemento.get("num_persone").asString
+                        elemento.get("num_persone").asString,
+                        elemento.get("continente").asString
 
                     )
                     )
@@ -318,16 +335,18 @@ class FragmentSchermataHome : Fragment() {
                    lista.sortByDescending {
                         it.rating
                     }
+                    binding.frameLayout2.visibility = View.VISIBLE
                     callback(lista)
                 }
             }
 
-         }
+        }
         }
 
 
+
     private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
-        val string = jsonObject.get("ref_immagine").asString
+        val string = jsonObject.get("path_immagine").asString
         Log.i("ciao90", "$string")
         Log.i("ciaoProva","$string")
         ClientNetwork.retrofit.getImage(string).enqueue(
@@ -355,4 +374,8 @@ class FragmentSchermataHome : Fragment() {
 
     }
 
+
 }
+
+
+

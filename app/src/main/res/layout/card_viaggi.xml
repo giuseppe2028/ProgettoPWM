@@ -19,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/marginVerticalCardLocalita"
-        android:inputType="textMultiLine"
+        android:inputType="textMultiLine|none"
         android:maxLines="4"
         android:text="cefalu"
         android:textStyle="bold"

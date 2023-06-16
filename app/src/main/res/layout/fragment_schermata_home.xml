@@ -1,190 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SchermataHome.FragmentPagine.FragmentSchermataHome">
+    android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:id="@+id/searchBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/scrollView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout4">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            style="@style/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="32dp"
-            android:background="@drawable/search_bar_border"
-            android:backgroundTint="@color/backGround"
-            android:iconifiedByDefault="false"
-            app:iconifiedByDefault="false"
-            app:queryHint="@string/CercaDestinazione" />
-
-        <ImageButton
-            android:id="@+id/filterButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/searchView"
-            android:layout_alignRight="@id/searchView"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentRight="false"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="@dimen/marginTopIconSearchView"
-            android:layout_marginEnd="@dimen/marginLeftIconSearchView"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/settings_sliders" />
-
-    </RelativeLayout>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="25dp" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
+    <TextView
+        android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/searchBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13"
-        app:layout_constraintVertical_chainStyle="packed">
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="712dp"
+        android:text="Ciao" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SchermataHome.FragmentPagine.FragmentSchermataHome">
 
-            android:id="@+id/imageProfile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="@dimen/MargineImmagineLayoutSuperiore"
-            android:src="@drawable/sfondologin"
-            app:civ_border_color="#FF000000" />
+        <RelativeLayout
+            android:id="@+id/searchBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/scrollView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout4">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/nomeProfilo"
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                style="@style/searchBar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/benvenutoHome" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/subtitleHome" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/searchBar"
-        tools:fillViewport="true">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listaViaggi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/frgmentProssimoViaggio"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title1" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listaLocalita"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/title1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintVertical_chainStyle="packed" />
+                android:layout_marginRight="32dp"
+                android:background="@drawable/search_bar_border"
+                android:backgroundTint="@color/backGround"
+                android:iconifiedByDefault="false"
+                app:iconifiedByDefault="false"
+                app:queryHint="@string/CercaDestinazione" />
 
-            <TextView
-                android:id="@+id/title1"
+            <ImageButton
+                android:id="@+id/filterButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="13dp"
-                android:text="@string/DestiazioniFamose"
-                android:textSize="@dimen/sizeTextSubTitle"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/listaViaggi"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listaLocalita" />
+                android:layout_alignTop="@id/searchView"
+                android:layout_alignRight="@id/searchView"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="false"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/marginTopIconSearchView"
+                android:layout_marginEnd="@dimen/marginLeftIconSearchView"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/settings_sliders" />
 
+        </RelativeLayout>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/frgmentProssimoViaggio"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="25dp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sfondoprofilo"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/searchBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:id="@+id/imageProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/MargineImmagineLayoutSuperiore"
+                android:src="@drawable/sfondologin"
+                app:civ_border_color="#FF000000" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                app:layout_constraintBottom_toTopOf="@id/localitaSuggeriteText"
-                app:layout_constraintTop_toBottomOf="@+id/listaViaggi"></androidx.fragment.app.FragmentContainerView>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/nomeProfilo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/benvenutoHome"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/subtitleHome" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/searchBar"
+            tools:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listaViaggi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@+id/frgmentProssimoViaggio"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title1" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listaLocalita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/title1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                    android:id="@+id/title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="13dp"
+                    android:text="@string/DestiazioniFamose"
+                    android:textSize="@dimen/sizeTextSubTitle"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/listaViaggi"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/listaLocalita" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/localitaSuggerite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/localitaSuggeriteText" />
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/frgmentProssimoViaggio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toTopOf="@id/localitaSuggeriteText"
+                    app:layout_constraintTop_toBottomOf="@+id/listaViaggi"></androidx.fragment.app.FragmentContainerView>
 
-            <TextView
-                android:id="@+id/localitaSuggeriteText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="13dp"
-                android:text="@string/LocalitaSuggerite"
-                android:textSize="@dimen/sizeTextSubTitle"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/localitaSuggerite"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/frgmentProssimoViaggio" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/localitaSuggerite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/localitaSuggeriteText" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/localitaSuggeriteText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="13dp"
+                    android:text="@string/LocalitaSuggerite"
+                    android:textSize="@dimen/sizeTextSubTitle"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/localitaSuggerite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frgmentProssimoViaggio" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

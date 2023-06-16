@@ -1,9 +1,11 @@
 package com.example.progettopwm.SchermataHome.RecycleView
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.progettopwm.databinding.CardLocalitaBinding
 import com.example.progettopwm.databinding.CardViaggiBinding
 
@@ -15,7 +17,6 @@ class CustomAdapterMete(private var lista:List<ItemClassLocalita>):RecyclerView.
         val rating = binding.ratingBar
         val prezzo = binding.prezzo
         val localita = binding.localita
-
     }
     fun searchMete(list:List<ItemClassLocalita>){
         this.lista = list
@@ -33,6 +34,7 @@ interface OnClickListener{
         val view = CardViaggiBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
+
         return ViewHolder(view)
     }
 
@@ -57,9 +59,11 @@ interface OnClickListener{
         }
 
     }
+
     fun getEmojiByUnicode(unicode:Int):String{
         return  String(Character.toChars(unicode));
     }
+
 
 
 }
