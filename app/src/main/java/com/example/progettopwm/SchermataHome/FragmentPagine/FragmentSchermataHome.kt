@@ -28,6 +28,11 @@ import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 import com.example.progettopwm.ViewDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.sql.Date
 import java.time.LocalDate
 
@@ -38,6 +43,7 @@ private const val ARG_PARAM2 = "param2"
 
 
 class FragmentSchermataHome : Fragment() {
+    private var statoCaricamento:Boolean = false
     private lateinit var adapter:CustomAdapter
     private lateinit var dati:ArrayList<ItemsViewModel>
     private var listaLuogo:ArrayList<ItemClassLocalita> = ArrayList()
@@ -61,10 +67,13 @@ class FragmentSchermataHome : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
+        waitReload()
+
+
 
         binding = FragmentSchermataHomeBinding.inflate(inflater)
        // binding.progressBar.visibility = View.VISIBLE
-        binding.frameLayout2.visibility = View.GONE
+
 
         recycleViewGestore()
         clickProfile()
@@ -77,6 +86,7 @@ class FragmentSchermataHome : Fragment() {
             listaLuogo = updateList
             adapterViaggi.filtraLista(listaLuogo)
             Log.i("ciao","${listaLuogo.size}")
+            statoCaricamento = true
         }
 
         caricaViaggioProssimo(Date.valueOf(LocalDate.now().toString()))
@@ -315,7 +325,21 @@ class FragmentSchermataHome : Fragment() {
          }
         }
 
+        fun waitReload(){
+            CoroutineScope(Dispatchers.Default).launch {
+                //aspetto 5 secondi
+                delay(5000)
+                Log.i("ciao","prova231")
+                //se la schermata non è caricata dopo 5 secondi:
+                activity?.runOnUiThread{
+                    if(!statoCaricamento){
+                        binding.reload.visibility = View.VISIBLE
+                        binding.frameLayout2.visibility = View.GONE
 
+                    }
+                }
+            }
+        }
     /*private fun getImage(jsonObject: JsonObject,callback:(Bitmap?)->Unit){
         val string = jsonObject.get("ref_immagine").asString
         Log.i("ciao90", "$string")
