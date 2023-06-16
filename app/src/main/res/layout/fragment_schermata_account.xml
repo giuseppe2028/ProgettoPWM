@@ -155,7 +155,7 @@
             android:text="@string/Recensione"
             android:textColor="@color/coloretestopiccolo"
             android:textSize="@dimen/sizeTextAccount"
-            android:textStyle="bold" />
+             />
 
         <LinearLayout
             android:layout_width="match_parent"
