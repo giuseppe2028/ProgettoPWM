@@ -1,6 +1,5 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
-import ClientNetwork
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
@@ -16,7 +15,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
+import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.GestioneDB
+import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapter
 import com.example.progettopwm.SchermataHome.RecycleView.CustomAdapterMete
@@ -94,14 +95,15 @@ class FragmentSchermataHome : Fragment() {
 
         binding.filterButton.setOnClickListener {
             val alert = ViewDialog()
-            val ciao = alert.showDialog(activity){
-                destinazione,numeroPersone->
+            val ciao = alert.showDialog(activity) {
+                    destinazione, numeroPersone,stato ->
                 //devo filtrare la lista
-                filtraListaDialog(destinazione,numeroPersone)
+                filtraListaDialog(destinazione, numeroPersone,stato)
             }
             val builder = AlertDialog.Builder(context)
-            Log.i("ciao","$ciao 123")
-            }
+            Log.i("ciao", "$ciao 123")
+        }
+    }
 
         /*val builder = AlertDialog.Builder(context)
         val inflater = LayoutInflater.from(context)
@@ -313,7 +315,7 @@ class FragmentSchermataHome : Fragment() {
             datoRichiesto = dato.get("contatore").asInt
             //setto ogni card:
             for(i in 0..datoRichiesto){
-                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
+                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, ref_immagine,continente,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
                 GestioneDB.queryImmagini(query){
                     elemento,immagine ->
                     lista.add(ItemClassLocalita(
@@ -324,7 +326,8 @@ class FragmentSchermataHome : Fragment() {
                         elemento.get("recensione").asDouble,
                         elemento.get("prezzo").asString.plus("$"),
                         elemento.get("tipologia").asString,
-                        elemento.get("num_persone").asString
+                        elemento.get("num_persone").asString,
+                        elemento.get("continente").asString
 
                     )
                     )
@@ -371,8 +374,8 @@ class FragmentSchermataHome : Fragment() {
 
     }
 
-     */
+
 }
 
 
-    }
+
