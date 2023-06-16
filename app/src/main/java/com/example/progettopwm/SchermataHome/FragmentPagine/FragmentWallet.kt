@@ -96,6 +96,8 @@ binding = FragmentWalletBinding.inflate(inflater)
 
     private fun aggiornaWallet(id: Int, saldo: Double){
         val query = "UPDATE Persona SET saldo = saldo + $saldo WHERE id = $id;"
+
+
         ClientNetwork.retrofit.update(query).enqueue(
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {

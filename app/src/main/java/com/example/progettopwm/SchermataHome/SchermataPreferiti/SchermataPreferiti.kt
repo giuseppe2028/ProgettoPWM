@@ -82,6 +82,7 @@ class SchermataPreferiti : Fragment() {
 
                     // Aggiorno l'adapter dopo l'aggiunta di un nuovo elemento
                     binding.listaPreferiti.adapter?.notifyDataSetChanged()
+                    controllaElementi(lista)
                 }
             }
         }
@@ -97,6 +98,7 @@ class SchermataPreferiti : Fragment() {
                 //lo aggiorno pure localemnte per evitare una query di troppo:
                 lista.removeAt(position)
                 adapter.notifyDataSetChanged()
+                controllaElementi(lista)
             }
         }
         )
@@ -107,6 +109,15 @@ class SchermataPreferiti : Fragment() {
 
 
 
+    }
+
+    fun controllaElementi(lista:ArrayList<ItemViewModel>){
+        if(lista.size==0){
+            binding.textView.visibility = View.VISIBLE
+        }
+        else{
+            binding.textView.visibility = View.GONE
+        }
     }
 
     companion object {

@@ -1,4 +1,5 @@
 package com.example.progettopwm.SchermataIniziale
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,7 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultRegistry
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
@@ -118,9 +121,15 @@ class FragmentLogin : Fragment() {
                     Log.i("questo","log")
 
                     //startActivity(intent)
-
-                    val intent = Intent(this.context,SchermataHome::class.java)
-
+                   // val intent = Intent(this.context,SchermataHome::class.java)
+                    //Qui metto il codice di invio:
+                    registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+                        result: ActivityResult ->
+                        if(result.resultCode == Activity.RESULT_OK){
+                            val intent = Intent(this.context,SchermataHome::class.java)
+                            startActivity(intent)
+                        }
+                    }
 
                 }
                 else{

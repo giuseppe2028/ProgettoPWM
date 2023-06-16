@@ -63,22 +63,25 @@ class FragmentSchermataHome : Fragment() {
     ): View{
 
         binding = FragmentSchermataHomeBinding.inflate(inflater)
+       // binding.progressBar.visibility = View.VISIBLE
+        binding.frameLayout2.visibility = View.GONE
 
         recycleViewGestore()
         clickProfile()
         filtraLista()
         gestioneSearchView()
         setProfilo()
+
         popolaLista{
                 updateList->
             listaLuogo = updateList
             adapterViaggi.filtraLista(listaLuogo)
             Log.i("ciao","${listaLuogo.size}")
-
+            binding.frameLayout2.visibility = View.VISIBLE
         }
 
         caricaViaggioProssimo(Date.valueOf(LocalDate.now().toString()))
-
+       // binding.progressBar.visibility = View.GONE
         // Inflate the layout for this fragment
         return binding.root
     }
