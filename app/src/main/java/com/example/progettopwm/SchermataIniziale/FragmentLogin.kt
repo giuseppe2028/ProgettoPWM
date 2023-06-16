@@ -123,13 +123,8 @@ class FragmentLogin : Fragment() {
                     //startActivity(intent)
                    // val intent = Intent(this.context,SchermataHome::class.java)
                     //Qui metto il codice di invio:
-                    registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                        result: ActivityResult ->
-                        if(result.resultCode == Activity.RESULT_OK){
-                            val intent = Intent(this.context,SchermataHome::class.java)
-                            startActivity(intent)
-                        }
-                    }
+                    val intent = Intent(this.context,SchermataHome::class.java)
+                    startActivity(intent)
 
                 }
                 else{
