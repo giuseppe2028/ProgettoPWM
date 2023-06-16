@@ -14,6 +14,7 @@ import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.LanguageApp
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.SchermataIniziale.FragmentLogin
 import com.example.progettopwm.SchermataIniziale.PasswordDimenticataFragment
@@ -56,11 +57,13 @@ class Login : AppCompatActivity() {
 
 
 
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         if(savedInstanceState == null){
             Log.i("sonoDentro","Dentro")
             transaction.add(binding.fragmentView.id, SchermataInizialeFragment())
         }
+
 
         setContentView(binding.root)
         verificaPermanenza()

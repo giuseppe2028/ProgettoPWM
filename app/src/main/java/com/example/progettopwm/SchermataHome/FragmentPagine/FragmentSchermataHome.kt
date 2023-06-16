@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.Gestione.ClientNetwork
+import com.example.progettopwm.Gestione.FragmentUtil
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
 //import com.example.progettopwm.GestioneDB
@@ -67,10 +69,8 @@ class FragmentSchermataHome : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
+        Log.i("passoUnaVolta","ciao")
         waitReload()
-
-
-
         binding = FragmentSchermataHomeBinding.inflate(inflater)
        // binding.progressBar.visibility = View.VISIBLE
 
@@ -80,7 +80,8 @@ class FragmentSchermataHome : Fragment() {
         filtraLista()
         gestioneSearchView()
         setProfilo()
-
+        reloadFragment()
+        filterButton()
         popolaLista{
                 updateList->
             listaLuogo = updateList
@@ -90,46 +91,61 @@ class FragmentSchermataHome : Fragment() {
         }
 
         caricaViaggioProssimo(Date.valueOf(LocalDate.now().toString()))
+
        // binding.progressBar.visibility = View.GONE
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    private fun filterButton() {
+    private fun reloadFragment() {
+        binding.reload.setOnClickListener {
+            binding.frameLayout2.visibility = View.VISIBLE
+            binding.reload.visibility = View.GONE
+            //faccio il reload del fragment:
+            FragmentUtil.refreshFragment(context)
 
-        binding.filterButton.setOnClickListener {
-            val alert = ViewDialog()
-            val ciao = alert.showDialog(activity){
-                destinazione,numeroPersone->
-                //devo filtrare la lista
-                filtraListaDialog(destinazione,numeroPersone)
-            }
-            val builder = AlertDialog.Builder(context)
-            Log.i("ciao","$ciao 123")
-            }
-
-        /*val builder = AlertDialog.Builder(context)
-        val inflater = LayoutInflater.from(context)
-        val dialogView = inflater.inflate(R.layout.filtri, null)
-        val alert = builder.create()
-        alert.show()
-
-         */
-
-
+        }
     }
 
-    private fun filtraListaDialog(destinazione: String, numeroPersone: String) {
-        //filtro la lista:
-        val lista:ArrayList<ItemClassLocalita> = ArrayList()
-        //filtro la lista
-        for(i in listaLuogo){
-            //aggiungo il tipo di destinazione
-            if(i.numPersone.contains(numeroPersone)){
-                lista.add(i)
+
+
+    private fun filtraListaDialog(destinazione: String, numeroPersone: String,ordineCrescente:Boolean) {
+
+        val lista = if (numeroPersone == "Nessuno" && destinazione == "Tutte le destinazioni") {
+            listaLuogo
+        } else {
+            listaLuogo.filter {
+                it.continente == destinazione && it.numPersone == numeroPersone
             }
         }
-        adapterViaggi.filtraLista(lista)
+        val listaOrdinata = if (ordineCrescente) {
+            lista.sortedBy { it.prezzo }
+        } else {
+            lista.sortedByDescending { it.prezzo }
+        }
+
+        adapterViaggi.filtraLista(listaOrdinata)
+        Log.i("debug1", "${lista.size}")
+        /*if(ordine){
+            Log.i("proa12","sonoqui")
+            lista.sortBy {
+                it.prezzo
+            }
+        }
+
+         listaLuogo.filter {
+                it.continente == destinazione && it.numPersone == numeroPersone
+            } as ArrayList<ItemClassLocalita>
+
+
+        else{
+            lista.sortByDescending {
+                it.prezzo
+            }
+
+
+        }
+*/
 
     }
 
@@ -297,7 +313,7 @@ class FragmentSchermataHome : Fragment() {
             datoRichiesto = dato.get("contatore").asInt
             //setto ogni card:
             for(i in 0..datoRichiesto){
-                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, ref_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
+                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, ref_immagine,Viaggio.num_persone,continente from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
                 GestioneDB.queryImmagini(query){
                     elemento,immagine ->
                     lista.add(ItemClassLocalita(
@@ -308,7 +324,8 @@ class FragmentSchermataHome : Fragment() {
                         elemento.get("recensione").asDouble,
                         elemento.get("prezzo").asString.plus("$"),
                         elemento.get("tipologia").asString,
-                        elemento.get("num_persone").asString
+                        elemento.get("num_persone").asString,
+                        elemento.get("continente").asString
 
                     )
                     )
@@ -316,7 +333,6 @@ class FragmentSchermataHome : Fragment() {
                    lista.sortByDescending {
                         it.rating
                     }
-                    binding.frameLayout2.visibility = View.VISIBLE
                     callback(lista)
 
                 }
@@ -325,7 +341,7 @@ class FragmentSchermataHome : Fragment() {
          }
         }
 
-        fun waitReload(){
+        private fun waitReload(){
             CoroutineScope(Dispatchers.Default).launch {
                 //aspetto 5 secondi
                 delay(5000)
@@ -370,5 +386,14 @@ class FragmentSchermataHome : Fragment() {
     }
 
      */
-
+    private fun filterButton() {
+        binding.filterButton.setOnClickListener {
+            val alert = ViewDialog()
+            val ciao = alert.showDialog(activity){
+                    destinazione,numeroPersone,ordine->
+                //devo filtrare la lista
+                val lista=  filtraListaDialog(destinazione,numeroPersone,ordine)
+            }
+        }
+    }
 }
