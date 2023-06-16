@@ -44,6 +44,7 @@ class SchermataPreferiti : Fragment() {
         //faccio la query
         setSchermata()
 
+
         // Inflate the layout for this fragment
         return binding.root
 
@@ -56,6 +57,7 @@ class SchermataPreferiti : Fragment() {
         val query = "select distinct V.id,luogo,nome_struttura,recensione,prezzo,ref_immagine,num_persone from Viaggio V,Preferiti P,Immagini I where P.ref_viaggio = V.id and I.ref_viaggio = V.id"
         var iesimoDato: JsonObject  // Dichiarazione della variabile fuori dal callback
         var lista = ArrayList<ItemViewModel>()
+        controllaElementi(lista)
 //faccio la query
         GestioneDB.queryGenerica(query) { dati ->
 
@@ -79,10 +81,10 @@ class SchermataPreferiti : Fragment() {
                             iesimoDato.get("num_persone").asInt
                         )
                     )
-
+                    controllaElementi(lista)
                     // Aggiorno l'adapter dopo l'aggiunta di un nuovo elemento
                     binding.listaPreferiti.adapter?.notifyDataSetChanged()
-                    controllaElementi(lista)
+
                 }
             }
         }

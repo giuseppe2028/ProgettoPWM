@@ -77,7 +77,6 @@ class FragmentSchermataHome : Fragment() {
             listaLuogo = updateList
             adapterViaggi.filtraLista(listaLuogo)
             Log.i("ciao","${listaLuogo.size}")
-            binding.frameLayout2.visibility = View.VISIBLE
         }
 
         caricaViaggioProssimo(Date.valueOf(LocalDate.now().toString()))
@@ -307,7 +306,9 @@ class FragmentSchermataHome : Fragment() {
                    lista.sortByDescending {
                         it.rating
                     }
+                    binding.frameLayout2.visibility = View.VISIBLE
                     callback(lista)
+
                 }
             }
 
