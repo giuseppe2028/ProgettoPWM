@@ -64,6 +64,13 @@ binding = FragmentWalletBinding.inflate(inflater)
                 val id_p= idPersona.getId()
                 aggiornaWallet(id_p, saldo.toDouble())
                 binding.editText.setText("")
+                recuperaWallet(id_p){ result, saldo->
+                    if(result){
+                        binding.textView9.text = saldo.toString()
+                    } else{
+                        binding.textView9.text = "null"
+                    }
+                }
             }
         }
 

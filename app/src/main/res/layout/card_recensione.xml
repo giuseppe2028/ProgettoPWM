@@ -67,6 +67,7 @@
                     android:layout_marginVertical="8dp"
                     android:singleLine="false"
                     android:text="Mario Rossi"
+                    android:textColor="@color/coloretestopiccolo"
                     android:textSize="16dp" />
 
                 <RatingBar

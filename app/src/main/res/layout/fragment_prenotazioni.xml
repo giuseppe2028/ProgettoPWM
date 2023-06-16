@@ -38,6 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="false"
+                    android:textColor="@color/coloretestopiccolo"
                     android:text="Formentera"
                     android:textSize="@dimen/sizeTextSubTitle"
                     android:textStyle="bold" />

@@ -68,7 +68,21 @@
                 app:layout_constraintStart_toEndOf="@+id/circleImageView2"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 
 
