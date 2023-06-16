@@ -13,7 +13,7 @@ class ViewDialog {
 
     private lateinit var binding:FiltriBinding
     //TODO(aggiungere la data, e il prezzo)
-    fun showDialog(activity: Activity?,callback:(String,String)->Unit) {
+    fun showDialog(activity: Activity?,callback:(String,String,Boolean)->Unit) {
         val dialog = Dialog(activity!!)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -27,7 +27,12 @@ class ViewDialog {
             val numPersone = numPersoneView.selectedItem.toString()
             val valore = regione.selectedItem.toString()
             val prezzo = dialog.findViewById<Spinner>(R.id.spinnerPrezzo).selectedItem
-            callback(valore,numPersone)
+            if(prezzo.equals("Crescente")){
+                callback(valore,numPersone,true)
+            }else{
+                callback(valore,numPersone,false)
+            }
+
 
             dialog.dismiss()
 

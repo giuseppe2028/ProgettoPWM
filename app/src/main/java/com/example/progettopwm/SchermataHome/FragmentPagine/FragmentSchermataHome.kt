@@ -93,24 +93,32 @@ class FragmentSchermataHome : Fragment() {
         binding.filterButton.setOnClickListener {
             val alert = ViewDialog()
             val ciao = alert.showDialog(activity){
-                destinazione,numeroPersone->
+                destinazione,numeroPersone,ordine->
                 //devo filtrare la lista
 
-                filtraListaDialog(destinazione,numeroPersone)
+               val lista=  filtraListaDialog(destinazione,numeroPersone,ordine)
             }
             }
     }
 
-    private fun filtraListaDialog(destinazione: String, numeroPersone: String) {
+
+
+    private fun filtraListaDialog(destinazione: String, numeroPersone: String,ordineCrescente:Boolean) {
 
         val lista = if (numeroPersone == "Nessuno" && destinazione == "Tutte le destinazioni") {
-            Log.i("debug1","sono quiiiii")
             listaLuogo
         } else {
            listaLuogo.filter {
                it.continente == destinazione && it.numPersone == numeroPersone
            }
         }
+        val listaOrdinata = if (ordineCrescente) {
+            lista.sortedBy { it.prezzo }
+        } else {
+            lista.sortedByDescending { it.prezzo }
+        }
+
+        adapterViaggi.filtraLista(listaOrdinata)
         Log.i("debug1", "${lista.size}")
         /*if(ordine){
             Log.i("proa12","sonoqui")
@@ -132,7 +140,7 @@ class FragmentSchermataHome : Fragment() {
 
         }
 */
-        adapterViaggi.filtraLista(lista)
+
     }
 
 
