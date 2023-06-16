@@ -19,7 +19,6 @@
     <string name="inserisciNC">Inserisci nome e cognome dell\'intestatario </string>
     <string name="inseriscinumero">Inserisci il numero della carta</string>
     <string name="inserisciimporto">Inserisci l\'importo</string>
-
     <string name="inserisciCP">Inserisci nuovamente la password</string>
     <string name="inserisciNP">Inserisci una nuova password</string>
     <string name="OTP">OTP</string>
@@ -80,6 +79,7 @@
         <item>Tutte le mete</item>
     </string-array>
     <string-array name="NumPersone">
+        <item>Nessuno</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>

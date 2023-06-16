@@ -27,10 +27,12 @@
                 android:textSize="@dimen/dimenTitleDialog"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView12"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.23000002"
-                app:layout_constraintVertical_chainStyle="packed"
-                tools:layout_editor_absoluteX="10dp" />
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -89,16 +91,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/numPersone"
-                app:layout_constraintBottom_toTopOf="@id/sselezionaPrezzo"
-                />
+                app:layout_constraintBottom_toTopOf="@id/spinnerPrezzo"
+                app:layout_constraintTop_toBottomOf="@+id/numPersone" />
 
             <Button
                 android:id="@+id/bottoneConferma"
                 style="@style/bottoneLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:paddingHorizontal="30dp"
                 android:paddingVertical="5dp"
@@ -107,19 +107,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.928"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sselezionaPrezzo" />
+                app:layout_constraintTop_toBottomOf="@id/spinnerPrezzo"/>
 
-            <SeekBar
-                android:id="@+id/sselezionaPrezzo"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
+            <Spinner
+                android:id="@+id/spinnerPrezzo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:max="9"
-                android:progress="3"
+                android:layout_marginBottom="8dp"
+                android:entries="@array/Prezzo"
                 app:layout_constraintBottom_toTopOf="@+id/bottoneConferma"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/PrezzoTesto" />
 
