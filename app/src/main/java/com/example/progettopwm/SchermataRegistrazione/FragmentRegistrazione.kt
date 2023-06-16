@@ -14,6 +14,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
 import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.Login.OTPFragment
 import com.example.progettopwm.R
@@ -146,8 +149,10 @@ class FragmentRegistrazione : Fragment() {
                 val email = emailEditText.text.toString()
                 val data = binding.textViewshowdata.text.toString()
                 val password = passwordEditText.text.toString()
+                val result =datiUtente(nome, cognome, email, data, password)
+                setFragmentResult("requestKey", bundleOf("bundleKey" to result))
                 mostraOTP()
-                caricaCredenziali(nome, cognome, email, data, password)
+
             }
         }
 
@@ -161,30 +166,6 @@ private fun mostraOTP(){
 }
 
 
-    private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
-        val query = "INSERT INTO Persona (nome,  cognome, mail, data_nascita, password) VALUES ('$nome', '$cognome', '$email', '$data', '$password')"
-
-        ClientNetwork.retrofit.insert(query).enqueue(
-            object : Callback<JsonObject> {
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    if (response.isSuccessful) {
-                        Log.i("ciao", response.body().toString())
-                    }
-                    else{
-                        Log.i("errore", "non funziona")
-                        Log.i("errore", response.message())
-                        Log.i("errore",  response.toString())
-
-                    }
-    }
-
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    Log.e("Errore", "Errore durante la chiamata di rete", t)
-                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
-                }
-            }
-        )
-    }
 
 
 
@@ -237,7 +218,7 @@ private fun mostraOTP(){
         val password = passwordEditText.text.toString()
 
         // Verifica se le password coincidono e se sono lunghe almeno 6 caratteri
-        val isPasswordValid = password.length >= 6
+        val isPasswordValid = (password.length in 6..16)
 
 
         if (isPasswordValid) {
