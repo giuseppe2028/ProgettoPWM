@@ -102,7 +102,8 @@ class FragmentSchermataHome : Fragment() {
             binding.frameLayout2.visibility = View.VISIBLE
             binding.reload.visibility = View.GONE
             //faccio il reload del fragment:
-            FragmentUtil.refreshFragment(context)
+            //FragmentUtil.refreshFragment(context)
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainerHome,FragmentSchermataHome())?.commit()
 
         }
     }
@@ -254,6 +255,7 @@ class FragmentSchermataHome : Fragment() {
             }
         )
     }
+
     private fun gestioneSearchView() {
         binding.searchView.clearFocus()
         val searchView = binding.searchView
@@ -342,10 +344,11 @@ class FragmentSchermataHome : Fragment() {
         }
 
         private fun waitReload(){
+            Log.i("ciao","prova231")
             CoroutineScope(Dispatchers.Default).launch {
                 //aspetto 5 secondi
                 delay(5000)
-                Log.i("ciao","prova231")
+
                 //se la schermata non è caricata dopo 5 secondi:
                 activity?.runOnUiThread{
                     if(!statoCaricamento){
