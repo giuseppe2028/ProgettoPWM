@@ -31,7 +31,7 @@
         android:text="@string/DatiAccountP"
         android:textSize="@dimen/title"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/coloretestopiccolo"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutRegistrazione"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -56,7 +56,6 @@
             android:id="@+id/inserisciNomecognome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"
             android:text="@string/inserisciNC" />
 
@@ -76,7 +75,6 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"
             android:text="@string/inseriscinumero" />
 
@@ -104,7 +102,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CVV"
-                android:textStyle="bold"
                 android:textColor="@color/coloretestopiccolo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -168,7 +165,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:text="MM/AA"
-                android:textStyle="bold"
                 android:textColor="@color/coloretestopiccolo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/linearLayout6"
@@ -186,7 +182,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/descrizionePagamenti"
-        android:textStyle="bold"
         android:textColor="@color/coloretestopiccolo"
         app:layout_constraintTop_toBottomOf="@+id/TitleModificaDatiPagamento" />
 </androidx.constraintlayout.widget.ConstraintLayout>

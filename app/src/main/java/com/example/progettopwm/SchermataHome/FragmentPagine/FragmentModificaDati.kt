@@ -227,7 +227,7 @@ class FragmentModificaDati : Fragment() {
 
     private fun validatePasswords(passwordEditText: EditText): Boolean {
         val password = passwordEditText.text.toString()
-        val isPasswordValid = password.length >= 6
+        val isPasswordValid = (password.length in 6..16)
         if (isPasswordValid) {
             passwordEditText.setBackgroundResource(R.drawable.edittext_border_green)
             return true

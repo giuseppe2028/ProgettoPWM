@@ -94,7 +94,7 @@ class ActivitySchermataViaggio : AppCompatActivity() {
             //chiedo il permesso
             val permesso = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CALL_PHONE)
             Log.i("permesso", "sono dentro")
-            if(permesso != PackageManager.PERMISSION_GRANTED){
+            if(permesso == PackageManager.PERMISSION_GRANTED){
                 Log.i("permesso","PermessoAbilitato")
                 val intent = Intent(Intent.ACTION_DIAL)
                 intent.setData(Uri.parse("tel:$numeroTelefono"));
@@ -108,7 +108,7 @@ class ActivitySchermataViaggio : AppCompatActivity() {
             //chiedo il permesso
             val permesso = ContextCompat.checkSelfPermission(this,android.Manifest.permission.CALL_PHONE)
             Log.i("permesso", "sono dentro")
-            if(permesso != PackageManager.PERMISSION_GRANTED){
+            if(permesso == PackageManager.PERMISSION_GRANTED){
                 Log.i("permesso","PermessoAbilitato")
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.putExtra(Intent.EXTRA_EMAIL, "emailaddress@emailaddress.com");

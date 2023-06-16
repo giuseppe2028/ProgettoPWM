@@ -31,6 +31,7 @@
         android:text="@string/DatiAccount"
         android:textSize="@dimen/title"
         android:textStyle="bold"
+        android:textColor="@color/coloretestopiccolo"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutRegistrazione"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -104,16 +105,17 @@
                 style="@style/bottoneLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/paddingEditTetxt"
                 android:text="@string/data1"
                 tools:ignore="UnknownId,UnknownIdInLayout"
                 android:elevation="8dp"/>
+
             <TextView
                 android:id="@+id/textViewshowdata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/paddingEditTetxt"
-                />
+                android:textSize="20dp"
+                android:textColor="@color/coloretestopiccolo"/>
         </LinearLayout>
 
 

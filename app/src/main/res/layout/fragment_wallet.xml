@@ -74,16 +74,20 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
                 android:text="€"
-                android:textColor="@color/black"
                 android:textSize="@dimen/title"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/coloretestopiccolo"/>
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginBottom="20dp"
+                android:textSize="@dimen/title"
+                android:textStyle="bold"
+                android:textColor="@color/coloretestopiccolo"/>
+            />
         </LinearLayout>
 
         <View
@@ -115,7 +119,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
 
-                android:textColor="@color/black"
+                android:textColor="@color/coloretestopiccolo"
                 android:textSize="@dimen/title"
                 android:textStyle="bold" />
 
@@ -136,18 +140,9 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center">
+
+
             <Button
-                android:id="@+id/buttonSaldo"
-                style="@style/bottoneLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/paddingEditTetxt"
-                android:elevation="8dp"
-                android:text="Saldo"
-                android:layout_marginRight="10dp"/>
-
-
-           <Button
             android:id="@+id/buttonPaga"
             style="@style/bottoneLogin"
             android:layout_width="wrap_content"

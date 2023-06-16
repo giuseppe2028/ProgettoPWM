@@ -20,8 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintVertical_chainStyle="packed"
-        android:background="@drawable/gradient_layaout"
-        android:elevation="8dp"
+
         >
         <TextView
             android:id="@+id/Title"
@@ -30,17 +29,19 @@
             android:text="@string/TitleProfilo"
             android:textSize="@dimen/title"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/margintopTitle"
             android:layout_marginLeft="@dimen/marginTitle"
-            />
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"/>
+        <!--   -->
+
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="@dimen/marginTitle"
-            android:layout_marginBottom="@dimen/marginTitle"
+           android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:elevation="8dp">
 
 
@@ -49,7 +50,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginLeft="@dimen/marginTitle"
-                android:src="@drawable/stiven_baslar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -60,13 +60,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/marginTitle"
+                android:textColor="@color/coloretestopiccolo"
+
                 android:textSize="@dimen/sizeText"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/circleImageView2"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/circleImageView2" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
 
 
@@ -92,7 +108,6 @@
             android:textSize="@dimen/sizeTextAccount"
             android:layout_marginTop="@dimen/paddingTextEdit"
             android:clickable="true"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"
             android:drawableStart="@drawable/baseline_account_circle_24"
             android:drawablePadding="8dp"
@@ -107,7 +122,7 @@
             android:textSize="@dimen/sizeTextAccount"
             android:layout_marginTop="@dimen/paddingTextEdit"
             android:clickable="true"
-            android:textStyle="bold"
+
             android:textColor="@color/coloretestopiccolo"
             android:drawableStart="@drawable/credit_card"
             android:drawablePadding="8dp"
@@ -122,7 +137,6 @@
             android:textSize="@dimen/sizeTextAccount"
             android:layout_marginTop="@dimen/paddingTextEdit"
             android:clickable="true"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"
             android:drawableStart="@drawable/wallet_bifold_outline"
             android:drawablePadding="8dp"

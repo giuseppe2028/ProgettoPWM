@@ -96,7 +96,7 @@ class SchermataPrenotazioni : Fragment() {
 
     private fun setSchermata() {
         val idP = idPersona.getId()
-        val query = "select distinct V.id,V.luogo,V.nome_struttura,V.recensione,V.prezzo,I.path_immagine,V.num_persone, V.giorni_pernotto, V.data from Viaggio V, Compra C, Immagini I, Persona P where C.ref_persona = P.id and P.id=$idP and C.ref_viaggio = V.id and I.ref_viaggio = V.id"
+        val query = "select distinct V.id,V.luogo,V.nome_struttura,V.prezzo,I.ref_immagine,V.num_persone, V.giorni_pernotto, V.data from Viaggio V, Compra C, Immagini I, Persona P where C.ref_persona = P.id and P.id=$idP and C.ref_viaggio = V.id and I.ref_viaggio = V.id"
         var iesimoDato: JsonObject  // Dichiarazione della variabile fuori dal callback
         var listaPre = ArrayList<ItemViewModelP>()
 //faccio la query
@@ -119,7 +119,6 @@ class SchermataPrenotazioni : Fragment() {
                             iesimoDato.get("giorni_pernotto").asInt,
                             iesimoDato.get("nome_struttura").asString,
                             iesimoDato.get("luogo").asString,
-                            iesimoDato.get("recensione").asDouble,
                             iesimoDato.get("prezzo").asDouble,
                             iesimoDato.get("num_persone").asInt
                         )

@@ -14,10 +14,19 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.clearFragmentResultListener
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
+import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.SchermataRegistrazione.SchermataRegistrazione
+import com.example.progettopwm.SchermataRegistrazione.datiUtente
 import com.example.progettopwm.databinding.FragmentOTPBinding
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.random.Random
 
 
@@ -43,12 +52,14 @@ class OTPFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
+
         val randomNumber = Random.nextInt(101, 901).toString()
         mostraNotifiche(randomNumber)
         binding = FragmentOTPBinding.inflate(inflater)
@@ -77,6 +88,19 @@ class OTPFragment : Fragment() {
     private fun clickBottoni(randomNumber: String) {
         binding.buttonOTP.setOnClickListener{
             if(binding.editTextOTP.text.toString().trim().isNotEmpty() && binding.editTextOTP.text.toString().equals(randomNumber)){
+                setFragmentResultListener("requestKey"){
+                        requestKey, bundle ->
+                    val result = bundle.getParcelable<datiUtente>("bundleKey")
+                    if (result != null) {
+                        val nome = result.nome
+                        val cognome = result.cognome
+                        val email = result.email
+                        val data = result.data
+                        val password = result.password
+                        caricaCredenziali(nome, cognome, email, data, password)
+                    }
+                }
+
                 startActivity(Intent(this.context, SchermataHome()::class.java))
 
             }
@@ -85,6 +109,34 @@ class OTPFragment : Fragment() {
                 mostraNotifiche(randomNumber)
             }
         }
+    }
+    private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
+        val query = "INSERT INTO Persona (nome,  cognome, mail, data_nascita, password) VALUES ('$nome', '$cognome', '$email', '$data', '$password')"
+
+        ClientNetwork.retrofit.insert(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        Log.i("ciao", response.body().toString())
+                    }
+                    else{
+                        Log.i("errore", "non funziona")
+                        Log.i("errore", response.message())
+                        Log.i("errore",  response.toString())
+
+                    }
+                }
+
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.e("Errore", "Errore durante la chiamata di rete", t)
+                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        clearFragmentResultListener("requestKey")
     }
 
     companion object {

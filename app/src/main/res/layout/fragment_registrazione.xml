@@ -58,7 +58,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/inserisciN"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"/>
 
         <EditText
@@ -80,7 +79,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/inserisciC"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"/>
 
         <EditText
@@ -101,7 +99,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/data"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"/>
 
         <LinearLayout
@@ -117,14 +114,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/paddingEditTetxt"
                 android:text="@string/data1"
-                tools:ignore="UnknownId,UnknownIdInLayout"
-                android:elevation="8dp"/>
+                tools:ignore="UnknownId,UnknownIdInLayout" android:elevation="8dp"/>
             <TextView
                 android:id="@+id/textViewshowdata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/paddingEditTetxt"
                 android:textStyle="bold"
+                android:textSize="20dp"
                 android:textColor="@color/coloretestopiccolo"
                 />
         </LinearLayout>
@@ -135,7 +132,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/inserisciE"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"/>
 
 
@@ -159,7 +155,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/inserisciP"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"/>
 
         <EditText
@@ -180,7 +175,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/inserisciCP"
-            android:textStyle="bold"
             android:textColor="@color/coloretestopiccolo"/>
 
         <EditText

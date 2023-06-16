@@ -13,7 +13,6 @@ class CustomAdapterPrenotazioni(val listaPre:List<ItemViewModelP>): RecyclerView
         //val image = binding.immaginiLocalita
         val titolo = binding.Titolo
         val testoLuogo = binding.testoLuogo
-        val recensione = binding.ratingBar2
         val numeroPersone = binding.numeroPersone
         val prezzo = binding.costo
         val immagine = binding.immagineLocalita
@@ -37,7 +36,6 @@ class CustomAdapterPrenotazioni(val listaPre:List<ItemViewModelP>): RecyclerView
         holder.dataP.text = calcolaData(item.dataA, item.giornoPernotto)
         holder.dataA.text = item.dataA
         holder.titolo.text = item.titolo
-        holder.recensione.rating = item.rating.toFloat()
         holder.numeroPersone.text = item.numPersone.toString()
         holder.prezzo.text = item.costo.toString().plus("$")
         holder.elimina.setOnClickListener {

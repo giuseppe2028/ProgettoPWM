@@ -24,38 +24,24 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/linearLayout12"
+                android:id="@+id/linearLayout14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline10"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout8"
+                <TextView
+                    android:id="@+id/Titolo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/iconViaggio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/marginPositionElement"
-                        android:layout_weight="1"
-                        android:drawableStart="@drawable/marker" />
-
-                    <TextView
-                        android:id="@+id/testoLuogo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Venezia,Italy" />
-
-                </LinearLayout>
+                    android:singleLine="false"
+                    android:textColor="@color/coloretestopiccolo"
+                    android:text="Formentera"
+                    android:textSize="@dimen/sizeTextSubTitle"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/layoutPersone"
@@ -82,38 +68,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/palette1"
-                        android:text="500$" />
+                        android:text="500$"
+                        android:layout_marginEnd="@dimen/marginPositionElement"
+                        />
+
+                    <TextView
+                        android:id="@+id/iconViaggio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/marginPositionElement"
+                        android:layout_weight="1"
+                        android:drawableStart="@drawable/marker" />
+
+                    <TextView
+                        android:id="@+id/testoLuogo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Venezia,Italy" />
                 </LinearLayout>
+
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/Titolo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:singleLine="false"
-                android:text="Formentera"
-                android:textSize="@dimen/sizeTextSubTitle"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/guideline10"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <RatingBar
-                android:id="@+id/ratingBar2"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Titolo" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="110dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -122,6 +97,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/linearLayout13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -140,16 +116,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/marginPositionElement"
-                        android:drawableLeft="@drawable/icons8_aereo_18___"
-                    />
+                        android:drawableLeft="@drawable/icons8_aereo_18___" />
 
 
                     <TextView
                         android:id="@+id/testoArrivo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        />
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -170,8 +144,7 @@
                         android:id="@+id/testoPartenza"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        />
+                        android:layout_weight="1" />
 
                 </LinearLayout>
             </LinearLayout>

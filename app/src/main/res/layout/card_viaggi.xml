@@ -17,6 +17,8 @@
     <TextView
         android:id="@+id/titoloLocalita"
         android:layout_width="0dp"
+        android:textColor="@color/coloretestopiccolo"
+
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/marginVerticalCardLocalita"
         android:inputType="textMultiLine|none"
