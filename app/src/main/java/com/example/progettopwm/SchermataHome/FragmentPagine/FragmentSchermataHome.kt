@@ -95,33 +95,43 @@ class FragmentSchermataHome : Fragment() {
             val ciao = alert.showDialog(activity){
                 destinazione,numeroPersone->
                 //devo filtrare la lista
+
                 filtraListaDialog(destinazione,numeroPersone)
             }
-            val builder = AlertDialog.Builder(context)
-            Log.i("ciao","$ciao 123")
             }
-
-        /*val builder = AlertDialog.Builder(context)
-        val inflater = LayoutInflater.from(context)
-        val dialogView = inflater.inflate(R.layout.filtri, null)
-        val alert = builder.create()
-        alert.show()
-
-         */
-
-
     }
 
     private fun filtraListaDialog(destinazione: String, numeroPersone: String) {
-        val lista = if (numeroPersone == "nussono" && destinazione == "Tutte le destinazioni") {
+
+        val lista = if (numeroPersone == "Nessuno" && destinazione == "Tutte le destinazioni") {
+            Log.i("debug1","sono quiiiii")
             listaLuogo
         } else {
-            listaLuogo.filter {
-
-                it.continente == destinazione && it.numPersone == numeroPersone
-            } as ArrayList<ItemClassLocalita>
+           listaLuogo.filter {
+               it.continente == destinazione && it.numPersone == numeroPersone
+           }
+        }
+        Log.i("debug1", "${lista.size}")
+        /*if(ordine){
+            Log.i("proa12","sonoqui")
+            lista.sortBy {
+                it.prezzo
+            }
         }
 
+         listaLuogo.filter {
+                it.continente == destinazione && it.numPersone == numeroPersone
+            } as ArrayList<ItemClassLocalita>
+
+
+        else{
+            lista.sortByDescending {
+                it.prezzo
+            }
+
+
+        }
+*/
         adapterViaggi.filtraLista(lista)
     }
 

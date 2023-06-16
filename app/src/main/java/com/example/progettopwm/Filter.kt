@@ -24,12 +24,11 @@ class ViewDialog {
             //prendo i dati e li passo alla classe di sopra:
             val regione = dialog.findViewById<Spinner>(R.id.regione)
             val numPersoneView  = dialog.findViewById<Spinner>(R.id.numPersone)
-            val destianazione = dialog.findViewById<Spinner>(R.id.regione).selectedItem.toString()
             val numPersone = numPersoneView.selectedItem.toString()
             val valore = regione.selectedItem.toString()
+            val prezzo = dialog.findViewById<Spinner>(R.id.spinnerPrezzo).selectedItem
+            callback(valore,numPersone)
 
-            Log.i("ciao","$destianazione")
-            callback(destianazione,numPersone)
             dialog.dismiss()
 
         }
