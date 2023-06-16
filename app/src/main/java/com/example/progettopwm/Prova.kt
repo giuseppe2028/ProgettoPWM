@@ -120,7 +120,7 @@ object GestioneDB {
         )
     }
     fun getImage(jsonObject: JsonObject,callback:(Bitmap)->Unit){
-        val string = jsonObject.get("path_immagine").asString
+        val string = jsonObject.get("ref_immagine").asString
         Log.i("ciao90", "$string")
         Log.i("ciaoProva","$string")
         ClientNetwork.retrofit.getImage(string).enqueue(

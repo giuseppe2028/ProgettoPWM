@@ -178,7 +178,7 @@ class ActivitySchermataViaggio : AppCompatActivity() {
         )
     }
     private fun getImage(jsonObject: JsonObject){
-        val string = jsonObject.get("path_immagine").asString
+        val string = jsonObject.get("ref_immagine").asString
         Log.i("ciao90", "$string")
         Log.i("ciaoProva","$string")
         ClientNetwork.retrofit.getImage(string).enqueue(

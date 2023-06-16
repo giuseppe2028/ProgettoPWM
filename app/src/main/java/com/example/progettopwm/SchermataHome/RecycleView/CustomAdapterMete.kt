@@ -15,7 +15,6 @@ class CustomAdapterMete(private var lista:List<ItemClassLocalita>):RecyclerView.
         val rating = binding.ratingBar
         val prezzo = binding.prezzo
         val localita = binding.localita
-
     }
     fun searchMete(list:List<ItemClassLocalita>){
         this.lista = list

@@ -12,6 +12,7 @@ class ItemClassLocalita(
     val title:String, val position:String, val rating:Double,
     val prezzo: String,
     val tipoViaggio:String,
-    val numPersone:String
+    val numPersone:String,
+    val continente:String
     ):Parcelable{
 }

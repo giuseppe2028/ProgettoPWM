@@ -113,22 +113,16 @@ class FragmentSchermataHome : Fragment() {
     }
 
     private fun filtraListaDialog(destinazione: String, numeroPersone: String) {
-        //filtro la lista:
-        var lista:ArrayList<ItemClassLocalita> = ArrayList()
-        //filtro la lista
-        for(i in listaLuogo){
-            //aggiungo il tipo di destinazione
-            if(numeroPersone.equals("Tutte le destinazioni")){
-                //levo il filtro di tutte le destinazioni
-                lista = listaLuogo
-            }else {
-                if (i.numPersone.contains(numeroPersone)) {
-                    lista.add(i)
-                }
-            }
-        }
-        adapterViaggi.filtraLista(lista)
+        val lista = if (numeroPersone == "nussono" && destinazione == "Tutte le destinazioni") {
+            listaLuogo
+        } else {
+            listaLuogo.filter {
 
+                it.continente == destinazione && it.numPersone == numeroPersone
+            } as ArrayList<ItemClassLocalita>
+        }
+
+        adapterViaggi.filtraLista(lista)
     }
 
 
@@ -288,7 +282,7 @@ class FragmentSchermataHome : Fragment() {
             datoRichiesto = dato.get("contatore").asInt
             //setto ogni card:
             for(i in 0..datoRichiesto){
-                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia, path_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
+                val query = "select Viaggio.id as id, luogo, nome_struttura, recensione, prezzo, tipologia,continente, ref_immagine,Viaggio.num_persone from Viaggio, Immagini where  ref_viaggio = Viaggio.id and Immagini.immagine_default = 1 and Viaggio.id =$i"
                 GestioneDB.queryImmagini(query){
                     elemento,immagine ->
                     lista.add(ItemClassLocalita(
@@ -299,10 +293,11 @@ class FragmentSchermataHome : Fragment() {
                         elemento.get("recensione").asDouble,
                         elemento.get("prezzo").asString.plus("$"),
                         elemento.get("tipologia").asString,
-                        elemento.get("num_persone").asString
-
+                        elemento.get("num_persone").asString,
+                        elemento.get("continente").asString
                     )
                     )
+                    Log.i("ciao","$elemento")
                     callback(lista)
                 }
             }
