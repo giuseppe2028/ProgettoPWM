@@ -61,5 +61,60 @@
         <string name="CompraloOra">Buy Now</string>
         <string name="Attivato">Trip added to favorites</string>
         <string name="Disattivato">Trip removed from favorites</string>
+        <string name="titleTextDialog">Filter By:</string>
+        <string name="Regione">Destination</string>
+        <string name="NumeroPersoneDialog">Number of People</string>
+        <string name="Prezzo">Price</string>
+        <string-array name="lingua">
+                <item>English</item>
+                <item>Italian</item>
+        </string-array>
+
+        <string name="mostraRecensioni">Show Reviews</string>
+
+        <string-array name="Regione">
+                <item>Europe</item>
+                <item>Africa</item>
+                <item>Asia</item>
+                <item>America</item>
+                <item>Oceania</item>
+                <item>All Destinations</item>
+        </string-array>
+
+        <string-array name="NumPersone">
+                <item>None</item>
+                <item>1</item>
+                <item>2</item>
+                <item>3</item>
+                <item>4</item>
+                <item>5</item>
+                <item>6</item>
+        </string-array>
+
+        <string-array name="Prezzo">
+                <item>Ascending</item>
+                <item>Descending</item>
+        </string-array>
+
+        <string name="RiepilogoPrenotazione">Booking Summary</string>
+        <string name="titoloDialogAcquisto">Congratulations, your purchase was successful</string>
+        <string name="testoAlertDialogAcquisto">All billing details will be sent to your email. For more information, you can find the receipt in the reservations section. We wish you a pleasant trip.</string>
+        <string name="ToastLogin1">Unregistered Google email, please register before logging in</string>
+        <string name="Esplorazione">Exploration</string>
+        <string name="Mare">Sea</string>
+        <string name="Relax">Relaxation</string>
+        <string name="Trekking">Trekking</string>
+        <string name="Cultura">Culture</string>
+        <string name="Recensione">Write a review</string>
+        <string name="titoloRecensione">Enter a title</string>
+        <string name="descrizioneRecensione">Enter a description</string>
+        <string name="InserisciRecensione">Write a review</string>
+        <string name="InserisciTitolo">Please enter a title for your review</string>
+        <string name="InserisciTesto">Please describe your experience</string>
+        <string name="InserisciValuta">Please provide a rating</string>
+        <string name="PopupRecensione">Thank you for your cooperation</string>
+        <string name="nessunElemento">No items in your list</string>
+        <string name="ErroreTesto">Sorry, the connection to the server has dropped</string>
+
 
 </resources>

@@ -79,7 +79,7 @@ class FragmentSchermataHome : Fragment() {
 
         binding = FragmentSchermataHomeBinding.inflate(inflater)
        // binding.progressBar.visibility = View.VISIBLE
-        binding.frameLayout2.visibility = View.GONE
+        //binding.frameLayout2.visibility = View.GONE
 
         recycleViewGestore()
         clickProfile()

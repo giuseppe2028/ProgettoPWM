@@ -116,6 +116,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:entries="@array/Prezzo"
                 android:max="9"
                 android:progress="3"
                 app:layout_constraintBottom_toTopOf="@+id/bottoneConferma"
