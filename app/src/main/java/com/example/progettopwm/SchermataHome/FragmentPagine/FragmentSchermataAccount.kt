@@ -104,33 +104,27 @@ class FragmentSchermataAccount : Fragment() {
                     )
                     //quando lo spinner viene cliccato memorizzo la sua posizione
                     sharedPreferences.edit().putInt("valoreSpinnerLingua",position).commit()
-                    setSpinner(selectedOption)
                     spinner.setSelection(position)
                 }
                 else{
                     sentinellaSpinner = true
                 }
             }
-            private fun setSpinner(selectedOption: String) {
-                //lo salvo nelle sharedPreferences:
 
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Azioni da intraprendere quando non viene selezionata alcuna opzione
+                Log.i("ciao", "ciao")
             }
-
-
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // Azioni da intraprendere quando non viene selezionata alcuna opzione
-                    Log.i("ciao", "ciao")
-                }
-            }
-
-            val item = binding.spinner.selectedItemPosition
-
-            setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to item))
-            //passo il valore indietro all'activity:
-
-
         }
+
+        val item = binding.spinner.selectedItemPosition
+
+        setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to item))
+        //passo il valore indietro all'activity:
+
+
+    }
 
     private fun clickBottoni() {
         val result = true

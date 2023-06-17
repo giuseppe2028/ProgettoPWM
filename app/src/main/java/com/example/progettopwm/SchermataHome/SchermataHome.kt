@@ -49,14 +49,14 @@ class SchermataHome : AppCompatActivity() {
                 val result = bundle.getString("itemSelectRisposta")
             Log.i("seleziona","$result")
             if(result!=null){
-                if(result.equals("inglese")){
+                if(result.equals("inglese")||result.equals("English")){
                     LanguageApp.setLocal(this,"en")
                     //inserisco la lingua nelle sharedPreferences
                     sharedPreferences.edit().putString("Lingua","en").apply()
                     finish()
                     startActivity(intent)
                 }
-                else if(result.equals("italiano")){
+                else if(result.equals("italiano")||result.equals("Italian")){
                     LanguageApp.setLocal(this,"it")
                     sharedPreferences.edit().putString("Lingua","it").apply()
                     finish()

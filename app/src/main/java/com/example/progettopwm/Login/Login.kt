@@ -88,10 +88,10 @@ class Login : AppCompatActivity() {
         }
     }
 
+
     private fun setLingua() {
         //prendo il valore della lingua:
         val lingua = sharedPreferences.getString("Lingua","")
-        Log.i("ciao","$lingua")
         Log.i("lingua","$lingua")
         if(lingua.equals("en")){
             LanguageApp.setLocal(this,"en")
