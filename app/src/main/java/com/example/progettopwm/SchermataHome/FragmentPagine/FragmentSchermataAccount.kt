@@ -79,6 +79,11 @@ class FragmentSchermataAccount : Fragment() {
 
         return binding.root
     }
+    private fun linguaDefault() {
+
+        val position = sharedPreferences.getInt("valoreSpinnerLingua",0)
+        binding.spinner.setSelection(position)
+    }
     private fun selectLingua() {
         var sentinellaSpinner = false
         val spinner = binding.spinner
@@ -99,12 +104,18 @@ class FragmentSchermataAccount : Fragment() {
                     )
                     //quando lo spinner viene cliccato memorizzo la sua posizione
                     sharedPreferences.edit().putInt("valoreSpinnerLingua",position).commit()
+                    setSpinner(selectedOption)
                     spinner.setSelection(position)
                 }
                 else{
                     sentinellaSpinner = true
                 }
             }
+            private fun setSpinner(selectedOption: String) {
+                //lo salvo nelle sharedPreferences:
+
+            }
+
 
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -120,13 +131,6 @@ class FragmentSchermataAccount : Fragment() {
 
 
         }
-
-    private fun linguaDefault() {
-
-        val position = sharedPreferences.getInt("valoreSpinnerLingua",0)
-        binding.spinner.setSelection(position)
-    }
-
 
     private fun clickBottoni() {
         val result = true
