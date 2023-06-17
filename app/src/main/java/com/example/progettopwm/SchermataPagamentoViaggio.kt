@@ -6,11 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.example.progettopwm.Dialog.DialogNotifica
@@ -23,7 +25,7 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
         ActivityResultContracts.RequestPermission()){
             isGaranted:Boolean->
         if(isGaranted){
-            Log.i("TAG", "Permission enabled")
+            sendNotifica()
         }else{
             Log.i("TAG", "Permission enabled")
         }
@@ -75,6 +77,7 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun mostraDialog() {
         binding.comprami2.setOnClickListener {
             val dialog = DialogNotifica()
@@ -85,15 +88,30 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
     }
 
     private fun chiediPermessoNotifica() {
-        var permesso = ContextCompat.checkSelfPermission(this,android.Manifest.permission.POST_NOTIFICATIONS)
-        Log.i("permesso", "$permesso")
-        Log.i("permesso1","${PackageManager.PERMISSION_GRANTED}")
-        if(permesso == PackageManager.PERMISSION_GRANTED){
-            Log.i("permesso","PermessoAbilitato")
-        }else{
-            requestPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-        }
+                    when {ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                sendNotifica()
+            }shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)->{
+                            //nulla
+                        }
+                        else ->{
+                            requestPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+                        }
 
+
+
+       /*     Log.i("permesso", "$permesso")
+                    Log . i ("permesso1", "${PackageManager.PERMISSION_GRANTED}")
+                if (permesso == PackageManager.PERMISSION_GRANTED) {
+                    Log.i("permesso", "PermessoAbilitato")
+                } else {
+
+                }
+
+        */
+        }
     }
 
     private fun sendNotifica() {
