@@ -66,7 +66,6 @@ class SchermataHome : AppCompatActivity() {
 
         }
     }
-
     private fun modificaDati() {
 
         supportFragmentManager
@@ -169,6 +168,11 @@ class SchermataHome : AppCompatActivity() {
     //blocco l'onpressed
     override fun onBackPressed() {
 
+            if(supportFragmentManager.backStackEntryCount == 0){
+                Log.i("sei","quii")
+                return
+            }
+        super.onBackPressed()
     }
 
 

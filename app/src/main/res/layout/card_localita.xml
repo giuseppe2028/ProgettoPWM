@@ -38,7 +38,8 @@
             android:id="@+id/descrizione"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/coloretestopiccolo" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

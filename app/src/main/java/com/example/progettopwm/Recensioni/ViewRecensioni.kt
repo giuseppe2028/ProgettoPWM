@@ -45,7 +45,7 @@ class ViewRecensioni : AppCompatActivity() {
                 for(i in 0..dimensione){
                     Log.i("listasize","$i")
                     //creo la singola card:
-                    val query = "select nome,cognome,rating,titolo,testo,ref_immagine from Recensioni,Persona where ref_utente = Persona.id and ref_viaggio = 1 and ref_utente = $i "
+                    val query = "select nome,cognome,rating,titolo,testo,ref_immagine from Recensioni,Persona where ref_utente = Persona.id and ref_viaggio = $idViaggio and ref_utente = $i "
                     GestioneDB.queryImmagini(query){
                         dato,immagine->
                         //popolo la lista

@@ -132,7 +132,6 @@ class FragmentSchermataAccount : Fragment() {
         val result = true
         binding.textViewGestione.setOnClickListener{
             parentFragmentManager.setFragmentResult("requestMD", bundleOf("bundleMD" to result))
-
         }
         binding.textViewdatipagamento.setOnClickListener{
             parentFragmentManager.setFragmentResult("requestDP", bundleOf("bundleDP" to result))

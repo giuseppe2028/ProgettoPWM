@@ -116,4 +116,5 @@
     <string name="PopupRecensione">Grazie per la tua collaborazione</string>
     <string name="nessunElemento">Nessun elemento nella tua lista </string>
     <string name="ErroreTesto">Mi dispiace, la connesione con il server è caduta</string>
+    <string name="caricati">caricati</string>
 </resources>
