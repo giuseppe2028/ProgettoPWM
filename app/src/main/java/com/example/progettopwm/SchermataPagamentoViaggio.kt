@@ -77,43 +77,13 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun mostraDialog() {
         binding.comprami2.setOnClickListener {
             val dialog = DialogNotifica()
             dialog.show(supportFragmentManager,"conferma")
-            chiediPermessoNotifica()
             sendNotifica()
         }
     }
-
-    private fun chiediPermessoNotifica() {
-                    when {ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.POST_NOTIFICATIONS
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                sendNotifica()
-            }shouldShowRequestPermissionRationale(android.Manifest.permission.POST_NOTIFICATIONS)->{
-                            //nulla
-                        }
-                        else ->{
-                            requestPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
-                        }
-
-
-
-       /*     Log.i("permesso", "$permesso")
-                    Log . i ("permesso1", "${PackageManager.PERMISSION_GRANTED}")
-                if (permesso == PackageManager.PERMISSION_GRANTED) {
-                    Log.i("permesso", "PermessoAbilitato")
-                } else {
-
-                }
-
-        */
-        }
-    }
-
     private fun sendNotifica() {
 
             val channelID:String = "ChannelID"
