@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.SEND_EMAIL" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"

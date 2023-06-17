@@ -21,7 +21,6 @@ import java.time.Duration
 class SchermataPagamentoViaggio : AppCompatActivity() {
     val requestPermission = registerForActivityResult(
         ActivityResultContracts.RequestPermission()){
-
             isGaranted:Boolean->
         if(isGaranted){
             Log.i("TAG", "Permission enabled")
@@ -86,9 +85,12 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
     }
 
     private fun chiediPermessoNotifica() {
-        val permesso = ContextCompat.checkSelfPermission(this,android.Manifest.permission.POST_NOTIFICATIONS)
-        Log.i("permesso", "sono dentro")
+        var permesso = ContextCompat.checkSelfPermission(this,android.Manifest.permission.POST_NOTIFICATIONS)
+        Log.i("permesso", "$permesso")
+        Log.i("permesso1","${PackageManager.PERMISSION_GRANTED}")
         if(permesso == PackageManager.PERMISSION_GRANTED){
+            Log.i("permesso","PermessoAbilitato")
+        }else{
             requestPermission.launch(android.Manifest.permission.POST_NOTIFICATIONS)
         }
 

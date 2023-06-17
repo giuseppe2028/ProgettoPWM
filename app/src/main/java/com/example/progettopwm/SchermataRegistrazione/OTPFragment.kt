@@ -4,7 +4,10 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +29,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.random.Random
-
+import android.content.pm.PackageManager
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -104,6 +107,7 @@ class OTPFragment : Fragment() {
 
                 startActivity(Intent(this.context, Login()::class.java))
 
+
             }
             else{
                 Toast.makeText(this.context, R.string.ToastOTP, Toast.LENGTH_SHORT).show()
@@ -114,7 +118,7 @@ class OTPFragment : Fragment() {
 
     private fun setIdPersona(email: String) {
         val query = "SELECT id FROM Persona WHERE mail = '$email'"
-                GestioneDB.richiestaInformazioni(query){
+            GestioneDB.richiestaInformazioni(query){
                     element ->
                     val id = element.get("id").asInt
                     idPersona.setId(id)
@@ -124,51 +128,52 @@ class OTPFragment : Fragment() {
 
     }
 
-    private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
-        val query = "INSERT INTO Persona (nome,  cognome, mail, data_nascita, password) VALUES ('$nome', '$cognome', '$email', '$data', '$password')"
 
-        ClientNetwork.retrofit.insert(query).enqueue(
-            object : Callback<JsonObject> {
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    if (response.isSuccessful) {
-                        Log.i("ciao", response.body().toString())
+            private fun caricaCredenziali(nome: String, cognome: String, email: String, data: String, password: String){
+                val query = "INSERT INTO Persona (nome,  cognome, mail, data_nascita, password) VALUES ('$nome', '$cognome', '$email', '$data', '$password')"
+
+                ClientNetwork.retrofit.insert(query).enqueue(
+                    object : Callback<JsonObject> {
+                        override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                            if (response.isSuccessful) {
+                                Log.i("ciao", response.body().toString())
+                            }
+                            else{
+                                Log.i("errore", "non funziona")
+                                Log.i("errore", response.message())
+                                Log.i("errore",  response.toString())
+
+                            }
+                        }
+
+                        override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                            Log.e("Errore", "Errore durante la chiamata di rete", t)
+                            Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                    else{
-                        Log.i("errore", "non funziona")
-                        Log.i("errore", response.message())
-                        Log.i("errore",  response.toString())
+                )
+            }
+            override fun onDestroyView() {
+                super.onDestroyView()
+                clearFragmentResultListener("requestKey")
+            }
 
+            companion object {
+                /**
+                 * Use this factory method to create a new instance of
+                 * this fragment using the provided parameters.
+                 *
+                 * @param param1 Parameter 1.
+                 * @param param2 Parameter 2.
+                 * @return A new instance of fragment OTPFragment.
+                 */
+                @JvmStatic
+                fun newInstance(param1: String, param2: String) =
+                    OTPFragment().apply {
+                        arguments = Bundle().apply {
+                            putString(ARG_PARAM1, param1)
+                            putString(ARG_PARAM2, param2)
+                        }
                     }
-                }
-
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    Log.e("Errore", "Errore durante la chiamata di rete", t)
-                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
-                }
             }
-        )
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        clearFragmentResultListener("requestKey")
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment OTPFragment.
-         */
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            OTPFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-}
+        }
