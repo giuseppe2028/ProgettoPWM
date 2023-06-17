@@ -170,7 +170,7 @@ class FragmentSchermataHome : Fragment() {
     private fun caricaViaggioProssimo(data: Date) {
         var id: Int
         val query =
-            "select * from Compra,Viaggio where ref_viaggio = Viaggio.id and Compra.ref_persona = 1 and data>'$data'order by data"
+            "select * from Compra,Viaggio where ref_viaggio = Viaggio.id and Compra.ref_persona = ${idPersona.getId()} and data>'$data'order by data"
         GestioneDB.richiestaInformazioni(query) { data ->
             binding.frgmentProssimoViaggio.visibility = View.VISIBLE
             //insersico la card

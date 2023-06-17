@@ -16,6 +16,7 @@ import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentDatiPagamentoBinding
 import com.example.progettopwm.Gestione.idPersona
+import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
@@ -189,24 +190,21 @@ class FragmentDatiPagamento : Fragment() {
 
 
     private fun inserisciDati(id: Int,numero_carta: Long, cvv: Int, nome_titolare: String, mese_scadenza:Int, anno_scadenza:Int, callback: (Boolean) -> Unit){
-        val query = "UPDATE DatiPagamento JOIN Persona ON DatiPagamento.numero_carta = Persona.ref_datiPagamento SET DatiPagamento.numero_carta = $numero_carta, Persona.ref_datiPagamento=$numero_carta, DatiPagamento.cvv = $cvv, DatiPagamento.nome_titolare = '$nome_titolare', DatiPagamento.mese_scadenza = $mese_scadenza , DatiPagamento.anno_scadenza = $anno_scadenza WHERE Persona.id = $id"
-        ClientNetwork.retrofit.update(query).enqueue(
-            object : Callback<JsonObject> {
-                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                    if (response.isSuccessful) {
-                            callback(true)
-                        }else{
-                            callback(false)
-                        }
-                }
-
-                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                    callback(false)
-                    Log.e("Errore", "Errore durante la chiamata di rete", t)
-                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
-                }
+        var query= ""
+        val query1= "select count(numero_carta) as num from DatiPagamento as DP, Persona P where  P.ref_datiPagamento = DP.numero_carta and P.id = $id"
+        GestioneDB.richiestaInformazioni(query1){
+            dato ->
+            if(dato.get("num").asInt==1){
+                query = "UPDATE DatiPagamento JOIN Persona ON DatiPagamento.numero_carta = Persona.ref_datiPagamento SET DatiPagamento.numero_carta = $numero_carta, Persona.ref_datiPagamento=$numero_carta, DatiPagamento.cvv = $cvv, DatiPagamento.nome_titolare = '$nome_titolare', DatiPagamento.mese_scadenza = $mese_scadenza , DatiPagamento.anno_scadenza = $anno_scadenza WHERE Persona.id = $id"
+                GestioneDB.aggiornaServer(query)
             }
-        )
+            else{
+                query = "insert into DatiPagamento(numero_carta,cvv,nome_titolare,mese_scadenza,anno_scadenza)values ($numero_carta, $cvv, '$nome_titolare', $mese_scadenza , $anno_scadenza)"
+                GestioneDB.inserisciElemento(query)
+                val queryUpdate = "UPDATE Persona set ref_datiPagamento = $numero_carta where id=$id"
+                GestioneDB.aggiornaServer(queryUpdate)
+            }
+        }
     }
 
 
