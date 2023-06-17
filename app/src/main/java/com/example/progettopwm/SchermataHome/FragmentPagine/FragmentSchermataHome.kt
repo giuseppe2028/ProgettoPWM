@@ -146,7 +146,6 @@ class FragmentSchermataHome : Fragment() {
 
     private fun filtraListaDialog(destinazione: String, numeroPersone: String,ordineCrescente:Boolean) {
 
-
         val lista = if (numeroPersone == "Nessuno" && destinazione == "Tutte le destinazioni") {
             listaLuogo
         } else {
@@ -159,10 +158,9 @@ class FragmentSchermataHome : Fragment() {
         } else {
             lista.sortedByDescending { it.prezzo }
         }
-        //salvo i dati
-        verificaSizeLista(listaOrdinata as ArrayList<ItemClassLocalita>)
+
         adapterViaggi.filtraLista(listaOrdinata)
-        Log.i("debug1", "${lista.size}")
+
 
     }
 
@@ -277,7 +275,7 @@ class FragmentSchermataHome : Fragment() {
     }
 
     private fun filtaListaByMete(stringa:String) {
-
+        val lista:ArrayList<ItemClassLocalita> = ArrayList()
         //filtro la lista
         for(i in listaLuogo){
             if(i.tipoViaggio.contains(stringa)){
