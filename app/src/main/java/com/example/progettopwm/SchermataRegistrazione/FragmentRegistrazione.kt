@@ -142,7 +142,7 @@ class FragmentRegistrazione : Fragment() {
                 Toast.makeText(this.context,"I campi nome, cognome, mail e data nascita non sono riempiti",Toast.LENGTH_SHORT).show()
             }
             //controllo il contenuto della password
-            else if(!validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata) && equalPasswords(passwordEditText,passwordEditTextC)){
+            else if(!validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata) && equalPasswords(passwordEditText,passwordEditTextC)&& validatePasswords(passwordEditText)&& validatePasswords(passwordEditTextC)){
 
                 val nome = nomeEditText.text.toString()
                 val cognome = cognomeEditText.text.toString()
