@@ -100,6 +100,7 @@
                 style="@style/bottoneLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:paddingHorizontal="30dp"
                 android:paddingVertical="5dp"
@@ -115,10 +116,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:entries="@array/Prezzo"
+                android:max="9"
+                android:progress="3"
                 app:layout_constraintBottom_toTopOf="@+id/bottoneConferma"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/PrezzoTesto" />
 

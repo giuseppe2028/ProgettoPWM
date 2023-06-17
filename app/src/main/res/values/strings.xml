@@ -114,5 +114,6 @@
     <string name="InserisciTesto">Perfavore, descrivi la tua esperienza</string>
     <string name="InserisciValuta">Perfavore, inserisci una valutazione</string>
     <string name="PopupRecensione">Grazie per la tua collaborazione</string>
-    <string name="nessunElementoPreferiti">Nessun elemento nella tua lista preferiti</string>
+    <string name="nessunElemento">Nessun elemento nella tua lista </string>
+    <string name="ErroreTesto">Mi dispiace, la connesione con il server è caduta</string>
 </resources>
