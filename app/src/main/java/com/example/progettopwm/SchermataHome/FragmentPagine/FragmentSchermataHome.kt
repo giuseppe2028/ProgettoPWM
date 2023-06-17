@@ -11,12 +11,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.progettopwm.ActivitySchermataViaggio
 import com.example.progettopwm.Gestione.ClientNetwork
+import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.SchermataHome.FragmenCardProssimoViaggio.FragmentProssimoVIaggio
 //import com.example.progettopwm.GestioneDB
@@ -28,6 +30,16 @@ import com.example.progettopwm.SchermataHome.RecycleView.ItemsViewModel
 import com.example.progettopwm.SchermataHome.SchermataHome
 import com.example.progettopwm.databinding.FragmentSchermataHomeBinding
 import com.example.progettopwm.ViewDialog
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.sql.Date
 import java.time.LocalDate
 
@@ -45,6 +57,7 @@ class FragmentSchermataHome : Fragment() {
     private lateinit var adapterViaggi:CustomAdapterMete
     private var param1: String? = null
     private var param2: String? = null
+    private var statoCaricamento = false
     var idPerson:Int = 0
 
 
@@ -101,21 +114,21 @@ class FragmentSchermataHome : Fragment() {
     }
 
     private fun verificaSizeLista(lista: ArrayList<ItemClassLocalita>) {
-        if (lista.size==0){
-            Log.i("ciao","sonoQui?")
+        if (lista.size == 0) {
+            Log.i("ciao", "sonoQui?")
             binding.listaLocalita.visibility = View.GONE
             binding.listaVuota.visibility = View.VISIBLE
             binding.listaVuota2.visibility = View.VISIBLE
 
-        binding.filterButton.setOnClickListener {
-            val alert = ViewDialog()
-            val ciao = alert.showDialog(activity) {
-                    destinazione, numeroPersone,stato ->
-                //devo filtrare la lista
-                filtraListaDialog(destinazione, numeroPersone,stato)
+            binding.filterButton.setOnClickListener {
+                val alert = ViewDialog()
+                val ciao = alert.showDialog(activity) { destinazione, numeroPersone, stato ->
+                    //devo filtrare la lista
+                    filtraListaDialog(destinazione, numeroPersone, stato)
+                }
+                val builder = AlertDialog.Builder(context)
+                Log.i("ciao", "$ciao 123")
             }
-            val builder = AlertDialog.Builder(context)
-            Log.i("ciao", "$ciao 123")
         }
     }
 
@@ -199,7 +212,7 @@ class FragmentSchermataHome : Fragment() {
 
     private fun setUpImage(ref_immagine:String){
         ClientNetwork.retrofit.getImage(ref_immagine).enqueue(
-            object : Callback<ResponseBody>{
+            object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
