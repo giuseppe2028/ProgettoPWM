@@ -122,7 +122,7 @@ class FragmentModificaDati : Fragment() {
                 Toast.makeText(this.context,"I campi nome, cognome, mail e data nascita non sono riempiti",Toast.LENGTH_SHORT).show()
             }
             //controllo il contenuto della password
-            else if(!validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata) && notEqualPasswords(passwordEditText,passwordEditTextC)){
+            else if(!validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata) && notEqualPasswords(passwordEditText,passwordEditTextC) && validatePasswords(passwordEditTextC)){
                 EqualPasswords(passwordEditText, id_p) { equal ->
                     // Qui puoi gestire il risultato del confronto tra le password
                     if (equal) {
