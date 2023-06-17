@@ -1,5 +1,6 @@
 package com.example.progettopwm.Login
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -81,7 +82,6 @@ class Login : AppCompatActivity() {
             //i.putExtra("username", username)
             //i.putExtra("password",password)
             i.putExtra("id",id)
-
             idPersona.setId(id)
             startActivity(i)
 
@@ -144,6 +144,7 @@ class Login : AppCompatActivity() {
         fragmentListenerSignIn()
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun googleAuth() {
         auth = FirebaseAuth.getInstance()
         //indico il builder della creazione dell'account
