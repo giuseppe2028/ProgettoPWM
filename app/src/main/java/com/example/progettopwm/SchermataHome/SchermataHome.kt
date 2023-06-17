@@ -34,7 +34,6 @@ class SchermataHome : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySchermataHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         selezioneNavigationBar()
         wallet()
         datiPagamento()
@@ -50,14 +49,14 @@ class SchermataHome : AppCompatActivity() {
                 val result = bundle.getString("itemSelectRisposta")
             Log.i("seleziona","$result")
             if(result!=null){
-                if(result.equals("inglese")){
+                if(result.equals("inglese")||result.equals("English")){
                     LanguageApp.setLocal(this,"en")
                     //inserisco la lingua nelle sharedPreferences
                     sharedPreferences.edit().putString("Lingua","en").apply()
                     finish()
                     startActivity(intent)
                 }
-                else if(result.equals("italiano")){
+                else if(result.equals("italiano")||result.equals("Italian")){
                     LanguageApp.setLocal(this,"it")
                     sharedPreferences.edit().putString("Lingua","it").apply()
                     finish()
@@ -67,7 +66,6 @@ class SchermataHome : AppCompatActivity() {
 
         }
     }
-
     private fun modificaDati() {
 
         supportFragmentManager
@@ -170,6 +168,11 @@ class SchermataHome : AppCompatActivity() {
     //blocco l'onpressed
     override fun onBackPressed() {
 
+            if(supportFragmentManager.backStackEntryCount == 0){
+                Log.i("sei","quii")
+                return
+            }
+        super.onBackPressed()
     }
 
 

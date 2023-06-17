@@ -78,6 +78,7 @@ binding = FragmentWalletBinding.inflate(inflater)
 
 
 
+
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -122,7 +123,6 @@ binding = FragmentWalletBinding.inflate(inflater)
                         val resultSet = response.body()?.get("queryset") as JsonArray
                         if (resultSet.size() == 1) {
                             val saldo = resultSet[0].asJsonObject.get("saldo").asDouble
-
                             callback(true, saldo)
                         }else{
                             callback(false, null)

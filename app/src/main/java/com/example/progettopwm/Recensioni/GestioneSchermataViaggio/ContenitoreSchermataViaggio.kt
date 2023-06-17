@@ -26,7 +26,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -50,7 +49,6 @@ class ContenitoreSchermataViaggio : Fragment() {
 
     private lateinit var binding:FragmentContenitoreSchermataViaggioBinding
     var numeroTelefono:String = ""
-    // TODO: Rename and change types of parameters
     private var idPersona:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +66,7 @@ class ContenitoreSchermataViaggio : Fragment() {
         var stato:Boolean = false
         binding = FragmentContenitoreSchermataViaggioBinding.inflate(layoutInflater)
         //Aggiungere id viaggio
-        setAzienda(1)
+        setAzienda(id)
         clickAzienda()
         Log.i("id","$idPersona 123")
 
@@ -81,13 +79,32 @@ class ContenitoreSchermataViaggio : Fragment() {
 
 
         private fun setAzienda(id:Int) {
-            val query = "select distinct nome_azienda, num_telefono, email from Azienda A, Viaggio V where A.ref_viaggio = V.id and V.id = $id"
-            GestioneDB.richiestaInformazioni(query){
+            val query = "select distinct nome_azienda, num_telefono, email,ref_immagine from Azienda A, Viaggio V where A.ref_viaggio = V.id and V.id = $id"
+
+
+
+            GestioneDB.queryImmagini(query){
+
+                dati,immagini->
+                binding.nomePersona.text = dati.get("nome_azienda").asString
+                Log.i("provaaa","${dati.get("ref_immagine")}")
+                numeroTelefono = dati.get("num_telefono").asString
+                binding.imageProfile2.setImageBitmap(immagini)
+
+
+            }
+
+           /* GestioneDB.richiestaInformazioni(query){
                     dati ->
                 binding.nomePersona.text = dati.get("nome_azienda").asString
                 numeroTelefono = dati.get("num_telefono").asString
-                //TODO(Aggiungere l'immagine del profilo)
+                GestioneDB.getImage(dati){
+                    immagine->
+                    binding.imageProfile2.setImageBitmap(immagine)
+                }
             }
+
+            */
         }
     private fun clickAzienda() {
         binding.imagePhoneButton.setOnClickListener {

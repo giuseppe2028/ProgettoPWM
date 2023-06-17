@@ -79,6 +79,11 @@ class FragmentSchermataAccount : Fragment() {
 
         return binding.root
     }
+    private fun linguaDefault() {
+
+        val position = sharedPreferences.getInt("valoreSpinnerLingua",0)
+        binding.spinner.setSelection(position)
+    }
     private fun selectLingua() {
         var sentinellaSpinner = false
         val spinner = binding.spinner
@@ -107,32 +112,24 @@ class FragmentSchermataAccount : Fragment() {
             }
 
 
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // Azioni da intraprendere quando non viene selezionata alcuna opzione
-                    Log.i("ciao", "ciao")
-                }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Azioni da intraprendere quando non viene selezionata alcuna opzione
+                Log.i("ciao", "ciao")
             }
-
-            val item = binding.spinner.selectedItemPosition
-
-            setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to item))
-            //passo il valore indietro all'activity:
-
-
         }
 
-    private fun linguaDefault() {
+        val item = binding.spinner.selectedItemPosition
 
-        val position = sharedPreferences.getInt("valoreSpinnerLingua",0)
-        binding.spinner.setSelection(position)
+        setFragmentResult("itemSelected", bundleOf("itemSelectRisposta" to item))
+        //passo il valore indietro all'activity:
+
+
     }
-
 
     private fun clickBottoni() {
         val result = true
         binding.textViewGestione.setOnClickListener{
             parentFragmentManager.setFragmentResult("requestMD", bundleOf("bundleMD" to result))
-
         }
         binding.textViewdatipagamento.setOnClickListener{
             parentFragmentManager.setFragmentResult("requestDP", bundleOf("bundleDP" to result))
@@ -204,8 +201,7 @@ class FragmentSchermataAccount : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     callback(false, null, null)
-                    Log.e("Errore", "Errore durante la chiamata di rete", t)
-                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
+
                 }
             }
         )

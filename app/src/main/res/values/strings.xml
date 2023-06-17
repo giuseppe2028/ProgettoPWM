@@ -41,11 +41,9 @@
     <string name="descrizionePagamenti">Aggiungi e gestisci i tuoi dati di pagamento.</string>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
 
     <string name="ToastOTP">Compila il campo OTP per continuare</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">esempio.esempio@dominio.esempio</string>
     <string name="passwordDimenticata">Non te la ricordi?</string>
@@ -116,4 +114,6 @@
     <string name="PopupRecensione">Grazie per la tua collaborazione</string>
     <string name="nessunElemento">Nessun elemento nella tua lista </string>
     <string name="ErroreTesto">Mi dispiace, la connesione con il server è caduta</string>
+    <string name="caricati">caricati</string>
+    <string name="NotificaPagamento">Pagamento Effettuato</string>
 </resources>

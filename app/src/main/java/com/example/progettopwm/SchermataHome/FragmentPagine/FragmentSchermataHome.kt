@@ -76,7 +76,7 @@ class FragmentSchermataHome : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
-
+        waitReload()
         binding = FragmentSchermataHomeBinding.inflate(inflater)
        // binding.progressBar.visibility = View.VISIBLE
         //binding.frameLayout2.visibility = View.GONE
@@ -95,9 +95,7 @@ class FragmentSchermataHome : Fragment() {
                     setUpImage(ref_immagine)
                 }
             }
-            else{
-                Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
-            }
+
         }
         popolaLista{
                 updateList->
@@ -195,7 +193,6 @@ class FragmentSchermataHome : Fragment() {
 
     private fun setProfilo() {
         val id = idPersona.getId()
-        //TODO(ll'id sarà passato all'inizio del profilo)
         val query = "select nome,id from Persona where id = $id"
         GestioneDB.richiestaInformazioni(query){
             data ->
@@ -260,8 +257,6 @@ class FragmentSchermataHome : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     callback(false, null)
-                    Log.e("Errore", "Errore durante la chiamata di rete", t)
-                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
                 }
             }
         )
@@ -424,7 +419,7 @@ class FragmentSchermataHome : Fragment() {
             Log.i("ciao","prova231")
             CoroutineScope(Dispatchers.Default).launch {
                 //aspetto 5 secondi
-                delay(5000)
+                delay(3000)
 
                 //se la schermata non è caricata dopo 5 secondi:
                 activity?.runOnUiThread{

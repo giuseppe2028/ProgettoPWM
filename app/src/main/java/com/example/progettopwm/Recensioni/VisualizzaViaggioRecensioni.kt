@@ -31,12 +31,13 @@ class VisualizzaViaggioRecensioni : AppCompatActivity() {
         //faccio la query:
         //mi faccio dare la dimensione:
         //aggiungere immagine
-        val query = "select count(id) as countId from  Compra C, Viaggio V where  C.ref_viaggio = V.id and C.ref_persona = 1 and data < '2023-06-15'"
+        val query = "select count(id) as countId from  Compra C, Viaggio V where  C.ref_viaggio = V.id and C.ref_persona = ${idPersona.getId()} and data < '$data'"
         GestioneDB.richiestaInformazioni(query){
             dato->
             //count:
-            val count = dato.get("countId").asInt
 
+            val count = dato.get("countId").asInt
+            Log.i("ciao","$count")
             for(i in 1..count){
                 //val query = "select V.id as id, luogo,nome_struttura,data,prezzo, recensione, num_persone, ref_immagine from Immagini I, Viaggio V, Compra C where C.ref_persona = ${idPersona.getId()} and V.data < $data and I.ref_viaggio = V.id and C.ref_viaggio = $i"
                 val query = "select V.id as id, luogo,nome_struttura,data,prezzo, recensione, num_persone, ref_immagine from Immagini I, Viaggio V, Compra C where C.ref_persona = ${idPersona.getId()} and V.data < '$data' and I.ref_viaggio = V.id and C.ref_viaggio = V.id"

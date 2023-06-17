@@ -1,5 +1,6 @@
 package com.example.progettopwm.SchermataHome.FragmentPagine
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -15,6 +16,7 @@ import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentDatiPagamentoBinding
 import com.example.progettopwm.Gestione.idPersona
+import com.example.progettopwm.SchermataHome.SchermataHome
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -169,8 +171,9 @@ class FragmentDatiPagamento : Fragment() {
                 val anno = binding.editTextanno.text.toString().toInt()
                 inserisciDati(id_p, n_c, cvv, nome, mese, anno){value->
                     if(value){
-                        Toast.makeText(context, "caricati", Toast.LENGTH_SHORT).show()
-
+                        Toast.makeText(context, R.string.caricati, Toast.LENGTH_SHORT).show()
+                        val i = Intent(this.context,SchermataHome::class.java)
+                        startActivity(i)
                     }
                     else{
                         Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()

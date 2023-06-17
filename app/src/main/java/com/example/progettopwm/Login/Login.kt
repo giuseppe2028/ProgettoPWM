@@ -86,9 +86,8 @@ class Login : AppCompatActivity() {
             startActivity(i)
 
         }
-
-
     }
+
 
     private fun setLingua() {
         //prendo il valore della lingua:

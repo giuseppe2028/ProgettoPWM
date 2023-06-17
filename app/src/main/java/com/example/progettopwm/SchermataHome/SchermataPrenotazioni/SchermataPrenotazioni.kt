@@ -34,6 +34,7 @@ import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.R
+import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.ItemViewModel
 import com.example.progettopwm.SchermataHome.SchermataPrenotazioni.RecyclerView.CustomAdapterPrenotazioni
 import com.example.progettopwm.SchermataHome.SchermataPrenotazioni.RecyclerView.ItemViewModelP
 import com.example.progettopwm.databinding.FragmentPrenotazioniBinding
@@ -107,34 +108,30 @@ class SchermataPrenotazioni : Fragment() {
         var iesimoDato: JsonObject  // Dichiarazione della variabile fuori dal callback
         var listaPre = ArrayList<ItemViewModelP>()
 //faccio la query
-        GestioneDB.queryGenerica(query) { dati ->
-
-            for (i in dati) {
-                iesimoDato = i as JsonObject
-                Log.i("entro", "entro")
-
-                // Carico l'immagine in modo asincrono
-                GestioneDB.getImage(i) { immagineRitorno ->
-                    val immagine = immagineRitorno
-
-                    // Aggiungo l'elemento alla lista
-                     listaPre.add(
+        GestioneDB.getArray(query){
+                array ->
+            for(i in array){
+                val element = i as JsonObject
+                Log.i("Prova12345", "${element.get("nome_struttura").asString}")
+                GestioneDB.getImage(element){
+                        immagine ->
+                    listaPre.add(
                         ItemViewModelP(
-                            iesimoDato.get("id").asInt,
+                            element.get("id").asInt,
                             immagine,
-                            iesimoDato.get("data").asString,
-                            iesimoDato.get("giorni_pernotto").asInt,
-                            iesimoDato.get("nome_struttura").asString,
-                            iesimoDato.get("luogo").asString,
-                            iesimoDato.get("prezzo").asDouble,
-                            iesimoDato.get("num_persone").asInt
+                            element.get("data").asString,
+                            element.get("giorni_pernotto").asInt,
+                            element.get("nome_struttura").asString,
+                            element.get("luogo").asString,
+                            element.get("prezzo").asDouble,
+                            element.get("num_persone").asInt
                         )
                     )
-
                     // Aggiorno l'adapter dopo l'aggiunta di un nuovo elemento
                     binding.listaPrenotazioni.adapter?.notifyDataSetChanged()
                 }
             }
+
         }
 
 // Imposto l'adapter fuori dal callback

@@ -1,15 +1,36 @@
 package com.example.progettopwm
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.example.progettopwm.Dialog.DialogNotifica
 import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.databinding.ActivitySchermataPagamentoViaggioBinding
 import java.time.Duration
 
 class SchermataPagamentoViaggio : AppCompatActivity() {
+    val requestPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()){
+            isGaranted:Boolean->
+        if(isGaranted){
+            sendNotifica()
+        }else{
+            Log.i("TAG", "Permission enabled")
+        }
+
+    }
     private  var idViaggio:Int = 0
     var prezzo = 0
     private lateinit var binding:ActivitySchermataPagamentoViaggioBinding
@@ -26,6 +47,13 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
         idViaggio = intent.getIntExtra("idViaggio",0)
         //faccio la query:
         querySchermata()
+        clickCompra()
+    }
+
+    private fun clickCompra() {
+        binding.comprami2.setOnClickListener {
+            controllaDati()
+        }
     }
 
     private fun querySchermata() {
@@ -44,7 +72,7 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
                     immagine->
                 binding.immagineLocalita.setImageBitmap(immagine)
             }
-            controllaDati()
+
         }
 
     }
@@ -53,7 +81,25 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
         binding.comprami2.setOnClickListener {
             val dialog = DialogNotifica()
             dialog.show(supportFragmentManager,"conferma")
+            sendNotifica()
         }
+    }
+    private fun sendNotifica() {
+
+            val channelID:String = "ChannelID"
+            //creo la notifica, ovvero creo il canale in cui inviare la notifica
+            var channel: NotificationChannel = NotificationChannel(channelID,"MyChannel",
+                NotificationManager.IMPORTANCE_DEFAULT )
+
+            val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+            var builder = NotificationCompat.Builder(this, channelID)
+                .setSmallIcon(R.drawable.photo_2023_05_31_21_01_17_removebg_preview)
+                .setContentTitle("Misvago")
+                .setContentText(getText(R.string.NotificaPagamento))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            notificationManager.notify(0,builder.build())
+
     }
 
     private fun controllaDati() {
