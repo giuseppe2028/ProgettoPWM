@@ -81,13 +81,14 @@ class ActivitySchermataViaggio : AppCompatActivity() {
     }
 
     private fun setAzienda(id:Int) {
-        val query = "select distinct nome_azienda, num_telefono, email from Azienda A, Viaggio V where A.ref_viaggio = V.id and V.id = $id"
-        GestioneDB.richiestaInformazioni(query){
-                dati ->
-            binding.nomePersona.text = dati.get("nome_azienda").asString
-            numeroTelefono = dati.get("num_telefono").asString
-            //TODO(Aggiungere l'immagine del profilo)
-        }
+        val query = "select distinct nome_azienda, num_telefono, email,ref_immagine from Azienda A, Viaggio V where A.ref_viaggio = V.id and V.id = $id"
+
+       GestioneDB.queryImmagini(query){
+           dati,immagine->
+           binding.imageProfile2.setImageBitmap(immagine)
+           binding.nomePersona.text = dati.get("nome_azienda").asString
+           numeroTelefono = dati.get("num_telefono").asString
+       }
     }
 
     private fun clickAzienda() {

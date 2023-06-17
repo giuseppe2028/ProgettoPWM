@@ -7,15 +7,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.databinding.FragmentProssimoVIaggioBinding
 import java.sql.Date
 import java.time.LocalDate
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
 
 /**
  * A simple [Fragment] subclass.
@@ -24,10 +25,9 @@ private const val ARG_PARAM2 = "param2"
  */
 class FragmentProssimoVIaggio : Fragment() {
     private lateinit var binding:FragmentProssimoVIaggioBinding
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    val dataAttuale = LocalDate.now()
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -50,12 +50,11 @@ class FragmentProssimoVIaggio : Fragment() {
     }
 
     private fun setSchermata(id:Int) {
-        //TODO inserire l'id del viaggio
         var immagine:Bitmap
         Log.i("Viaggio","ciao1")
         val data = Date.valueOf(
             LocalDate.now().toString())
-        val query = "select * from Compra,Viaggio,Immagini where Compra.ref_viaggio = Viaggio.id and Compra.ref_persona = 1 and data>'2023-06-12' and Viaggio.id = Immagini.ref_viaggio order by data "
+        val query = "select * from Compra,Viaggio,Immagini where Compra.ref_viaggio = Viaggio.id and Compra.ref_persona = ${idPersona.getId()} and data>'$dataAttuale' and Viaggio.id = Immagini.ref_viaggio order by data "
         GestioneDB.richiestaInformazioni(query){
 
             dato ->
@@ -94,7 +93,6 @@ class FragmentProssimoVIaggio : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment FragmentProssimoVIaggio.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FragmentProssimoVIaggio().apply {

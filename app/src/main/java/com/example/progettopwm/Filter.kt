@@ -12,7 +12,6 @@ import com.example.progettopwm.databinding.FiltriBinding
 class ViewDialog {
 
     private lateinit var binding:FiltriBinding
-    //TODO(aggiungere la data, e il prezzo)
     fun showDialog(activity: Activity?,callback:(String,String,Boolean)->Unit) {
         val dialog = Dialog(activity!!)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
