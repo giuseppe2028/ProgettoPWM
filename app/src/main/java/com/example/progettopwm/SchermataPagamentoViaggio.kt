@@ -26,6 +26,13 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
         idViaggio = intent.getIntExtra("idViaggio",0)
         //faccio la query:
         querySchermata()
+        clickCompra()
+    }
+
+    private fun clickCompra() {
+        binding.comprami2.setOnClickListener {
+            controllaDati()
+        }
     }
 
     private fun querySchermata() {
@@ -44,7 +51,7 @@ class SchermataPagamentoViaggio : AppCompatActivity() {
                     immagine->
                 binding.immagineLocalita.setImageBitmap(immagine)
             }
-            controllaDati()
+
         }
 
     }

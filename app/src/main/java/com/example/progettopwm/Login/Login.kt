@@ -86,8 +86,6 @@ class Login : AppCompatActivity() {
             startActivity(i)
 
         }
-
-
     }
 
     private fun setLingua() {

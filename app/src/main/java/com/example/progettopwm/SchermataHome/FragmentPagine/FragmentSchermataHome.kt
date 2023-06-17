@@ -195,7 +195,6 @@ class FragmentSchermataHome : Fragment() {
 
     private fun setProfilo() {
         val id = idPersona.getId()
-        //TODO(ll'id sarà passato all'inizio del profilo)
         val query = "select nome,id from Persona where id = $id"
         GestioneDB.richiestaInformazioni(query){
             data ->

@@ -2,6 +2,7 @@ package com.example.progettopwm.SchermataHome.FragmentPagine
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -19,6 +20,7 @@ import com.example.progettopwm.Gestione.ClientNetwork
 import com.example.progettopwm.R
 import com.example.progettopwm.databinding.FragmentModificaDatiBinding
 import com.example.progettopwm.Gestione.idPersona
+import com.example.progettopwm.SchermataHome.SchermataHome
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -123,7 +125,8 @@ class FragmentModificaDati : Fragment() {
             }
             //controllo il contenuto della password
             else if(!validateOtherFields(nomeEditText, cognomeEditText, emailEditText, binding.textViewshowdata) && notEqualPasswords(passwordEditText,passwordEditTextC)){
-                EqualPasswords(passwordEditText, id_p) { equal ->
+                EqualPasswords(passwordEditText, id_p) {
+                        equal ->
                     // Qui puoi gestire il risultato del confronto tra le password
                     if (equal) {
                         val nome = nomeEditText.text.toString()
@@ -133,6 +136,7 @@ class FragmentModificaDati : Fragment() {
                         val data= binding.textViewshowdata.text.toString()
                         val id_p = idPersona.getId()
                         inserisciDati(id_p, nome,cognome, data ,email, password)
+                        startActivity(Intent(this.context, SchermataHome::class.java))
                     } else {
                         Toast.makeText(
                             this.context,

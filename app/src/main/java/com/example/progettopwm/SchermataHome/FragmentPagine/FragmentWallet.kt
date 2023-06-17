@@ -64,13 +64,7 @@ binding = FragmentWalletBinding.inflate(inflater)
                 val id_p= idPersona.getId()
                 aggiornaWallet(id_p, saldo.toDouble())
                 binding.editText.setText("")
-                recuperaWallet(id_p){ result, saldo->
-                    if(result){
-                        binding.textView9.text = saldo.toString()
-                    } else{
-                        binding.textView9.text = "null"
-                    }
-                }
+
             }
         }
 
@@ -97,6 +91,13 @@ binding = FragmentWalletBinding.inflate(inflater)
             object : Callback<JsonObject> {
                 override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                     if (response.isSuccessful) {
+                        recuperaWallet(id){ result, saldo->
+                            if(result){
+                                binding.textView9.text = saldo.toString()
+                            } else{
+                                binding.textView9.text = "null"
+                            }
+                        }
                     }
                     else{
                         Log.i("errore", "non funziona")

@@ -34,7 +34,6 @@ class SchermataHome : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySchermataHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         selezioneNavigationBar()
         wallet()
         datiPagamento()
