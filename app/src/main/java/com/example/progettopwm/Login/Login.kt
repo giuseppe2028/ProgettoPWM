@@ -229,6 +229,7 @@ class Login : AppCompatActivity() {
                     startActivity(i)
                     Log.i("dato","${dato.size()}")
                     //stampo il Toast
+                    idPersona.setId(dato.get("id").asInt)
         }
     }
 

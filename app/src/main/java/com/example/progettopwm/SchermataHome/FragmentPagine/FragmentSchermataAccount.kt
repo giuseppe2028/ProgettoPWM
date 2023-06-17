@@ -70,7 +70,6 @@ class FragmentSchermataAccount : Fragment() {
                 }
             }
             else{
-                Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
             }
         }
         // Inflate the layout for this fragment

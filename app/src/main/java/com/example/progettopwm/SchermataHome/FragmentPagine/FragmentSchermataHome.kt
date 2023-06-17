@@ -172,6 +172,7 @@ class FragmentSchermataHome : Fragment() {
         val query =
             "select * from Compra,Viaggio where ref_viaggio = Viaggio.id and Compra.ref_persona = 1 and data>'$data'order by data"
         GestioneDB.richiestaInformazioni(query) { data ->
+            binding.frgmentProssimoViaggio.visibility = View.VISIBLE
             //insersico la card
             val manager = childFragmentManager
             id = data.get("id").asInt

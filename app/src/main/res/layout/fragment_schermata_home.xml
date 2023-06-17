@@ -181,6 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@id/localitaSuggeriteText"
                     app:layout_constraintTop_toBottomOf="@+id/relativeListaViaggi"
                     tools:layout_editor_absoluteX="0dp"></androidx.fragment.app.FragmentContainerView>
