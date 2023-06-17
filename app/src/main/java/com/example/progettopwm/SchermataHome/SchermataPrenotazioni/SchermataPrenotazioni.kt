@@ -1,7 +1,9 @@
 package com.example.progettopwm.SchermataHome.SchermataPrenotazioni
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -178,11 +180,29 @@ class SchermataPrenotazioni : Fragment() {
 
             }
             override fun Onclick(position: Int, item: ItemViewModelP) {
-                val query = "delete from Compra where ref_viaggio = ${item.id}"
-                GestioneDB.eliminaElemento(query)
-                //lo aggiorno pure localemnte per evitare una query di troppo:
-                listaPre.removeAt(position)
-                adapter.notifyDataSetChanged()
+                val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                alertDialogBuilder.setTitle("Prenotazione")
+                alertDialogBuilder.setMessage("Are you sure?")
+
+// Aggiungi il pulsante OK
+                alertDialogBuilder.setPositiveButton("OK") { dialogInterface: DialogInterface, i: Int ->
+
+                    val query = "delete from Compra where ref_viaggio = ${item.id}"
+                    GestioneDB.eliminaElemento(query)
+                    //lo aggiorno pure localemnte per evitare una query di troppo:
+                    listaPre.removeAt(position)
+                    adapter.notifyDataSetChanged()
+                    val idP= idPersona.getId()
+                    aggiornaWallet(item.id, idP)
+                }
+
+// Aggiungi il pulsante Annulla
+                alertDialogBuilder.setNegativeButton("Annulla") { dialogInterface: DialogInterface, i: Int ->
+                }
+
+// Crea e mostra l'AlertDialog
+                val alertDialog = alertDialogBuilder.create()
+                alertDialog.show()
             }
 
 
@@ -193,7 +213,26 @@ class SchermataPrenotazioni : Fragment() {
     }
 
 
-
+    private fun aggiornaWallet(idV: Int, idP: Int){
+        val query = "UPDATE Persona SET saldo = saldo + (SELECT prezzo FROM Viaggio WHERE id = $idV) WHERE id = $idP;"
+        ClientNetwork.retrofit.update(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                    }
+                    else{
+                        Log.i("errore", "non funziona")
+                        Log.i("errore", response.message())
+                        Log.i("errore",  response.toString())
+                    }
+                }
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.e("Errore", "Errore durante la chiamata di rete", t)
+                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
     private fun pdf(file: String, fileName: String){
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
             if(this.context?.let { checkSelfPermission(it, Manifest.permission.WRITE_EXTERNAL_STORAGE) } == PermissionChecker.PERMISSION_DENIED){
