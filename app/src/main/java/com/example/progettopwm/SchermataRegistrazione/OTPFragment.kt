@@ -113,7 +113,6 @@ class OTPFragment : Fragment() {
     }
 
     private fun setIdPersona(email: String) {
-
         val query = "SELECT id FROM Persona WHERE mail = '$email'"
                 GestioneDB.richiestaInformazioni(query){
                     element ->

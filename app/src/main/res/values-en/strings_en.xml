@@ -116,6 +116,7 @@
         <string name="nessunElemento">No items in your list</string>
         <string name="ErroreTesto">Sorry, the connection to the server has dropped</string>
         <string name="caricati">loaded</string>
+        <string name="NotificaPagamento">payment succeded</string>
 
 
 </resources>

@@ -6,7 +6,7 @@
         android:name="android.hardware.telephony"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Questo serve per le chiamate-->
     <uses-permission android:name="android.permission.CALL_PHONE"/>
@@ -35,21 +35,11 @@
         <activity
             android:name=".Recensioni.ViewRecensioni"
             android:exported="false" />
-
         <activity
             android:name=".SchermataPagamentoViaggio"
             android:exported="false" />
         <activity
             android:name=".ActivitySchermataViaggio"
-            android:exported="false" />
-        <activity
-            android:name=".SchermataHome.SchermataWallet"
-            android:exported="false" />
-        <activity
-            android:name=".SchermataHome.SchermataInserimentoDatiPagamento"
-            android:exported="false" />
-        <activity
-            android:name=".SchermataHome.SchermataModificaDatiAccount"
             android:exported="false" />
         <activity
             android:name=".SchermataHome.SchermataHome"

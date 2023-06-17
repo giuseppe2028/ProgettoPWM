@@ -117,4 +117,5 @@
     <string name="nessunElemento">Nessun elemento nella tua lista </string>
     <string name="ErroreTesto">Mi dispiace, la connesione con il server è caduta</string>
     <string name="caricati">caricati</string>
+    <string name="NotificaPagamento">Pagamento Effettuato</string>
 </resources>

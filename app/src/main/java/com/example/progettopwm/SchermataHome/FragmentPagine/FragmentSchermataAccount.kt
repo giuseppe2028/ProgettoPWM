@@ -203,8 +203,7 @@ class FragmentSchermataAccount : Fragment() {
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     callback(false, null, null)
-                    Log.e("Errore", "Errore durante la chiamata di rete", t)
-                    Toast.makeText(context, "Errore durante la chiamata di rete", Toast.LENGTH_SHORT).show()
+
                 }
             }
         )
