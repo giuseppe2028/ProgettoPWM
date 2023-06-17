@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.progettopwm.Gestione.ClientNetwork
+import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.Recensioni.ViewRecensioni
 import com.example.progettopwm.SchermataHome.FragmentPagine.FragmentSchermataHome
 import com.example.progettopwm.SchermataHome.RecycleView.ItemClassLocalita
@@ -138,7 +139,7 @@ class ActivitySchermataViaggio : AppCompatActivity() {
     }
 
     private fun setLike(id:Int){
-        val query = "select * from Preferiti where ref_viaggio = $id"
+        val query = "select * from Preferiti where ref_viaggio = $id and ref_persona = ${idPersona.getId()}"
         GestioneDB.queryGenerica(query){
                 data->
             if(data.size()!=0){

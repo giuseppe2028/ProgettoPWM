@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.progettopwm.Gestione.idPersona
 import com.example.progettopwm.GestioneDB
 import com.example.progettopwm.R
 import com.example.progettopwm.SchermataHome.SchermataPreferiti.RecyclerView.CustomAdapterPreferiti
@@ -47,7 +48,7 @@ class SchermataPreferiti : Fragment() {
         binding = FragmentSchermataPreferitiBinding.inflate(inflater)
         binding.listaPreferiti.layoutManager = LinearLayoutManager(this.context)
         //faccio la query
-        setSchermata()
+
 
 
         // Inflate the layout for this fragment
@@ -55,44 +56,48 @@ class SchermataPreferiti : Fragment() {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setSchermata()
+    }
+
 
 
     private fun setSchermata() {
-        //TODO(passare l'id della persona via intent)
-        val query = "select distinct V.id,luogo,nome_struttura,recensione,prezzo,ref_immagine,num_persone from Viaggio V,Preferiti P,Immagini I where P.ref_viaggio = V.id and I.ref_viaggio = V.id"
+        val query = "select distinct  V.id,luogo,nome_struttura,recensione,prezzo,ref_immagine,num_persone from Viaggio V,Preferiti P,Immagini I where P.ref_viaggio = V.id and I.ref_viaggio = V.id and P.ref_persona = ${idPersona.getId()}"
         var iesimoDato: JsonObject  // Dichiarazione della variabile fuori dal callback
         var lista = ArrayList<ItemViewModel>()
         controllaElementi(lista)
 //faccio la query
-        GestioneDB.queryGenerica(query) { dati ->
-
-            for (i in dati) {
-                iesimoDato = i as JsonObject
-                Log.i("entro", "entro")
-
-                // Carico l'immagine in modo asincrono
-                GestioneDB.getImage(i) { immagineRitorno ->
-                    val immagine = immagineRitorno
-
-                    // Aggiungo l'elemento alla lista
-                     lista.add(
+        GestioneDB.getArray(query){
+            array ->
+            for(i in array){
+                val element = i as JsonObject
+                Log.i("Prova12345", "${element.get("nome_struttura").asString}")
+                GestioneDB.getImage(element){
+                    immagine ->
+                    lista.add(
                         ItemViewModel(
-                            iesimoDato.get("id").asInt,
+                            element.get("id").asInt,
                             immagine,
-                            iesimoDato.get("nome_struttura").asString,
-                            iesimoDato.get("luogo").asString,
-                            iesimoDato.get("recensione").asDouble,
-                            iesimoDato.get("prezzo").asDouble,
-                            iesimoDato.get("num_persone").asInt
-                        )
-                    )
+                            element.get("nome_struttura").asString,
+                            element.get("luogo").asString,
+                            element.get("recensione").asDouble,
+                            element.get("prezzo").asDouble,
+                            element.get("num_persone").asInt
+                        ))
                     controllaElementi(lista)
                     // Aggiorno l'adapter dopo l'aggiunta di un nuovo elemento
                     binding.listaPreferiti.adapter?.notifyDataSetChanged()
-
                 }
             }
+
         }
+
+
+
+
+
 
 // Imposto l'adapter fuori dal callback
        val adapter = CustomAdapterPreferiti(lista)

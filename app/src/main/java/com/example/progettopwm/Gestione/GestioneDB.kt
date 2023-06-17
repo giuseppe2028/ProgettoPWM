@@ -204,4 +204,26 @@ object GestioneDB {
             }
         )
     }
+    fun getArray(query:String, callback:(JsonArray)->Unit){
+        ClientNetwork.retrofit.registrazione(query).enqueue(
+            object : Callback<JsonObject> {
+                override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                    if (response.isSuccessful) {
+                        val risposta = response.body()?.get("queryset") as JsonArray
+                        if (risposta.size() != 0) {
+                            //ho un solo oggetto JSON
+                            callback(risposta)
+                        }
+                        else if(risposta.size() == 0){
+                            //Toast.makeText(context,R.string.ToastLogin,Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                    Log.i("Problema","${t.message}")
+                }
+
+            }
+        )
+    }
 }
